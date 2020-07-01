@@ -67,16 +67,16 @@ is referred by the `onedrive` module prefix.
 
 Getting an item from OneDrive's root directory. Here, we are getting an item called `Book.xlsx` from the root.
 
-```onedrive:Item|error item = msOneDriveClient->getItemFromRoot("Book.xlsx");```
+```onedrive:Item|error item = msOneDriveClient->getItem("Book.xlsx");```
 
 Getting an item from OneDrive's directory other than root. Here, we are getting an item called `Book.xlsx` from the location `/myfolder`.
 
-```onedrive:Item|error item = msOneDriveClient->getItemFromNonRoot("/myfolder", "Book.xlsx");```
+```onedrive:Item|error item = msOneDriveClient->getItem("Book.xlsx", "/myfolder");```
 
 Getting the URL of an item.
 
 ```
-    onedrive:Item|error item = msOneDriveClient->getItemFromRoot("Book.xlsx");
+    onedrive:Item|error item = msOneDriveClient->getItem("Book.xlsx");
     if (item is onedrive:Item) {
         log:printInfo("The URL of the workbook is " + item.webUrl.toString());
     } else {

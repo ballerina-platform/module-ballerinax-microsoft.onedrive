@@ -111,10 +111,10 @@ The `ballerinax/module-ballerinax-microsoft.onedrive` module contains operations
     onedrive:MicrosoftGraphConfiguration msGraphConfig = {
         baseUrl: config:getAsString("MS_BASE_URL"),
         msInitialAccessToken: config:getAsString("MS_ACCESS_TOKEN"),
-        msClientID: config:getAsString("MS_CLIENT_ID"),
+        msClientId: config:getAsString("MS_CLIENT_ID"),
         msClientSecret: config:getAsString("MS_CLIENT_SECRET"),
         msRefreshToken: config:getAsString("MS_REFRESH_TOKEN"),
-        msRefreshURL: config:getAsString("MS_REFRESH_URL"),
+        msRefreshUrl: config:getAsString("MS_REFRESH_URL"),
         trustStorePath: config:getAsString("TRUST_STORE_PATH"),
         trustStorePassword: config:getAsString("TRUST_STORE_PASSWORD"),
         bearerToken: config:getAsString("MS_ACCESS_TOKEN"),
@@ -133,12 +133,12 @@ The `ballerinax/module-ballerinax-microsoft.onedrive` module contains operations
 
         onedrive:OneDriveClient oneDriveClient = new (msGraphConfig);
         
-        onedrive:Item|error item = oneDriveClient->getItemFromRoot("Book.xlsx");
+        onedrive:Item|error item = oneDriveClient->getItem("Book.xlsx");
 
         if (item is onedrive:Item) {
             io:println("Failed to get the Excel workbook.");
         } else {
-            io:println(<string>item.detail()["message"]);
+            io:println(item.message());
         }
     }
 	```
