@@ -57,6 +57,7 @@ public type OneDriveClient client object {
 
     # Get an item located at the root level of OneDrive.
     # + itemName - name of the item (e.g., Workbook) to be fetched
+    # + path - path on OneDrive
     # + return - item from the root if fetching is successful or else returns an error
     public remote function getItem(string itemName, string path = "/") returns @tainted (Item|Error) {
         //Make a GET request and collect the information about the items on the root.
