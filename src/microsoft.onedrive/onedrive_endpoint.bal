@@ -19,18 +19,17 @@ import ballerina/oauth2;
 import ballerina/stringutils;
 
 # Microsoft OneDrive Client Object.
-# + oneDriveClient - HTTP client endpoint for accessing OneDrive
 public type OneDriveClient client object {
-    http:Client oneDriveClient;
+    private http:Client oneDriveClient;
 
     public function init(MicrosoftGraphConfiguration msGraphConfig) {
         oauth2:OutboundOAuth2Provider oauth2Provider = new ({
             accessToken: msGraphConfig.msInitialAccessToken,
             refreshConfig: {
-                clientId: msGraphConfig.msClientID,
+                clientId: msGraphConfig.msClientId,
                 clientSecret: msGraphConfig.msClientSecret,
                 refreshToken: msGraphConfig.msRefreshToken,
-                refreshUrl: msGraphConfig.msRefreshURL,
+                refreshUrl: msGraphConfig.msRefreshUrl,
                 clientConfig: {
                     secureSocket: {
                         trustStore: {
@@ -59,11 +58,19 @@ public type OneDriveClient client object {
     # Get an item located at the root level of OneDrive.
     # + itemName - name of the item (e.g., Workbook) to be fetched
     # + return - item from the root if fetching is successful or else returns an error
-    public remote function getItemFromRoot(string itemName) returns @tainted (Item|Error) {
-        //Make a GET request and collect the information about the items on the root
+    public remote function getItem(string itemName, string path = "/") returns @tainted (Item|Error) {
+        //Make a GET request and collect the information about the items on the root.
         http:Request request = new;
-        http:Response|error response = self.oneDriveClient->get("/v1.0/me/drive/root/children", request);
-        Item resultItem = new ();
+        http:Response|error response = new;
+        http:Client clientObj = self.oneDriveClient;
+        if (path == "/") {
+            response = clientObj->get("/v1.0/me/drive/root/children", request);
+        } else {
+            response = clientObj->get("https://graph.microsoft.com/v1.0/me/drive/root:" +
+            path + ":/children", request);
+        }
+
+        Item resultItem = {};
 
         if (response is error) {
             return HttpError("Error occurred while accessing the Microsoft Graph API.", response);
@@ -71,7 +78,7 @@ public type OneDriveClient client object {
 
         http:Response httpResponse = <http:Response>response;
 
-        //If the request was successful it will return the details in a JSON response
+        //If the request was successful, it will return the details in a JSON response.
         json|error responseJson = httpResponse.getJsonPayload();
 
         if !(responseJson is map<json>) {
@@ -90,7 +97,7 @@ public type OneDriveClient client object {
 
         json[] itemsArray = <json[]>value;
 
-        //Iterate through the array of items until the specified item was found
+        //Iterate through the array of items until the specified item is found.
         foreach var item in itemsArray {
             if (item is map<json>) {
                 if (stringutils:equalsIgnoreCase(item["name"].toString(), itemName)) {
@@ -107,79 +114,25 @@ public type OneDriveClient client object {
 
         return resultItem;
     }
-
-    # Get an item located at a non-root level location of OneDrive.
-    # + path - path to the item (e.g., /foo/bar)
-    # + itemName - name of the item (e.g., Workbook) to be fetched
-    # + return - item from the non-root if fetching is successful or else returns an error
-    public remote function getItemFromNonRoot(string path, string itemName) returns @tainted (Item|Error) {
-        //Make a GET request and collect the information about the items from the non-root location
-        http:Request request = new;
-        http:Response|error response = self.oneDriveClient->get("https://graph.microsoft.com/v1.0/me/drive/root:" +
-            path + ":/children", request);
-        Item resultItem = new ();
-
-        if (response is error) {
-            return HttpError("Error occurred while accessing the Microsoft Graph API.", response);
-        }
-
-        http:Response httpResponse = <http:Response>response;
-
-        //If the request was successful it will return the details in a JSON response
-        json|error responseJson = httpResponse.getJsonPayload();
-
-        if !(responseJson is map<json>) {
-            typedesc<any|error> typeOfResponse = typeof responseJson;
-            return TypeConversionError("Invalid response; expected a `map<json>` found " + typeOfResponse.toString());
-        }
-
-        map<json> responsePayload = <map<json>>responseJson;
-
-        json|error value = responsePayload.value;
-
-        if !(value is json[]) {
-            typedesc<any|error> typeOfValue = typeof value;
-            return TypeConversionError("Invalid value; expected a `json[]` found " + typeOfValue.toString());
-        }
-
-        json[] itemsArray = <json[]>value;
-
-        //Iterate through the array of items until the specified item was found
-        foreach var item in itemsArray {
-            if (item is map<json>) {
-                if (stringutils:equalsIgnoreCase(item["name"].toString(), itemName)) {
-                    resultItem.id = item["id"].toString();
-                    resultItem.name = item["name"].toString();
-                    resultItem.webUrl = item["webUrl"].toString();
-                    return resultItem;
-                }
-            } else {
-                typedesc<any|error> typeOfItem = typeof item;
-                return TypeConversionError("Invalid response; expected a `map<json>` found " + typeOfItem.toString());
-            }
-        }
-
-        return resultItem;
-    }
 };
 
 # Client Object, which represents an item on Microsoft OneDrive.
 # + id - unique identifier for the item
 # + name - name of the item
 # + webUrl - unique URL for accessing the item via a web browser
-public type Item client object {
-    public string id = "";
-    public string name = "";
-    public string webUrl = "";
+public type Item record {
+    string id = "";
+    string name = "";
+    string webUrl = "";
 };
 
 # Microsoft Graph client configuration.
 # + baseUrl - the Microsoft Graph endpoint URL
 # + msInitialAccessToken - initial access token
-# + msClientID - Microsoft client identifier
+# + msClientId - Microsoft client identifier
 # + msClientSecret - client secret
 # + msRefreshToken - refresh token
-# + msRefreshURL - refresh URL
+# + msRefreshUrl - refresh URL
 # + trustStorePath - trust store path
 # + trustStorePassword - trust store password
 # + bearerToken - bearer token
@@ -187,10 +140,10 @@ public type Item client object {
 public type MicrosoftGraphConfiguration record {
     string baseUrl;
     string msInitialAccessToken;
-    string msClientID;
+    string msClientId;
     string msClientSecret;
     string msRefreshToken;
-    string msRefreshURL;
+    string msRefreshUrl;
     string trustStorePath;
     string trustStorePassword;
     string bearerToken;

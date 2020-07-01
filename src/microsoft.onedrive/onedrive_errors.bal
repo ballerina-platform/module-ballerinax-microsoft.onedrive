@@ -14,7 +14,7 @@
 // specific language governing permissions and limitations
 // under the License.
 
-//Ballerina Microsoft Graph OneDrive Error types
+//Ballerina Microsoft Graph OneDrive error types
 
 public type TypeConversionError distinct error;
 

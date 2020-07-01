@@ -21,10 +21,10 @@ import ballerina/test;
 MicrosoftGraphConfiguration msGraphConfig = {
     baseUrl: config:getAsString("MS_BASE_URL"),
     msInitialAccessToken: config:getAsString("MS_ACCESS_TOKEN"),
-    msClientID: config:getAsString("MS_CLIENT_ID"),
+    msClientId: config:getAsString("MS_CLIENT_ID"),
     msClientSecret: config:getAsString("MS_CLIENT_SECRET"),
     msRefreshToken: config:getAsString("MS_REFRESH_TOKEN"),
-    msRefreshURL: config:getAsString("MS_REFRESH_URL"),
+    msRefreshUrl: config:getAsString("MS_REFRESH_URL"),
     trustStorePath: config:getAsString("TRUST_STORE_PATH"),
     trustStorePassword: config:getAsString("TRUST_STORE_PASSWORD"),
     bearerToken: config:getAsString("MS_ACCESS_TOKEN"),
@@ -43,11 +43,11 @@ OneDriveClient oneDriveClient = new (msGraphConfig);
 
 @test:Config {}
 function testGetURLofItem() {
-    Item|error item = oneDriveClient->getItemFromRoot("Book.xlsx");
+    Item|error item = oneDriveClient->getItem("Book.xlsx");
 
     if (item is Item) {
         test:assertEquals(item.name, "Book.xlsx", msg = "Failed to get the Excel workbook.");
     } else {
-        test:assertFail(msg = <string>item.detail()["message"]);
+        test:assertFail(msg = item.message());
     }
 }
