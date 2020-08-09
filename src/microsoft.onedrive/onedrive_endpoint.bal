@@ -31,8 +31,7 @@ public type OneDriveClient client object {
                 refreshToken: msGraphConfig.msRefreshToken,
                 refreshUrl: msGraphConfig.msRefreshUrl,
                 clientConfig: {
-                    secureSocket: {
-                    }
+                    secureSocket: msGraphConfig?.secureSocketConfig
                 }
             }
         });
@@ -133,6 +132,7 @@ public type Item record {
 # + bearerToken - bearer token
 # + followRedirects - flag to indicate redirection preference
 # + maxRedirectsCount - maximum number of redirects to follow
+# + secureSocketConfig - the secure connection configuration
 public type MicrosoftGraphConfiguration record {
     string baseUrl;
     string msInitialAccessToken;
@@ -143,4 +143,5 @@ public type MicrosoftGraphConfiguration record {
     string bearerToken;
     boolean followRedirects;
     int maxRedirectsCount;
+    http:ClientSecureSocket secureSocketConfig?;
 };
