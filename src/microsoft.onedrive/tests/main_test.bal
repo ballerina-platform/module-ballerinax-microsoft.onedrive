@@ -16,8 +16,6 @@
 
 import ballerina/config;
 import ballerina/test;
-import ballerina/stringutils;
-import ballerina/lang.'int as langint;
 
 // Create the Microsoft Graph Client configuration by reading the config file.
 MicrosoftGraphConfiguration msGraphConfig = {
@@ -28,8 +26,8 @@ MicrosoftGraphConfiguration msGraphConfig = {
     msRefreshToken: config:getAsString("MS_REFRESH_TOKEN"),
     msRefreshUrl: config:getAsString("MS_REFRESH_URL"),
     bearerToken: config:getAsString("MS_ACCESS_TOKEN"),
-    followRedirects: stringutils:toBoolean(config:getAsString("MS_FOLLOW_REDIRECTS")) ? true : false,
-    maxRedirectsCount: (config:getAsString("MS_MAX_REDIRECTS").length() > 0) && (<int>langint:fromString(config:getAsString("MS_MAX_REDIRECTS"))) > 0 ? <int>langint:fromString(config:getAsString("MS_MAX_REDIRECTS")) : 0
+    followRedirects: config:getAsBoolean("MS_FOLLOW_REDIRECTS", false),
+    maxRedirectsCount: config:getAsInt("MS_MAX_REDIRECTS", 0)
 };
 
 OneDriveClient oneDriveClient = new (msGraphConfig);
