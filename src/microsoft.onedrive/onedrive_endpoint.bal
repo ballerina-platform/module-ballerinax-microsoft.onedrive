@@ -45,8 +45,7 @@ public type OneDriveClient client object {
                 enabled: msGraphConfig.followRedirects,
                 maxCount: msGraphConfig.maxRedirectsCount
             },
-            secureSocket: {
-            }
+            secureSocket: msGraphConfig?.secureSocketConfig
         });
     }
 

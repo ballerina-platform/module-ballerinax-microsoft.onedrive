@@ -1,4 +1,4 @@
 org_name = "ballerinax"
 version = "0.10.0"
 lockfile_version = "1.0.0"
-ballerina_version = "slp2"
+ballerina_version = "slp3"
