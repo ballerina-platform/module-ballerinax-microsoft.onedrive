@@ -18,10 +18,11 @@ The `ballerinax/module-ballerinax-microsoft.onedrive` module contains operations
        - MS_CLIENT_SECRET
        - MS_ACCESS_TOKEN
        - MS_REFRESH_TOKEN
-       - TRUST_STORE_PATH
-       - TRUST_STORE_PASSWORD
+       - MS_FOLLOW_REDIRECTS
+       - MS_MAX_REDIRECTS
 
-    Follow the steps below to obtain the configuration information mentioned above.
+    Follow the steps below to obtain the configuration information mentioned above. Note that `<MS_FOLLOW_REDIRECTS>` indicates whether the redirect
+    response should be followed. `<MS_MAX_REDIRECTS>` indicates the maximum number of redirects to follow.
 
     1. Before you run the following steps, create an account in [OneDrive](https://onedrive.live.com). Next, sign into [Azure Portal - App Registrations](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade). You can use your personal, work, or school account to register.
 
@@ -106,6 +107,8 @@ The `ballerinax/module-ballerinax-microsoft.onedrive` module contains operations
     import ballerina/io;
     import ballerina/config;
     import ballerinax/microsoft.onedrive;
+    import ballerina/stringutils;
+    import ballerina/lang.'int as langint;
 
     // Create the Microsoft Graph Client configuration by reading the config file.
     onedrive:MicrosoftGraphConfiguration msGraphConfig = {
@@ -115,18 +118,9 @@ The `ballerinax/module-ballerinax-microsoft.onedrive` module contains operations
         msClientSecret: config:getAsString("MS_CLIENT_SECRET"),
         msRefreshToken: config:getAsString("MS_REFRESH_TOKEN"),
         msRefreshUrl: config:getAsString("MS_REFRESH_URL"),
-        trustStorePath: config:getAsString("TRUST_STORE_PATH"),
-        trustStorePassword: config:getAsString("TRUST_STORE_PASSWORD"),
         bearerToken: config:getAsString("MS_ACCESS_TOKEN"),
-        clientConfig: {
-            accessToken: config:getAsString("MS_ACCESS_TOKEN"),
-            refreshConfig: {
-                clientId: config:getAsString("MS_CLIENT_ID"),
-                clientSecret: config:getAsString("MS_CLIENT_SECRET"),
-                refreshToken: config:getAsString("MS_REFRESH_TOKEN"),
-                refreshUrl: config:getAsString("MS_REFRESH_URL")
-            }
-        }
+        followRedirects: config:getAsBoolean("MS_FOLLOW_REDIRECTS", false),
+        maxRedirectsCount: config:getAsInt("MS_MAX_REDIRECTS", 0)
     };
 
     public function main() {

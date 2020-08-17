@@ -31,28 +31,22 @@ public type OneDriveClient client object {
                 refreshToken: msGraphConfig.msRefreshToken,
                 refreshUrl: msGraphConfig.msRefreshUrl,
                 clientConfig: {
-                    secureSocket: {
-                        trustStore: {
-                            path: msGraphConfig.trustStorePath,
-                            password: msGraphConfig.trustStorePassword
-                        }
-                    }
+                    secureSocket: msGraphConfig?.secureSocketConfig
                 }
             }
         });
         http:BearerAuthHandler oauth2Handler = new (oauth2Provider);
 
         self.oneDriveClient = new (msGraphConfig.baseUrl, {
-                auth: {
-                    authHandler: oauth2Handler
-                },
-                secureSocket: {
-                    trustStore: {
-                        path: msGraphConfig.trustStorePath,
-                        password: msGraphConfig.trustStorePassword
-                    }
-                }
-            });
+            auth: {
+                authHandler: oauth2Handler
+            },
+            followRedirects: {
+                enabled: msGraphConfig.followRedirects,
+                maxCount: msGraphConfig.maxRedirectsCount
+            },
+            secureSocket: msGraphConfig?.secureSocketConfig
+        });
     }
 
     # Get an item located at the root level of OneDrive.
@@ -134,10 +128,10 @@ public type Item record {
 # + msClientSecret - client secret
 # + msRefreshToken - refresh token
 # + msRefreshUrl - refresh URL
-# + trustStorePath - trust store path
-# + trustStorePassword - trust store password
 # + bearerToken - bearer token
-# + clientConfig - OAuth2 direct token configuration
+# + followRedirects - flag to indicate redirection preference
+# + maxRedirectsCount - maximum number of redirects to follow
+# + secureSocketConfig - the secure connection configuration
 public type MicrosoftGraphConfiguration record {
     string baseUrl;
     string msInitialAccessToken;
@@ -145,8 +139,8 @@ public type MicrosoftGraphConfiguration record {
     string msClientSecret;
     string msRefreshToken;
     string msRefreshUrl;
-    string trustStorePath;
-    string trustStorePassword;
     string bearerToken;
-    oauth2:DirectTokenConfig clientConfig;
+    boolean followRedirects;
+    int maxRedirectsCount;
+    http:ClientSecureSocket secureSocketConfig?;
 };
