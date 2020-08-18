@@ -5,7 +5,7 @@ The `ballerinax/module-ballerinax-microsoft.onedrive` module contains operations
 ## Compatibility
 |                     |    Version     |
 |:-------------------:|:--------------:|
-| Ballerina Language  | Swan Lake Preview1   |
+| Ballerina Language  | Swan Lake Preview3   |
 | Microsoftgraph REST API | v1.0          |
 
 ## Getting started
