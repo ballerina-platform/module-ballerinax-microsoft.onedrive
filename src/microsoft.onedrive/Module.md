@@ -10,7 +10,7 @@ This module contains operations for accessing the items stored in OneDrive.
 ## Compatibility
 |                     |    Version     |
 |:-------------------:|:--------------:|
-| Ballerina Language  | Swan Lake Preview1   |
+| Ballerina Language  | Swan Lake Preview3   |
 | Microsoftgraph REST API | v1.0          |
 
 ## Sample
