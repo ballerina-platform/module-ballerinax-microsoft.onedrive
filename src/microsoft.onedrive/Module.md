@@ -30,8 +30,8 @@ MS_CLIENT_SECRET="<MS_CLIENT_SECRET>"
 MS_REFRESH_TOKEN="<MS_REFRESH_TOKEN>"
 MS_REFRESH_URL="https://login.microsoftonline.com/common/oauth2/v2.0/token"
 MS_ACCESS_TOKEN="<MS_ACCESS_TOKEN>"
-TRUST_STORE_PATH=""
-TRUST_STORE_PASSWORD=""
+FOLLOW_REDIRECTS=""
+MAX_REDIRECTS_COUNT=""
 ```
 
 **Example Code**
@@ -48,18 +48,9 @@ is referred by the `onedrive` module prefix.
         msClientSecret: config:getAsString("MS_CLIENT_SECRET"),
         msRefreshToken: config:getAsString("MS_REFRESH_TOKEN"),
         msRefreshURL: config:getAsString("MS_REFRESH_URL"),
-        trustStorePath: config:getAsString("TRUST_STORE_PATH"),
-        trustStorePassword: config:getAsString("TRUST_STORE_PASSWORD"),
         bearerToken: config:getAsString("MS_ACCESS_TOKEN"),
-        clientConfig: {
-            accessToken: config:getAsString("MS_ACCESS_TOKEN"),
-            refreshConfig: {
-                clientId: config:getAsString("MS_CLIENT_ID"),
-                clientSecret: config:getAsString("MS_CLIENT_SECRET"),
-                refreshToken: config:getAsString("MS_REFRESH_TOKEN"),
-                refreshUrl: config:getAsString("MS_REFRESH_URL")
-            }
-        }
+        followRedirects: config:getAsBoolean("MS_FOLLOW_REDIRECTS", false),
+        maxRedirectsCount: config:getAsInt("MS_MAX_REDIRECTS", 0)
     };
 
     onedrive:OneDriveClient msOneDriveClient = new(msGraphConfig);
