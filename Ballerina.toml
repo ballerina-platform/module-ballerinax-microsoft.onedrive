@@ -1,6 +1,6 @@
 [package]
 org= "ballerinax"
-name= "microsoft_onedrive"
+name= "microsoft.onedrive"
 version= "0.10.0"
 authors = ["Ballerina"]
 keywords = ["Microsoft", "OneDrive", "drive"]

@@ -16,6 +16,11 @@ jobs:
               with:
                   args:
                       build -c
+              env:
+                  TOKEN_ENDPOINT: ${{ secrets.TOKEN_ENDPOINT }}
+                  REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+                  APP_ID: ${{ secrets.APP_ID }}
+                  APP_SECRET: ${{ secrets.APP_SECRET }}
             - name: Ballerina Push
               uses: ballerina-platform/ballerina-action/@swan-lake-connector-release
               with:
