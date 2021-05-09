@@ -234,11 +234,11 @@ public type Audio record {
 # Resource that groups file-related data items into a single structure.
 #
 # + content - A `byte[]` which represents the content of a file
-# + mimeType - The MIME type for the file
+# + mediaType - The MIME type for the file
 # + hashes - Hashes of the file's binary content, if available
 public type File record {
     byte[] content?;
-    string mimeType?;
+    string mediaType?;
     HashFacet hashes?;
 };
 

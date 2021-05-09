@@ -14,29 +14,38 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/http;
 import ballerina/log;
+import ballerina/os;
 import ballerinax/microsoft.onedrive;
 
-configurable http:OAuth2RefreshTokenGrantConfig & readonly driveOauthConfig = ?;
+configurable string & readonly refreshUrl = os:getEnv("TOKEN_ENDPOINT");
+configurable string & readonly refreshToken = os:getEnv("REFRESH_TOKEN");
+configurable string & readonly clientId = os:getEnv("APP_ID");
+configurable string & readonly clientSecret = os:getEnv("APP_SECRET");
 
-onedrive:Configuration config = {
-    clientConfig : driveOauthConfig
+onedrive:Configuration configuration = {
+    clientConfig: {
+        refreshUrl: refreshUrl,
+        refreshToken : refreshToken,
+        clientId : clientId,
+        clientSecret : clientSecret,
+        scopes: ["offline_access","https://graph.microsoft.com/Files.ReadWrite.All"]
+    }
 };
+onedrive:Client driveClient = check new(configuration);
 
-onedrive:Client driveClient = check new (config);
 
 public function main() {
-    string parentID = "root";
-    string newFolderName = "Samples_Test";
+    log:printInfo("Create a folder in a folder specified by ID");
 
+    string parentID = "<PARENT_FOLDER_ID>";
+    string newFolderName = "Samples_Test";
     onedrive:FolderMetadata item = {
         name: newFolderName,
-        folder: {},
+        folder: { },
         conflictResolutionBehaviour : "rename"
     };
 
-    log:printInfo("Create a folder in a folder specified by ID");
     onedrive:DriveItem|onedrive:Error driveItem = driveClient->createFolderById(parentID, item);
 
     if (driveItem is onedrive:DriveItem) {

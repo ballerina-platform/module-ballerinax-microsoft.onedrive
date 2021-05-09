@@ -14,28 +14,37 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/http;
-import ballerina/log;
 import ballerina/io;
+import ballerina/log;
+import ballerina/os;
 import ballerinax/microsoft.onedrive;
 
-configurable http:OAuth2RefreshTokenGrantConfig & readonly driveOauthConfig = ?;
+configurable string & readonly refreshUrl = os:getEnv("TOKEN_ENDPOINT");
+configurable string & readonly refreshToken = os:getEnv("REFRESH_TOKEN");
+configurable string & readonly clientId = os:getEnv("APP_ID");
+configurable string & readonly clientSecret = os:getEnv("APP_SECRET");
 
-onedrive:Configuration config = {
-    clientConfig : driveOauthConfig
+onedrive:Configuration configuration = {
+    clientConfig: {
+        refreshUrl: refreshUrl,
+        refreshToken : refreshToken,
+        clientId : clientId,
+        clientSecret : clientSecret,
+        scopes: ["offline_access","https://graph.microsoft.com/Files.ReadWrite.All"]
+    }
 };
-
-onedrive:Client driveClient = check new (config);
+onedrive:Client driveClient = check new(configuration);
 
 public function main() {
     log:printInfo("Upload drive item to a folder with given item ID");
 
-    stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("files/logo.txt");
-    string fileNameForNewUploadById = "newUpload.txt";
+    stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("./files/github.png");
+    string fileNameForNewUploadById = "newUpload.png";
     string parentFolderId = "<PARENT_FOLDER_ID>";
+    string mediaType = "image/png";
 
     onedrive:DriveItem|onedrive:Error itemInfo = driveClient->uploadDriveItemToFolderById(parentFolderId, fileNameForNewUploadById, 
-        byteStream);
+        byteStream, mediaType);
     if (itemInfo is onedrive:DriveItem) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
         log:printInfo("Success!");
@@ -43,3 +52,4 @@ public function main() {
         log:printError(itemInfo.message());
     }
 }
+

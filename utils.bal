@@ -17,7 +17,6 @@
 import ballerina/http;
 import ballerina/io;
 import ballerina/regex;
-import ballerina/mime;
 
 isolated function handleResponse(http:Response httpResponse) returns @tainted map<json>|Error? {
     if (httpResponse.statusCode is http:STATUS_OK|http:STATUS_CREATED|http:STATUS_ACCEPTED) {
@@ -42,7 +41,7 @@ isolated function encodeSharingUrl(string sharingUrl) returns string {
     return URL_PREFIX.concat(replacedString1);
 }
 
-isolated function createRequestPath(string[] pathParameters, string[] queryParameters = []) returns string|error {
+isolated function createUrl(string[] pathParameters, string[] queryParameters = []) returns string|error {
     string url = EMPTY_STRING;
     if (pathParameters.length() > ZERO) {
         foreach string element in pathParameters {
@@ -65,8 +64,8 @@ isolated function createPathBasedUrl(string[] pathParametersBefore, string relat
                                      string[] pathParametersAfter = [], string[] queryParameters = [])
                                      returns string|error {
     string url = EMPTY_STRING;
-    string beforeParameters = check createRequestPath(pathParametersBefore);
-    string afterParameters = check createRequestPath(pathParametersAfter);
+    string beforeParameters = check createUrl(pathParametersBefore);
+    string afterParameters = check createUrl(pathParametersAfter);
     url = beforeParameters + ":" + relativePathParameters + ":" + afterParameters;
     return url;
 }
@@ -160,14 +159,13 @@ isolated function updateDriveItem(http:Client httpClient, string url, DriveItem 
     } 
 }
 
-isolated function downloadDriveItem(http:Client httpClient, string url) returns @tainted 
-                                    File|Error {
+isolated function downloadDriveItem(http:Client httpClient, string url) returns @tainted File|Error {
     http:Response response = check httpClient->get(<@untainted>url);
     if (response.statusCode is http:STATUS_OK) {
         byte[] content = check response.getBinaryPayload();
         return {
             content: content,
-            mimeType: response.getContentType()
+            mediaType: response.getContentType()
         };  
     } else {
         json errorPayload = check response.getJsonPayload();
@@ -176,16 +174,14 @@ isolated function downloadDriveItem(http:Client httpClient, string url) returns 
     }
 }
 
-isolated function handleDownloadPrtialItem(string webUrl, map<string> headerMap) returns @tainted 
-                                           File|Error {
+isolated function handleDownloadPrtialItem(string webUrl, map<string> headerMap) returns @tainted File|Error {
     http:Client downloadClient = check new(webUrl);
     http:Response response = check downloadClient->get(EMPTY_STRING, headerMap);
     if (response.statusCode is http:STATUS_OK|http:STATUS_PARTIAL_CONTENT) {
         byte[] content = check response.getBinaryPayload();
-        mime:MediaType mediaType = check mime:getMediaType(response.getContentType());
         return {
             content: content,
-            mimeType: response.getContentType()
+            mediaType: response.getContentType()
         }; 
     } else {
         json errorPayload = check response.getJsonPayload();
@@ -194,9 +190,9 @@ isolated function handleDownloadPrtialItem(string webUrl, map<string> headerMap)
     }
 }
 
-isolated function uploadDriveItem(http:Client httpClient, string url, stream<byte[],io:Error?> binaryRepresentation) 
-                                  returns @tainted DriveItem|Error {
-    http:Response response = check httpClient->put(url, binaryRepresentation);
+isolated function uploadDriveItem(http:Client httpClient, string url, stream<byte[],io:Error?> binaryStream, 
+                                  string mediaType) returns @tainted DriveItem|Error {
+    http:Response response = check httpClient->put(url, binaryStream, "application/octet-stream");
     map<json>|string? handledResponse = check handleResponse(response);
     if (handledResponse is map<json>) {
         return check convertToDriveItem(handledResponse);
@@ -204,6 +200,19 @@ isolated function uploadDriveItem(http:Client httpClient, string url, stream<byt
         return error PayloadValidationError("Invalid response");
     } 
 }
+
+//************************ Functions for uploading and replacing the files using byte[] ****************************
+isolated function uploadDriveItemByteArray(http:Client httpClient, string url, byte[] byteArray, string mediaType) 
+                                           returns @tainted DriveItem|Error {
+    http:Response response = check httpClient->put(url, byteArray, mediaType);
+    map<json>|string? handledResponse = check handleResponse(response);
+    if (handledResponse is map<json>) {
+        return check convertToDriveItem(handledResponse);
+    } else {
+        return error PayloadValidationError("Invalid response");
+    } 
+}
+//******************************************************************************************************************
 
 isolated function uploadBytes(int fileSize, byte[] block, int startByte, int endByte, string uploadUrl) returns 
                               @tainted map<json>|Error {
@@ -219,8 +228,8 @@ isolated function uploadBytes(int fileSize, byte[] block, int startByte, int end
                 http:STATUS_HTTP_VERSION_NOT_SUPPORTED, http:STATUS_INTERNAL_SERVER_ERROR]
         }
     });
-    string contentRangeHeader = string `bytes ${startByte.toString()}-${endByte.toString()}/${fileSize.toString()}`;
     http:Request request = new;
+    string contentRangeHeader = string `bytes ${startByte.toString()}-${endByte.toString()}/${fileSize.toString()}`;
     map<string> headers = {
         [CONTENT_RANGE]: contentRangeHeader,
         [http:CONTENT_LENGTH]: block.length().toString()
@@ -284,25 +293,14 @@ isolated function sendSharableLink(http:Client httpClient, string url, ItemShare
     }
 }
 
-isolated function replaceFile(http:Client httpClient, string url, byte[] binaryRepresentation) returns 
-                              @tainted DriveItem|Error {
-    http:Response response = check httpClient->put(url, binaryRepresentation);
-    map<json>|string? handledResponse = check handleResponse(response);
-    if (handledResponse is map<json>) {
-        return check convertToDriveItem(handledResponse);
-    } else {
-        return error PayloadValidationError("Invalid response");
-    } 
-}
-
 isolated function copyDriveItem(http:Client httpClient, string url, ItemReference? parentReference, string? name) 
                                 returns @tainted string|Error {
     json copyItemOptions = {};
-    if (name is () &&  parentReference is ()) {
+    if ((name is () || name == "") &&  parentReference is ()) {
         copyItemOptions = {};
     } else if (parentReference is ()) {
         copyItemOptions = { name: name };
-    } else if (name is ()) {
+    } else if (name is () || name == "") {
         copyItemOptions = { parentReference : check parentReference.cloneWithType(json) };
     } else {
         copyItemOptions = {

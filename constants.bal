@@ -25,8 +25,7 @@ public enum FileFormat {
     MIMETYPE_PDF = "pdf",
     MIMETYPE_JPG = "jpg",
     MIMETYPE_HTML = "html",
-    MIMETYPE_GLB = "glb",
-    MIMETYPE_DOCX = "docx"
+    MIMETYPE_GLB = "glb"
 }
 
 # Represents the conflict resolution behavior for actions in file operations. Default for PUT requests is `REPLACE`

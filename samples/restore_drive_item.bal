@@ -14,22 +14,30 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/http;
 import ballerina/log;
+import ballerina/os;
 import ballerinax/microsoft.onedrive;
 
-configurable http:OAuth2RefreshTokenGrantConfig & readonly driveOauthConfig = ?;
+configurable string & readonly refreshUrl = os:getEnv("TOKEN_ENDPOINT");
+configurable string & readonly refreshToken = os:getEnv("REFRESH_TOKEN");
+configurable string & readonly clientId = os:getEnv("APP_ID");
+configurable string & readonly clientSecret = os:getEnv("APP_SECRET");
 
-onedrive:Configuration config = {
-    clientConfig : driveOauthConfig
+onedrive:Configuration configuration = {
+    clientConfig: {
+        refreshUrl: refreshUrl,
+        refreshToken : refreshToken,
+        clientId : clientId,
+        clientSecret : clientSecret,
+        scopes: ["offline_access","https://graph.microsoft.com/Files.ReadWrite.All"]
+    }
 };
-
-onedrive:Client driveClient = check new (config);
+onedrive:Client driveClient = check new(configuration);
 
 public function main() {
     log:printInfo("Restore drive item");
 
-    string itemId = "";
+    string itemId = "<ITEM_ID>";
 
     onedrive:DriveItem|onedrive:Error restoredDriveItem = driveClient->restoreDriveItem(itemId);
     if (restoredDriveItem is onedrive:DriveItem) {

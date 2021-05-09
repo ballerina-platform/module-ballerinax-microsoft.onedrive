@@ -14,30 +14,33 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/http;
 import ballerina/log;
+import ballerina/os;
 import ballerinax/microsoft.onedrive;
 
-configurable http:OAuth2RefreshTokenGrantConfig & readonly driveOauthConfig = ?;
+configurable string & readonly refreshUrl = os:getEnv("TOKEN_ENDPOINT");
+configurable string & readonly refreshToken = os:getEnv("REFRESH_TOKEN");
+configurable string & readonly clientId = os:getEnv("APP_ID");
+configurable string & readonly clientSecret = os:getEnv("APP_SECRET");
 
-onedrive:Configuration config = {
-    clientConfig : driveOauthConfig
+onedrive:Configuration configuration = {
+    clientConfig: {
+        refreshUrl: refreshUrl,
+        refreshToken : refreshToken,
+        clientId : clientId,
+        clientSecret : clientSecret,
+        scopes: ["offline_access","https://graph.microsoft.com/Files.ReadWrite.All"]
+    }
 };
-
-onedrive:Client driveClient = check new (config);
+onedrive:Client driveClient = check new(configuration);
 
 public function main() {
     log:printInfo("Copy drive item by item ID");
 
-    string driveId = "";
-    string destinationFolderId = ""; 
-    string itemId = "";
+    string itemId = "<ITEM_ID_TO_COPY>";
+    string itemCopyName = "Collector_Copy_Id";
 
-    onedrive:ItemReference destinationFolder = {
-        driveId: driveId,
-        id: destinationFolderId
-    };
-    string|onedrive:Error resourceId = driveClient->copyDriveItemWithId(itemId, "name", destinationFolder); 
+    string|onedrive:Error resourceId = driveClient->copyDriveItemWithId(itemId, itemCopyName); 
     // if there is a copy of same file already exists in the destination folder this operation will fail
     if (resourceId is string) {
         log:printInfo("Created a copy in with id " + resourceId);

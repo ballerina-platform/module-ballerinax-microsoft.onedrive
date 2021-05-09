@@ -29,7 +29,7 @@ onedrive:Client driveClient = check new (config);
 public function main() {
     log:printInfo("Delete drive item by item ID");
 
-    string itemId = ""; //Folder to delete
+    string itemId = "<TARGET_ITEM_ID>";
 
     onedrive:Error? deleteResponse = driveClient->deleteDriveItemById(itemId);
     if (deleteResponse is ()) {

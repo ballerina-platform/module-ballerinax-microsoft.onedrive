@@ -15,34 +15,41 @@
 // under the License.
 
 import ballerina/file;
-import ballerina/http;
-import ballerina/log;
 import ballerina/io;
+import ballerina/log;
+import ballerina/os;
 import ballerinax/microsoft.onedrive;
 
-configurable http:OAuth2RefreshTokenGrantConfig & readonly driveOauthConfig = ?;
+configurable string & readonly refreshUrl = os:getEnv("TOKEN_ENDPOINT");
+configurable string & readonly refreshToken = os:getEnv("REFRESH_TOKEN");
+configurable string & readonly clientId = os:getEnv("APP_ID");
+configurable string & readonly clientSecret = os:getEnv("APP_SECRET");
 
-onedrive:Configuration config = {
-    clientConfig : driveOauthConfig
+onedrive:Configuration configuration = {
+    clientConfig: {
+        refreshUrl: refreshUrl,
+        refreshToken : refreshToken,
+        clientId : clientId,
+        clientSecret : clientSecret,
+        scopes: ["offline_access","https://graph.microsoft.com/Files.ReadWrite.All"]
+    }
 };
+onedrive:Client driveClient = check new(configuration);
 
-onedrive:Client driveClient = check new (config);
 
 public function main() {
     log:printInfo("Upload large file to a folder with given path");
 
-    string localFilePath = "files/ServiceNow_IntegrationSOAP.mp4";
-    stream<io:Block,io:Error?> fileStream = checkpanic io:fileReadBlocksAsStream(localFilePath, 
-        onedrive:DEFAULT_FRAGMENT_SIZE);
+    string localFilePath = "<LOCAL_FILE_PATH>";
 
-    string uploadDestination = "<UPLOAD_DETINATION_FILE_PATH_WITH_EXTENTION>";
+    stream<io:Block,io:Error?> fileStream = checkpanic io:fileReadBlocksAsStream(localFilePath, onedrive:DEFAULT_FRAGMENT_SIZE*8);
     file:MetaData fileMetaData = checkpanic file:getMetaData(localFilePath);
+    string uploadDestinationPath = "<UPLOAD_DETINATION_FILE_PATH_WITH_EXTENTION>";
     onedrive:ItemInfo info = {
         fileSize : fileMetaData.size
     };
 
-    onedrive:DriveItem|onedrive:Error itemInfo = driveClient->resumableUploadDriveItem(uploadDestination, info, 
-        fileStream);
+    onedrive:DriveItem|onedrive:Error itemInfo = driveClient->resumableUploadDriveItem(uploadDestination, info, fileStream);
     if (itemInfo is onedrive:DriveItem) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
         log:printInfo("Success!");

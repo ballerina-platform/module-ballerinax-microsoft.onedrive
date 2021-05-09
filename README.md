@@ -178,6 +178,45 @@ scopes = [<MS_NECESSARY_SCOPES>]
 - Only the operations which are supported in personal Microsoft account is supported.
 
 # Quickstart(s)
+
+## Create a folder in OneDrive
+### Step 1: Import OneDrive Package
+First, import the ballerinax/microsoft.onedrive module into the Ballerina project.
+```ballerina
+import ballerinax/microsoft.onedrive;
+```
+### Step 2: Configure the connection to an existing Azure AD app
+You can now make the connection configuration using the OAuth2 refresh token grant config.
+```ballerina
+onedrive:Configuration configuration = {
+    clientConfig: {
+        refreshUrl: <REFRESH_URL>,
+        refreshToken : <REFRESH_TOKEN>,
+        clientId : <CLIENT_ID>,
+        clientSecret : <CLIENT_SECRET>,
+        scopes: [<NECESSARY_SCOPES>]
+    }
+};
+```
+### Step 3: Create a folder
+```string parentID = "<PARENT_FOLDER_ID>";
+    string newFolderName = "Samples_Test";
+    onedrive:FolderMetadata item = {
+        name: newFolderName,
+        folder: { },
+        conflictResolutionBehaviour : "rename"
+    };
+
+    onedrive:DriveItem|onedrive:Error driveItem = driveClient->createFolderById(parentID, item);
+
+    if (driveItem is onedrive:DriveItem) {
+        log:printInfo("Folder Created " + driveItem.toString());
+        log:printInfo("Success!");
+    } else {
+        log:printError(driveItem.message());
+    }
+```
+
 ## Upload a file to OneDrive
 ### Step 1: Import OneDrive Package
 First, import the ballerinax/microsoft.onedrive module into the Ballerina project.
@@ -203,12 +242,13 @@ onedrive:Client driveClient = check new (config);
 ```
 ### Step 4: Upload a file
 ```ballerina
-    byte[] byteArray = checkpanic io:fileReadBytes(<PATH_TO_FILE>);
+    stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream(<PATH_TO_FILE>);
     string fileNameForNewUploadById = "<NEW_FILE_NAME.extention>";
     string parentFolderId = "<PARENT_FOLDER_ID>";
+    string mediaType = "<MEDIA_TYPE>";
 
     onedrive:DriveItem|onedrive:Error itemInfo = driveClient->uploadDriveItemToFolderById(parentFolderId, 
-        fileNameForNewUploadById, byteArray);
+        fileNameForNewUploadById, byteStream, mediaType);
     if (itemInfo is onedrive:DriveItem) {
         io:println("Uploaded item " + itemInfo?.id.toString());
     } else {
@@ -242,70 +282,159 @@ onedrive:Client driveClient = check new (config);
 ```ballerina
     string fileId = "<ID_OF_FILE_TO_DOWNLOAD>";
 
-    byte[]|onedrive:Error itemResponse = driveClient->downloadFileById(fileId);
-    if (itemResponse is byte[]) {
-        io:Error? result = io:fileWriteBytes("./files/downloadedFile", itemResponse);
+    onedrive:File|onedrive:Error itemResponse = driveClient->downloadFileById(fileId);
+    if (itemResponse is onedrive:File) {
+        byte[] content = let var item = itemResponse?.content in item is byte[] ? item : [];
+        io:Error? result = io:fileWriteBytes("./files/downloadedFileById.docx", content); 
     } else {
         io:println(itemResponse.message());
     }
 ```
 # Samples
-
 ## Get DriveItem metadata
-Retrieve the metadata for a DriveItem in a Drive by item ID or file syatem path (relative path). 
+Retrieve the metadata for a DriveItem in a Drive by item ID or file system path (relative path). 
+
+ID based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/get_item_metadata_by_id.bal
+
+Path based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/get_item_metadata_by_path.bal 
+
+Notes : <br/>
+This operation supports several OData query parameters as wella as normal query parameters.
+* **$expand** 
+* **$select**
+* **includeDeletedItems=true** - Query parameter to return deleted items. This query parameter is only valid when targeting a driveItem by ID, and otherwise will be ignored.
+
+Sample with query parameters is available here: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/get_item_metadata_by_id_query_params.bal
 
 ## Get recent DriveItems
 Lists a set of items that have been recently used by the `signed in user`. This will include items that are in the 
 user's drive as well as the items they have access to from other drives.
 
+Sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/get_recent_items.bal
+
 ## Get DriveItems shared with me
 Retrieve a collection of `DriveItem` resources that have been shared with the `signed in user` of the OneDrive.
 
+Sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/get_shared_items.bal
+
 ## Create new folders in OneDrive
-Create a new folder in a Drive with a specified parent item, referred with the parent folder's ID or file syatem path 
+Create a new folder in a Drive with a specified parent item, referred with the parent folder's ID or file system path 
 (relative path).
 
+ID based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/create_folder_by_id.bal
+
+Path based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/create_folder_by_path.bal
+
 ## Update a DriveItem
-Update the metadata for a DriveItem in a Drive referring by item ID or file syatem path (relative path).
+Update the metadata for a DriveItem in a Drive referring by item ID or file system path (relative path).
+
+ID based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/update_drive_item_by_id.bal
+
+Path based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/update_drive_item_by_path.bal
+
+**Notes:** <br/>
+* Item update does not work when item is open in browser (On editing view)
+https://stackoverflow.com/questions/50057662/not-able-to-update-file-stream-through-microsoft-graph-sdk-when-file-is-open-in
+
+* The set of exact fields which can be updated is not provided in the docs. 
+If we try to update facets which are not related to the current resource (eg: if the resource is a file and we send folder facet it gives an error) error occurs.
 
 ## Delete a DriveItem
-Delete a DriveItem in a Drive by using it's item ID or file syatem path (relative path).
+Delete a DriveItem in a Drive by using it's item ID or file system path (relative path).
+
+ID based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/delete_drive_item.by_id.bal
+
+Path based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/delete_drive_item.by_path.bal
 
 ## Restore DriveItem
-Restore a driveItem that has been deleted and is currently in the recycle bin.
+Restore a DriveItem that has been deleted and is currently in the recycle bin.
+
+Sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/restore_drive_item.bal
 
 ## Copy a DriveItem
 Asynchronously creates a copy of a DriveItem (including any children), under a new parent item or at the same location 
 with a new name.
 
+ID based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/copy_drive_item_by_id.bal
+
+Path based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/copy_drive_item_by_path.bal
+
 ## Download file
-Download the contents of the primary stream (file) of a DriveItem using item ID or it's file syatem path (relative path). 
-**NOTE:** Only driveItems with the file property can be downloaded.
+Download the contents of the primary stream (file) of a DriveItem using item ID or it's file system path (relative path). 
+
+ID based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/download_file_by_id.bal
+
+Path based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/download_file_by_path.bal
+
+**Notes:** <br/> 
+* Only DriveItems with the file property can be downloaded.
 
 ## Upload a small file to a certain location in OneDrive
-Upload a new file to the Drive. This method only supports files up to 4MB in size.
+Upload a new file to the Drive.
+
+ID based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/upload_file_to_parent_id.bal
+
+Path based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/upload_file_to_parent_path.bal
+
+**Notes:** <br/>
+* This method only supports files up to 4MB in size.
 
 ## Replace file
-Update the contents of an existing file in the Drive. This method only supports files up to 4MB in size. Here, the type 
-of the file should be the same type as the file we replace with.
+Update the contents of an existing file in the Drive.
+
+ID based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/replace_file_using_id.bal
+
+Path based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/replace_file_using_path.bal
+
+**Notes:** <br/>
+* The file used for replacing must be of the same media type as the file which will be replaced.
+* This method only supports files up to 4MB in size.
 
 ## Upload a large file to a certain location in OneDrive
-Upload files up to the maximum file size. **NOTE:** Maximum bytes in any given request is less than 60 MiB.
+Upload files up to the maximum file size. 
+
+Sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/upload_large_file.bal
+
+**Notes:** <br/> 
+* Maximum bytes in any given request should be less than 60 MiB.
+* If the file is fragmented into into multiple byte ranges, the size of each byte range MUST be a multiple of 320 KiB 
+(327,680 bytes). You can use the constant `ondedrive:DEFAULT_FRAGMENT_SIZE` to easily obtain a multiple of 320 KiB.
 
 ## Search DriveItems
-Search the hierarchy of items for items matching a query.
+Search the hierarchy of items for items matching a query. You can search within a folder hierarchy, a whole drive, or 
+files shared with the current user.
+
+Sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/search_drive_items.bal
+
+**Notes:** <br/>
+* Supports the **$expand**, **$select**, **$skipToken**, **$top**, and **$orderby** OData query parameters to customize 
+the response.
+* You can use the **$top** query parameter to specify the number of items in the page.
+* Find more on Odata query parameters here: https://docs.microsoft.com/en-us/onedrive/developer/rest-api/concepts/optional-query-parameters?view=odsp-graph-online
 
 ## Get a sharable link for a DriveItem
 Create a new sharing link if the specified link type doesn't already exist for the calling application. If a sharing 
 link of the specified type already exists for the app, the existing sharing link will be returned.
 
+ID based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/get_sharable_link_from_id.bal
+
+Path based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/get_sharable_link_from_path.bal
+
 ## Get metadata for a shared DriveItem
 Access a shared DriveItem by using sharing URL.
+
+Sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/get_shared_drive_item.bal
 
 ## Send sharing invitation via emails
 Sends a sharing invitation for a DriveItem. A sharing invitation provides permissions to the recipients and optionally 
 sends them an email with a sharing link.
 
+ID based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/send_sharing_invitation_by_id.balal
+
+Path based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/send_sharing_invitation_by_path.bal
+
+**Notes:** <br/>
+* OneDrive personal accounts cannot create or modify permissions on the root DriveItem.
 
 # Building from the Source
 ## Setting Up the Prerequisites
@@ -322,7 +451,7 @@ sends them an email with a sharing link.
 2. Download and install [Ballerina SLP8](https://ballerina.io/). 
 
 ## Building the Source
-Execute the commands below to build from the source after installing Ballerina SLP8 version.
+Execute the commands below to build from the source after installing Ballerina SL Alpha 5 version.
 
 1. To build the library:
 ```shell script
