@@ -192,7 +192,9 @@ isolated function handleDownloadPrtialItem(string webUrl, map<string> headerMap)
 
 isolated function uploadDriveItem(http:Client httpClient, string url, stream<byte[],io:Error?> binaryStream, 
                                   string mediaType) returns @tainted DriveItem|Error {
-    http:Response response = check httpClient->put(url, binaryStream, "application/octet-stream");
+    http:Request request = new;
+    request.setByteStream(binaryStream, mediaType);
+    http:Response response = check httpClient->put(url, request);
     map<json>|string? handledResponse = check handleResponse(response);
     if (handledResponse is map<json>) {
         return check convertToDriveItem(handledResponse);
@@ -322,7 +324,6 @@ isolated function handleCopyItemResponse(http:Response httpResponse) returns @ta
         // long running JOB
         string locationHeader = check httpResponse.getHeader(http:LOCATION);
         AsyncJobStatus asyncStatus = check getasyncJobStatus(<@untainted>locationHeader); 
-        // This recursive function must be revisited and get a review
         return asyncStatus?.resourceId;
     }
     json errorPayload = check httpResponse.getJsonPayload();

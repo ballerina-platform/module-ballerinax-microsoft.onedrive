@@ -42,14 +42,16 @@ public function main() {
 
     string localFilePath = "<LOCAL_FILE_PATH>";
 
-    stream<io:Block,io:Error?> fileStream = checkpanic io:fileReadBlocksAsStream(localFilePath, onedrive:DEFAULT_FRAGMENT_SIZE*8);
+    stream<io:Block,io:Error?> fileStream = checkpanic io:fileReadBlocksAsStream(localFilePath, 
+        onedrive:DEFAULT_FRAGMENT_SIZE*8);
     file:MetaData fileMetaData = checkpanic file:getMetaData(localFilePath);
     string uploadDestinationPath = "<UPLOAD_DETINATION_FILE_PATH_WITH_EXTENTION>";
     onedrive:ItemInfo info = {
         fileSize : fileMetaData.size
     };
 
-    onedrive:DriveItem|onedrive:Error itemInfo = driveClient->resumableUploadDriveItem(uploadDestination, info, fileStream);
+    onedrive:DriveItem|onedrive:Error itemInfo = driveClient->resumableUploadDriveItem(uploadDestinationPath, info, 
+        fileStream);
     if (itemInfo is onedrive:DriveItem) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
         log:printInfo("Success!");

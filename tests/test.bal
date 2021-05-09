@@ -417,8 +417,8 @@ function testCopyDriveItemInPath() {
 @test:Config {
     enable: true
 }
-function testUploadDriveItemToFolderById() {
-    log:printInfo("client->uploadDriveItemToFolderById()");
+function testUploadFileToFolderById() {
+    log:printInfo("client->uploadFileById()");
     runtime:sleep(2);
 
     stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("./files/logo.txt");
@@ -426,7 +426,7 @@ function testUploadDriveItemToFolderById() {
     string parentFolderId = collectorFolderId;
     string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-    DriveItem|Error itemInfo = oneDriveClient->uploadDriveItemToFolderById(parentFolderId, fileNameForNewUploadById, 
+    DriveItem|Error itemInfo = oneDriveClient->uploadFileToFolderById(parentFolderId, fileNameForNewUploadById, 
         byteStream, mediaType);
     if (itemInfo is DriveItem) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
@@ -440,8 +440,8 @@ function testUploadDriveItemToFolderById() {
 @test:Config {
     enable: true
 }
-function testUploadDriveItemToFolderByPath() {
-    log:printInfo("client->uploadDriveItemToFolderByPath()");
+function testUploadFileToFolderByPath() {
+    log:printInfo("client->uploadFileToFolderByPath()");
     runtime:sleep(2);
 
     stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("./files/logo.txt");
@@ -449,7 +449,7 @@ function testUploadDriveItemToFolderByPath() {
     string parentFolderPath = collectorFolderPath;
     string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-    DriveItem|Error itemInfo = oneDriveClient->uploadDriveItemToFolderByPath(parentFolderPath, 
+    DriveItem|Error itemInfo = oneDriveClient->uploadFileToFolderByPath(parentFolderPath, 
         fileNameNewForNewUploadByPath, byteStream, mediaType);
     if (itemInfo is DriveItem) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
@@ -466,8 +466,8 @@ function testUploadDriveItemToFolderByPath() {
     enable: true,
     dependsOn: [testReplaceFileUsingId]
 }
-function testUploadDriveItemToFolderByIdTest() {
-    log:printInfo("client->uploadDriveItemToFolderByIdTest()");
+function testUploadFileToFolderByIdAsArray() {
+    log:printInfo("client->uploadFileToFolderByIdAsArray()");
     runtime:sleep(2);
 
     byte[] byteArray = checkpanic io:fileReadBytes("./files/document.docx");
@@ -475,7 +475,7 @@ function testUploadDriveItemToFolderByIdTest() {
     string parentFolderId = collectorFolderId;
     string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-    DriveItem|Error itemInfo = oneDriveClient->uploadDriveItemToFolderByIdTest(parentFolderId, fileNameForNewUploadById, 
+    DriveItem|Error itemInfo = oneDriveClient->uploadFileToFolderByIdAsArray(parentFolderId, fileNameForNewUploadById, 
         byteArray, mediaType);
     if (itemInfo is DriveItem) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
@@ -490,8 +490,8 @@ function testUploadDriveItemToFolderByIdTest() {
     enable: true,
     dependsOn: [testReplaceFileUsingPath]
 }
-function testUploadDriveItemToFolderByPathTest() {
-    log:printInfo("client->uploadDriveItemToFolderByPathTest()");
+function testUploadFileToFolderByPathAsArray() {
+    log:printInfo("client->uploadFileToFolderByPathAsArray()");
     runtime:sleep(2);
 
     byte[] byteArray = checkpanic io:fileReadBytes("./files/document.docx");
@@ -499,7 +499,7 @@ function testUploadDriveItemToFolderByPathTest() {
     string parentFolderPath = collectorFolderPath;
     string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-    DriveItem|Error itemInfo = oneDriveClient->uploadDriveItemToFolderByPathTest(parentFolderPath, 
+    DriveItem|Error itemInfo = oneDriveClient->uploadFileToFolderByPathAsArray(parentFolderPath, 
         fileNameNewForNewUploadByPath, byteArray, mediaType);
     if (itemInfo is DriveItem) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
@@ -513,7 +513,7 @@ function testUploadDriveItemToFolderByPathTest() {
 
 @test:Config {
     enable: true,
-    dependsOn: [testUploadDriveItemToFolderByIdTest]
+    dependsOn: [testUploadFileToFolderByIdAsArray]
 }
 function testDownloadFileById() {
     log:printInfo("client->downloadFileById()");
@@ -533,7 +533,7 @@ function testDownloadFileById() {
 
 @test:Config {
     enable: true,
-    dependsOn: [testUploadDriveItemToFolderByPathTest]
+    dependsOn: [testUploadFileToFolderByPathAsArray]
 }
 function testDownloadFileByPath() {
     log:printInfo("client->downloadFileByPath()");
@@ -553,7 +553,7 @@ function testDownloadFileByPath() {
 
 @test:Config {
     enable: true,
-    dependsOn: [testUploadDriveItemToFolderByIdTest]
+    dependsOn: [testUploadFileToFolderByIdAsArray]
 }
 function testDownloadConvertedFileContentById() {
     log:printInfo("client->downloadConvertedFileContentById()");
@@ -574,7 +574,7 @@ function testDownloadConvertedFileContentById() {
 
 @test:Config {
     enable: true,
-    dependsOn: [testUploadDriveItemToFolderByPathTest]
+    dependsOn: [testUploadFileToFolderByPathAsArray]
 }
 function testDownloadConvertedFileContentByPath() {
     log:printInfo("client->downloadConvertedFileContentByPath()");
@@ -595,7 +595,7 @@ function testDownloadConvertedFileContentByPath() {
 
 @test:Config {
     enable: true,
-    dependsOn: [testUploadDriveItemToFolderById]
+    dependsOn: [testUploadFileToFolderById]
 }
 function testReplaceFileUsingId() {
     log:printInfo("client->replaceFileUsingId()");
@@ -616,7 +616,7 @@ function testReplaceFileUsingId() {
 
 @test:Config {
     enable: true,
-    dependsOn: [testUploadDriveItemToFolderByPath]
+    dependsOn: [testUploadFileToFolderByPath]
 }
 function testReplaceFileUsingPath() {
     log:printInfo("client->replaceFileUsingPath()");
@@ -637,7 +637,7 @@ function testReplaceFileUsingPath() {
 
 @test:Config {
     enable: true,
-    dependsOn: [testUploadDriveItemToFolderByPath]
+    dependsOn: [testUploadFileToFolderByPath]
 }
 function testResumableUploadDriveItem() {
     log:printInfo("client->resumableUploadDriveItem()");
@@ -686,7 +686,7 @@ function testSearchDriveItems() {
 
 @test:Config {
     enable: true,
-    dependsOn: [testUploadDriveItemToFolderById]
+    dependsOn: [testUploadFileToFolderById]
 }
 function testGetSharableLinkFromId() {
     log:printInfo("client->getSharableLinkFromId()");
@@ -710,7 +710,7 @@ function testGetSharableLinkFromId() {
 
 @test:Config {
     enable: true,
-    dependsOn: [testUploadDriveItemToFolderByPath]
+    dependsOn: [testUploadFileToFolderByPath]
 }
 function testGetSharableLinkFromPath() {
     log:printInfo("client->getSharableLinkFromPath()");
@@ -751,7 +751,7 @@ function testGetSharedDriveItem() {
 
 @test:Config {
     enable: true,
-    dependsOn: [testUploadDriveItemToFolderById]
+    dependsOn: [testUploadFileToFolderById]
 }
 function testSendSharingInvitationById() {
     log:printInfo("client->sendSharingInvitationById()");
@@ -778,7 +778,7 @@ function testSendSharingInvitationById() {
 
 @test:Config {
     enable: true,
-    dependsOn: [testUploadDriveItemToFolderByPath]
+    dependsOn: [testUploadFileToFolderByPath]
 }
 function testSendSharingInvitationByPath() {
     log:printInfo("client->sendSharingInvitationByPath()");
