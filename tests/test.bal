@@ -61,7 +61,6 @@ function testCreateFoldersAndFiles() {
     string newFolderName = "Collector";
     FolderMetadata item = {
         name: newFolderName,
-        folder: { },
         conflictResolutionBehaviour : "rename"
     };
 
@@ -123,7 +122,6 @@ function testCreateFolderById() {
 
     FolderMetadata item = {
         name: newFolderName,
-        folder: { },
         conflictResolutionBehaviour : "rename"
     };
     DriveItem|Error driveItem = oneDriveClient->createFolderById(parentID, item);
@@ -149,7 +147,6 @@ function testCreateFolderByPath() {
 
     FolderMetadata item = {
         name: newFolderName,
-        folder: { },
         conflictResolutionBehaviour : "rename"
     };
     DriveItem|Error driveItem = oneDriveClient->createFolderByPath(parentRelativepath, item);

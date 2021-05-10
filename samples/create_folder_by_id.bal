@@ -41,7 +41,6 @@ public function main() returns error? {
     string newFolderName = "Samples_Test";
     onedrive:FolderMetadata item = {
         name: newFolderName,
-        folder: { },
         conflictResolutionBehaviour : "rename"
     };
 

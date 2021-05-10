@@ -9,7 +9,7 @@ account (currently logged in user).
 
 ## Compatibility
 Ballerina Language Version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Swan Lake Alpha 5**<br/>
-Microsoft Graph API Version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **v1.0**<br/>
+[Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview) Version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **v1.0**<br/>
 Java Development Kit (JDK)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11                    
 
 ## OneDrive Client
@@ -55,12 +55,11 @@ public function main() returns error? {
     };
     onedrive:Client driveClient = check new(configuration);
 
-    string parentsRelativepath = "/Sample_parent"; 
-    string newFolderName = "Sample_Test";
+    string parentFolderPath = "/Sample_Parent"; 
+    string folderName = "Sample_Test";
 
     onedrive:FolderMetadata item = {
         name: newFolderName,
-        folder: {},
         conflictResolutionBehaviour : "rename"
     };
 
@@ -75,13 +74,12 @@ public function main() returns error? {
     }
 }
 ```
-
 ### Upload a small file to OneDrive
 Upload a new file to the Drive. This method only supports files up to 4MB in size.
 ```ballerina
-import ballerina/http;
-import ballerina/log;
 import ballerina/io;
+import ballerina/log;
+import ballerina/os;
 import ballerinax/microsoft.onedrive;
 
 configurable string & readonly refreshUrl = os:getEnv("TOKEN_ENDPOINT");
@@ -90,7 +88,6 @@ configurable string & readonly clientId = os:getEnv("APP_ID");
 configurable string & readonly clientSecret = os:getEnv("APP_SECRET");
 
 public function main() returns error? {
-
     onedrive:Configuration configuration = {
         clientConfig: {
             refreshUrl: refreshUrl,
@@ -104,12 +101,13 @@ public function main() returns error? {
 
     log:printInfo("Upload drive item to a folder with given item ID");
 
-    stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("files/logo.txt");
-    string fileNameForNewUpload = "newUpload.txt";
-    string parentFolderId = "<PARENT_FOLDER_ID>";
+    byte[] byteArray = check io:fileReadBytes("<LOCAL_FILE_PATH>");
+    string fileNameNewForNewUploadByPath = "<NEW_FILE_NAME>";
+    string parentFolderPath = "<PARENT_FOLDER_PATH>";
+    string mediaType = "image/png";
 
-    onedrive:DriveItem|onedrive:Error itemInfo = driveClient->uploadDriveItemToFolderById(parentFolderId, 
-        fileNameForNewUploadById, byteStream);
+    onedrive:DriveItem|onedrive:Error itemInfo = driveClient->uploadDriveItemToFolderByPath(parentFolderPath, 
+        fileNameNewForNewUploadByPath, byteArray, mediaType);
     if (itemInfo is onedrive:DriveItem) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
         log:printInfo("Success!");
@@ -118,7 +116,6 @@ public function main() returns error? {
     }
 }
 ```
-
 ### Download a file from OneDrive
 Download the contents of the primary stream (file) of a DriveItem using item ID.
 ```
@@ -143,12 +140,12 @@ public function main() returns error? {
         }
     };
     onedrive:Client driveClient = check new(configuration);
+
+    log:printInfo("Download drive item by path");
+
+    string filePath = "<FILE_PATH>";
     
-    log:printInfo("Download drive item by ID");
-
-    string fileId = "<FILE_ID>";
-
-    onedrive:File|onedrive:Error itemResponse = driveClient->downloadFileById(fileId);
+    onedrive:File|onedrive:Error itemResponse = driveClient->downloadFileByPath(filePath);
     if (itemResponse is onedrive:File) {
         byte[] content = let var item = itemResponse?.content in item is byte[] ? item : [];
         io:Error? result = io:fileWriteBytes("./files/downloadedFile", content);
@@ -158,7 +155,6 @@ public function main() returns error? {
     }
 }
 ```
-
 ### Delete a drive item
 
 ```ballerina

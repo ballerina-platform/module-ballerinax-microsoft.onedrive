@@ -169,7 +169,7 @@ public type DriveItem record {
 # + remoteItem - Remote item data, if the item is shared from a drive other than the one being accessed 
 public type FolderMetadata record {|
     string name;
-    Folder folder;
+    Folder folder = { };
     ItemReference parentReference?;
     FileSystemInfo fileSystemInfo?;
     ConflictResolutionBehaviour conflictResolutionBehaviour?;

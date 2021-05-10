@@ -167,11 +167,11 @@ scopes = [<MS_NECESSARY_SCOPES>]
 ```
 # Supported versions & limitations
 ## Supported Versions
-|                                 | Version               |
-|---------------------------------|-----------------------|
-| Ballerina Language Version      | **Swan Lake Alpha 5** |
-| Microsoft Graph API Version     | **v1.0**              |
-| Java Development Kit (JDK)      | 11                    |
+|                                                                                    | Version               |
+|------------------------------------------------------------------------------------|-----------------------|
+| Ballerina Language Version                                                         | **Swan Lake Alpha 5** |
+| [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview) Version     | **v1.0**              |
+| Java Development Kit (JDK)                                                         | 11                    |
 
 ## Limitations
 - Connector only allows to perform functions onbehalf of the currently logged in user.
@@ -203,7 +203,6 @@ onedrive:Configuration configuration = {
     string newFolderName = "Samples_Test";
     onedrive:FolderMetadata item = {
         name: newFolderName,
-        folder: { },
         conflictResolutionBehaviour : "rename"
     };
 
@@ -243,12 +242,12 @@ onedrive:Client driveClient = check new (config);
 ### Step 4: Upload a file
 ```ballerina
     byte[] byteArray = check io:fileReadBytes("<LOCAL_FILE_PATH>");
-    string fileNameForNewUploadById = "<NEW_FILE_NAME>";
-    string parentFolderId = "<PARENT_FOLDER_ID>";
+    string fileNameNewForNewUploadByPath = "<NEW_FILE_NAME>";
+    string parentFolderPath = "<PARENT_FOLDER_PATH>";
     string mediaType = "image/png";
 
-    onedrive:DriveItem|onedrive:Error itemInfo = driveClient->uploadDriveItemToFolderById(parentFolderId, 
-        fileNameForNewUploadById, byteArray, mediaType);
+    onedrive:DriveItem|onedrive:Error itemInfo = driveClient->uploadDriveItemToFolderByPath(parentFolderPath, 
+        fileNameNewForNewUploadByPath, byteArray, mediaType);
     if (itemInfo is onedrive:DriveItem) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
         log:printInfo("Success!");
@@ -281,14 +280,15 @@ onedrive:Client driveClient = check new (config);
 ```
 ### Step 4: Download a file
 ```ballerina
-    string fileId = "<ID_OF_FILE_TO_DOWNLOAD>";
-
-    onedrive:File|onedrive:Error itemResponse = driveClient->downloadFileById(fileId);
+    string filePath = "<PATH_FILE_TO_BE_DOWNLOADED>";
+    
+    onedrive:File|onedrive:Error itemResponse = driveClient->downloadFileByPath(filePath);
     if (itemResponse is onedrive:File) {
         byte[] content = let var item = itemResponse?.content in item is byte[] ? item : [];
-        io:Error? result = io:fileWriteBytes("./files/downloadedFileById.docx", content); 
+        io:Error? result = io:fileWriteBytes("./files/downloadedFile", content);
+        log:printInfo("Success!");
     } else {
-        io:println(itemResponse.message());
+        log:printError(itemResponse.message());
     }
 ```
 # Samples
