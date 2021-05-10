@@ -24,21 +24,21 @@ configurable string & readonly refreshToken = os:getEnv("REFRESH_TOKEN");
 configurable string & readonly clientId = os:getEnv("APP_ID");
 configurable string & readonly clientSecret = os:getEnv("APP_SECRET");
 
-onedrive:Configuration configuration = {
-    clientConfig: {
-        refreshUrl: refreshUrl,
-        refreshToken : refreshToken,
-        clientId : clientId,
-        clientSecret : clientSecret,
-        scopes: ["offline_access","https://graph.microsoft.com/Files.ReadWrite.All"]
-    }
-};
-onedrive:Client driveClient = check new(configuration);
+public function main() returns error? {
+    onedrive:Configuration configuration = {
+        clientConfig: {
+            refreshUrl: refreshUrl,
+            refreshToken : refreshToken,
+            clientId : clientId,
+            clientSecret : clientSecret,
+            scopes: ["offline_access","https://graph.microsoft.com/Files.ReadWrite.All"]
+        }
+    };
+    onedrive:Client driveClient = check new(configuration);
 
-public function main() {
     log:printInfo("Replace file by referring item path");
 
-    byte[] byteArray = checkpanic io:fileReadBytes("<LOCAL_FILE_PATH>");
+    byte[] byteArray = check io:fileReadBytes("<LOCAL_FILE_PATH>");
     string filePath = "<FILE_PATH>";
     string mediType = "image/png";
 

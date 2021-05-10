@@ -242,17 +242,18 @@ onedrive:Client driveClient = check new (config);
 ```
 ### Step 4: Upload a file
 ```ballerina
-    stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream(<PATH_TO_FILE>);
-    string fileNameForNewUploadById = "<NEW_FILE_NAME.extention>";
+    byte[] byteArray = check io:fileReadBytes("<LOCAL_FILE_PATH>");
+    string fileNameForNewUploadById = "<NEW_FILE_NAME>";
     string parentFolderId = "<PARENT_FOLDER_ID>";
-    string mediaType = "<MEDIA_TYPE>";
+    string mediaType = "image/png";
 
     onedrive:DriveItem|onedrive:Error itemInfo = driveClient->uploadDriveItemToFolderById(parentFolderId, 
-        fileNameForNewUploadById, byteStream, mediaType);
+        fileNameForNewUploadById, byteArray, mediaType);
     if (itemInfo is onedrive:DriveItem) {
-        io:println("Uploaded item " + itemInfo?.id.toString());
+        log:printInfo("Uploaded item " + itemInfo?.id.toString());
+        log:printInfo("Success!");
     } else {
-        io:println(itemInfo.message());
+        log:printError(itemInfo.message());
     }
 ```
 ## Download a file from OneDrive

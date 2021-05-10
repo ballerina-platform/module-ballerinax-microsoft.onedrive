@@ -25,25 +25,25 @@ configurable string & readonly refreshToken = os:getEnv("REFRESH_TOKEN");
 configurable string & readonly clientId = os:getEnv("APP_ID");
 configurable string & readonly clientSecret = os:getEnv("APP_SECRET");
 
-onedrive:Configuration configuration = {
-    clientConfig: {
-        refreshUrl: refreshUrl,
-        refreshToken : refreshToken,
-        clientId : clientId,
-        clientSecret : clientSecret,
-        scopes: ["offline_access","https://graph.microsoft.com/Files.ReadWrite.All"]
-    }
-};
-onedrive:Client driveClient = check new(configuration);
+public function main() returns error? {
+    onedrive:Configuration configuration = {
+        clientConfig: {
+            refreshUrl: refreshUrl,
+            refreshToken : refreshToken,
+            clientId : clientId,
+            clientSecret : clientSecret,
+            scopes: ["offline_access","https://graph.microsoft.com/Files.ReadWrite.All"]
+        }
+    };
+    onedrive:Client driveClient = check new(configuration);
 
-public function main() {
     log:printInfo("Upload large file to a folder with given path");
 
     string localFilePath = "<LOCAL_FILE_PATH>";
 
-    stream<io:Block,io:Error?> fileStream = checkpanic io:fileReadBlocksAsStream(localFilePath, 
+    stream<io:Block,io:Error?> fileStream = check io:fileReadBlocksAsStream(localFilePath, 
         onedrive:DEFAULT_FRAGMENT_SIZE*8);
-    file:MetaData fileMetaData = checkpanic file:getMetaData(localFilePath);
+    file:MetaData fileMetaData = check file:getMetaData(localFilePath);
     string uploadDestinationPath = "<UPLOAD_DETINATION_FILE_PATH_WITH_EXTENTION>";
     onedrive:ItemInfo info = {
         fileSize : fileMetaData.size

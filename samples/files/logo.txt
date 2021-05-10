@@ -9,7 +9,7 @@ cosmosdb:Configuration config = {
 
 cosmosdb:ManagementClient managementClient = check new (config);
 
-public function main() { 
+public function main() returns error? { 
     string databaseId = "my_database";
 
     log:printInfo("Creating database");

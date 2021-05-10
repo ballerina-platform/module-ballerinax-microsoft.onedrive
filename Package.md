@@ -37,15 +37,23 @@ import ballerina/http;
 import ballerina/log;
 import ballerinax/microsoft.onedrive;
 
-configurable http:OAuth2RefreshTokenGrantConfig & readonly driveOauthConfig = ?;
+configurable string & readonly refreshUrl = os:getEnv("TOKEN_ENDPOINT");
+configurable string & readonly refreshToken = os:getEnv("REFRESH_TOKEN");
+configurable string & readonly clientId = os:getEnv("APP_ID");
+configurable string & readonly clientSecret = os:getEnv("APP_SECRET");
 
-onedrive:Configuration config = {
-    clientConfig : driveOauthConfig
-};
+public function main() returns error? {
 
-onedrive:Client driveClient = check new (config);
-
-public function main() {
+    onedrive:Configuration configuration = {
+        clientConfig: {
+            refreshUrl: refreshUrl,
+            refreshToken : refreshToken,
+            clientId : clientId,
+            clientSecret : clientSecret,
+            scopes: ["offline_access","https://graph.microsoft.com/Files.ReadWrite.All"]
+        }
+    };
+    onedrive:Client driveClient = check new(configuration);
 
     string parentsRelativepath = "/Sample_parent"; 
     string newFolderName = "Sample_Test";
@@ -76,15 +84,24 @@ import ballerina/log;
 import ballerina/io;
 import ballerinax/microsoft.onedrive;
 
-configurable http:OAuth2RefreshTokenGrantConfig & readonly driveOauthConfig = ?;
+configurable string & readonly refreshUrl = os:getEnv("TOKEN_ENDPOINT");
+configurable string & readonly refreshToken = os:getEnv("REFRESH_TOKEN");
+configurable string & readonly clientId = os:getEnv("APP_ID");
+configurable string & readonly clientSecret = os:getEnv("APP_SECRET");
 
-onedrive:Configuration config = {
-    clientConfig : driveOauthConfig
-};
+public function main() returns error? {
 
-onedrive:Client driveClient = check new (config);
+    onedrive:Configuration configuration = {
+        clientConfig: {
+            refreshUrl: refreshUrl,
+            refreshToken : refreshToken,
+            clientId : clientId,
+            clientSecret : clientSecret,
+            scopes: ["offline_access","https://graph.microsoft.com/Files.ReadWrite.All"]
+        }
+    };
+    onedrive:Client driveClient = check new(configuration);
 
-public function main() {
     log:printInfo("Upload drive item to a folder with given item ID");
 
     stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("files/logo.txt");
@@ -104,28 +121,71 @@ public function main() {
 
 ### Download a file from OneDrive
 Download the contents of the primary stream (file) of a DriveItem using item ID.
+```
+import ballerina/io;
+import ballerina/log;
+import ballerina/os;
+import ballerinax/microsoft.onedrive;
 
+configurable string & readonly refreshUrl = os:getEnv("TOKEN_ENDPOINT");
+configurable string & readonly refreshToken = os:getEnv("REFRESH_TOKEN");
+configurable string & readonly clientId = os:getEnv("APP_ID");
+configurable string & readonly clientSecret = os:getEnv("APP_SECRET");
 
+public function main() returns error? {
+    onedrive:Configuration configuration = {
+        clientConfig: {
+            refreshUrl: refreshUrl,
+            refreshToken : refreshToken,
+            clientId : clientId,
+            clientSecret : clientSecret,
+            scopes: ["offline_access","https://graph.microsoft.com/Files.ReadWrite.All"]
+        }
+    };
+    onedrive:Client driveClient = check new(configuration);
+    
+    log:printInfo("Download drive item by ID");
+
+    string fileId = "<FILE_ID>";
+
+    onedrive:File|onedrive:Error itemResponse = driveClient->downloadFileById(fileId);
+    if (itemResponse is onedrive:File) {
+        byte[] content = let var item = itemResponse?.content in item is byte[] ? item : [];
+        io:Error? result = io:fileWriteBytes("./files/downloadedFile", content);
+        log:printInfo("Success!");
+    } else {
+        log:printError(itemResponse.message());
+    }
+}
+```
 
 ### Delete a drive item
 
 ```ballerina
-import ballerina/http;
 import ballerina/log;
+import ballerina/os;
 import ballerinax/microsoft.onedrive;
 
-configurable http:OAuth2RefreshTokenGrantConfig & readonly driveOauthConfig = ?;
+configurable string & readonly refreshUrl = os:getEnv("TOKEN_ENDPOINT");
+configurable string & readonly refreshToken = os:getEnv("REFRESH_TOKEN");
+configurable string & readonly clientId = os:getEnv("APP_ID");
+configurable string & readonly clientSecret = os:getEnv("APP_SECRET");
 
-onedrive:Configuration config = {
-    clientConfig : driveOauthConfig
-};
-
-onedrive:Client driveClient = check new (config);
-
-public function main() {
+public function main() returns error? {
+    onedrive:Configuration configuration = {
+        clientConfig: {
+            refreshUrl: refreshUrl,
+            refreshToken : refreshToken,
+            clientId : clientId,
+            clientSecret : clientSecret,
+            scopes: ["offline_access","https://graph.microsoft.com/Files.ReadWrite.All"]
+        }
+    };
+    onedrive:Client driveClient = check new(configuration);
+    
     log:printInfo("Delete drive item by item ID");
 
-    string itemId = "";
+    string itemId = "<TARGET_ITEM_ID>";
 
     onedrive:Error? deleteResponse = driveClient->deleteDriveItemById(itemId);
     if (deleteResponse is ()) {
