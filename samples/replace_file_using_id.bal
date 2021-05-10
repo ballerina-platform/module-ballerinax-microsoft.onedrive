@@ -38,11 +38,11 @@ onedrive:Client driveClient = check new(configuration);
 public function main() {
     log:printInfo("Replace file by referring item ID");
 
-    stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("./files/github.png");
+    byte[] byteArray = checkpanic io:fileReadBytes("<LOCAL_FILE_PATH>");
     string fileId = "<FILE_ID>";
     string mediType = "image/png";
 
-    onedrive:DriveItem|onedrive:Error itemInfo = driveClient->replaceFileUsingId(fileId, byteStream, mediType);
+    onedrive:DriveItem|onedrive:Error itemInfo = driveClient->replaceFileUsingId(fileId, byteArray, mediType);
     if (itemInfo is onedrive:DriveItem) {
         log:printInfo("Replaced item " + itemInfo?.id.toString());
         log:printInfo("Success!");

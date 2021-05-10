@@ -38,13 +38,13 @@ onedrive:Client driveClient = check new(configuration);
 public function main() {
     log:printInfo("Upload drive item to a folder with given item ID");
 
-    stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("./files/github.png");
-    string fileNameForNewUploadById = "newUpload.png";
+    byte[] byteArray = checkpanic io:fileReadBytes("<LOCAL_FILE_PATH>");
+    string fileNameForNewUploadById = "<NEW_FILE_NAME>";
     string parentFolderId = "<PARENT_FOLDER_ID>";
     string mediaType = "image/png";
 
-    onedrive:DriveItem|onedrive:Error itemInfo = driveClient->uploadDriveItemToFolderById(parentFolderId, fileNameForNewUploadById, 
-        byteStream, mediaType);
+    onedrive:DriveItem|onedrive:Error itemInfo = driveClient->uploadDriveItemToFolderById(parentFolderId, 
+        fileNameForNewUploadById, byteArray, mediaType);
     if (itemInfo is onedrive:DriveItem) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
         log:printInfo("Success!");
@@ -52,4 +52,3 @@ public function main() {
         log:printError(itemInfo.message());
     }
 }
-

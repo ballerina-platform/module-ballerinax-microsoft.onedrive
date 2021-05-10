@@ -34,7 +34,6 @@ onedrive:Configuration configuration = {
 };
 onedrive:Client driveClient = check new(configuration);
 
-
 public function main() {
     log:printInfo("Create a folder in a folder specified by ID");
 

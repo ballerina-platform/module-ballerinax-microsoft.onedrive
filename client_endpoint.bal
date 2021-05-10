@@ -334,47 +334,87 @@ public client class Client {
         return handleDownloadPrtialItem(downloadUrl, headerMap);
     }
 
-    # Upload a new file to the Drive. This method only supports files up to 4MB in size.
-    # 
-    # + parentFolderId - The folder ID of the parent folder where, the new file will be uploaded
-    # + fileName - The name of the new file
-    # + binaryStream - An stream of `byte[]` that represents a binary stream of the file to be uploaded
-    # + mediaType - The media type of the uploading file
-    # + return - A record of type `DriveItem` if sucess. Else `Error`.
-    @display {label: "Upload file (ID based)"}
-    remote isolated function uploadFileToFolderById(@display {label: "Parent folder id"} string parentFolderId, 
-                                                    @display {label: "Name of new file"} string fileName, 
-                                                    @display {label: "Stream of bytes to upload"} 
-                                                    stream<byte[],io:Error?> binaryStream, 
-                                                    @display {label: "Media type of file"} string mediaType) 
-                                                    returns @tainted DriveItem|Error {
-        string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, parentFolderId], 
-            string `/${fileName}`, [CONTENT_OF_DRIVE_ITEM]);
-        return uploadDriveItem(self.httpClient, <@untainted>path, binaryStream, mediaType); 
-    }
+    //********************* Tests for uploading and replacing the files using steam of bytes ***************************
+    // # Upload a new file to the Drive. This method only supports files up to 4MB in size.
+    // # 
+    // # + parentFolderId - The folder ID of the parent folder where, the new file will be uploaded
+    // # + fileName - The name of the new file
+    // # + binaryStream - An stream of `byte[]` that represents a binary stream of the file to be uploaded
+    // # + mediaType - The media type of the uploading file
+    // # + return - A record of type `DriveItem` if sucess. Else `Error`.
+    // @display {label: "Upload file (ID based)"}
+    // remote isolated function uploadFileToFolderById(@display {label: "Parent folder id"} string parentFolderId, 
+    //                                                 @display {label: "Name of new file"} string fileName, 
+    //                                                 @display {label: "Stream of bytes to upload"} 
+    //                                                 stream<byte[],io:Error?> binaryStream, 
+    //                                                 @display {label: "Media type of file"} string mediaType) 
+    //                                                 returns @tainted DriveItem|Error {
+    //     string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, parentFolderId], 
+    //         string `/${fileName}`, [CONTENT_OF_DRIVE_ITEM]);
+    //     return uploadDriveItem(self.httpClient, <@untainted>path, binaryStream, mediaType); 
+    // }
 
-    # Upload a new file to the Drive. This method only supports files up to 4MB in size.
-    # 
-    # + parentFolderPath - The folder path of the parent folder relative to the `root` of the respective Drive where, 
-    #                      the new folder will be created.
-    #                      **NOTE:** When you want to create a folder on root itself, you must give the relative path of 
-    #                      the new folder only.
-    # + fileName - The name of the new file
-    # + binaryStream - An stream of `byte[]` that represents a binary stream of the file to be uploaded
-    # + mediaType - The media type of the uploading file
-    # + return - A record of type `DriveItem` if sucess. Else `Error`.
-    @display {label: "Upload file (Path based)"}
-    remote isolated function uploadFileToFolderByPath(@display {label: "Parent folder path"} 
-                                                      string parentFolderPath, 
-                                                      @display {label: "Name of new file"} string fileName, 
-                                                      @display {label: "Stream of bytes to upload"} 
-                                                      stream<byte[],io:Error?> binaryStream, 
-                                                      @display {label: "Media type of file"} string mediaType) 
-                                                      returns @tainted DriveItem|Error {
-        string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], 
-            string `${parentFolderPath}/${fileName}`, [CONTENT_OF_DRIVE_ITEM]);
-        return uploadDriveItem(self.httpClient, <@untainted>path, binaryStream, mediaType); 
-    }
+    // # Upload a new file to the Drive. This method only supports files up to 4MB in size.
+    // # 
+    // # + parentFolderPath - The folder path of the parent folder relative to the `root` of the respective Drive where, 
+    // #                      the new folder will be created.
+    // #                      **NOTE:** When you want to create a folder on root itself, you must give the relative path 
+    // #                      of the new folder only.
+    // # + fileName - The name of the new file
+    // # + binaryStream - An stream of `byte[]` that represents a binary stream of the file to be uploaded
+    // # + mediaType - The media type of the uploading file
+    // # + return - A record of type `DriveItem` if sucess. Else `Error`.
+    // @display {label: "Upload file (Path based)"}
+    // remote isolated function uploadFileToFolderByPath(@display {label: "Parent folder path"} 
+    //                                                   string parentFolderPath, 
+    //                                                   @display {label: "Name of new file"} string fileName, 
+    //                                                   @display {label: "Stream of bytes to upload"} 
+    //                                                   stream<byte[],io:Error?> binaryStream, 
+    //                                                   @display {label: "Media type of file"} string mediaType) 
+    //                                                   returns @tainted DriveItem|Error {
+    //     string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], 
+    //         string `${parentFolderPath}/${fileName}`, [CONTENT_OF_DRIVE_ITEM]);
+    //     return uploadDriveItem(self.httpClient, <@untainted>path, binaryStream, mediaType); 
+    // }
+    
+    // # Update the contents of an existing file in the Drive. This method only supports files up to 4MB in size.
+    // # Here, the type of the file should be the same type as the file we replace with.
+    // # 
+    // # + itemId - The ID of the DriveItem
+    // # + binaryStream - An stream of `byte[]` that represents a binary stream of the file to be uploaded
+    // # + mediaType - The media type of the uploading file
+    // # + return - A record of type `DriveItem` if sucess. Else `Error`.
+    // @display {label: "Replace file (ID based)"}
+    // remote isolated function replaceFileUsingId(@display {label: "Item id"} string itemId,
+    //                                             @display {label: "Stream of bytes to upload"}  
+    //                                             stream<byte[],io:Error?> binaryStream, 
+    //                                             @display {label: "Media type of file"} string mediaType) 
+    //                                             returns @tainted DriveItem|Error {
+    //     string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
+    //         CONTENT_OF_DRIVE_ITEM]);
+    //     return uploadDriveItem(self.httpClient, <@untainted>path, binaryStream, mediaType); 
+    // }
+
+    // # Update the contents of an existing file in the Drive. This method only supports files up to 4MB in size.
+    // # Here, the type of the file should be the same type as the file we replace with.
+    // # 
+    // # + itemPath - The file system path of the File. The hierarchy of the path allowed in this function is relative
+    // #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.
+    // # + binaryStream - An stream of `byte[]` that represents a binary stream of the file to be uploaded
+    // # + mediaType - The media type of the uploading file
+    // # + return - A record of type `DriveItem` if sucess. Else `Error`.
+    // @display {label: "Replace file (Path based)"}
+    // remote isolated function replaceFileUsingPath(@display {label: "Item path relative to drive root"} string itemPath, 
+    //                                               @display {label: "Stream of bytes to upload"}  
+    //                                               stream<byte[],io:Error?> binaryStream, 
+    //                                               @display {label: "Media type of file"} string mediaType) 
+    //                                               returns @tainted DriveItem|Error {
+    //     string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, 
+    //         [CONTENT_OF_DRIVE_ITEM]);
+    //     return uploadDriveItem(self.httpClient, <@untainted>path, binaryStream, mediaType); 
+    // }
+    //******************************************************************************************************************
+
 
     //************************ Functions for uploading and replacing the files using byte[] ****************************
     # Upload a new file to the Drive. This method only supports files up to 4MB in size.
@@ -385,11 +425,11 @@ public client class Client {
     # + mediaType - The media type of the uploading file
     # + return - A record of type `DriveItem` if sucess. Else `Error`.
     @display {label: "Upload file (ID based)"}
-    remote isolated function uploadFileToFolderByIdAsArray(@display {label: "Parent folder id"} string parentFolderId, 
-                                                           @display {label: "Name of new file"} string fileName, 
-                                                           @display {label: "Array of bytes to upload"} byte[] byteArray, 
-                                                           @display {label: "Media type of file"} string mediaType) 
-                                                           returns @tainted DriveItem|Error {
+    remote isolated function uploadFileToFolderById(@display {label: "Parent folder id"} string parentFolderId, 
+                                                    @display {label: "Name of new file"} string fileName, 
+                                                    @display {label: "Array of bytes to upload"} byte[] byteArray, 
+                                                    @display {label: "Media type of file"} string mediaType) 
+                                                    returns @tainted DriveItem|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, parentFolderId], 
             string `/${fileName}`, [CONTENT_OF_DRIVE_ITEM]);
         return uploadDriveItemByteArray(self.httpClient, <@untainted>path, byteArray, mediaType); 
@@ -406,13 +446,11 @@ public client class Client {
     # + mediaType - The media type of the uploading file
     # + return - A record of type `DriveItem` if sucess. Else `Error`.
     @display {label: "Upload file (Path based)"}
-    remote isolated function uploadFileToFolderByPathAsArray(@display {label: "Parent folder path"} 
-                                                             string parentFolderPath, 
-                                                             @display {label: "Name of new file"} string fileName, 
-                                                             @display {label: "Array of bytes to upload"} 
-                                                             byte[] byteArray, 
-                                                             @display {label: "Media type of file"} string mediaType) 
-                                                             returns @tainted DriveItem|Error {
+    remote isolated function uploadFileToFolderByPath(@display {label: "Parent folder path"} string parentFolderPath, 
+                                                      @display {label: "Name of new file"} string fileName, 
+                                                      @display {label: "Array of bytes to upload"} byte[] byteArray, 
+                                                      @display {label: "Media type of file"} string mediaType) 
+                                                      returns @tainted DriveItem|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], 
             string `${parentFolderPath}/${fileName}`, [CONTENT_OF_DRIVE_ITEM]);
         return uploadDriveItemByteArray(self.httpClient, <@untainted>path, byteArray, mediaType); 
@@ -426,10 +464,10 @@ public client class Client {
     # + mediaType - The media type of the uploading file
     # + return - A record of type `DriveItem` if sucess. Else `Error`.
     @display {label: "Replace file (ID based)"}
-    remote isolated function replaceFileUsingIdAsArray(@display {label: "Item id"} string itemId, 
-                                                       @display {label: "Array of bytes to upload"} byte[] byteArray, 
-                                                       @display {label: "Media type of file"} string mediaType) returns 
-                                                       @tainted DriveItem|Error {
+    remote isolated function replaceFileUsingId(@display {label: "Item id"} string itemId, 
+                                                @display {label: "Array of bytes to upload"} byte[] byteArray, 
+                                                @display {label: "Media type of file"} string mediaType) returns 
+                                                @tainted DriveItem|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
             CONTENT_OF_DRIVE_ITEM]);
         return uploadDriveItemByteArray(self.httpClient, <@untainted>path, byteArray, mediaType); 
@@ -444,53 +482,15 @@ public client class Client {
     # + mediaType - The media type of the uploading file
     # + return - A record of type `DriveItem` if sucess. Else `Error`.
     @display {label: "Replace file (Path based)"}
-    remote isolated function replaceFileUsingPathAsArray(@display {label: "Item path relative to drive root"}
-                                                         string itemPath,                                                    
-                                                         @display {label: "Array of bytes to upload"} byte[] byteArray, 
-                                                         @display {label: "Media type of file"} string mediaType) 
-                                                         returns @tainted DriveItem|Error {
+    remote isolated function replaceFileUsingPath(@display {label: "Item path relative to drive root"} string itemPath,                                                    
+                                                  @display {label: "Array of bytes to upload"} byte[] byteArray, 
+                                                  @display {label: "Media type of file"} string mediaType) 
+                                                  returns @tainted DriveItem|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, 
             [CONTENT_OF_DRIVE_ITEM]);
         return uploadDriveItemByteArray(self.httpClient, <@untainted>path, byteArray, mediaType); 
     }
     //******************************************************************************************************************
-
-    # Update the contents of an existing file in the Drive. This method only supports files up to 4MB in size.
-    # Here, the type of the file should be the same type as the file we replace with.
-    # 
-    # + itemId - The ID of the DriveItem
-    # + binaryStream - An stream of `byte[]` that represents a binary stream of the file to be uploaded
-    # + mediaType - The media type of the uploading file
-    # + return - A record of type `DriveItem` if sucess. Else `Error`.
-    @display {label: "Replace file (ID based)"}
-    remote isolated function replaceFileUsingId(@display {label: "Item id"} string itemId,
-                                                @display {label: "Stream of bytes to upload"}  
-                                                stream<byte[],io:Error?> binaryStream, 
-                                                @display {label: "Media type of file"} string mediaType) 
-                                                returns @tainted DriveItem|Error {
-        string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
-            CONTENT_OF_DRIVE_ITEM]);
-        return uploadDriveItem(self.httpClient, <@untainted>path, binaryStream, mediaType); 
-    }
-
-    # Update the contents of an existing file in the Drive. This method only supports files up to 4MB in size.
-    # Here, the type of the file should be the same type as the file we replace with.
-    # 
-    # + itemPath - The file system path of the File. The hierarchy of the path allowed in this function is relative
-    #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.
-    # + binaryStream - An stream of `byte[]` that represents a binary stream of the file to be uploaded
-    # + mediaType - The media type of the uploading file
-    # + return - A record of type `DriveItem` if sucess. Else `Error`.
-    @display {label: "Replace file (Path based)"}
-    remote isolated function replaceFileUsingPath(@display {label: "Item path relative to drive root"} string itemPath, 
-                                                  @display {label: "Stream of bytes to upload"}  
-                                                  stream<byte[],io:Error?> binaryStream, 
-                                                  @display {label: "Media type of file"} string mediaType) 
-                                                  returns @tainted DriveItem|Error {
-        string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, 
-            [CONTENT_OF_DRIVE_ITEM]);
-        return uploadDriveItem(self.httpClient, <@untainted>path, binaryStream, mediaType); 
-    }
 
     # Upload files up to the maximum file size. **NOTE:** Maximum bytes in any given request is less than 60 MiB.
     # 
