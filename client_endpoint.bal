@@ -25,6 +25,7 @@ import ballerina/log;
 public client class Client {
     http:Client httpClient;
 
+    @display {label: "Client configuration"}
     public isolated function init(Configuration config) returns error? {
         http:BearerTokenConfig|http:OAuth2RefreshTokenGrantConfig clientConfig = config.clientConfig;
         http:ClientSecureSocket? socketConfig = config?.secureSocketConfig;
@@ -337,7 +338,7 @@ public client class Client {
         return handleDownloadPrtialItem(downloadUrl, headerMap);
     }
 
-    //********************* Tests for uploading and replacing the files using steam of bytes ***************************
+    //********************* Functions for uploading and replacing the files using steam of bytes ***********************
     // # Upload a new file to the Drive. This method only supports files up to 4MB in size.
     // # 
     // # + parentFolderId - The folder ID of the parent folder where, the new file will be uploaded
