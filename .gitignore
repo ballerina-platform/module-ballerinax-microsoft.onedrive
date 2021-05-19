@@ -43,3 +43,17 @@ Config.toml
 
 # .ballerina files
 *.ballerina
+
+# Files to ignore
+/files/ServiceNow_IntegrationSOAP.mp4
+/samples/files/ServiceNow_IntegrationSOAP.mp4
+/files/ServiceNow_IntegrationREST.mp4
+/samples/files/ServiceNow_IntegrationREST.mp4
+/files/downloadedFileById.docx
+/files/downloadedFileByPath.docx
+/files/downloadedContentById.pdf
+/files/downloadedContentByPath.pdf
+/samples/files/downloadedFileById.docx
+/samples/files/downloadedFileByPath.docx
+/samples/files/downloadedContentById.pdf
+/samples/files/downloadedContentByPath.pdf
