@@ -419,7 +419,7 @@ function testCopyDriveItemInPath() {
 //     log:printInfo("client->uploadFileById()");
 //     runtime:sleep(2);
 
-//     stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("./files/logo.txt");
+//     stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("onedrive/tests/files/logo.txt");
 //     string fileNameForNewUploadById = "newUpload.txt";
 //     string parentFolderId = collectorFolderId;
 //     string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
@@ -442,7 +442,7 @@ function testCopyDriveItemInPath() {
 //     log:printInfo("client->uploadFileToFolderByPath()");
 //     runtime:sleep(2);
 
-//     stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("./files/logo.txt");
+//     stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("onedrive/tests/files/logo.txt");
 //     string fileNameNewForNewUploadByPath = "newUploadByPath.txt";
 //     string parentFolderPath = collectorFolderPath;
 //     string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
@@ -466,7 +466,7 @@ function testCopyDriveItemInPath() {
 //     log:printInfo("client->replaceFileUsingId()");
 //     runtime:sleep(2);
 
-//     stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("./files/github.png");
+//     stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("onedrive/tests/files/github.png");
 //     string fileId = idOfFileInCollector;
 //     string mediType = "image/png";
 
@@ -487,7 +487,7 @@ function testCopyDriveItemInPath() {
 //     log:printInfo("client->replaceFileUsingPath()");
 //     runtime:sleep(2);
 
-//     stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("./files/github.png");
+//     stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("onedrive/tests/files/github.png");
 //     string filePath = pathOfFileInCollector;
 //     string mediType = "image/png";
 
@@ -511,7 +511,7 @@ function testUploadFileToFolderByIdAsArray() {
     log:printInfo("client->uploadFileToFolderByIdAsArray()");
     runtime:sleep(2);
 
-    byte[] byteArray = checkpanic io:fileReadBytes("./files/document.docx");
+    byte[] byteArray = checkpanic io:fileReadBytes("onedrive/tests/files/document.docx");
     string fileNameForNewUploadById = "newUploadByIdByteArray.docx";
     string parentFolderId = collectorFolderId;
     string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
@@ -535,7 +535,7 @@ function testUploadFileToFolderByPathAsArray() {
     log:printInfo("client->uploadFileToFolderByPathAsArray()");
     runtime:sleep(2);
 
-    byte[] byteArray = checkpanic io:fileReadBytes("./files/document.docx");
+    byte[] byteArray = checkpanic io:fileReadBytes("onedrive/tests/files/document.docx");
     string fileNameNewForNewUploadByPath = "newUploadByPathByteArray.docx";
     string parentFolderPath = collectorFolderPath;
     string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
@@ -559,7 +559,7 @@ function testReplaceFileUsingIdAsArray() {
     log:printInfo("client->replaceFileUsingId()");
     runtime:sleep(2);
 
-    byte[] byteArray = checkpanic io:fileReadBytes("./files/github.png");
+    byte[] byteArray = checkpanic io:fileReadBytes("onedrive/tests/files/github.png");
     string fileId = idOfFileInCollector;
     string mediType = "image/png";
 
@@ -580,7 +580,7 @@ function testReplaceFileUsingPathAsArray() {
     log:printInfo("client->replaceFileUsingPath()");
     runtime:sleep(2);
 
-    byte[] byteArray = checkpanic io:fileReadBytes("./files/github.png");
+    byte[] byteArray = checkpanic io:fileReadBytes("onedrive/tests/files/github.png");
     string filePath = pathOfFileInCollector;
     string mediType = "image/png";
 
@@ -607,7 +607,7 @@ function testDownloadFileById() {
     File|Error itemResponse = oneDriveClient->downloadFileById(fileId);
     if (itemResponse is File) {
         byte[] content = let var item = itemResponse?.content in item is byte[] ? item : [];
-        io:Error? result = io:fileWriteBytes("./files/downloadedFileById.docx", content);
+        io:Error? result = io:fileWriteBytes("onedrive/tests/files/downloadedFileById.docx", content);
     } else {
         test:assertFail(msg = itemResponse.message());
     }
@@ -627,7 +627,7 @@ function testDownloadFileByPath() {
     File|Error itemResponse = oneDriveClient->downloadFileByPath(filePath);
     if (itemResponse is File) {
         byte[] content = let var item = itemResponse?.content in item is byte[] ? item : [];
-        io:Error? result = io:fileWriteBytes("./files/downloadedFileByPath.docx", content);    
+        io:Error? result = io:fileWriteBytes("onedrive/tests/files/downloadedFileByPath.docx", content);    
     } else {
         test:assertFail(msg = itemResponse.message());
     }
@@ -648,7 +648,7 @@ function testDownloadConvertedFileContentById() {
     File|Error itemResponse = oneDriveClient->downloadFileById(fileId, expectedFormat);
     if (itemResponse is File) {
         byte[] content = let var item = itemResponse?.content in item is byte[] ? item : [];
-        io:Error? result = io:fileWriteBytes("./files/downloadedContentById." + MIMETYPE_PDF, content);    
+        io:Error? result = io:fileWriteBytes("onedrive/tests/files/downloadedContentById." + MIMETYPE_PDF, content);    
     } else {
         test:assertFail(msg = itemResponse.message());
     }
@@ -669,7 +669,7 @@ function testDownloadConvertedFileContentByPath() {
     File|Error itemResponse = oneDriveClient->downloadFileByPath(filePath, expectedFormat);
     if (itemResponse is File) {
         byte[] content = let var item = itemResponse?.content in item is byte[] ? item : [];
-        io:Error? result = io:fileWriteBytes("./files/downloadedContentByPath." + MIMETYPE_PDF, content);
+        io:Error? result = io:fileWriteBytes("onedrive/tests/files/downloadedContentByPath." + MIMETYPE_PDF, content);
     } else {
         test:assertFail(msg = itemResponse.message());
     }
@@ -688,7 +688,7 @@ function testResumableUploadDriveItem() {
     //string fileName = "ServiceNow_IntegrationSOAP.mp4";
     //string filePath = "files/ServiceNow_IntegrationREST.mp4";
 
-    string localFilePath = "files" + FORWARD_SLASH + fileName;
+    string localFilePath = "onedrive/tests/files" + FORWARD_SLASH + fileName;
     stream<io:Block,io:Error?> fileStream = checkpanic io:fileReadBlocksAsStream(localFilePath, DEFAULT_FRAGMENT_SIZE*6);
     file:MetaData fileMetaData = checkpanic file:getMetaData(localFilePath);
     string uploadDestinationPath = collectorFolderPath + FORWARD_SLASH + fileName;

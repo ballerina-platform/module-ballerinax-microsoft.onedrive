@@ -10,13 +10,12 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - name: Ballerina Build
-              uses: ballerina-platform/ballerina-action/@master
+              uses: ballerina-platform/ballerina-action/@nightly
               with:
                   args:
-                      build -c
+                      build -c ./onedrive
               env:
                   TOKEN_ENDPOINT: ${{ secrets.TOKEN_ENDPOINT }}
                   REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
                   APP_ID: ${{ secrets.APP_ID }}
                   APP_SECRET: ${{ secrets.APP_SECRET }}
-                  

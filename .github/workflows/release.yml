@@ -15,7 +15,7 @@ jobs:
               uses: ballerina-platform/ballerina-action/@master
               with:
                   args:
-                      build -c
+                      build -c ./onedrive
               env:
                   TOKEN_ENDPOINT: ${{ secrets.TOKEN_ENDPOINT }}
                   REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
