@@ -77,6 +77,15 @@ public enum CheckInOption {
     UNSPECIFIED = "unspecified"
 }
 
+# The state of publication for a document.
+# 
+# + PUBLISHED_LEVEL - The level for a pusblished document
+# + CHECKOUT_LEVEL - The level for a document to ensure that no-one else is able to edit it
+public enum PublicationLevel {
+    PUBLISHED_LEVEL = "published",
+    CHECKOUT_LEVEL = "checkout"
+}
+
 # The default fragment size for obtaining fragments of a file.(To upload as fragment size MUST be a multiple of 320 KiB 
 # (327,680 bytes)).
 public const DEFAULT_FRAGMENT_SIZE = 327680;
@@ -115,7 +124,7 @@ enum ClosingCharacters {
 }
 
 enum AsyncJob {
-    ITEMCOPY = "ItemCopy",
+    ITEMCOPY = "itemCopy",
     DOWNLOADURL = "DownloadUrl"
 }
 
@@ -126,10 +135,9 @@ enum AsyncJobStatusString {
     DELETE_PENDING = "deletePending",
     WAITING = "waiting",
     FAILED = "failed",
-    DELETE_FAILED = "deleteFailed"
+    DELETE_FAILED = "deleteFailed",
+    COMPLETED = "completed"
 }
-
-const ASYNCJOB_COMPLETED = "completed";
 
 enum ErrorCode {
     ACCESS_DENIED = "accessDenied",
@@ -153,7 +161,7 @@ const FOLLOWING_BY_LOGGED_IN_USER = "following";
 const DRIVE_ROOT = "root";
 const CHILDREN_RESOURCES = "children";
 const SHARED_RESOURCES = "shares";
-const ANALYTICS_RESOOURCES = "analytics";
+const ANALYTICS_RESOURCES = "analytics";
 const DRIVEITEM_RESOURCE = "driveItem";
 const CONTENT_OF_DRIVE_ITEM = "content";
 const RESTORE_ACTION = "restore";
@@ -192,3 +200,4 @@ const RETRY_ATTEMPTS = 5;
 const RETRY_INTERVAL = 3d;
 const BACKOFF_FACTOR = 2.0;
 const MAX_WAIT = 20d;
+const MAX_CHAR_COUNT = 2000;

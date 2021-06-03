@@ -80,14 +80,14 @@ isolated function appendQueryOption(string queryParameter, string connectingStri
             if (validateOdataSystemQueryOption(queryOptionName.substring(1), queryOptionValue)) {
                 url += connectingString + queryParameter;
             } else {
-                return error QueryParameterValidationError("Invalid query parameter");
+                return error QueryParameterValidationError(INVALID_QUERY_PARAMETER);
             }
         } else {
             // non odata query parameters
             url += connectingString + queryParameter;
         }
     } else {
-        return error QueryParameterValidationError("Invalid query parameter");
+        return error QueryParameterValidationError(INVALID_QUERY_PARAMETER);
     }
     return url;
 }
@@ -120,7 +120,7 @@ isolated function getDriveItemArray(http:Client httpClient, string url) returns 
         json responseArray = check handledResponse.value;
         return check convertToDriveItemArray(<json[]>responseArray);
     } else {
-        return error PayloadValidationError("Invalid response");
+        return error PayloadValidationError(INVALID_RESPONSE);
     }
 }
 
@@ -130,7 +130,7 @@ isolated function getDriveItem(http:Client httpClient, string url) returns @tain
     if (handledResponse is map<json>) {
         return check convertToDriveItem(handledResponse);
     } else {
-        return error PayloadValidationError("Invalid response");
+        return error PayloadValidationError(INVALID_RESPONSE);
     }
 }
 
@@ -143,7 +143,7 @@ isolated function createFolder(http:Client httpClient, string url, FolderMetadat
     if (handledResponse is map<json>) {
         return check convertToDriveItem(handledResponse);
     } else {
-        return error PayloadValidationError("Invalid response");
+        return error PayloadValidationError(INVALID_RESPONSE);
     }   
 }
 
@@ -155,7 +155,7 @@ isolated function updateDriveItem(http:Client httpClient, string url, DriveItem 
     if (handledResponse is map<json>) {
         return check convertToDriveItem(handledResponse);
     } else {
-        return error PayloadValidationError("Invalid response");
+        return error PayloadValidationError(INVALID_RESPONSE);
     } 
 }
 
@@ -199,19 +199,21 @@ isolated function uploadDriveItem(http:Client httpClient, string url, stream<byt
     if (handledResponse is map<json>) {
         return check convertToDriveItem(handledResponse);
     } else {
-        return error PayloadValidationError("Invalid response");
+        return error PayloadValidationError(INVALID_RESPONSE);
     } 
 }
 
 //************************ Functions for uploading and replacing the files using byte[] ****************************
 isolated function uploadDriveItemByteArray(http:Client httpClient, string url, byte[] byteArray, string mediaType) 
                                            returns @tainted DriveItem|Error {
-    http:Response response = check httpClient->put(url, byteArray, mediaType);
+    http:Request request = new;
+    request.setBinaryPayload(byteArray, mediaType);
+    http:Response response = check httpClient->put(url, request);
     map<json>|string? handledResponse = check handleResponse(response);
     if (handledResponse is map<json>) {
         return check convertToDriveItem(handledResponse);
     } else {
-        return error PayloadValidationError("Invalid response");
+        return error PayloadValidationError(INVALID_RESPONSE);
     } 
 }
 //******************************************************************************************************************
@@ -243,7 +245,7 @@ isolated function uploadBytes(int fileSize, byte[] block, int startByte, int end
     if (handledResponse is map<json>) {
         return handledResponse;
     } else {
-        return error PayloadValidationError("Invalid response");
+        return error PayloadValidationError(INVALID_RESPONSE);
     }
 }
 
@@ -279,19 +281,24 @@ isolated function getSharableLink(http:Client httpClient, string url, Permission
     if (handledResponse is map<json>) {
         return check handledResponse.cloneWithType(Permission);
     } else {
-        return error PayloadValidationError("Invalid response");
+        return error PayloadValidationError(INVALID_RESPONSE);
     }
 }
 
 isolated function sendSharableLink(http:Client httpClient, string url, ItemShareInvitation invitation) returns 
                                    @tainted Permission|Error {
+    boolean isValid = let var message = invitation?.message in message is string ? message.length() >= MAX_CHAR_COUNT ? 
+        false : true : true; 
+    if (!isValid) {
+        return error PayloadValidationError(INVALID_MESSAGE);
+    }              
     json shareInvitation = check invitation.cloneWithType(json);
     http:Response response = check httpClient->post(url, shareInvitation);
     map<json>|string? handledResponse = check handleResponse(response);
     if (handledResponse is map<json>) {
         return check handledResponse.cloneWithType(Permission);
     } else {
-        return error PayloadValidationError("Invalid response");
+        return error PayloadValidationError(INVALID_RESPONSE);
     }
 }
 
@@ -315,7 +322,7 @@ isolated function copyDriveItem(http:Client httpClient, string url, ItemReferenc
     if (handledResponse is string) {
         return handledResponse;
     } else {
-        return error PayloadValidationError("Invalid response");
+        return error PayloadValidationError(INVALID_RESPONSE);
     }
 }
 
@@ -337,10 +344,10 @@ isolated function getasyncJobStatus(string monitorUrl) returns @tainted AsyncJob
     if (response.statusCode is http:STATUS_OK|http:STATUS_ACCEPTED|http:REDIRECT_SEE_OTHER_303) {
         json jsonResponse = check response.getJsonPayload();
         AsyncJobStatus asyncStatus = check jsonResponse.cloneWithType(AsyncJobStatus);
-        if (asyncStatus?.percentageComplete == HUNDRED && asyncStatus?.status == ASYNCJOB_COMPLETED) {
+        if (asyncStatus?.percentageComplete == HUNDRED && asyncStatus?.status == COMPLETED) {
             return asyncStatus;
         } else if (asyncStatus?.status == FAILED || asyncStatus?.status == DELETE_FAILED) {
-            return error RequestFailedError("Asynchronous Job failed");
+            return error RequestFailedError(ASYNC_REQUEST_FAILED);
         } else {
             return check getasyncJobStatus(monitorUrl);
         }

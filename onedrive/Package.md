@@ -30,7 +30,7 @@ onedrive:Client driveClient = check new (config);
 ```
 ## Samples
 ### Create a folder in OneDrive
-Create a new folder in a Drive with a specified parent item, referred with file syatem path (relative path).
+Create a new folder in a Drive with a specified parent item, referred with file system path (relative path).
 
 ```
 import ballerina/http;

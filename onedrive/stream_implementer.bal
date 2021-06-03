@@ -71,10 +71,10 @@ class DriveItemStream {
                 }
                 return driveItems;
             } else {
-                return error PayloadValidationError("Invalid payload");
+                return error PayloadValidationError(INVALID_PAYLOAD);
             }
         } else {
-            return error PayloadValidationError("Invalid response");
+            return error PayloadValidationError(INVALID_RESPONSE);
         }
     }
 }
