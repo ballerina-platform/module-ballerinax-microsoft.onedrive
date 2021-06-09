@@ -16,7 +16,7 @@
 
 isolated function convertToDriveItem(map<json> sourceDriveItemObject) returns DriveItem|error {
     DriveItem convertedItem = check sourceDriveItemObject.cloneWithType(DriveItem);
-    convertedItem.downloadUrl = let var url = sourceDriveItemObject["@microsoft.graph.downloadUrl"] in url is string ? 
+    convertedItem.downloadUrl = let var url = sourceDriveItemObject["@microsoft.graph.downloadUrl"] in url is string ?
         url : EMPTY_STRING;
     return convertedItem;
 }

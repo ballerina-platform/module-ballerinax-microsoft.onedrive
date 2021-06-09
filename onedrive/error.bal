@@ -38,3 +38,11 @@ public type RequestFailedError distinct error;
 
 # Union of all types of errors
 public type Error PayloadValidationError|QueryParameterValidationError|InputValidationError|RequestFailedError|error;
+
+# Error messages
+const INVALID_RESPONSE = "Invalid response";
+const INVALID_PAYLOAD = "Invalid payload";
+const INVALID_MESSAGE = "Message cannot exceed 2000 characters";
+const ASYNC_REQUEST_FAILED = "Asynchronous Job failed";
+const INVALID_QUERY_PARAMETER = "Invalid query parameter";
+const MAX_FRAGMENT_SIZE_EXCEEDED = "The content exceeds the maximum fragment size";

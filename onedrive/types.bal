@@ -20,6 +20,7 @@ import ballerina/http;
 #
 # + clientConfig - OAuth client configuration
 # + secureSocketConfig - SSH configuration
+@display{label: "Connection config"} 
 public type Configuration record {
     http:BearerTokenConfig|http:OAuth2RefreshTokenGrantConfig clientConfig;
     http:ClientSecureSocket secureSocketConfig?;
@@ -112,7 +113,8 @@ public type ItemReference record {
 # + specialFolder - If the current item is also available as a special folder, this facet is returned
 # + fileSystemInfo - File system information on client
 # + remoteItem - Remote item data, if the item is shared from a drive other than the one being accessed 
-# + folder - Folder metadata, if the item is a folder 
+# + folder - Folder metadata, if the item is a folder
+# + root - If this property is non-null, it indicates that the driveItem is the top-most driveItem in the drive
 # + parentReference - Parent information, if the item has a parent
 # + children - Collection containing Item objects for the immediate children of item
 # + versions - The list of previous versions of the item 
@@ -120,7 +122,7 @@ public type ItemReference record {
 # + permissions - The set of permissions for the item 
 # + thumbnails - Collection containing ThumbnailSet objects associated with the item
 # + downloadUrl - A URL that can be used to download this file's content. Authentication is not required with this URL. 
-public type DriveItem record {
+public type DriveItem record {|
     *BaseItem;
     string cTag?;
     string description?;
@@ -143,6 +145,7 @@ public type DriveItem record {
     FileSystemInfo fileSystemInfo?;
     RemoteItem remoteItem?;
     Folder folder?;
+    json root?;
     // relationships
     ItemReference parentReference?;
     DriveItem[] children?;
@@ -152,12 +155,7 @@ public type DriveItem record {
     ThumbnailSet[] thumbnails?;
     // instance annotations
     string downloadUrl?;
-    // @microsoft.graph.conflictBehavior: string,
-    // @microsoft.graph.sourceUrl: url
-    // content: { @odata.type: Edm.Stream },
-    // malware: { @odata.type: microsoft.graph.malware },
-    // root: { @odata.type: microsoft.graph.root }
-};
+|};
 
 # Represents necessary metadata in reference to a folder.
 #
@@ -175,24 +173,6 @@ public type FolderMetadata record {|
     ConflictResolutionBehaviour conflictResolutionBehaviour?;
     RemoteItem remoteItem?;
 |};
-
-# Returned when using the Shares API to access a shared DriveItem.
-#
-# + id - The unique identifier for the share being accessed  
-# + name - The display name of the shared item 
-# + owner - Information about the owner of the shared item being referenced  
-# + driveItem - The underlying driveItem 
-# + items - All DriveItems contained in the sharing root 
-public type SharedDriveItem record {
-    string id?;
-    string name?;
-    IdentitySet owner?;
-    DriveItem driveItem?;
-    DriveItem items?;
-    //list: { @odata.type: microsoft.graph.list },
-    //listItem: { @odata.type: microsoft.graph.listItem },
-    //site: { @odata.type: microsoft.graph.site }
-};
 
 # Resource that groups audio-related properties on an item into a single structure.
 #
@@ -329,7 +309,7 @@ public type Photo record {
 # + level - The state of publication for this document. Either `published` or `checkout`. 
 # + versionId - The unique identifier for the version that is visible to the current caller
 public type Publication record {
-    string level?; //enum
+    PublicationLevel level?;
     string versionId?;
 };
 
@@ -494,7 +474,6 @@ public type ItemActivity record {
     DriveItem driveItem?;
     string activityDateTime?;
     //listItem: {@odata.type: microsoft.graph.listItem},
-    //action: {@odata.type: microsoft.graph.itemActionSet},
 };
 
 # Resource that provides information about a sharing permission granted for a DriveItem resource.
@@ -543,8 +522,8 @@ public type PermissionOptions record {|
 # + webUrl - A URL that opens the item in the browser on the OneDrive website. 
 public type SharingLink record {
     Identity application?;
-    string 'type?; //enum
-    string scope?; //enum
+    LinkType 'type?;
+    LinkScope scope?;
     string webHtml?;
     string webUrl?;
 };
@@ -598,10 +577,10 @@ public type Tumbnail record {
 # + resourceId - ID of the relevent DriveItem 
 # + status - String value that maps to an enumeration of possible values about the status of the job
 type AsyncJobStatus record {
-    string operation?; //enum
+    string operation?;
     float percentageComplete?;
     string resourceId?;
-    string status?; //enum
+    AsyncJobStatusString status?;
 };
 
 # Resource that provides information about how to upload large files to OneDrive
@@ -646,7 +625,7 @@ public type ItemShareInvitation record {|
     boolean sendInvitation = false;
     PermissionRole[] roles;
     DriveRecipient[] recipients;
-    string message?; //validation
+    string message?;
 |};
 
 # Resource that represents a person, group, or other recipient to share with using the invite action.

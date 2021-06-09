@@ -7,9 +7,9 @@ Ballerina Connector For Microsoft OneDrive
 
 Connects to Microsoft OneDrive using Ballerina.
 
-- [Microsoft OneDrive Connecter](#markdown-navigation)
+- [Microsoft OneDrive Connector]
     - [Introduction](#introduction)
-        - [What is Microsoft OneDrive](#what-is-microsoft-onedrive?)
+        - [What is Microsoft OneDrive](#what-is-microsoft-onedrive)
         - [Key features of Microsoft OneDrive](#key-features-of-microsoft-onedrive)
         - [Connector Overview](#connector-overview)
     - [Prerequisites](#prerequisites)
@@ -26,7 +26,7 @@ Connects to Microsoft OneDrive using Ballerina.
 # Introduction
 ## What is Microsoft OneDrive?
 [Microsoft OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage) is a file hosting 
-service and synchronization service operated by Microsoft as part of its web version of Office. It provides 5GB of space 
+service and synchronization service operated by Microsoft as part of its web version of Office. It provides 5 GB of space 
 offered for free to anyone with a Microsoft account. OneDrive’s starter tier allows for storage and document editing and 
 collaboration via Office Online. For Windows 10 users, OneDrive is embedded in the operating system by default. OneDrive 
 allows users to save files, photos and other documents across multiple devices. A user can also save their files in 
@@ -60,7 +60,7 @@ service resources. This version of the connector only supports the access to the
 account (currently logged in user).
 
 # Prerequisites
-- Micrsoft Account
+- Microsoft Account
 - Access to Azure Portal
 - Java 11 installed - Java Development Kit (JDK) with version 11 is required
 - [Ballerina SL Alpha 5](https://ballerina.io/learn/user-guide/getting-started/setting-up-ballerina/installation-options/) installed 
@@ -87,7 +87,7 @@ account (currently logged in user).
     **Step 1:** Register a new application in your Azure AD tenant.<br/>
     - In the App registrations page, click **New registration** and enter a meaningful name in the name field.
     - In the **Supported account types** section, select Accounts in any organizational directory (Any Azure AD 
-    directory - Multitenant) and personal Microsoft accounts (e.g., Skype, Xbox, Outlook.com). Click Register to 
+    directory - Multi-tenant) and personal Microsoft accounts (e.g., Skype, Xbox, Outlook.com). Click Register to 
     create the application.
     - Provide a **Redirect URI** if necessary.
 
@@ -169,12 +169,12 @@ scopes = [<MS_NECESSARY_SCOPES>]
 ## Supported Versions
 |                                                                                    | Version               |
 |------------------------------------------------------------------------------------|-----------------------|
-| Ballerina Language Version                                                         | **Swan Lake Alpha 5** |
+| Ballerina Language Version                                                         | **Swan Lake Beta 1** |
 | [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview) Version     | **v1.0**              |
 | Java Development Kit (JDK)                                                         | 11                    |
 
 ## Limitations
-- Connector only allows to perform functions onbehalf of the currently logged in user.
+- Connector only allows to perform functions behalf of the currently logged in user.
 - Only the operations which are supported in personal Microsoft account is supported.
 
 # Quickstart(s)
@@ -300,7 +300,7 @@ ID based addressing sample is available at: https://github.com/ballerina-platfor
 Path based addressing sample is available at: https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/samples/get_item_metadata_by_path.bal 
 
 Notes : <br/>
-This operation supports several OData query parameters as wella as normal query parameters.
+This operation supports several OData query parameters as well as normal query parameters.
 * **$expand** 
 * **$select**
 * **includeDeletedItems=true** - Query parameter to return deleted items. This query parameter is only valid when targeting a driveItem by ID, and otherwise will be ignored.
@@ -456,12 +456,12 @@ Execute the commands below to build from the source after installing Ballerina S
 
 1. To build the library:
 ```shell script
-    ballerina build
+    bal build
 ```
 
 2. To build the module without the tests:
 ```shell script
-    ballerina build --skip-tests
+    ball build --skip-tests
 ```
 # Contributing to Ballerina
 As an open source project, Ballerina welcomes contributions from the community. 
