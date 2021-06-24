@@ -64,8 +64,8 @@ function testCreateFoldersAndFiles() {
         conflictResolutionBehaviour : "rename"
     };
 
-    DriveItem|Error driveItem = oneDriveClient->createFolderById(parentID, item);
-    if (driveItem is DriveItem) {
+    DriveItemData|Error driveItem = oneDriveClient->createFolderById(parentID, item);
+    if (driveItem is DriveItemData) {
         log:printInfo("Folder Created");
         collectorFolderId = <@untainted>driveItem?.id.toString();
         collectorFolderPath = "/"+ <@untainted>driveItem?.name.toString();
@@ -77,30 +77,12 @@ function testCreateFoldersAndFiles() {
 @test:Config {
     enable: true
 }
-function testGetRecentItems() {
-    log:printInfo("client->getRecentItems()");
-    runtime:sleep(2);
-
-    DriveItem[]|Error driveItems = oneDriveClient->getRecentItems();
-    if (driveItems is DriveItem[]) {
-        foreach var item in driveItems {
-            log:printInfo("Item received " + item.toString());
-        }
-    } else {
-        test:assertFail(msg = driveItems.message());
-    }
-    io:println("\n\n");
-}
-
-@test:Config {
-    enable: true
-}
 function testGetItemsSharedWithMe() {
     log:printInfo("client->getItemsSharedWithMe()");
     runtime:sleep(2);
 
-    DriveItem[]|Error driveItems = oneDriveClient->getItemsSharedWithMe();
-    if (driveItems is DriveItem[]) {
+    DriveItemData[]|Error driveItems = oneDriveClient->getItemsSharedWithMe();
+    if (driveItems is DriveItemData[]) {
         foreach var item in driveItems {
             log:printInfo("Item received " + item.toString());
         }
@@ -122,10 +104,18 @@ function testCreateFolderById() {
 
     FolderMetadata item = {
         name: newFolderName,
+        folder: {
+            childCount: 10,
+            view: {
+                sortBy: "name",
+                sortOrder: "descending", // But no effect can be seen
+                viewType: "details"
+            }
+        },
         conflictResolutionBehaviour : "rename"
     };
-    DriveItem|Error driveItem = oneDriveClient->createFolderById(parentID, item);
-    if (driveItem is DriveItem) {
+    DriveItemData|Error driveItem = oneDriveClient->createFolderById(parentID, item);
+    if (driveItem is DriveItemData) {
         log:printInfo("Folder Created " + driveItem?.id.toString());
         newFolderId = <@untainted>driveItem?.id.toString();
     } else {
@@ -149,8 +139,8 @@ function testCreateFolderByPath() {
         name: newFolderName,
         conflictResolutionBehaviour : "rename"
     };
-    DriveItem|Error driveItem = oneDriveClient->createFolderByPath(parentRelativepath, item);
-    if (driveItem is DriveItem) {
+    DriveItemData|Error driveItem = oneDriveClient->createFolderByPath(parentRelativepath, item);
+    if (driveItem is DriveItemData) {
         log:printInfo("Folder Created " + driveItem?.id.toString());
     } else {
         test:assertFail(msg = driveItem.message());
@@ -168,8 +158,8 @@ function testGetItemMetadataById() {
 
     string itemId = newFolderId;
     
-    DriveItem|Error driveItem = oneDriveClient->getItemMetadataById(itemId);
-    if (driveItem is DriveItem) {
+    DriveItemData|Error driveItem = oneDriveClient->getItemMetadataById(itemId);
+    if (driveItem is DriveItemData) {
         log:printInfo("Item received " + driveItem.toString());
     } else {
         test:assertFail(msg = driveItem.message());
@@ -186,8 +176,8 @@ function testGetItemMetadataByPath() {
     runtime:sleep(2);
 
     string itemPath = newFolderPath;
-    DriveItem|Error driveItem = oneDriveClient->getItemMetadataByPath(itemPath);
-    if (driveItem is DriveItem) {
+    DriveItemData|Error driveItem = oneDriveClient->getItemMetadataByPath(itemPath);
+    if (driveItem is DriveItemData) {
         log:printInfo("Item received " + driveItem.toString());
     } else {
         test:assertFail(msg = driveItem.message());
@@ -206,8 +196,8 @@ function testGetItemMetadataByIdApplyQueryParams() {
     string itemId = collectorFolderId;
     string[] queryParams = ["$expand=children"];
 
-    DriveItem|Error driveItem = oneDriveClient->getItemMetadataById(itemId, queryParams);
-    if (driveItem is DriveItem) {
+    DriveItemData|Error driveItem = oneDriveClient->getItemMetadataById(itemId, queryParams);
+    if (driveItem is DriveItemData) {
         log:printInfo("Item received " + driveItem.toString());
     } else {
         test:assertFail(msg = driveItem.message());
@@ -233,8 +223,8 @@ function testUpdateDriveItemById() {
             childCount: 9
         }
     };
-    DriveItem|Error driveItem = oneDriveClient->updateDriveItemById(itemId, replacement);
-    if (driveItem is DriveItem) {
+    DriveItemData|Error driveItem = oneDriveClient->updateDriveItemById(itemId, replacement);
+    if (driveItem is DriveItemData) {
         log:printInfo("Item updated " + driveItem.toString());
     } else {
         test:assertFail(msg = driveItem.message());
@@ -255,8 +245,8 @@ function testUpdateDriveItemByPath() {
         name: "Child_Canva",
         folder : {}
     };
-    DriveItem|Error driveItem = oneDriveClient->updateDriveItemByPath(itemPath, replacement);
-    if (driveItem is DriveItem) {
+    DriveItemData|Error driveItem = oneDriveClient->updateDriveItemByPath(itemPath, replacement);
+    if (driveItem is DriveItemData) {
         log:printInfo("Item updated " + driveItem.toString());
         newFolderPath = "/Child_Canva";
     } else {
@@ -283,8 +273,8 @@ function testMoveDriveItem() {
         }
     };
 
-    DriveItem|Error driveItemMovedById = oneDriveClient->updateDriveItemById(itemIdtoMoveById, replacement1);
-    if (driveItemMovedById is DriveItem) {
+    DriveItemData|Error driveItemMovedById = oneDriveClient->updateDriveItemById(itemIdtoMoveById, replacement1);
+    if (driveItemMovedById is DriveItemData) {
         log:printInfo("Item moved " + driveItemMovedById.toString());
     } else {
         test:assertFail(msg = driveItemMovedById.message());
@@ -301,8 +291,8 @@ function testMoveDriveItem() {
         }
     };
 
-    DriveItem|Error driveItemMovedByPath = oneDriveClient->updateDriveItemByPath(itemPathtoMoveByPath, replacement2);
-    if (driveItemMovedByPath is DriveItem) {
+    DriveItemData|Error driveItemMovedByPath = oneDriveClient->updateDriveItemByPath(itemPathtoMoveByPath, replacement2);
+    if (driveItemMovedByPath is DriveItemData) {
         log:printInfo("Item moved " + driveItemMovedByPath.toString());
         collectorCopyFolderPath = collectorFolderPath + "/Moved_to_Collector_Path";
     } else {
@@ -358,8 +348,8 @@ function testRestoreDriveItem() {
 
     string itemId = collectorCopyIdFolderId;
 
-    DriveItem|Error restoredDriveItem = oneDriveClient->restoreDriveItem(itemId);
-    if (restoredDriveItem is DriveItem) {
+    DriveItemData|Error restoredDriveItem = oneDriveClient->restoreDriveItem(itemId);
+    if (restoredDriveItem is DriveItemData) {
         log:printInfo("Item restored "+ restoredDriveItem?.id.toString());
     } else {
         test:assertFail(msg = restoredDriveItem.message());
@@ -424,9 +414,9 @@ function testCopyDriveItemInPath() {
 //     string parentFolderId = collectorFolderId;
 //     string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-//     DriveItem|Error itemInfo = oneDriveClient->uploadFileToFolderById(parentFolderId, fileNameForNewUploadById, 
+//     DriveItemData|Error itemInfo = oneDriveClient->uploadFileToFolderById(parentFolderId, fileNameForNewUploadById, 
 //         byteStream, mediaType);
-//     if (itemInfo is DriveItem) {
+//     if (itemInfo is DriveItemData) {
 //         log:printInfo("Uploaded item " + itemInfo?.id.toString());
 //         idOfFileInCollector = <@untainted>itemInfo?.id.toString();
 //     } else {
@@ -447,9 +437,9 @@ function testCopyDriveItemInPath() {
 //     string parentFolderPath = collectorFolderPath;
 //     string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-//     DriveItem|Error itemInfo = oneDriveClient->uploadFileToFolderByPath(parentFolderPath, 
+//     DriveItemData|Error itemInfo = oneDriveClient->uploadFileToFolderByPath(parentFolderPath, 
 //         fileNameNewForNewUploadByPath, byteStream, mediaType);
-//     if (itemInfo is DriveItem) {
+//     if (itemInfo is DriveItemData) {
 //         log:printInfo("Uploaded item " + itemInfo?.id.toString());
 //         pathOfFileInCollector = collectorFolderPath + FORWARD_SLASH + fileNameNewForNewUploadByPath;
 //     } else {
@@ -470,8 +460,8 @@ function testCopyDriveItemInPath() {
 //     string fileId = idOfFileInCollector;
 //     string mediType = "image/png";
 
-//     DriveItem|Error itemInfo = oneDriveClient->replaceFileUsingId(fileId, byteStream, mediType);
-//     if (itemInfo is DriveItem) {
+//     DriveItemData|Error itemInfo = oneDriveClient->replaceFileUsingId(fileId, byteStream, mediType);
+//     if (itemInfo is DriveItemData) {
 //         log:printInfo("Replaced item " + itemInfo?.id.toString());
 //     } else {
 //         test:assertFail(msg = itemInfo.message());
@@ -491,8 +481,8 @@ function testCopyDriveItemInPath() {
 //     string filePath = pathOfFileInCollector;
 //     string mediType = "image/png";
 
-//     DriveItem|Error itemInfo = oneDriveClient->replaceFileUsingPath(filePath, byteStream, mediType);
-//     if (itemInfo is DriveItem) {
+//     DriveItemData|Error itemInfo = oneDriveClient->replaceFileUsingPath(filePath, byteStream, mediType);
+//     if (itemInfo is DriveItemData) {
 //         log:printInfo("Replaced item " + itemInfo?.id.toString());
 //     } else {
 //         test:assertFail(msg = itemInfo.message());
@@ -516,9 +506,9 @@ function testUploadFileToFolderByIdAsArray() {
     string parentFolderId = collectorFolderId;
     string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-    DriveItem|Error itemInfo = oneDriveClient->uploadFileToFolderById(parentFolderId, fileNameForNewUploadById, 
+    DriveItemData|Error itemInfo = oneDriveClient->uploadFileToFolderById(parentFolderId, fileNameForNewUploadById, 
         byteArray, mediaType);
-    if (itemInfo is DriveItem) {
+    if (itemInfo is DriveItemData) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
         idOfFileInCollector = <@untainted>itemInfo?.id.toString();
     } else {
@@ -540,9 +530,9 @@ function testUploadFileToFolderByPathAsArray() {
     string parentFolderPath = collectorFolderPath;
     string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-    DriveItem|Error itemInfo = oneDriveClient->uploadFileToFolderByPath(parentFolderPath, 
+    DriveItemData|Error itemInfo = oneDriveClient->uploadFileToFolderByPath(parentFolderPath, 
         fileNameNewForNewUploadByPath, byteArray, mediaType);
-    if (itemInfo is DriveItem) {
+    if (itemInfo is DriveItemData) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
         pathOfFileInCollector = collectorFolderPath + FORWARD_SLASH + fileNameNewForNewUploadByPath;
     } else {
@@ -563,8 +553,8 @@ function testReplaceFileUsingIdAsArray() {
     string fileId = idOfFileInCollector;
     string mediType = "image/png";
 
-    DriveItem|Error itemInfo = oneDriveClient->replaceFileUsingId(fileId, byteArray, mediType);
-    if (itemInfo is DriveItem) {
+    DriveItemData|Error itemInfo = oneDriveClient->replaceFileUsingId(fileId, byteArray, mediType);
+    if (itemInfo is DriveItemData) {
         log:printInfo("Replaced item " + itemInfo?.id.toString());
     } else {
         test:assertFail(msg = itemInfo.message());
@@ -584,8 +574,8 @@ function testReplaceFileUsingPathAsArray() {
     string filePath = pathOfFileInCollector;
     string mediType = "image/png";
 
-    DriveItem|Error itemInfo = oneDriveClient->replaceFileUsingPath(filePath, byteArray, mediType);
-    if (itemInfo is DriveItem) {
+    DriveItemData|Error itemInfo = oneDriveClient->replaceFileUsingPath(filePath, byteArray, mediType);
+    if (itemInfo is DriveItemData) {
         log:printInfo("Replaced item " + itemInfo?.id.toString());
     } else {
         test:assertFail(msg = itemInfo.message());
@@ -692,12 +682,12 @@ function testResumableUploadDriveItem() {
     stream<io:Block,io:Error?> fileStream = checkpanic io:fileReadBlocksAsStream(localFilePath, DEFAULT_FRAGMENT_SIZE*6);
     file:MetaData fileMetaData = checkpanic file:getMetaData(localFilePath);
     string uploadDestinationPath = collectorFolderPath + FORWARD_SLASH + fileName;
-    ItemInfo info = {
+    UploadMetadata info = {
         fileSize : fileMetaData.size
     };
 
-    DriveItem|Error itemInfo = oneDriveClient->resumableUploadDriveItem(uploadDestinationPath, info, fileStream);
-    if (itemInfo is DriveItem) {
+    DriveItemData|Error itemInfo = oneDriveClient->resumableUploadDriveItem(uploadDestinationPath, info, fileStream);
+    if (itemInfo is DriveItemData) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
     } else {
         test:assertFail(msg = itemInfo.message());
@@ -706,17 +696,16 @@ function testResumableUploadDriveItem() {
 }
 
 @test:Config {
-    enable: true,
-    dependsOn: []
+    enable: true
 }
 function testSearchDriveItems() {
     log:printInfo("client->searchDriveItems()");
     runtime:sleep(2);
 
     string searchText = "newUploadByPath";
-    stream<DriveItem, Error>|Error itemStream = oneDriveClient->searchDriveItems(searchText);
-    if (itemStream is stream<DriveItem, Error>) {
-        Error? e = itemStream.forEach(isolated function (DriveItem queryResult) {
+    stream<DriveItemData, Error>|Error itemStream = oneDriveClient->searchDriveItems(searchText);
+    if (itemStream is stream<DriveItemData, Error>) {
+        Error? e = itemStream.forEach(isolated function (DriveItemData queryResult) {
             log:printInfo(queryResult.toString());
         });
     } else {
@@ -781,8 +770,8 @@ function testGetSharedDriveItem() {
     log:printInfo("client->getSharedDriveItem()");
     runtime:sleep(2);
 
-    DriveItem|Error sharedItem = oneDriveClient->getSharedDriveItem(sharedUrl);
-    if (sharedItem is DriveItem) {
+    DriveItemData|Error sharedItem = oneDriveClient->getSharedDriveItem(sharedUrl);
+    if (sharedItem is DriveItemData) {
         log:printInfo("Shared item info " + sharedItem.toString());
     } else {
         test:assertFail(msg = sharedItem.message());
@@ -845,16 +834,19 @@ function testSendSharingInvitationByPath() {
 
 // *************************Supported only in Azure work and School accounts (NOT TESTED) **************************
 // @test:Config {
-//     enable: true
+//     enable: true,
+//     dependsOn: [testRestoreDriveItem]
 // }
 // function testCheckInDriveItem() {
 //     log:printInfo("client->checkInDriveItem()");
 //     runtime:sleep(2);
 
+//     string itemId = collectorCopyIdFolderId;
+
 //     CheckInOptions options = {
 //         comment: "Check In"
 //     };
-//     error? result = oneDriveClient->checkInDriveItem(checkedInFile, options);
+//     error? result = oneDriveClient->checkInDriveItem(itemId, options);
 //     if (result is ()) {
 //         log:printInfo("CheckIn success");
 //     } else {
@@ -887,8 +879,8 @@ function testSendSharingInvitationByPath() {
 //     log:printInfo("client->followDriveItem()");
 //     runtime:sleep(2);
 
-//     DriveItem|Error followedDeiveItem = oneDriveClient->followDriveItem(followFile);
-//     if (followedDeiveItem is DriveItem) {
+//     DriveItemData|Error followedDeiveItem = oneDriveClient->followDriveItem(followFile);
+//     if (followedDeiveItem is DriveItemData) {
 //         log:printInfo("Item followed "+ followedDeiveItem?.id.toString());
 //     } else {
 //         test:assertFail(msg = followedDeiveItem.message());
@@ -918,8 +910,8 @@ function testSendSharingInvitationByPath() {
 //     log:printInfo("client->getItemsFollowed()");
 //     runtime:sleep(2);
 
-//     DriveItem[]|Error driveItems = oneDriveClient->getItemsFollowed();
-//     if (driveItems is DriveItem[]) {
+//     DriveItemData[]|Error driveItems = oneDriveClient->getItemsFollowed();
+//     if (driveItems is DriveItemData[]) {
 //         foreach var item in driveItems {
 //             log:printInfo("Item received " + item.toString());
 //         }

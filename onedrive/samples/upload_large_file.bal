@@ -45,13 +45,13 @@ public function main() returns error? {
         onedrive:DEFAULT_FRAGMENT_SIZE*8);
     file:MetaData fileMetaData = check file:getMetaData(localFilePath);
     string uploadDestinationPath = "<UPLOAD_DETINATION_FILE_PATH_WITH_EXTENTION>";
-    onedrive:ItemInfo info = {
+    onedrive:UploadMetadata info = {
         fileSize : fileMetaData.size
     };
 
-    onedrive:DriveItem|onedrive:Error itemInfo = driveClient->resumableUploadDriveItem(uploadDestinationPath, info, 
+    onedrive:DriveItemData|onedrive:Error itemInfo = driveClient->resumableUploadDriveItem(uploadDestinationPath, info, 
         fileStream);
-    if (itemInfo is onedrive:DriveItem) {
+    if (itemInfo is onedrive:DriveItemData) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
         log:printInfo("Success!");
     } else {

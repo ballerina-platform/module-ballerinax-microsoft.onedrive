@@ -42,8 +42,8 @@ public function main() returns error? {
     string fileId = "<FILE_ID>";
     string mediType = "image/png";
 
-    onedrive:DriveItem|onedrive:Error itemInfo = driveClient->replaceFileUsingId(fileId, byteArray, mediType);
-    if (itemInfo is onedrive:DriveItem) {
+    onedrive:DriveItemData|onedrive:Error itemInfo = driveClient->replaceFileUsingId(fileId, byteArray, mediType);
+    if (itemInfo is onedrive:DriveItemData) {
         log:printInfo("Replaced item " + itemInfo?.id.toString());
         log:printInfo("Success!");
     } else {

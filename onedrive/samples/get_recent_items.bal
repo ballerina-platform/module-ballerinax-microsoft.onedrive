@@ -36,9 +36,9 @@ public function main() returns error? {
     onedrive:Client driveClient = check new(configuration);
 
     log:printInfo("Get recent items");
-    onedrive:DriveItem[]|onedrive:Error driveItems = driveClient->getRecentItems();
+    onedrive:DriveItemData[]|onedrive:Error driveItems = driveClient->getRecentItems();
 
-    if (driveItems is onedrive:DriveItem[]) {
+    if (driveItems is onedrive:DriveItemData[]) {
         foreach var item in driveItems {
             log:printInfo("Item received " + item.toString());
         }

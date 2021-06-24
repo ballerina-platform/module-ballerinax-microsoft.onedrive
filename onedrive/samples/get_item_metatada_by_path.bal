@@ -39,9 +39,9 @@ public function main() returns error? {
 
     string itemPath = "<ITEM_PATH>";
 
-    onedrive:DriveItem|onedrive:Error driveItem = driveClient->getItemMetadataByPath(itemPath);
+    onedrive:DriveItemData|onedrive:Error driveItem = driveClient->getItemMetadataByPath(itemPath);
 
-    if (driveItem is onedrive:DriveItem) {
+    if (driveItem is onedrive:DriveItemData) {
         log:printInfo(driveItem.toString());
         log:printInfo("Success!");
     } else {

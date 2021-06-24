@@ -8,7 +8,7 @@ service resources. This version of the connector only supports the access to the
 account (currently logged in user).
 
 ## Compatibility
-Ballerina Language Version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Swan Lake Alpha 5**<br/>
+Ballerina Language Version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Swan Lake Beta 1**<br/>
 [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview) Version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **v1.0**<br/>
 Java Development Kit (JDK)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11                    
 

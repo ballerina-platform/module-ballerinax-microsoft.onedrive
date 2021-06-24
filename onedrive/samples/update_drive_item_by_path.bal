@@ -43,8 +43,8 @@ public function main() returns error? {
         folder : {}
     };
 
-    onedrive:DriveItem|onedrive:Error driveItem = driveClient->updateDriveItemByPath(itemPath, replacement);
-    if (driveItem is onedrive:DriveItem) {
+    onedrive:DriveItemData|onedrive:Error driveItem = driveClient->updateDriveItemByPath(itemPath, replacement);
+    if (driveItem is onedrive:DriveItemData) {
         log:printInfo("Item updated " + driveItem.toString());
         log:printInfo("Success!");
     } else {

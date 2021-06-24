@@ -43,9 +43,9 @@ public function main() returns error? {
     string parentFolderPath = "<PARENT_FOLDER_PATH>";
     string mediaType = "image/png";
 
-    onedrive:DriveItem|onedrive:Error itemInfo = driveClient->uploadDriveItemToFolderByPath(parentFolderPath, 
+    onedrive:DriveItemData|onedrive:Error itemInfo = driveClient->uploadFileToFolderByPath(parentFolderPath, 
         fileNameNewForNewUploadByPath, byteArray, mediaType);
-    if (itemInfo is onedrive:DriveItem) {
+    if (itemInfo is onedrive:DriveItemData) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
         log:printInfo("Success!");
     } else {
