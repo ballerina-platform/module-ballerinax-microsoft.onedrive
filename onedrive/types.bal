@@ -510,7 +510,7 @@ public type DriveItem record {|
 # + conflictResolutionBehaviour - The conflict resolution behaviour
 public type FolderMetadata record {|
     string name;
-    Folder folder = { }; //check with kanushka
+    Folder folder = { };
     ItemReference parentReference?;
     FileSystemInfo fileSystemInfo?;
     ConflictResolutionBehaviour conflictResolutionBehaviour?;

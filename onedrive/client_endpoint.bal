@@ -264,7 +264,7 @@ public client class Client {
     # + return - A `string` which represents the ID of the newly created copy if sucess. Else `Error`.
     @display {label: "Copy drive item (Path based)"}
     remote isolated function copyDriveItemInPath(@display {label: "Item Path Relative to Drive Root"} string itemPath, 
-                                                 @display {label: "New name for the copy"} string? name = (), 
+                                                 @display {label: "New Name For Copy"} string? name = (), 
                                                  @display {label: "Parent Item Data"} 
                                                  ParentReference? parentReference = ()) 
                                                  returns @tainted @display {label: "Item ID"} string|Error {
@@ -280,7 +280,7 @@ public client class Client {
     # + return - A record of type `File`
     @display {label: "Download file (ID based)"}
     remote isolated function downloadFileById(@display {label: "Item ID"} string itemId, 
-                                              @display {label: "Item format data"} FileFormat? formatToConvert = ()) 
+                                              @display {label: "Item Format Data"} FileFormat? formatToConvert = ()) 
                                               returns @tainted File|Error {
         string path = EMPTY_STRING;
         if (formatToConvert is ()) {
@@ -302,7 +302,7 @@ public client class Client {
     # + return - A record of type `File` if successful. Else `Error`.
     @display {label: "Download file (Path based)"}
     remote isolated function downloadFileByPath(@display {label: "Item Path Relative to Drive Root"} string itemPath, 
-                                                @display {label: "Item format data"} FileFormat? formatToConvert = ()) 
+                                                @display {label: "Item Format Data"} FileFormat? formatToConvert = ()) 
                                                 returns @tainted File|Error {
         string path = EMPTY_STRING;
         if (formatToConvert is ()) {
@@ -323,8 +323,8 @@ public client class Client {
     #                          file.
     # + return - A record of type `File` if successful. Else `Error`.
     @display {label: "Download file by download URL"}
-    remote isolated function downloadFileByDownloadUrl(@display {label: "Downloadable url of file"} string downloadUrl, 
-                                                       @display {label: "Byte range for partial content"} 
+    remote isolated function downloadFileByDownloadUrl(@display {label: "Downloadable URL of File"} string downloadUrl, 
+                                                       @display {label: "Byte Range for Partial Content"} 
                                                        ByteRange? partialContentOption = ()) returns 
                                                        @tainted File|Error {
         map<string> headerMap = {};
@@ -430,7 +430,7 @@ public client class Client {
     @display {label: "Upload file (ID based)"}
     remote isolated function uploadFileToFolderById(@display {label: "Parent Folder ID"} string parentFolderId, 
                                                     @display {label: "File Name"} string fileName, 
-                                                    @display {label: "Array of bytes"} byte[] byteArray, 
+                                                    @display {label: "Array of Bytes"} byte[] byteArray, 
                                                     @display {label: "Mime Type"} string mimeType) returns 
                                                     @tainted DriveItemData|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, parentFolderId], 
@@ -451,7 +451,7 @@ public client class Client {
     @display {label: "Upload file (Path based)"}
     remote isolated function uploadFileToFolderByPath(@display {label: "Parent Folder Path"} string parentFolderPath, 
                                                       @display {label: "File Name"} string fileName, 
-                                                      @display {label: "Array of bytes"} byte[] byteArray, 
+                                                      @display {label: "Array of Bytes"} byte[] byteArray, 
                                                       @display {label: "Mime Type"} string mimeType) returns 
                                                       @tainted DriveItemData|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], 
@@ -468,7 +468,7 @@ public client class Client {
     # + return - A record of type `DriveItemData` if sucess. Else `Error`.
     @display {label: "Replace file (ID based)"}
     remote isolated function replaceFileUsingId(@display {label: "Item ID"} string itemId, 
-                                                @display {label: "Array of bytes"} byte[] byteArray, 
+                                                @display {label: "Array of Bytes"} byte[] byteArray, 
                                                 @display {label: "Mime Type"} string mimeType) returns 
                                                 @tainted DriveItemData|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
@@ -486,7 +486,7 @@ public client class Client {
     # + return - A record of type `DriveItemData` if sucess. Else `Error`.
     @display {label: "Replace file (Path based)"}
     remote isolated function replaceFileUsingPath(@display {label: "Item Path Relative to Drive Root"} string itemPath,                                                    
-                                                  @display {label: "Array of bytes"} byte[] byteArray, 
+                                                  @display {label: "Array of Bytes"} byte[] byteArray, 
                                                   @display {label: "Mime Type"} string mimeType) returns 
                                                   @tainted DriveItemData|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, 
@@ -509,7 +509,7 @@ public client class Client {
     @display {label: "Upload a large file"}
     remote function resumableUploadDriveItem(@display {label: "Item Path Relative to Drive Root"} string itemPath, 
                                              @display {label: "Information About File"} UploadMetadata itemInfo, 
-                                             @display {label: "Stream of bytes"} 
+                                             @display {label: "Stream of Bytes"} 
                                              stream<io:Block,io:Error?> binaryStream) returns 
                                              @tainted DriveItemData|Error { 
         string path = check createPathBasedUrl([DRIVE_RESOURCE, DRIVE_ROOT], itemPath, [CREATE_UPLOAD_SESSION_ACTION]);
@@ -583,7 +583,7 @@ public client class Client {
     # + return - A record of type `Permission` if sucess. Else `Error`.
     @display {label: "Get sharable links (ID based)"}
     remote isolated function getSharableLinkFromId(@display {label: "Item ID"} string itemId, 
-                                                   @display {label: "Permission options"} PermissionOptions options) 
+                                                   @display {label: "Permission Options"} PermissionOptions options) 
                                                    returns @tainted @display {label: "Permission Information"} 
                                                    Permission|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
@@ -603,7 +603,7 @@ public client class Client {
     @display {label: "Get sharable links (Path based)"}
     remote isolated function getSharableLinkFromPath(@display {label: "Item Path Relative to Drive Root"} 
                                                      string itemPath, 
-                                                     @display {label: "Permission options"} PermissionOptions options)
+                                                     @display {label: "Permission Options"} PermissionOptions options)
                                                      returns @tainted Permission|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, 
             [CREATE_LINK_ACTION]);
@@ -652,8 +652,7 @@ public client class Client {
     # + return - A record of type `Permission` if sucess. Else `Error`.
     @display {label: "Send Sharing Invitation (Path based)"}
     remote isolated function sendSharingInvitationByPath(@display {label: "Item Path Relative to Drive Root"} 
-                                                         string itemPath, 
-                                                         @display {label: "Sharing Invitation"} 
+                                                         string itemPath, @display {label: "Sharing Invitation"} 
                                                          ItemShareInvitation invitation) returns 
                                                          @tainted Permission|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, [INVITE_ACTION]);

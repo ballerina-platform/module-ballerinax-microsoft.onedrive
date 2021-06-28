@@ -100,9 +100,9 @@ isolated function validateOdataSystemQueryOption(string queryOptionName, string 
         return false;
     }
     foreach string character in queryOptionValue {
-        if (character is OpeningCharacters) {
+        if (matchOpening(character)) {
             characterArray.push(character);
-        } else if (character is ClosingCharacters) {
+        } else if (matchClosing(character)) {
             _ = characterArray.pop();
         }
     }
@@ -129,6 +129,24 @@ isolated function getasyncJobStatus(string monitorUrl) returns @tainted AsyncJob
     json errorPayload = check response.getJsonPayload();
     string message = errorPayload.toString(); // Error should be defined as a user defined object
     return error PayloadValidationError(message);
+}
+
+isolated function matchOpening(string value) returns boolean {
+    match value {
+        OPEN_BRACKET|OPEN_SQURAE_BRACKET|OPEN_CURLY_BRACKET|SINGLE_QUOTE_O|DOUBLE_QUOTE_O => {
+            return true;
+        }
+    }
+    return false;
+}
+
+isolated function matchClosing(string value) returns boolean {
+    match value {
+        CLOSE_BRACKET|CLOSE_SQURAE_BRACKET|CLOSE_CURLY_BRACKET|SINGLE_QUOTE_C|DOUBLE_QUOTE_C => {
+            return true;
+        }
+    }
+    return false;
 }
 
 # Resource that provide the progress of the long running action.

@@ -36,7 +36,7 @@ with others. OneDrive integrates with Microsoft Office so users can access Word,
 OneDrive. It doesn’t require a download and should already be a part of Windows 10. 
 
 <p align="center">
-<img src="./docs/images/One_Drive.png?raw=true" alt="One Drive"/>
+<img src="./docs/images/One_Drive.png?raw=true" alt="One Drive" width="500"/>
 </p>
 
 ## Key features of Microsoft OneDrive
@@ -80,15 +80,13 @@ account (currently logged in user).
     Before your app can get a token from the Microsoft identity platform, it must be registered in the Azure portal. 
     Registration integrates your app with the Microsoft identity platform and establishes the information that it 
     uses to get tokens
-    1. App Id
+    1. App ID
     2. Redirect URL
     3. App Secret <br/>
 
     **Step 1:** Register a new application in your Azure AD tenant.<br/>
     - In the App registrations page, click **New registration** and enter a meaningful name in the name field.
-    - In the **Supported account types** section, select Accounts in any organizational directory (Any Azure AD 
-    directory - Multi-tenant) and personal Microsoft accounts (e.g., Skype, Xbox, Outlook.com). Click Register to 
-    create the application.
+    - In the **Supported account types** section, select **Accounts in any organizational directory (Any Azure AD directory - Multi-tenant) and personal Microsoft accounts (e.g., Skype, Xbox, Outlook.com)** or **Personal Microsoft accounts only**. Click Register to create the application.
     - Provide a **Redirect URI** if necessary.
 
         ![Obtaining Credentials Step 1](docs/images/s1.png)
@@ -120,7 +118,7 @@ account (currently logged in user).
     - In a new browser, enter the below URL by replacing the <MS_CLIENT_ID> with the application ID.
 
         ```
-        https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=<MS_CLIENT_ID>&response_type=code&redirect_uri=https://oauth.pstmn.io/v1/browser-callback&response_mode=query&scope=openid offline_access https://graph.microsoft.com/Files.ReadWrite.All
+        https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=<MS_CLIENT_ID>&response_type=code&redirect_uri=https://oauth.pstmn.io/v1/browser-callback&response_mode=query&scope=openid offline_access <SPACE_SEPERATED_LIST_OF_SCOPES>
         ```
     
     - This will prompt you to enter the username and password for signing into the Azure Portal App.
@@ -140,7 +138,7 @@ account (currently logged in user).
         ```
         {
             "token_type": "Bearer",
-            "scope": "Files.ReadWrite openid User.Read Mail.Send Mail.ReadWrite",
+            "scope": "openid <LIST_OF_PERMISSIONS>",
             "expires_in": 3600,
             "ext_expires_in": 3600,
             "access_token": "<MS_ACCESS_TOKEN>",
