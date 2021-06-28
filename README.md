@@ -36,7 +36,7 @@ with others. OneDrive integrates with Microsoft Office so users can access Word,
 OneDrive. It doesn’t require a download and should already be a part of Windows 10. 
 
 <p align="center">
-<img src="./docs/images/One_Drive.png?raw=true" alt="One Drive" width="200"/>
+<img src="./docs/images/One_Drive.png?raw=true" alt="One Drive" width="500"/>
 </p>
 
 ## Key features of Microsoft OneDrive
