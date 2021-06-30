@@ -63,8 +63,8 @@ account (currently logged in user).
 - Microsoft Account
 - Access to Azure Portal
 - Java 11 installed - Java Development Kit (JDK) with version 11 is required
-- [Ballerina SL Beta 1](https://ballerina.io/learn/user-guide/getting-started/setting-up-ballerina/installation-options/) installed 
-    - Ballerina Swan Lake Beta 1 is required
+- [Ballerina SL Alpha 5](https://ballerina.io/learn/user-guide/getting-started/setting-up-ballerina/installation-options/) installed 
+    - Ballerina Swan Lake Alpha 5 is required
 
 ## Obtaining tokens
 - Create an account in OneDrive
@@ -167,7 +167,7 @@ scopes = [<MS_NECESSARY_SCOPES>]
 ## Supported Versions
 |                                                                                    | Version               |
 |------------------------------------------------------------------------------------|-----------------------|
-| Ballerina Language Version                                                         | **Swan Lake Beta 1**  |
+| Ballerina Language Version                                                         | **Swan Lake Alpha 5**  |
 | [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview) Version     | **v1.0**              |
 | Java Development Kit (JDK)                                                         | 11                    |
 
@@ -448,10 +448,10 @@ sends them an email with a sharing link.
         > **Note:** Set the JAVA_HOME environment variable to the path name of the directory into which you installed 
         JDK.
 
-2. Download and install [Ballerina SLBeta 1](https://ballerina.io/). 
+2. Download and install [Ballerina SLAlpha 5](https://ballerina.io/). 
 
 ## Building the Source
-Execute the commands below to build from the source after installing Ballerina SL Beta 1 version.
+Execute the commands below to build from the source after installing Ballerina SL Alpha 5 version.
 
 1. To build the library:
 ```shell script
