@@ -507,7 +507,7 @@ function testUploadFileToFolderByIdAsArray() {
     string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
     DriveItemData|Error itemInfo = oneDriveClient->uploadFileToFolderById(parentFolderId, fileNameForNewUploadById, 
-        byteArray, mediaType);
+        <@untainted>byteArray, mediaType);
     if (itemInfo is DriveItemData) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
         idOfFileInCollector = <@untainted>itemInfo?.id.toString();
@@ -531,7 +531,7 @@ function testUploadFileToFolderByPathAsArray() {
     string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
     DriveItemData|Error itemInfo = oneDriveClient->uploadFileToFolderByPath(parentFolderPath, 
-        fileNameNewForNewUploadByPath, byteArray, mediaType);
+        fileNameNewForNewUploadByPath, <@untainted>byteArray, mediaType);
     if (itemInfo is DriveItemData) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
         pathOfFileInCollector = collectorFolderPath + FORWARD_SLASH + fileNameNewForNewUploadByPath;
@@ -553,7 +553,7 @@ function testReplaceFileUsingIdAsArray() {
     string fileId = idOfFileInCollector;
     string mediType = "image/png";
 
-    DriveItemData|Error itemInfo = oneDriveClient->replaceFileUsingId(fileId, byteArray, mediType);
+    DriveItemData|Error itemInfo = oneDriveClient->replaceFileUsingId(fileId, <@untainted>byteArray, mediType);
     if (itemInfo is DriveItemData) {
         log:printInfo("Replaced item " + itemInfo?.id.toString());
     } else {
@@ -574,7 +574,7 @@ function testReplaceFileUsingPathAsArray() {
     string filePath = pathOfFileInCollector;
     string mediType = "image/png";
 
-    DriveItemData|Error itemInfo = oneDriveClient->replaceFileUsingPath(filePath, byteArray, mediType);
+    DriveItemData|Error itemInfo = oneDriveClient->replaceFileUsingPath(filePath, <@untainted>byteArray, mediType);
     if (itemInfo is DriveItemData) {
         log:printInfo("Replaced item " + itemInfo?.id.toString());
     } else {
