@@ -8,7 +8,7 @@ service resources. This version of the connector only supports the access to the
 account (currently logged in user).
 
 ## Compatibility
-Ballerina Language Version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Swan Lake Beta 1**<br/>
+Ballerina Language Version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Swan Lake Alpha 5**<br/>
 [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview) Version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **v1.0**<br/>
 Java Development Kit (JDK)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11                    
 
@@ -43,7 +43,6 @@ configurable string & readonly clientId = os:getEnv("APP_ID");
 configurable string & readonly clientSecret = os:getEnv("APP_SECRET");
 
 public function main() returns error? {
-
     onedrive:Configuration configuration = {
         clientConfig: {
             refreshUrl: refreshUrl,
@@ -55,18 +54,18 @@ public function main() returns error? {
     };
     onedrive:Client driveClient = check new(configuration);
 
-    string parentFolderPath = "/Sample_Parent"; 
-    string folderName = "Sample_Test";
+    log:printInfo("Create a folder in a folder specified by ID");
 
+    string parentID = "<PARENT_FOLDER_ID>";
+    string newFolderName = "Samples_Test";
     onedrive:FolderMetadata item = {
         name: newFolderName,
         conflictResolutionBehaviour : "rename"
     };
 
-    log:printInfo("Create a folder in a folder specified by path");
-    onedrive:DriveItem|onedrive:Error driveItem = driveClient->createFolderByPath(parentRelativepath, item);
+    onedrive:DriveItemData|onedrive:Error driveItem = driveClient->createFolderById(parentID, item);
 
-    if (driveItem is onedrive:DriveItem) {
+    if (driveItem is onedrive:DriveItemData) {
         log:printInfo("Folder Created " + driveItem.toString());
         log:printInfo("Success!");
     } else {
@@ -106,9 +105,9 @@ public function main() returns error? {
     string parentFolderPath = "<PARENT_FOLDER_PATH>";
     string mediaType = "image/png";
 
-    onedrive:DriveItem|onedrive:Error itemInfo = driveClient->uploadDriveItemToFolderByPath(parentFolderPath, 
+    onedrive:DriveItemData|onedrive:Error itemInfo = driveClient->uploadFileToFolderByPath(parentFolderPath, 
         fileNameNewForNewUploadByPath, byteArray, mediaType);
-    if (itemInfo is onedrive:DriveItem) {
+    if (itemInfo is onedrive:DriveItemData) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());
         log:printInfo("Success!");
     } else {
