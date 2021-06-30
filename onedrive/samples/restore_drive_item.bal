@@ -39,8 +39,8 @@ public function main() returns error? {
 
     string itemId = "<ITEM_ID>";
 
-    onedrive:DriveItem|onedrive:Error restoredDriveItem = driveClient->restoreDriveItem(itemId);
-    if (restoredDriveItem is onedrive:DriveItem) {
+    onedrive:DriveItemData|onedrive:Error restoredDriveItem = driveClient->restoreDriveItem(itemId);
+    if (restoredDriveItem is onedrive:DriveItemData) {
         log:printInfo("Item restored "+ restoredDriveItem?.id.toString());
         log:printInfo("Success!");
     } else {

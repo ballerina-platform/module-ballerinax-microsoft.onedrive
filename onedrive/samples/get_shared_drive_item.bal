@@ -39,8 +39,8 @@ public function main() returns error? {
 
     string sharedUrl = "<SHARED_URL>";
 
-    onedrive:DriveItem|onedrive:Error sharedItem = driveClient->getSharedDriveItem(sharedUrl);
-    if (sharedItem is onedrive:DriveItem) {
+    onedrive:DriveItemData|onedrive:Error sharedItem = driveClient->getSharedDriveItem(sharedUrl);
+    if (sharedItem is onedrive:DriveItemData) {
         log:printInfo("Shared item info " + sharedItem.toString());
         log:printInfo("Success!");
     } else {

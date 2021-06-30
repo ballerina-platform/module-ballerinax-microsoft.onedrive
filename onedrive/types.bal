@@ -16,35 +16,95 @@
 
 import ballerina/http;
 
-# Represents configuration parameters to create Azure Cosmos DB client.
+# Represents configuration parameters to create Microsoft OneDrive client.
 #
 # + clientConfig - OAuth client configuration
 # + secureSocketConfig - SSH configuration
 @display{label: "Connection config"} 
-public type Configuration record {
+public type Configuration record {|
     http:BearerTokenConfig|http:OAuth2RefreshTokenGrantConfig clientConfig;
     http:ClientSecureSocket secureSocketConfig?;
-};
+|};
 
-# An abstract resource that contains a common set of properties shared among several other resources types.
+# Represents a file, folder, or other item stored in a drive.
 #
 # + id - The unique identifier of the drive
-# + description - Provides a user-visible description of the item
-# + createdBy - Identity of the user, device, or application which created the item 
 # + createdDateTime - Date and time of item creation
+# + cTag - An eTag for the content of the item. This eTag is not changed if only the metadata is changed. 
+#          **Note:** This property is not returned if the item is a folder.
 # + eTag - ETag for the item
-# + lastModifiedBy - Identity of the user, device, and application which last modified the item 
 # + lastModifiedDateTime - Date and time the item was last modified 
+# + name - Name of the item
+# + size - Size of the item in bytes 
 # + webUrl - URL that displays the resource in the browser
-public type BaseItem record {
+# + description - Provides a user-visible description of the item
+# + webDavUrl - WebDAV compatible URL for the item 
+# + root - If this property is non-null, it indicates that the driveItem is the top-most driveItem in the drive
+# + createdBy - Identity of the user, device, or application which created the item 
+# + lastModifiedBy - Identity of the user, device, and application which last modified the item
+# + fileSystemInfo - File system information on client
+# + parentReference - Parent information, if the item has a parent
+# + remoteItem - Remote item data, if the item is shared from a drive other than the one being accessed
+# + downloadUrl - A URL that can be used to download this file's content. Authentication is not required with this URL. 
+# + file - File metadata, if the item is a file
+# + folder - Folder metadata, if the item is a folder
+# + image - Image metadata, if the item is an image 
+# + photo - Photo metadata, if the item is a photo 
+# + video - Video metadata, if the item is a video
+# + audio - Audio metadata, if the item is an audio file 
+# + location - Location metadata, if the item has location data 
+# + package - If present, indicates that this item is a package instead of a folder or file
+# + publication - Provides information about the published or checked-out state of an item, in locations that support 
+#                 such actions
+# + deleted - Information about the deleted state of the item
+# + shared - Indicates that the item has been shared with others and provides information about the shared state of the 
+# + searchResult - Search metadata, if the item is from a search result item
+# + sharepointIds - Returns identifiers useful for SharePoint REST compatibility
+# + specialFolder - If the current item is also available as a special folder, this facet is returned
+# + children - Collection containing Item objects for the immediate children of item
+# + versions - The list of previous versions of the item 
+# + activities - The list of recent activities that took place on this item
+# + permissions - The set of permissions for the item 
+# + thumbnails - Collection containing ThumbnailSet objects associated with the item
+public type DriveItemData record {
     string id?;
-    string description?;
-    IdentitySet createdBy?;
     string createdDateTime?;
+    string cTag?;
     string eTag?;
-    IdentitySet lastModifiedBy?;
     string lastModifiedDateTime?;
+    string name?;
+    int size?;
     string webUrl?;
+    string description?;
+    string webDavUrl?;
+    json root?;
+    IdentitySet createdBy?;
+    IdentitySet lastModifiedBy?;
+    FileSystemInfo fileSystemInfo?;
+    ItemReference parentReference?;
+    DriveItemData remoteItem?;
+    string downloadUrl?;
+    File file?;
+    Folder folder?;
+    Image image?;
+    Photo photo?;
+    Video video?;
+    Audio audio?;
+    GeoCordinates location?;
+    Package package?;
+    Publication publication?;
+    Deleted deleted?;
+    Shared shared?;
+    SearchResult searchResult?;
+    SharePointId sharepointIds?;
+    SpecialFolder specialFolder?;
+    // relationships
+    DriveItemData[] children?;
+    DriveItemVersion[] versions?;
+    ItemActivity activities?;
+    Permission[] permissions?;
+    ThumbnailSet[] thumbnails?;
+    // instance annotations
 };
 
 # represent a set of identities associated with various events for an item.
@@ -67,6 +127,18 @@ public type Identity record {
     string id?;
 };
 
+# Resource that contains properties that are reported by the device's local file system for the local version of an 
+# item.
+#
+# + createdDateTime - The UTC date and time the file was created on a client
+# + lastAccessedDateTime - The UTC date and time the file was last accessed 
+# + lastModifiedDateTime - The UTC date and time the file was last modified on a client
+public type FileSystemInfo record {
+    string createdDateTime?;
+    string lastAccessedDateTime?;
+    string lastModifiedDateTime?;
+};
+
 # Provides information necessary to address a DriveItem via the API.
 #
 # + driveId - Unique identifier of the drive instance that contains the item 
@@ -76,7 +148,6 @@ public type Identity record {
 # + path - Path that can be used to navigate to the item
 # + shareId - A unique identifier for a shared resource that can be accessed via the Shares API
 # + sharepointIds - Returns identifiers useful for SharePoint REST compatibility
-# + siteId - represents the ID of the site that contains the parent document library of the driveItem resource 
 public type ItemReference record {
     string driveId?;
     string driveType?;
@@ -85,94 +156,106 @@ public type ItemReference record {
     string path?;
     string shareId?;
     SharePointId sharepointIds?;
-    string siteId?;
 };
 
-# Represents a file, folder, or other item stored in a drive.
+# Resource that groups file-related data items into a single structure.
 #
-# + cTag - An eTag for the content of the item. This eTag is not changed if only the metadata is changed. 
-#          **Note:** This property is not returned if the item is a folder.
-# + description - Provides a user-visible description of the item
-# + size - Size of the item in bytes 
-# + name - The name of the folder
-# + webDavUrl - WebDAV compatible URL for the item 
-# + audio - Audio metadata, if the item is an audio file 
-# + image - Image metadata, if the item is an image 
-# + file - File metadata, if the item is a file
-# + location - Location metadata, if the item has location data 
-# + package - If present, indicates that this item is a package instead of a folder or file
-# + photo - Photo metadata, if the item is a photo 
-# + publication - Provides information about the published or checked-out state of an item, in locations that support 
-#                 such actions
-# + video - Video metadata, if the item is a video
-# + deleted - Information about the deleted state of the item
-# + searchResult - Search metadata, if the item is from a search result
-# + shared - Indicates that the item has been shared with others and provides information about the shared state of the 
-#            item
-# + sharepointIds - Returns identifiers useful for SharePoint REST compatibility
-# + specialFolder - If the current item is also available as a special folder, this facet is returned
-# + fileSystemInfo - File system information on client
-# + remoteItem - Remote item data, if the item is shared from a drive other than the one being accessed 
-# + folder - Folder metadata, if the item is a folder
-# + root - If this property is non-null, it indicates that the driveItem is the top-most driveItem in the drive
-# + parentReference - Parent information, if the item has a parent
-# + children - Collection containing Item objects for the immediate children of item
-# + versions - The list of previous versions of the item 
-# + activities - The list of recent activities that took place on this item
-# + permissions - The set of permissions for the item 
-# + thumbnails - Collection containing ThumbnailSet objects associated with the item
-# + downloadUrl - A URL that can be used to download this file's content. Authentication is not required with this URL. 
-public type DriveItem record {|
-    *BaseItem;
-    string cTag?;
-    string description?;
-    int size?;
-    string name?;
-    string webDavUrl?;
-    Audio audio?;
-    Image image?;
-    File file?;
-    GeoCordinates location?;
-    Package package?;
-    Photo photo?;
-    Publication publication?;
-    Video video?;
-    Deleted deleted?;
-    SearchResult searchResult?;
-    Shared shared?;
-    SharePointId sharepointIds?;
-    SpecialFolder specialFolder?;
-    FileSystemInfo fileSystemInfo?;
-    RemoteItem remoteItem?;
-    Folder folder?;
-    json root?;
-    // relationships
-    ItemReference parentReference?;
-    DriveItem[] children?;
-    DriveItemVersion[] versions?;
-    ItemActivity activities?;
-    Permission[] permissions?;
-    ThumbnailSet[] thumbnails?;
-    // instance annotations
-    string downloadUrl?;
+# + content - A `byte[]` which represents the content of a file
+# + mimeType - The MIME type for the file
+# + hashes - Hashes of the file's binary content, if available
+public type File record {
+    byte[] content?;
+    string mimeType?;
+    Hash hashes?;
+};
+
+# Resource that groups available hashes into a single structure for an item.
+#
+# + crc32Hash - The CRC32 value of the file in little endian (if available)
+# + sha1Hash - SHA1 hash for the contents of the file (if available)
+# + sha256Hash - SHA256 hash for the contents of the file (if available)
+# + quickXorHash - A proprietary hash of the file that can be used to determine if the contents of the file have changed
+public type Hash record {
+    string crc32Hash?;
+    string sha1Hash?;
+    string sha256Hash?;
+    string quickXorHash?;
+};
+
+# Resource that groups folder-related data on an item into a single structure.
+#
+# + childCount - Number of children contained immediately within this container 
+# + view - A collection of properties defining the recommended view for the folder
+public type Folder record {|
+    int:Unsigned32 childCount?;
+    FolderView view?;
 |};
 
-# Represents necessary metadata in reference to a folder.
+# Resource that provides or sets recommendations on the user-experience of a folder.
 #
-# + name - The name of the folder
-# + folder - Folder metadata, if the item is a folder
-# + parentReference - Parent information, if the item has a parent
-# + fileSystemInfo - File system information on client
-# + conflictResolutionBehaviour - The conflict resolution behaviour
-# + remoteItem - Remote item data, if the item is shared from a drive other than the one being accessed 
-public type FolderMetadata record {|
-    string name;
-    Folder folder = { };
-    ItemReference parentReference?;
-    FileSystemInfo fileSystemInfo?;
-    ConflictResolutionBehaviour conflictResolutionBehaviour?;
-    RemoteItem remoteItem?;
-|};
+# + sortBy - The method by which the folder should be sorted 
+# + sortOrder - Indicates that items should be sorted in descending order. Otherwise, items should be sorted ascending.
+# + viewType - The type of view that should be used to represent the folder
+public type FolderView record {
+    SortBy sortBy?;
+    SortOrder sortOrder?;
+    ViewType viewType?;
+};
+
+# Resource that groups image-related properties into a single structure.
+#
+# + width - Width of the image, in pixels 
+# + height - Height of the image, in pixels
+public type Image record {
+    int:Unsigned32 width?;
+    int:Unsigned32 height?;
+};
+
+# Resource that provides photo and camera properties.
+#
+# + cameraMake - Camera manufacturer 
+# + cameraModel - Camera model 
+# + exposureDenominator - The denominator for the exposure time fraction from the camera
+# + exposureNumerator - The numerator for the exposure time fraction from the camera
+# + fNumber - The F-stop value from the camera 
+# + focalLength - The focal length from the camera
+# + iso - The ISO value from the camera
+# + takenDateTime - Represents the date and time the photo was taken
+public type Photo record {
+    string cameraMake?;
+    string cameraModel?;
+    float exposureDenominator?;
+    float exposureNumerator?;
+    float fNumber?;
+    float focalLength?;
+    int:Unsigned32 iso?;
+    string takenDateTime?;
+};
+
+# Resource that groups video-related data items into a single structure.
+#
+# + audioBitsPerSample - Number of audio bits per sample 
+# + audioChannels - Number of audio channels
+# + audioFormat - Name of the audio format (AAC, MP3, etc.) 
+# + audioSamplesPerSecond - Number of audio samples per second
+# + bitrate - Bit rate of the video in bits per second
+# + duration - Duration of the file in milliseconds
+# + fourCC - "Four character code" name of the video format
+# + frameRate - Frame rate of the video
+# + height - Height of the video, in pixels
+# + width - Width of the video, in pixels
+public type Video record {
+    int:Unsigned32 audioBitsPerSample?;
+    int:Unsigned32 audioChannels?;
+    string audioFormat?;
+    int:Unsigned32 audioSamplesPerSecond?;
+    int:Unsigned32 bitrate?;
+    int duration?;
+    string fourCC?;
+    float frameRate?;
+    int:Unsigned32 height?;
+    int:Unsigned32 width?;
+};
 
 # Resource that groups audio-related properties on an item into a single structure.
 #
@@ -211,59 +294,6 @@ public type Audio record {
     int:Unsigned32 year?;
 };
 
-# Resource that groups file-related data items into a single structure.
-#
-# + content - A `byte[]` which represents the content of a file
-# + mediaType - The MIME type for the file
-# + hashes - Hashes of the file's binary content, if available
-public type File record {
-    byte[] content?;
-    string mediaType?;
-    HashFacet hashes?;
-};
-
-# Resource that groups available hashes into a single structure for an item.
-#
-# + crc32Hash - The CRC32 value of the file in little endian (if available)
-# + sha1Hash - SHA1 hash for the contents of the file (if available)
-# + sha256Hash - SHA256 hash for the contents of the file (if available)
-# + quickXorHash - A proprietary hash of the file that can be used to determine if the contents of the file have changed
-public type HashFacet record {
-    string crc32Hash?;
-    string sha1Hash?;
-    string sha256Hash?;
-    string quickXorHash?;
-};
-
-# Resource that groups folder-related data on an item into a single structure.
-#
-# + childCount - Number of children contained immediately within this container 
-# + view - A collection of properties defining the recommended view for the folder
-public type Folder record {
-    int:Unsigned32 childCount?;
-    FolderView view?;
-};
-
-# Resource that provides or sets recommendations on the user-experience of a folder.
-#
-# + sortBy - The method by which the folder should be sorted 
-# + sortOrder - Indicates that items should be sorted in descending order. Otherwise, items should be sorted ascending.
-# + viewType - The type of view that should be used to represent the folder
-public type FolderView record {
-    string sortBy?;
-    string sortOrder?;
-    string viewType?;
-};
-
-# Resource that groups image-related properties into a single structure.
-#
-# + width - Width of the image, in pixels 
-# + height - Height of the image, in pixels
-public type Image record {
-    int:Unsigned32 width?;
-    int:Unsigned32 height?;
-};
-
 # Resource that provides geographic coordinates and elevation of a location based on metadata contained within the file.
 #
 # + altitude - The altitude (height), in feet, above sea level for the item
@@ -283,27 +313,6 @@ public type Package record {
     string 'type?;
 };
 
-# Resource that provides photo and camera properties.
-#
-# + cameraMake - Camera manufacturer 
-# + cameraModel - Camera model 
-# + exposureDenominator - The denominator for the exposure time fraction from the camera
-# + exposureNumerator - The numerator for the exposure time fraction from the camera
-# + fNumber - The F-stop value from the camera 
-# + focalLength - The focal length from the camera
-# + iso - The ISO value from the camera
-# + takenDateTime - Represents the date and time the photo was taken
-public type Photo record {
-    string cameraMake?;
-    string cameraModel?;
-    float exposureDenominator?;
-    float exposureNumerator?;
-    float fNumber?;
-    float focalLength?;
-    int:Unsigned32 iso?;
-    string takenDateTime?;
-};
-
 # Resource that provides details on the published status of a driveItemVersion or driveItem resource.
 #
 # + level - The state of publication for this document. Either `published` or `checkout`. 
@@ -313,97 +322,12 @@ public type Publication record {
     string versionId?;
 };
 
-# Resource that indicates that a driveItem references an item that exists in another drive.
-#
-# + id - Unique identifier for the remote item in its drive 
-# + createdBy - Identity of the user, device, and application which created the item
-# + createdDateTime - Date and time of item creation
-# + file - Indicates that the remote item is a file
-# + fileSystemInfo - Information about the remote item from the local file system
-# + folder - Indicates that the remote item is a folder
-# + lastModifiedBy - Identity of the user, device, and application which last modified the item
-# + lastModifiedDateTime - Date and time the item was last modified
-# + name - Filename of the remote item 
-# + package - If present, indicates that this item is a package instead of a folder or file
-# + parentReference - Properties of the parent of the remote item
-# + shared - Indicates that the item has been shared with others and provides information about the shared state of 
-#            the item
-# + sharepointIds - Provides interop between items in OneDrive for Business and SharePoint with the full set of 
-#                   item identifiers 
-# + specialFolder - If the current item is also available as a special folder, this facet is returned
-# + size - Size of the remote item
-# + webDavUrl - DAV compatible URL for the item 
-# + webUrl - URL that displays the resource in the browser
-public type RemoteItem record {
-    string id?;
-    IdentitySet createdBy?;
-    string createdDateTime?;
-    File file?;
-    FileSystemInfo fileSystemInfo?;
-    Folder folder?;
-    IdentitySet lastModifiedBy?;
-    string lastModifiedDateTime?;
-    string name?;
-    Package package?;
-    ItemReference parentReference?;
-    Shared shared?;
-    SharePointId sharepointIds?;
-    SpecialFolder specialFolder?;
-    int size?;
-    string webDavUrl?;
-    string webUrl?;
-};
-
-# Resource that groups video-related data items into a single structure.
-#
-# + audioBitsPerSample - Number of audio bits per sample 
-# + audioChannels - Number of audio channels
-# + audioFormat - Name of the audio format (AAC, MP3, etc.) 
-# + audioSamplesPerSecond - Number of audio samples per second
-# + bitrate - Bit rate of the video in bits per second
-# + duration - Duration of the file in milliseconds
-# + fourCC - "Four character code" name of the video format
-# + frameRate - Frame rate of the video
-# + height - Height of the video, in pixels
-# + width - Width of the video, in pixels
-public type Video record {
-    int:Unsigned32 audioBitsPerSample?;
-    int:Unsigned32 audioChannels?;
-    string audioFormat?;
-    int:Unsigned32 audioSamplesPerSecond?;
-    int:Unsigned32 bitrate?;
-    int duration?;
-    string fourCC?;
-    float frameRate?;
-    int:Unsigned32 height?;
-    int:Unsigned32 width?;
-};
-
 # Resource that indicates that the item has been deleted. The presence (non-null) of the resource value indicates that 
 # the file was deleted. A null (or missing) value indicates that the file is not deleted.
 #
 # + state - Represents the state of the deleted item 
 public type Deleted record {
     string state?;
-};
-
-# Resource that contains properties that are reported by the device's local file system for the local version of an 
-# item.
-#
-# + createdDateTime - The UTC date and time the file was created on a client
-# + lastAccessedDateTime - The UTC date and time the file was last accessed 
-# + lastModifiedDateTime - The UTC date and time the file was last modified on a client
-public type FileSystemInfo record {
-    string createdDateTime?;
-    string lastAccessedDateTime?;
-    string lastModifiedDateTime?;
-};
-
-# Resource that indicates than an item is the response to a search query.
-#
-# + onClickTelemetryUrl - A callback URL that can be used to record telemetry information. 
-public type SearchResult record {
-    string onClickTelemetryUrl?;
 };
 
 # Resource that indicates a DriveItem has been shared with others.
@@ -417,6 +341,13 @@ public type Shared record {
     string scope?; 
     IdentitySet sharedBy?;
     string sharedDateTime?;
+};
+
+# Resource that indicates than an item is the response to a search query.
+#
+# + onClickTelemetryUrl - A callback URL that can be used to record telemetry information. 
+public type SearchResult record {
+    string onClickTelemetryUrl?;
 };
 
 # Resource that groups the various identifiers for an item stored in a SharePoint site or OneDrive for Business into a 
@@ -471,7 +402,7 @@ public type DriveItemVersion record {
 public type ItemActivity record {
     string id?;
     IdentitySet actor?;
-    DriveItem driveItem?;
+    DriveItemData driveItem?;
     string activityDateTime?;
     //listItem: {@odata.type: microsoft.graph.listItem},
 };
@@ -496,20 +427,6 @@ public type Permission record {
     string[] roles?;
     string shareId?;
 };
-
-# Resource that defines properties of the sharing link your application is requesting. 
-#
-# + 'type - The type of sharing link to create. Either `view`, `edit`, or `embed`
-# + scope - The scope of link to create. Either `anonymous` or `organization`
-# + password - The password of the sharing link that is set by the creator. Optional and OneDrive Personal only.
-# + expirationDateTime - A String with format of yyyy-MM-ddTHH:mm:ssZ of DateTime indicates the expiration time of the 
-#                        permission 
-public type PermissionOptions record {|
-    LinkType 'type;
-    LinkScope scope?;
-    string password?;
-    string expirationDateTime?;
-|};
 
 #  Resource that groups link-related data items into a single structure.
 #
@@ -570,31 +487,57 @@ public type Tumbnail record {
     string url?;
 };
 
-# Resource that provide the progress of the long running action.
+// *********************************************** Input Record Types **************************************************
+# Drive item data
 #
-# + operation - The type of long running operation
-# + percentageComplete - A value between 0 and 100 that indicates the percentage complete 
-# + resourceId - ID of the relevent DriveItem 
-# + status - String value that maps to an enumeration of possible values about the status of the job
-type AsyncJobStatus record {
-    string operation?;
-    float percentageComplete?;
-    string resourceId?;
-    AsyncJobStatusString status?;
-};
+# + name - Name of the item
+# + file - File metadata, if the item is a file
+# + folder - Folder metadata, if the item is a folder 
+# + parentReference - Parent information, if the item has a parent
+public type DriveItem record {|
+    string name?;
+    File file?;
+    Folder folder?;
+    ParentReference parentReference?;
+|};
 
-# Resource that provides information about how to upload large files to OneDrive
+# Represents necessary metadata in reference to a folder.
 #
-# + uploadUrl - The URL endpoint that accepts PUT requests for byte ranges of the file 
-# + expirationDateTime - The date and time in UTC that the upload session will expire. The complete file must be 
-#                        uploaded before this expiration time is reached.
-# + nextExpectedRanges - A collection of byte ranges that the server is missing for the file. These ranges are zero 
-#                        indexed and of the format "start-end" (e.g. "0-26" to indicate the first 27 bytes of the file)
-public type UploadSession record {
-    string uploadUrl;
+# + name - The name of the folder
+# + folder - Folder metadata, if the item is a folder
+# + parentReference - Parent information, if the item has a parent
+# + fileSystemInfo - File system information on client
+# + conflictResolutionBehaviour - The conflict resolution behaviour
+public type FolderMetadata record {|
+    string name;
+    Folder folder = { };
+    ItemReference parentReference?;
+    FileSystemInfo fileSystemInfo?;
+    ConflictResolutionBehaviour conflictResolutionBehaviour?;
+|};
+
+# The reference data for the destination folder where the item will be copied
+#
+# + id - ID of the destination folder  
+# + driveId - ID of the Drive the destination folder exist
+public type ParentReference record {|
+    string id;
+    string driveId?;
+|};
+
+# Resource that defines properties of the sharing link your application is requesting. 
+#
+# + 'type - The type of sharing link to create. Either `view`, `edit`, or `embed`
+# + scope - The scope of link to create. Either `anonymous` or `organization`
+# + password - The password of the sharing link that is set by the creator. Optional and OneDrive Personal only.
+# + expirationDateTime - A String with format of yyyy-MM-ddTHH:mm:ssZ of DateTime indicates the expiration time of the 
+#                        permission 
+public type PermissionOptions record {|
+    LinkType 'type;
+    LinkScope scope?;
+    string password?;
     string expirationDateTime?;
-    string[] nextExpectedRanges?;
-};
+|};
 
 # Resource that provide additional data about the file being uploaded and customizing the semantics of the upload 
 # operation.
@@ -604,13 +547,13 @@ public type UploadSession record {
 # + name - The name of the item (filename and extension) 
 # + fileSize - Provides an expected file size to perform a quota check prior to upload. Only on OneDrive Personal.
 # + conflictResolutionBehaviour - The conflict resolution behaviour
-public type ItemInfo record {
+public type UploadMetadata record {|
     int fileSize;
     string name?;
     string description?;
     FileSystemInfo fileSystemInfo?;
     ConflictResolutionBehaviour conflictResolutionBehaviour?;
-};
+|};
 
 # Resource that represents necessary information for a sharing invitation.
 #
@@ -639,6 +582,16 @@ public type DriveRecipient record {|
     string objectId?;
 |};
 
+# Resource that contains the values to define a range of bytes.
+#
+# + startByte - The value of the starting index of bytes  
+# + endByte - The value of the ending index of bytes   
+public type ByteRange record {|
+    int startByte;
+    int endByte;
+|};
+
+// ***************************************** Other Record Types ********************************************************
 # Resource that contains options for Check-In a file.
 #
 # + comment - A check-in comment that is associated with the version
@@ -722,13 +675,4 @@ public type IncompleteData record {|
 public type ItemActionStat record {|
     int:Unsigned32 actionCount;
     int:Unsigned32 actorCount;
-|};
-
-# Resource that contains the values to define a range of bytes.
-#
-# + startByte - The value of the starting index of bytes  
-# + endByte - The value of the ending index of bytes   
-public type ByteRange record {|
-    int startByte;
-    int endByte;
 |};

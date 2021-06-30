@@ -44,9 +44,9 @@ public function main() returns error? {
         conflictResolutionBehaviour : "rename"
     };
 
-    onedrive:DriveItem|onedrive:Error driveItem = driveClient->createFolderByPath(parentRelativepath, item);
+    onedrive:DriveItemData|onedrive:Error driveItem = driveClient->createFolderByPath(parentRelativepath, item);
 
-    if (driveItem is onedrive:DriveItem) {
+    if (driveItem is onedrive:DriveItemData) {
         log:printInfo("Folder Created " + driveItem.toString());
         log:printInfo("Success!");
     } else {

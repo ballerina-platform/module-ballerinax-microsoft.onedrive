@@ -37,9 +37,9 @@ public function main() returns error? {
 
     log:printInfo("Get items shared with me");
 
-    onedrive:DriveItem[]|onedrive:Error driveItems = driveClient->getItemsSharedWithMe();
+    onedrive:DriveItemData[]|onedrive:Error driveItems = driveClient->getItemsSharedWithMe();
 
-    if (driveItems is onedrive:DriveItem[]) {
+    if (driveItems is onedrive:DriveItemData[]) {
         foreach var item in driveItems {
             log:printInfo("Item received " + item.toString());
         }

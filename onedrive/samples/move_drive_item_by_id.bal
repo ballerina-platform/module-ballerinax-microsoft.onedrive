@@ -45,8 +45,8 @@ public function main() returns error? {
             id: parentFolderId
         }
     };
-    onedrive:DriveItem|onedrive:Error driveItem = driveClient->updateDriveItemById(itemId, replacement);
-    if (driveItem is onedrive:DriveItem) {
+    onedrive:DriveItemData|onedrive:Error driveItem = driveClient->updateDriveItemById(itemId, replacement);
+    if (driveItem is onedrive:DriveItemData) {
         log:printInfo("Item moved " + driveItem.toString());
         log:printInfo("Success!");
     } else {

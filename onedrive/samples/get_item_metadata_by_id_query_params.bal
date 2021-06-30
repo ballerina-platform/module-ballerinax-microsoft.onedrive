@@ -40,9 +40,9 @@ public function main() returns error? {
     string itemId = "<ITEM_ID>";
     string[] queryParams = ["$expand=children"];
 
-    onedrive:DriveItem|onedrive:Error driveItem = driveClient->getItemMetadataById(itemId, queryParams);
+    onedrive:DriveItemData|onedrive:Error driveItem = driveClient->getItemMetadataById(itemId, queryParams);
 
-    if (driveItem is onedrive:DriveItem) {
+    if (driveItem is onedrive:DriveItemData) {
         log:printInfo(driveItem.toString());
         log:printInfo("Success!");
     } else {

@@ -14,23 +14,23 @@
 // specific language governing permissions and limitations
 // under the License.
 
-isolated function convertToDriveItem(map<json> sourceDriveItemObject) returns DriveItem|error {
-    DriveItem convertedItem = check sourceDriveItemObject.cloneWithType(DriveItem);
+isolated function convertToDriveItem(map<json> sourceDriveItemObject) returns DriveItemData|error {
+    DriveItemData convertedItem = check sourceDriveItemObject.cloneWithType(DriveItemData);
     convertedItem.downloadUrl = let var url = sourceDriveItemObject["@microsoft.graph.downloadUrl"] in url is string ?
-        url : EMPTY_STRING;
+         url : EMPTY_STRING;
     return convertedItem;
 }
 
-isolated function convertToDriveItemArray(json[] sourceDriveItemObject) returns DriveItem[]|error {
-    DriveItem[] driveItems = [];
+isolated function convertToDriveItemArray(json[] sourceDriveItemObject) returns DriveItemData[]|error {
+    DriveItemData[] driveItems = [];
     foreach json item in sourceDriveItemObject {
-        DriveItem convertedItem = check convertToDriveItem(<map<json>>item);
+        DriveItemData convertedItem = check convertToDriveItem(<map<json>>item);
         driveItems.push(convertedItem);
     }
     return driveItems;
 }
 
-isolated function mapItemInfoToJson(ItemInfo? info) returns json|error {
+isolated function mapItemInfoToJson(UploadMetadata? info) returns json|error {
     json fileInfo = check info?.fileSystemInfo.cloneWithType(json);
     return {
         description: let var desc = info?.description in desc is string ? desc : (), 

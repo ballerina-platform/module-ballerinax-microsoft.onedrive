@@ -17,7 +17,7 @@
 import ballerina/http;
 
 class DriveItemStream {
-    private DriveItem[] currentEntries = [];
+    private DriveItemData[] currentEntries = [];
     private string nextLink;
     int index = 0;
     private final http:Client httpClient;
@@ -30,9 +30,9 @@ class DriveItemStream {
         self.currentEntries = check self.fetchRecordsInitial();
     }
 
-    public isolated function next() returns @tainted record {| DriveItem value; |}|Error? {
+    public isolated function next() returns @tainted record {| DriveItemData value; |}|Error? {
         if(self.index < self.currentEntries.length()) {
-            record {| DriveItem value; |} singleRecord = {value: self.currentEntries[self.index]};
+            record {| DriveItemData value; |} singleRecord = {value: self.currentEntries[self.index]};
             self.index += 1;
             return singleRecord;
         }
@@ -40,33 +40,33 @@ class DriveItemStream {
         if (self.nextLink != EMPTY_STRING) {
             self.index = 0;
             self.currentEntries = check self.fetchRecordsNext();
-            record {| DriveItem value; |} singleRecord = {value: self.currentEntries[self.index]};
+            record {| DriveItemData value; |} singleRecord = {value: self.currentEntries[self.index]};
             self.index += 1;
             return singleRecord;
         }
     }
 
-    isolated function fetchRecordsInitial() returns @tainted DriveItem[]|Error {
+    isolated function fetchRecordsInitial() returns @tainted DriveItemData[]|Error {
         http:Response response = check self.httpClient->get(self.path);
         map<json>|string? handledResponse = check handleResponse(response);
         return check self.getAndConvertToDriveItemArray(response);
     }
     
-    isolated function fetchRecordsNext() returns @tainted DriveItem[]|Error {
+    isolated function fetchRecordsNext() returns @tainted DriveItemData[]|Error {
         http:Client nextPageClient = check new (self.nextLink);
         http:Response response = check nextPageClient->get(EMPTY_STRING);
         return check self.getAndConvertToDriveItemArray(response);
     }
 
-    isolated function getAndConvertToDriveItemArray(http:Response response) returns @tainted DriveItem[]|error {
-        DriveItem[] driveItems = [];
+    isolated function getAndConvertToDriveItemArray(http:Response response) returns @tainted DriveItemData[]|error {
+        DriveItemData[] driveItems = [];
         map<json>|string? handledResponse = check handleResponse(response);
         if (handledResponse is map<json>) {
             self.nextLink = let var link = handledResponse["@odata.nextLink"] in link is string ? link : EMPTY_STRING;
             json values = check handledResponse.value;
             if (values is json[]) {
                 foreach json item in values {
-                    DriveItem convertedItem = check convertToDriveItem(handledResponse);
+                    DriveItemData convertedItem = check convertToDriveItem(<map<json>>item);
                     driveItems.push(convertedItem);
                 }
                 return driveItems;

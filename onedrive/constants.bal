@@ -86,6 +86,28 @@ public enum PublicationLevel {
     CHECKOUT_LEVEL = "checkout"
 }
 
+public enum SortBy {
+    DEFAULT = "default",
+    NAME = "name",
+    TYPE = "type",
+    SIZE = "size",
+    CREATEDDATETIME = "takenOrCreatedDateTime",
+    LASTMODIFIEDDATETIME = "lastModifiedDateTime",
+    SEQUENCE = "sequence"
+}
+
+public enum SortOrder {
+    ASCENDING = "ascending",
+    DESCENDING = "descending"
+}
+
+public enum ViewType {
+    DEFAULT_VIEWTYPE = "default",
+    ICONS_VIEWTYPE = "icons",
+    DETAILS_VIEWTYPE = "details",
+    THUMBNAILS_VIEWTYPE = "thumbnails"
+}
+
 # The default fragment size for obtaining fragments of a file.(To upload as fragment size MUST be a multiple of 320 KiB 
 # (327,680 bytes)).
 public const DEFAULT_FRAGMENT_SIZE = 327680;
