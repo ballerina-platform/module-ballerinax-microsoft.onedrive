@@ -19,10 +19,10 @@ import ballerina/log;
 import ballerina/os;
 import ballerinax/microsoft.onedrive;
 
-configurable string & readonly refreshUrl = os:getEnv("TOKEN_ENDPOINT");
+configurable string & readonly refreshUrl = os:getEnv("REFRESH_URL");
 configurable string & readonly refreshToken = os:getEnv("REFRESH_TOKEN");
-configurable string & readonly clientId = os:getEnv("APP_ID");
-configurable string & readonly clientSecret = os:getEnv("APP_SECRET");
+configurable string & readonly clientId = os:getEnv("CLIENT_ID");
+configurable string & readonly clientSecret = os:getEnv("CLIENT_SECRET");
 
 public function main() returns error? {
     onedrive:Configuration configuration = {
