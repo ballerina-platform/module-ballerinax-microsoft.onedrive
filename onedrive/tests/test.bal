@@ -194,7 +194,7 @@ function testGetItemMetadataByIdApplyQueryParams() {
     runtime:sleep(2);
 
     string itemId = collectorFolderId;
-    string[] queryParams = ["$expand=children"];
+    string? queryParams = "$expand=children";
 
     DriveItemData|Error driveItem = oneDriveClient->getItemMetadataById(itemId, queryParams);
     if (driveItem is DriveItemData) {

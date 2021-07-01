@@ -27,10 +27,15 @@ import ballerina/log;
 }
 public client class Client {
     http:Client httpClient;
+    Configuration config;
 
-    public isolated function init(Configuration config) returns error? {
-        http:BearerTokenConfig|http:OAuth2RefreshTokenGrantConfig clientConfig = config.clientConfig;
-        http:ClientSecureSocket? socketConfig = config?.secureSocketConfig;
+    # Initializes the OneDrive connector client endpoint.
+    #
+    # + onedriveConfig - Configurations required to initialize the `Client` endpoint
+    # + return - Error at failure of client initialization
+    public isolated function init(Configuration onedriveConfig) returns error? {
+        http:BearerTokenConfig|http:OAuth2RefreshTokenGrantConfig clientConfig = onedriveConfig.clientConfig;
+        http:ClientSecureSocket? socketConfig = onedriveConfig?.secureSocketConfig;
         self.httpClient = check new (BASE_URL, {
             auth: clientConfig,
             secureSocket: socketConfig,
@@ -39,6 +44,7 @@ public client class Client {
             },
             followRedirects: {enabled: true, maxCount: 5}
         });
+        self.config = onedriveConfig;
     }
 
     // ************************************* Operations on a Drive resource ********************************************
@@ -56,13 +62,15 @@ public client class Client {
 
     # Retrieve a collection of `DriveItemData` resources that have been shared with the `signed in user` of the OneDrive.
     # 
-    # + queryParams - An array of type `string` in the format `<QUERY_PARAMETER_NAME>=<PARAMETER_VALUE>`
-    #                 (By default, sharedWithMe return items shared within your own tenant. To include items shared from
-    #                  external tenants, append `allowexternal=true` query parameter)
+    # + queryParams - Optional query parameters. 
+    #               - This method support OData query parameters to customize the response. It should be 
+    #                   an array of type `string` in the format `<QUERY_PARAMETER_NAME>=<PARAMETER_VALUE>`
+    #               - For more information about query parameters, refer here: 
+    #                   https://docs.microsoft.com/en-us/graph/query-parameters
     # + return - An array of type `DriveItemData` if sucess. Else `Error`.
     @display {label: "Get list of items shared with me"}
     remote isolated function getItemsSharedWithMe(@display {label: "Optional Query Parameters"} 
-                                                  string[] queryParams = []) returns 
+                                                  string? queryParams = ()) returns 
                                                   @tainted @display {label: "DriveItem List"} DriveItemData[]|error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, SHARED_WITH_LOGGED_IN_USER], 
             queryParams);
@@ -105,40 +113,42 @@ public client class Client {
             path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], parentFolderPath, 
                 [CHILDREN_RESOURCES]);
         }
-        return check createFolder(self.httpClient, <@untainted>path, folderMetadata);
+        return check createFolder(self.httpClient, path, folderMetadata);
     }
 
     # Retrieve the metadata for a DriveItem in a Drive by item ID.
     # 
     # + itemId - The ID of the DriveItem
-    # + queryParams - Optional query parameters. This method support OData query parameters to customize the response.
-    #                 It should be an array of type `string` in the format `<QUERY_PARAMETER_NAME>=<PARAMETER_VALUE>`
-    #                 **Note:** For more information about query parameters, refer here: 
+    # + queryParams - Optional query parameters. 
+    #               - This method support OData query parameters to customize the response. It should be 
+    #                   an array of type `string` in the format `<QUERY_PARAMETER_NAME>=<PARAMETER_VALUE>`
+    #               - For more information about query parameters, refer here: 
     #                   https://docs.microsoft.com/en-us/graph/query-parameters
     # + return - A record of type `DriveItemData` if sucess. Else `Error`.
     @display {label: "Get item metadata (ID based)"}
     remote isolated function getItemMetadataById(@display {label: "Item ID"} string itemId, 
                                                  @display {label: "Optional Query Parameters"} 
-                                                 string[] queryParams = []) returns @tainted DriveItemData|Error {
+                                                 string? queryParams = ()) returns @tainted DriveItemData|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId], queryParams);
-        return check getDriveItem(self.httpClient, <@untainted>path);
+        return check getDriveItem(self.httpClient, path);
     }
 
     # Retrieve the metadata for a DriveItem in a Drive by file system path.
     # 
     # + itemPath - The file system path of the DriveItem. The hierarchy of the path allowed in this function is relative
     #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.
-    # + queryParams - Optional query parameters. This method support OData query parameters to customize the response.
-    #                 It should be an array of type `string` in the format `<QUERY_PARAMETER_NAME>=<PARAMETER_VALUE>`
-    #                 **Note:** For more information about query parameters, refer here: 
+    # + queryParams - Optional query parameters. 
+    #               - This method support OData query parameters to customize the response. It should be 
+    #                   an array of type `string` in the format `<QUERY_PARAMETER_NAME>=<PARAMETER_VALUE>`
+    #               - For more information about query parameters, refer here: 
     #                   https://docs.microsoft.com/en-us/graph/query-parameters
     # + return - A record of type `DriveItemData` if sucess. Else `Error`.
     @display {label: "Get item metadata (Path based)"}
     remote isolated function getItemMetadataByPath(@display {label: "Item Path Relative to Drive Root"} string itemPath, 
                                                    @display {label: "Optional Query Parameters"} 
-                                                   string[] queryParams = []) returns @tainted DriveItemData|Error {
+                                                   string? queryParams = ()) returns @tainted DriveItemData|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, [], queryParams);
-        return check getDriveItem(self.httpClient, <@untainted>path);
+        return check getDriveItem(self.httpClient, path);
     }
 
     # Update the metadata for a DriveItem in a Drive referring by item ID.
@@ -151,7 +161,7 @@ public client class Client {
                                                  @display {label: "Replacement Item Data"} DriveItem replacementData)
                                                  returns @tainted DriveItemData|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId]);
-        return updateDriveItem(self.httpClient, <@untainted>path, replacementData); 
+        return updateDriveItem(self.httpClient, path, replacementData); 
     }
 
     # Update the metadata for a DriveItem in a Drive by file system path.
@@ -165,7 +175,7 @@ public client class Client {
                                                    @display {label: "Replacement Item Data"} DriveItem replacementData)
                                                    returns @tainted DriveItemData|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath);
-        return updateDriveItem(self.httpClient, <@untainted>path, replacementData); 
+        return updateDriveItem(self.httpClient, path, replacementData); 
     }
 
     # Delete a DriveItem in a Drive by using it's ID.
@@ -175,7 +185,7 @@ public client class Client {
     @display {label: "Delete drive item (ID based)"}
     remote isolated function deleteDriveItemById(@display {label: "Item ID"} string itemId) returns @tainted Error? {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId]);
-        http:Response response = check self.httpClient->delete(<@untainted>path);
+        http:Response response = check self.httpClient->delete(path);
         _ = check handleResponse(response);
     }
 
@@ -188,7 +198,7 @@ public client class Client {
     remote isolated function deleteDriveItemByPath(@display {label: "Item Path Relative to Drive Root"} string itemPath) 
                                                    returns @tainted Error? {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath);
-        http:Response response = check self.httpClient->delete(<@untainted>path);
+        http:Response response = check self.httpClient->delete(path);
         _ = check handleResponse(response);
     }
 
@@ -226,7 +236,7 @@ public client class Client {
                                     name: name
                                  };
         }
-        http:Response response = check self.httpClient->post(<@untainted>path, restoreItemOptions);
+        http:Response response = check self.httpClient->post(path, restoreItemOptions);
         map<json>|string? handledResponse = check handleResponse(response);
         if (handledResponse is map<json>) {
             return check convertToDriveItem(handledResponse);
@@ -250,7 +260,7 @@ public client class Client {
                                                  ParentReference? parentReference = ()) 
                                                  returns @tainted @display {label: "Item ID"} string|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, COPY_ACTION]);
-        return check copyDriveItem(self.httpClient, <@untainted>path, parentReference, name);
+        return check copyDriveItem(self.httpClient, path, parentReference, name);
     }
 
     # Asynchronously creates a copy of a DriveItem (including any children), under a new parent item or at the same 
@@ -269,7 +279,7 @@ public client class Client {
                                                  ParentReference? parentReference = ()) 
                                                  returns @tainted @display {label: "Item ID"} string|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, [COPY_ACTION]);
-        return check copyDriveItem(self.httpClient, <@untainted>path, parentReference, name);
+        return check copyDriveItem(self.httpClient, path, parentReference, name);
     }
 
     # Download the contents of the primary stream (file) of a DriveItem using item ID. **NOTE:** Only driveItems with 
@@ -288,7 +298,7 @@ public client class Client {
                 CONTENT_OF_DRIVE_ITEM]);
         } else {
             path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
-                CONTENT_OF_DRIVE_ITEM], [string `format=${formatToConvert.toString()}`]);
+                CONTENT_OF_DRIVE_ITEM], string `format=${formatToConvert.toString()}`);
         }
         return check downloadDriveItem(self.httpClient, path);
     }
@@ -298,6 +308,8 @@ public client class Client {
     # 
     # + itemPath - The file system path of the File. The hierarchy of the path allowed in this function is relative
     #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.
+    #              example: Use the itempath as `/Documents/MyFile.xlsx` if MyFile.xlsx is located inside a folder called
+    #              Docuements.
     # + formatToConvert - Specify the format the item's content should be downloaded as.
     # + return - A record of type `File` if successful. Else `Error`.
     @display {label: "Download file (Path based)"}
@@ -310,7 +322,7 @@ public client class Client {
                 [CONTENT_OF_DRIVE_ITEM]);
         } else {
             path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, 
-                [CONTENT_OF_DRIVE_ITEM], [string `format=${formatToConvert.toString()}`]);
+                [CONTENT_OF_DRIVE_ITEM], string `format=${formatToConvert.toString()}`);
         }
         return check downloadDriveItem(self.httpClient, path);
     }
@@ -435,7 +447,7 @@ public client class Client {
                                                     @tainted DriveItemData|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, parentFolderId], 
             string `/${fileName}`, [CONTENT_OF_DRIVE_ITEM]);
-        return uploadDriveItemByteArray(self.httpClient, <@untainted>path, byteArray, mimeType); 
+        return uploadDriveItemByteArray(self.httpClient, path, byteArray, mimeType); 
     }
 
     # Upload a new file to the Drive. This method only supports files up to 4MB in size.
@@ -456,7 +468,7 @@ public client class Client {
                                                       @tainted DriveItemData|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], 
             string `${parentFolderPath}/${fileName}`, [CONTENT_OF_DRIVE_ITEM]);
-        return uploadDriveItemByteArray(self.httpClient, <@untainted>path, byteArray, mimeType); 
+        return uploadDriveItemByteArray(self.httpClient, path, byteArray, mimeType); 
     }
 
     # Update the contents of an existing file in the Drive. This method only supports files up to 4MB in size.
@@ -473,14 +485,16 @@ public client class Client {
                                                 @tainted DriveItemData|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
             CONTENT_OF_DRIVE_ITEM]);
-        return uploadDriveItemByteArray(self.httpClient, <@untainted>path, byteArray, mimeType); 
+        return uploadDriveItemByteArray(self.httpClient, path, byteArray, mimeType); 
     }
 
     # Update the contents of an existing file in the Drive. This method only supports files up to 4MB in size.
     # Here, the type of the file should be the same type as the file we replace with.
     # 
     # + itemPath - The file system path of the File. The hierarchy of the path allowed in this function is relative
-    #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.    
+    #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.  
+    #              example: Use the itempath as `/Documents/MyFile.xlsx` if MyFile.xlsx is located inside a folder called
+    #              Docuements.
     # + byteArray - An array of `byte` that represents a binary form of the file to be uploaded
     # + mimeType - The mime type of the uploading file
     # + return - A record of type `DriveItemData` if sucess. Else `Error`.
@@ -491,7 +505,7 @@ public client class Client {
                                                   @tainted DriveItemData|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, 
             [CONTENT_OF_DRIVE_ITEM]);
-        return uploadDriveItemByteArray(self.httpClient, <@untainted>path, byteArray, mimeType); 
+        return uploadDriveItemByteArray(self.httpClient, path, byteArray, mimeType); 
     }
     //******************************************************************************************************************
 
@@ -516,7 +530,7 @@ public client class Client {
         json payload = {
             item: check mapItemInfoToJson(itemInfo)
         };        
-        http:Response response = check self.httpClient->post(<@untainted>path, payload);
+        http:Response response = check self.httpClient->post(path, payload);
         map<json>|string? handledResponse = check handleResponse(response);
         if (handledResponse is map<json>) {
             UploadSession session = check handledResponse.cloneWithType(UploadSession);
@@ -554,18 +568,20 @@ public client class Client {
     # 
     # + searchText - The query text used to search for items. Values may be matched across several fields including 
     #                filename, metadata, and file content.
-    # + queryParams - Optional query parameters. This method support OData query parameters to customize the response.
-    #                 It should be an array of type `string` in the format `<QUERY_PARAMETER_NAME>=<PARAMETER_VALUE>`
-    #                 **Note:** Refer more information about query parameters here: https://docs.microsoft.com/en-us/graph/query-parameters
+    # + queryParams - Optional query parameters. 
+    #               - This method support OData query parameters to customize the response. It should be 
+    #                   an array of type `string` in the format `<QUERY_PARAMETER_NAME>=<PARAMETER_VALUE>`
+    #               - For more information about query parameters, refer here: 
+    #                   https://docs.microsoft.com/en-us/graph/query-parameters
     # + return - A stream of type `DriveItemData` if sucess. Else `Error`.
     @display {label: "Search drive items"}
     remote isolated function searchDriveItems(@display {label: "Search text"} string searchText, 
-                                              @display {label: "Optional Query Parameters"} string[] queryParams = []) 
+                                              @display {label: "Optional Query Parameters"} string? queryParams = ()) 
                                               returns @tainted @display {label: "DriveItem Stream"} 
                                               stream<DriveItemData, Error>|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT, 
             string `search(q='${searchText}')`]);
-        DriveItemStream objectInstance = check new (self.httpClient, <@untainted>path);
+        DriveItemStream objectInstance = check new (self.config, self.httpClient, path, queryParams);
         stream<DriveItemData, error> finalStream = new (objectInstance);
         return finalStream;
     }
@@ -588,7 +604,7 @@ public client class Client {
                                                    Permission|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
             CREATE_LINK_ACTION]);
-        return check getSharableLink(self.httpClient, <@untainted>path, options);
+        return check getSharableLink(self.httpClient, path, options);
     }
 
     # Create a new sharing link if the specified link type doesn't already exist for the 
@@ -607,7 +623,7 @@ public client class Client {
                                                      returns @tainted Permission|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, 
             [CREATE_LINK_ACTION]);
-        return check getSharableLink(self.httpClient, <@untainted>path, options);
+        return check getSharableLink(self.httpClient, path, options);
     }
 
     # Access a shared DriveItem by using sharing URL.
@@ -640,7 +656,7 @@ public client class Client {
                                                        ItemShareInvitation invitation) returns 
                                                        @tainted Permission|Error { 
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, INVITE_ACTION]);
-        return check sendSharableLink(self.httpClient, <@untainted>path, invitation);
+        return check sendSharableLink(self.httpClient, path, invitation);
     }
 
     # Sends a sharing invitation for a DriveItem. A sharing invitation provides permissions to the recipients and
@@ -656,7 +672,7 @@ public client class Client {
                                                          ItemShareInvitation invitation) returns 
                                                          @tainted Permission|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, [INVITE_ACTION]);
-        return check sendSharableLink(self.httpClient, <@untainted>path, invitation);
+        return check sendSharableLink(self.httpClient, path, invitation);
     }
 
     // *************************Supported only in Azure work and School accounts (NOT TESTED) **************************
