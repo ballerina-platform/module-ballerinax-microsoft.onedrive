@@ -298,6 +298,8 @@ public client class Client {
     # 
     # + itemPath - The file system path of the File. The hierarchy of the path allowed in this function is relative
     #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.
+    #              example: Use the itempath as `/Documents/MyFile.xlsx` if MyFile.xlsx is located inside a folder called
+    #              Docuements.
     # + formatToConvert - Specify the format the item's content should be downloaded as.
     # + return - A record of type `File` if successful. Else `Error`.
     @display {label: "Download file (Path based)"}
@@ -480,7 +482,9 @@ public client class Client {
     # Here, the type of the file should be the same type as the file we replace with.
     # 
     # + itemPath - The file system path of the File. The hierarchy of the path allowed in this function is relative
-    #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.    
+    #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.  
+    #              example: Use the itempath as `/Documents/MyFile.xlsx` if MyFile.xlsx is located inside a folder called
+    #              Docuements.
     # + byteArray - An array of `byte` that represents a binary form of the file to be uploaded
     # + mimeType - The mime type of the uploading file
     # + return - A record of type `DriveItemData` if sucess. Else `Error`.
