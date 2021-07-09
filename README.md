@@ -134,7 +134,7 @@ Follow this procedure to get the access token, and refresh token:
         ```
    5. Copy the code parameter (here it is M95780001-0fb3-d138-6aa2-0be59d402f32) to a text file to use as the value of `<MS_REFRESH_URL>` in the project configuration file.
    6. In a new terminal enter the following cURL command: 
-      **Note**: Be sure to replace <MS_CODE>, <MS_CLIENT_ID>, and <MS_CLIENT_SECRET> with appropriate values you obtained in the steps above.
+      **Note**: Be sure to replace `<MS_CODE>`, `<MS_CLIENT_ID>`, and `<MS_CLIENT_SECRET>` with appropriate values you obtained in the steps above.
         ```
         curl -X POST --header "Content-Type: application/x-www-form-urlencoded" --header "Host:login.microsoftonline.com" -d "client_id=<MS_CLIENT_ID>&client_secret=<MS_CLIENT_SECRET>&grant_type=authorization_code&redirect_uri=https://login.microsoftonline.com/common/oauth2/nativeclient&code=<MS_CODE>&scope=Files.ReadWrite openid User.Read Mail.Send Mail.ReadWrite offline_access" https://login.microsoftonline.com/common/oauth2/v2.0/token
         ```
@@ -151,7 +151,7 @@ Follow this procedure to get the access token, and refresh token:
             "id_token": "<ID_TOKEN>"
         }
         ```
-        Copy the values of `<MS_ACCESS_TOKEN>` and `<MS_REFRESH_TOKEN> to a text file to use in the project configuration file.
+        Copy the values of `<MS_ACCESS_TOKEN>` and `<MS_REFRESH_TOKEN>` to a text file to use in the project configuration file.
         
 For more information on OAuth2 tokens, see [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2) and [OAuth 2.0 and OpenID Connect protocols on the Microsoft identity platform](https://docs.microsoft.com/en-au/azure/active-directory/develop/active-directory-v2-protocols#endpoints)<br/>
 
