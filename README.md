@@ -12,7 +12,7 @@ Connects to Microsoft OneDrive using Ballerina.
         - [What is Microsoft OneDrive](#what-is-microsoft-onedrive)
         - [Key features of Microsoft OneDrive](#key-features-of-microsoft-onedrive)
         - [Connector overview](#connector-overview)
-        - [Compatibility and limitations](#compatibility-and-limitations)
+    - [Compatibility and limitations](#compatibility-and-limitations)
     - [Prerequisites](#prerequisites)
     - [Configure the connector](#configure-the-connector)
         - [Obtain tokens](#obtain-tokens)
@@ -53,7 +53,6 @@ The connector is developed on top of Microsoft Graph API, which is a REST API th
 ## Compatibility
 - Ballerina language version: Swan Lake Beta 1
 - [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview) version: 1.0 
-
 
 ## Limitations
 - Allows performing functions only on behalf of the currently signed-in user.
