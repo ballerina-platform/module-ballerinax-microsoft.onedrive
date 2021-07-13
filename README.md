@@ -60,7 +60,7 @@ The connector is developed on top of Microsoft Graph API, which is a REST API th
 
 # Prerequisites
 - A Microsoft OneDrive account
-- An Azure account that has an active subscription (you can use your persona, work, or school account)
+- An Azure account that has an active subscription (you can use your personal, work, or school account)
 - Java Development Kit (JDK) 11 installed
 - [Ballerina SL Beta 1](https://ballerina.io/learn/user-guide/getting-started/setting-up-ballerina/installation-options/) installed
 
@@ -135,7 +135,7 @@ Follow this procedure to get the access token, and refresh token:
    6. In a new terminal enter the following cURL command: 
       **Note**: Be sure to replace `<MS_CODE>`, `<MS_CLIENT_ID>`, and `<MS_CLIENT_SECRET>` with appropriate values you obtained in the steps above.
         ```
-        curl -X POST --header "Content-Type: application/x-www-form-urlencoded" --header "Host:login.microsoftonline.com" -d "client_id=<MS_CLIENT_ID>&client_secret=<MS_CLIENT_SECRET>&grant_type=authorization_code&redirect_uri=https://login.microsoftonline.com/common/oauth2/nativeclient&code=<MS_CODE>&scope=Files.ReadWrite openid User.Read Mail.Send Mail.ReadWrite offline_access" https://login.microsoftonline.com/common/oauth2/v2.0/token
+        curl -X POST --header "Content-Type: application/x-www-form-urlencoded" --header "Host:login.microsoftonline.com" -d "client_id=<MS_CLIENT_ID>&client_secret=<MS_CLIENT_SECRET>&grant_type=authorization_code&redirect_uri=https://login.microsoftonline.com/common/oauth2/nativeclient&code=<MS_CODE>&scope=openid offline_access <SPACE_SEPARATED_LIST_OF_SCOPES>" https://login.microsoftonline.com/common/oauth2/v2.0/token
         ```
         
      The cURL command results in a response as follows with the values for `<MS_ACCESS_TOKEN>` and `<MS_REFRESH_TOKEN>`:
@@ -170,7 +170,6 @@ refreshUrl = <MS_REFRESH_URL>
 refreshToken = <MS_REFRESH_TOKEN>
 clientId = <MS_CLIENT_ID>
 clientSecret = <MS_CLIENT_SECRET>
-scopes = [<MS_NECESSARY_SCOPES>]
 ```
 
 # Quickstart
