@@ -122,7 +122,7 @@ Follow this procedure to get the access token, and refresh token:
    3. In a new browser, enter the URL as follows and replace `<MS_CLIENT_ID>` with the application ID you obtained in Step 1.
 
        ```
-       https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=<MS_CLIENT_ID>&response_type=code&redirect_uri=https://oauth.pstmn.io/v1/browser-callback&response_mode=query&scope=openid offline_access <SPACE_SEPERATED_LIST_OF_SCOPES>
+       https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=<MS_CLIENT_ID>&response_type=code&redirect_uri=https://oauth.pstmn.io/v1/browser-callback&response_mode=query&scope=openid offline_access <SPACE_SEPARATED_LIST_OF_SCOPES>
        ```
     
       This prompts for the username and password to sign in to the Azure Portal application.
