@@ -55,7 +55,7 @@ public client class Client {
     # 
     # + return - An array of type `DriveItemData` if sucess. Else `Error`.
     @display {label: "Get list of recent items"}
-    remote isolated function getRecentItems() returns @tainted @display {label: "DriveItem List"} DriveItemData[]|Error {
+    remote isolated function getRecentItems() returns @display {label: "DriveItem List"} DriveItemData[]|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, RECENT_ITEMS]);
         return check getDriveItemArray(self.httpClient, path);
     }
@@ -71,7 +71,7 @@ public client class Client {
     @display {label: "Get list of items shared with me"}
     remote isolated function getItemsSharedWithMe(@display {label: "Optional Query Parameters"} 
                                                   string? queryParams = ()) returns 
-                                                  @tainted @display {label: "DriveItem List"} DriveItemData[]|error {
+                                                  @display {label: "DriveItem List"} DriveItemData[]|error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, SHARED_WITH_LOGGED_IN_USER], 
             queryParams);
         return check getDriveItemArray(self.httpClient, path);
@@ -88,7 +88,7 @@ public client class Client {
     @display {label: "Create new folder (ID based)"}
     remote isolated function createFolderById(@display {label: "Parent Folder ID"} string parentFolderId, 
                                               @display {label: "Additional Folder Data"} FolderMetadata folderMetadata) 
-                                              returns @tainted DriveItemData|Error { 
+                                              returns DriveItemData|Error { 
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, parentFolderId, 
             CHILDREN_RESOURCES]);
         return check createFolder(self.httpClient, path, folderMetadata);
@@ -105,7 +105,7 @@ public client class Client {
     @display {label: "Create new folder (Path based)"}
     remote isolated function createFolderByPath(@display {label: "Parent Folder Path"} string parentFolderPath, 
                                                 @display {label: "Additional Folder Data"} FolderMetadata folderMetadata) 
-                                                returns @tainted DriveItemData|Error {
+                                                returns DriveItemData|Error {
         string path = EMPTY_STRING;
         if (parentFolderPath == EMPTY_STRING || parentFolderPath == FORWARD_SLASH) {
             path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT, CHILDREN_RESOURCES]);
@@ -128,7 +128,7 @@ public client class Client {
     @display {label: "Get item metadata (ID based)"}
     remote isolated function getItemMetadataById(@display {label: "Item ID"} string itemId, 
                                                  @display {label: "Optional Query Parameters"} 
-                                                 string? queryParams = ()) returns @tainted DriveItemData|Error {
+                                                 string? queryParams = ()) returns DriveItemData|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId], queryParams);
         return check getDriveItem(self.httpClient, path);
     }
@@ -146,7 +146,7 @@ public client class Client {
     @display {label: "Get item metadata (Path based)"}
     remote isolated function getItemMetadataByPath(@display {label: "Item Path Relative to Drive Root"} string itemPath, 
                                                    @display {label: "Optional Query Parameters"} 
-                                                   string? queryParams = ()) returns @tainted DriveItemData|Error {
+                                                   string? queryParams = ()) returns DriveItemData|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, [], queryParams);
         return check getDriveItem(self.httpClient, path);
     }
@@ -159,7 +159,7 @@ public client class Client {
     @display {label: "Update item metadata (ID based)"}
     remote isolated function updateDriveItemById(@display {label: "Item ID"} string itemId, 
                                                  @display {label: "Replacement Item Data"} DriveItem replacementData)
-                                                 returns @tainted DriveItemData|Error {
+                                                 returns DriveItemData|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId]);
         return updateDriveItem(self.httpClient, path, replacementData); 
     }
@@ -173,7 +173,7 @@ public client class Client {
     @display {label: "Update item metadata (Path based)"}
     remote isolated function updateDriveItemByPath(@display {label: "Item Path Relative to Drive Root"} string itemPath, 
                                                    @display {label: "Replacement Item Data"} DriveItem replacementData)
-                                                   returns @tainted DriveItemData|Error {
+                                                   returns DriveItemData|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath);
         return updateDriveItem(self.httpClient, path, replacementData); 
     }
@@ -183,7 +183,7 @@ public client class Client {
     # + itemId - The ID of the DriveItem
     # + return - Returns `nil` is success. Else `Error`.
     @display {label: "Delete drive item (ID based)"}
-    remote isolated function deleteDriveItemById(@display {label: "Item ID"} string itemId) returns @tainted Error? {
+    remote isolated function deleteDriveItemById(@display {label: "Item ID"} string itemId) returns Error? {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId]);
         http:Response response = check self.httpClient->delete(path);
         _ = check handleResponse(response);
@@ -196,7 +196,7 @@ public client class Client {
     # + return - Returns `nil` is success. Else `Error`.
     @display {label: "Delete drive item (Path based)"}
     remote isolated function deleteDriveItemByPath(@display {label: "Item Path Relative to Drive Root"} string itemPath) 
-                                                   returns @tainted Error? {
+                                                   returns Error? {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath);
         http:Response response = check self.httpClient->delete(path);
         _ = check handleResponse(response);
@@ -214,7 +214,7 @@ public client class Client {
     remote isolated function restoreDriveItem(@display {label: "Item ID"} string itemId, 
                                               @display {label: "Parent Folder ID"} string? parentFolderId = (),
                                               @display {label: "New File Name"} string? name = ())
-                                              returns @tainted DriveItemData|Error {
+                                              returns DriveItemData|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
             RESTORE_ACTION]);
         json restoreItemOptions = {};
@@ -258,7 +258,7 @@ public client class Client {
                                                  @display {label: "New File Name"} string? name = (), 
                                                  @display {label: "Parent Item Data"} 
                                                  ParentReference? parentReference = ()) 
-                                                 returns @tainted @display {label: "Item ID"} string|Error {
+                                                 returns @display {label: "Item ID"} string|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, COPY_ACTION]);
         return check copyDriveItem(self.httpClient, path, parentReference, name);
     }
@@ -277,7 +277,7 @@ public client class Client {
                                                  @display {label: "New Name For Copy"} string? name = (), 
                                                  @display {label: "Parent Item Data"} 
                                                  ParentReference? parentReference = ()) 
-                                                 returns @tainted @display {label: "Item ID"} string|Error {
+                                                 returns @display {label: "Item ID"} string|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, [COPY_ACTION]);
         return check copyDriveItem(self.httpClient, path, parentReference, name);
     }
@@ -291,7 +291,7 @@ public client class Client {
     @display {label: "Download file (ID based)"}
     remote isolated function downloadFileById(@display {label: "Item ID"} string itemId, 
                                               @display {label: "Item Format Data"} FileFormat? formatToConvert = ()) 
-                                              returns @tainted File|Error {
+                                              returns File|Error {
         string path = EMPTY_STRING;
         if (formatToConvert is ()) {
             path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
@@ -315,7 +315,7 @@ public client class Client {
     @display {label: "Download file (Path based)"}
     remote isolated function downloadFileByPath(@display {label: "Item Path Relative to Drive Root"} string itemPath, 
                                                 @display {label: "Item Format Data"} FileFormat? formatToConvert = ()) 
-                                                returns @tainted File|Error {
+                                                returns File|Error {
         string path = EMPTY_STRING;
         if (formatToConvert is ()) {
             path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, 
@@ -337,8 +337,7 @@ public client class Client {
     @display {label: "Download file by download URL"}
     remote isolated function downloadFileByDownloadUrl(@display {label: "Downloadable URL of File"} string downloadUrl, 
                                                        @display {label: "Byte Range for Partial Content"} 
-                                                       ByteRange? partialContentOption = ()) returns 
-                                                       @tainted File|Error {
+                                                       ByteRange? partialContentOption = ()) returns File|Error {
         map<string> headerMap = {};
         if (partialContentOption != ()) {
             string partialRangeHeader = 
@@ -364,7 +363,7 @@ public client class Client {
     //                                                 @display {label: "Stream of bytes to upload"} 
     //                                                 stream<byte[],io:Error?> binaryStream, 
     //                                                 @display {label: "Mime Type"} string mimeType) returns 
-    //                                                 @tainted @display {label: "DriveItem Metadata"} DriveItemData|Error {
+    //                                                 @display {label: "DriveItem Metadata"} DriveItemData|Error {
     //     string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, parentFolderId], 
     //         string `/${fileName}`, [CONTENT_OF_DRIVE_ITEM]);
     //     return uploadDriveItem(self.httpClient, path, binaryStream, mimeType); 
@@ -387,7 +386,7 @@ public client class Client {
     //                                                   @display {label: "Stream of bytes to upload"} 
     //                                                   stream<byte[],io:Error?> binaryStream, 
     //                                                   @display {label: "Mime Type"} string mimeType) returns 
-    //                                                   @tainted @display {label: "DriveItem Metadata"} DriveItemData|Error {
+    //                                                   @display {label: "DriveItem Metadata"} DriveItemData|Error {
     //     string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], 
     //         string `${parentFolderPath}/${fileName}`, [CONTENT_OF_DRIVE_ITEM]);
     //     return uploadDriveItem(self.httpClient, path, binaryStream, mimeType); 
@@ -405,7 +404,7 @@ public client class Client {
     //                                             @display {label: "Stream of bytes to upload"}  
     //                                             stream<byte[],io:Error?> binaryStream, 
     //                                             @display {label: "Mime Type"} string mimeType) returns 
-    //                                             @tainted @display {label: "DriveItem Metadata"} DriveItemData|Error {
+    //                                             @display {label: "DriveItem Metadata"} DriveItemData|Error {
     //     string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
     //         CONTENT_OF_DRIVE_ITEM]);
     //     return uploadDriveItem(self.httpClient, path, binaryStream, mimeType); 
@@ -424,7 +423,7 @@ public client class Client {
     //                                               @display {label: "Stream of bytes to upload"}  
     //                                               stream<byte[],io:Error?> binaryStream, 
     //                                               @display {label: "Mime Type"} string mimeType) returns 
-    //                                               @tainted @display {label: "DriveItem Metadata"} DriveItemData|Error {
+    //                                               @display {label: "DriveItem Metadata"} DriveItemData|Error {
     //     string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, 
     //         [CONTENT_OF_DRIVE_ITEM]);
     //     return uploadDriveItem(self.httpClient, path, binaryStream, mimeType); 
@@ -444,7 +443,7 @@ public client class Client {
                                                     @display {label: "File Name"} string fileName, 
                                                     @display {label: "Array of Bytes"} byte[] byteArray, 
                                                     @display {label: "Mime Type"} string mimeType) returns 
-                                                    @tainted DriveItemData|Error {
+                                                    DriveItemData|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, parentFolderId], 
             string `/${fileName}`, [CONTENT_OF_DRIVE_ITEM]);
         return uploadDriveItemByteArray(self.httpClient, path, byteArray, mimeType); 
@@ -465,7 +464,7 @@ public client class Client {
                                                       @display {label: "File Name"} string fileName, 
                                                       @display {label: "Array of Bytes"} byte[] byteArray, 
                                                       @display {label: "Mime Type"} string mimeType) returns 
-                                                      @tainted DriveItemData|Error {
+                                                      DriveItemData|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], 
             string `${parentFolderPath}/${fileName}`, [CONTENT_OF_DRIVE_ITEM]);
         return uploadDriveItemByteArray(self.httpClient, path, byteArray, mimeType); 
@@ -482,7 +481,7 @@ public client class Client {
     remote isolated function replaceFileUsingId(@display {label: "Item ID"} string itemId, 
                                                 @display {label: "Array of Bytes"} byte[] byteArray, 
                                                 @display {label: "Mime Type"} string mimeType) returns 
-                                                @tainted DriveItemData|Error {
+                                                DriveItemData|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
             CONTENT_OF_DRIVE_ITEM]);
         return uploadDriveItemByteArray(self.httpClient, path, byteArray, mimeType); 
@@ -502,7 +501,7 @@ public client class Client {
     remote isolated function replaceFileUsingPath(@display {label: "Item Path Relative to Drive Root"} string itemPath,                                                    
                                                   @display {label: "Array of Bytes"} byte[] byteArray, 
                                                   @display {label: "Mime Type"} string mimeType) returns 
-                                                  @tainted DriveItemData|Error {
+                                                  DriveItemData|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, 
             [CONTENT_OF_DRIVE_ITEM]);
         return uploadDriveItemByteArray(self.httpClient, path, byteArray, mimeType); 
@@ -524,8 +523,7 @@ public client class Client {
     remote function resumableUploadDriveItem(@display {label: "Item Path Relative to Drive Root"} string itemPath, 
                                              @display {label: "Information About File"} UploadMetadata itemInfo, 
                                              @display {label: "Stream of Bytes"} 
-                                             stream<io:Block,io:Error?> binaryStream) returns 
-                                             @tainted DriveItemData|Error { 
+                                             stream<io:Block,io:Error?> binaryStream) returns DriveItemData|Error { 
         string path = check createPathBasedUrl([DRIVE_RESOURCE, DRIVE_ROOT], itemPath, [CREATE_UPLOAD_SESSION_ACTION]);
         json payload = {
             item: check mapItemInfoToJson(itemInfo)
@@ -577,7 +575,7 @@ public client class Client {
     @display {label: "Search drive items"}
     remote isolated function searchDriveItems(@display {label: "Search text"} string searchText, 
                                               @display {label: "Optional Query Parameters"} string? queryParams = ()) 
-                                              returns @tainted @display {label: "DriveItem Stream"} 
+                                              returns @display {label: "DriveItem Stream"} 
                                               stream<DriveItemData, Error>|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT, 
             string `search(q='${searchText}')`]);
@@ -600,8 +598,7 @@ public client class Client {
     @display {label: "Get sharable links (ID based)"}
     remote isolated function getSharableLinkFromId(@display {label: "Item ID"} string itemId, 
                                                    @display {label: "Permission Options"} PermissionOptions options) 
-                                                   returns @tainted @display {label: "Permission Information"} 
-                                                   Permission|Error {
+                                                   returns @display {label: "Permission Information"} Permission|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
             CREATE_LINK_ACTION]);
         return check getSharableLink(self.httpClient, path, options);
@@ -620,7 +617,7 @@ public client class Client {
     remote isolated function getSharableLinkFromPath(@display {label: "Item Path Relative to Drive Root"} 
                                                      string itemPath, 
                                                      @display {label: "Permission Options"} PermissionOptions options)
-                                                     returns @tainted Permission|Error {
+                                                     returns Permission|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, 
             [CREATE_LINK_ACTION]);
         return check getSharableLink(self.httpClient, path, options);
@@ -632,7 +629,7 @@ public client class Client {
     # + return - A record of type `DriveItemData` if sucess. Else `Error`.
     @display {label: "Get shared item metadata"}
     remote isolated function getSharedDriveItem(@display {label: "Shared URL"} string sharingUrl) returns 
-                                                @tainted DriveItemData|Error {
+                                                DriveItemData|Error {
         string encodedSharingUrl = encodeSharingUrl(sharingUrl);
         string path = check createUrl([SHARED_RESOURCES, encodedSharingUrl, DRIVEITEM_RESOURCE]);
         http:Response response = check self.httpClient->get(path);
@@ -653,8 +650,7 @@ public client class Client {
     @display {label: "Send Sharing Invitation (ID based)"}
     remote isolated function sendSharingInvitationById(@display {label: "Item ID"} string itemId, 
                                                        @display {label: "Sharing Invitation"} 
-                                                       ItemShareInvitation invitation) returns 
-                                                       @tainted Permission|Error { 
+                                                       ItemShareInvitation invitation) returns Permission|Error { 
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, INVITE_ACTION]);
         return check sendSharableLink(self.httpClient, path, invitation);
     }
@@ -669,15 +665,14 @@ public client class Client {
     @display {label: "Send Sharing Invitation (Path based)"}
     remote isolated function sendSharingInvitationByPath(@display {label: "Item Path Relative to Drive Root"} 
                                                          string itemPath, @display {label: "Sharing Invitation"} 
-                                                         ItemShareInvitation invitation) returns 
-                                                         @tainted Permission|Error {
+                                                         ItemShareInvitation invitation) returns Permission|Error {
         string path = check createPathBasedUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT], itemPath, [INVITE_ACTION]);
         return check sendSharableLink(self.httpClient, path, invitation);
     }
 
     // *************************Supported only in Azure work and School accounts (NOT TESTED) **************************
     // remote isolated function checkInDriveItem(@display {label: "Item ID"} string itemId, CheckInOptions options) 
-    //                                           returns @tainted Error? {
+    //                                           returns Error? {
     //     string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId,
     //         CHECK_IN_ACTION]);
     //     json payload = check options.cloneWithType(json);
@@ -685,7 +680,7 @@ public client class Client {
     //     _ = check handleResponse(response);
     // }
 
-    // remote isolated function checkOutDriveItem(@display {label: "Item ID"} string itemId) returns @tainted Error? {
+    // remote isolated function checkOutDriveItem(@display {label: "Item ID"} string itemId) returns Error? {
     //     string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
     //         CHECK_OUT_ACTION]);
     //     http:Request request = new;
@@ -694,7 +689,7 @@ public client class Client {
     // }
 
     // remote isolated function followDriveItem(@display {label: "Item ID"} string itemId) returns 
-    //                                          @tainted DriveItemData|Error {
+    //                                          DriveItemData|Error {
     //     string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
     //         FOLLOW_ACTION]);
     //     http:Request request = new;
@@ -707,7 +702,7 @@ public client class Client {
     //     } 
     // }
 
-    // remote isolated function unfollowDriveItem(@display {label: "Item ID"} string itemId) returns @tainted Error? {
+    // remote isolated function unfollowDriveItem(@display {label: "Item ID"} string itemId) returns Error? {
     //     string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
     //         UNFOLLOW_ACTION]);
     //     http:Request request = new;
@@ -715,14 +710,14 @@ public client class Client {
     //     _ = check handleResponse(response);
     // }
 
-    // remote isolated function getItemsFollowed() returns @tainted DriveItemData[]|Error {
+    // remote isolated function getItemsFollowed() returns DriveItemData[]|Error {
     //     string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, FOLLOWING_BY_LOGGED_IN_USER]);
     //     return check getDriveItemArray(self.httpClient, path);
     // }
     
     // remote isolated function getDriveItemPreview(@display {label: "Item ID"} string itemId, 
     //                                              PreviewOptions? options = ()) returns 
-    //                                              @tainted EmbeddableData|Error {
+    //                                              EmbeddableData|Error {
     //     string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId, 
     //         PREVIEW_ACTION]);
     //     http:Request request = new;
@@ -740,7 +735,7 @@ public client class Client {
     // }
 
     // remote isolated function getItemStatistics(string driveId, @display {label: "Item ID"} string itemId) returns 
-    //                                            @tainted ItemAnalytics|Error {
+    //                                            ItemAnalytics|Error {
     //     string path = check createUrl([ALL_DRIVES, driveId, ALL_DRIVE_ITEMS, itemId, ANALYTICS_RESOURCES]);
     //     http:Response response = check self.httpClient->get(path);
     //     map<json>|string? handledResponse = check handleResponse(response);

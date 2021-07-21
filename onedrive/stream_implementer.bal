@@ -26,7 +26,7 @@ class DriveItemStream {
     Configuration config;
 
     isolated function init(Configuration config, http:Client httpClient, string path, string? queryParams = ()) 
-                           returns @tainted Error? {
+                           returns Error? {
         self.httpClient = httpClient;
         self.path = path;
         self.nextLink = EMPTY_STRING;
@@ -35,7 +35,7 @@ class DriveItemStream {
         self.currentEntries = check self.fetchRecordsInitial();
     }
 
-    public isolated function next() returns @tainted record {| DriveItemData value; |}|Error? {
+    public isolated function next() returns record {| DriveItemData value; |}|Error? {
         if(self.index < self.currentEntries.length()) {
             record {| DriveItemData value; |} singleRecord = {value: self.currentEntries[self.index]};
             self.index += 1;
@@ -51,13 +51,13 @@ class DriveItemStream {
         }
     }
 
-    isolated function fetchRecordsInitial() returns @tainted DriveItemData[]|Error {
+    isolated function fetchRecordsInitial() returns DriveItemData[]|Error {
         http:Response response = check self.httpClient->get(self.path);
         map<json>|string? handledResponse = check handleResponse(response);
         return check self.getAndConvertToDriveItemArray(response);
     }
     
-    isolated function fetchRecordsNext() returns @tainted DriveItemData[]|Error {
+    isolated function fetchRecordsNext() returns DriveItemData[]|Error {
         http:ClientSecureSocket? socketConfig = self.config?.secureSocketConfig;
         http:Client nextPageClient = check new (self.nextLink, {
             auth: self.config.clientConfig,
@@ -67,7 +67,7 @@ class DriveItemStream {
         return check self.getAndConvertToDriveItemArray(response);
     }
 
-    isolated function getAndConvertToDriveItemArray(http:Response response) returns @tainted DriveItemData[]|error {
+    isolated function getAndConvertToDriveItemArray(http:Response response) returns DriveItemData[]|error {
         DriveItemData[] driveItems = [];
         map<json>|string? handledResponse = check handleResponse(response);
         if (handledResponse is map<json>) {

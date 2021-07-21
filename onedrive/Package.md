@@ -1,8 +1,7 @@
-Connects to OneDrive from Ballerina
+Connects to Microsoft OneDrive from Ballerina
 ### Package Overview
 
-The `ballerinax/microsoft.onedrive` is a [Ballerina](https://ballerina.io/) connector for OneDrive.
-This package provides the capability to easily access OneDrive.
+The `ballerinax/microsoft.onedrive` package provides a [Ballerina](https://ballerina.io/) connector to easily connect to Microsoft OneDrive.
 
 #### Compatibility
 |                                                                                   | Version               |

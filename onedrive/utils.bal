@@ -17,7 +17,7 @@
 import ballerina/http;
 import ballerina/regex;
 
-isolated function handleResponse(http:Response httpResponse) returns @tainted map<json>|Error? {
+isolated function handleResponse(http:Response httpResponse) returns map<json>|Error? {
     if (httpResponse.statusCode is http:STATUS_OK|http:STATUS_CREATED|http:STATUS_ACCEPTED) {
         json jsonResponse = check httpResponse.getJsonPayload();
         return <map<json>>jsonResponse;
@@ -112,7 +112,7 @@ isolated function validateOdataSystemQueryOption(string queryOptionName, string 
     return isValid;
 }
 
-isolated function getasyncJobStatus(string monitorUrl) returns @tainted AsyncJobStatus|error {
+isolated function getasyncJobStatus(string monitorUrl) returns AsyncJobStatus|error {
     http:Client httpClient = check new(monitorUrl);
     http:Response response = check httpClient->get(EMPTY_STRING);
     if (response.statusCode is http:STATUS_OK|http:STATUS_ACCEPTED|http:REDIRECT_SEE_OTHER_303) {
