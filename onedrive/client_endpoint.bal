@@ -18,19 +18,22 @@ import ballerina/http;
 import ballerina/io;
 import ballerina/log;
 
-# OneDrive Client Object for executing drive operations.
+# This is connecting to the Microsoft Graph RESTful web API that enables you to access Microsoft Cloud service resources.
 # 
 # + httpClient - the HTTP Client
 @display {
     label: "Microsoft OneDrive Client", 
     iconPath: "MSOneDriveLogo.svg"
 }
-public client class Client {
-    http:Client httpClient;
-    Configuration config;
-
-    # Initializes the OneDrive connector client endpoint.
-    #
+public isolated client class Client {
+    final http:Client httpClient;
+    final readonly & Configuration config;
+    # Gets invoked to initialize the `connector`.
+    # The connector initialization requires setting the API credentials. 
+    # Create a [Microsoft 365 Work and School account](https://www.office.com/) 
+    # and obtain tokens following [this guide](https://docs.microsoft.com/en-us/graph/auth-register-app-v2). Configure the Access token to 
+    # have the [required permission](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-configure-app-expose-web-apis#add-a-scope).
+    # 
     # + onedriveConfig - Configurations required to initialize the `Client` endpoint
     # + return - Error at failure of client initialization
     public isolated function init(Configuration onedriveConfig) returns error? {
@@ -44,30 +47,28 @@ public client class Client {
             },
             followRedirects: {enabled: true, maxCount: 5}
         });
-        self.config = onedriveConfig;
+        self.config = onedriveConfig.cloneReadOnly();
     }
 
     // ************************************* Operations on a Drive resource ********************************************
     // The Drive resource is the top-level object representing a user's OneDrive.
 
-    # Lists a set of items that have been recently used by the `signed in user`. This will include items that are in the
-    # user's drive as well as the items they have access to from other drives.
+    # Lists a set of items that have been recently used by the `signed in user`. <br/>
+    # This will include items that are in the user's drive as well as the items they have access to from other drives.
     # 
-    # + return - An array of type `DriveItemData` if sucess. Else `Error`.
+    # + return - An array of `onedrive:DriveItemData` if sucess. Else `onedrive:Error`.
     @display {label: "Get list of recent items"}
     remote isolated function getRecentItems() returns @display {label: "DriveItem List"} DriveItemData[]|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, RECENT_ITEMS]);
         return check getDriveItemArray(self.httpClient, path);
     }
 
-    # Retrieve a collection of `DriveItemData` resources that have been shared with the `signed in user` of the OneDrive.
+    # Retrieves a collection of `DriveItemData` resources that have been shared with the `signed in user` of the OneDrive.
     # 
-    # + queryParams - Optional query parameters. 
-    #               - This method support OData query parameters to customize the response. It should be 
-    #                   an array of type `string` in the format `<QUERY_PARAMETER_NAME>=<PARAMETER_VALUE>`
-    #               - For more information about query parameters, refer here: 
-    #                   https://docs.microsoft.com/en-us/graph/query-parameters
-    # + return - An array of type `DriveItemData` if sucess. Else `Error`.
+    # + queryParams - Optional query parameters
+    #               - This method support OData query parameters to customize the response. It should be an array of type `string` in the format `<QUERY_PARAMETER_NAME>=<PARAMETER_VALUE>`
+    #               - For more information about query parameters, [visit](https://docs.microsoft.com/en-us/graph/query-parameters).
+    # + return - An array of `onedrive:DriveItemData` if sucess. Else `onedrive:Error`.
     @display {label: "Get list of items shared with me"}
     remote isolated function getItemsSharedWithMe(@display {label: "Optional Query Parameters"} 
                                                   string? queryParams = ()) returns 
@@ -80,11 +81,11 @@ public client class Client {
     // ************************************ Operations on a DriveItem resource *****************************************
     // The DriveItem resource represents a file, folder, or other item stored in OneDrive.
   
-    # Create a new folder in a Drive with a specified parent item, referred with the parent folder's ID.
+    # Creates a new folder in a Drive with a specified parent item, referred with the parent folder's ID.
     # 
-    # + parentFolderId - The folder ID of the parent folder where, the new folder will be created.
-    # + folderMetadata - A record of type `FolderMetadata` which contains the necessary data to create a folder
-    # + return - A record of type `DriveItemData` if sucess. Else `Error`.
+    # + parentFolderId - The folder ID of the parent folder where, the new folder will be created
+    # + folderMetadata - A record `onedrive:FolderMetadata` which contains the necessary data to create a folder
+    # + return - A record `onedrive:DriveItemData` if sucess. Else `onedrive:Error`.
     @display {label: "Create new folder (ID based)"}
     remote isolated function createFolderById(@display {label: "Parent Folder ID"} string parentFolderId, 
                                               @display {label: "Additional Folder Data"} FolderMetadata folderMetadata) 
@@ -94,14 +95,13 @@ public client class Client {
         return check createFolder(self.httpClient, path, folderMetadata);
     }
 
-    # Create a new folder in a Drive with a specified parent item referred with the folder path.
+    # Creates a new folder in a Drive with a specified parent item referred with the folder path.
     # 
     # + parentFolderPath - The folder path of the parent folder relative to the `root` of the respective Drive where, 
-    #                      the new folder will be created.
-    #                      **NOTE:** When you want to create a folder on root itself, you must give the relative path of 
-    #                      the new folder only.
+    #                      the new folder will be created
+    #                    - **NOTE:** When you want to create a folder on root itself, you must give the relative path of the new folder only.
     # + folderMetadata - A record of type `FolderMetadata` which contains the necessary data to create a folder
-    # + return - A record of type `DriveItemData` if sucess. Else `Error`.
+    # + return - A record `onedrive:DriveItemData` if sucess. Else `onedrive:Error`.
     @display {label: "Create new folder (Path based)"}
     remote isolated function createFolderByPath(@display {label: "Parent Folder Path"} string parentFolderPath, 
                                                 @display {label: "Additional Folder Data"} FolderMetadata folderMetadata) 
@@ -116,15 +116,13 @@ public client class Client {
         return check createFolder(self.httpClient, path, folderMetadata);
     }
 
-    # Retrieve the metadata for a DriveItem in a Drive by item ID.
+    # Retrieves the metadata for a DriveItem in a Drive by item ID.
     # 
     # + itemId - The ID of the DriveItem
-    # + queryParams - Optional query parameters. 
-    #               - This method support OData query parameters to customize the response. It should be 
-    #                   an array of type `string` in the format `<QUERY_PARAMETER_NAME>=<PARAMETER_VALUE>`
-    #               - For more information about query parameters, refer here: 
-    #                   https://docs.microsoft.com/en-us/graph/query-parameters
-    # + return - A record of type `DriveItemData` if sucess. Else `Error`.
+    # + queryParams - Optional query parameters
+    #               - This method support OData query parameters to customize the response. It should be an array of type `string` in the format `<QUERY_PARAMETER_NAME>=<PARAMETER_VALUE>`
+    #               - For more information about query parameters, [visit](https://docs.microsoft.com/en-us/graph/query-parameters).
+    # + return - A record `onedrive:DriveItemData` if sucess. Else `onedrive:Error`.
     @display {label: "Get item metadata (ID based)"}
     remote isolated function getItemMetadataById(@display {label: "Item ID"} string itemId, 
                                                  @display {label: "Optional Query Parameters"} 
@@ -133,16 +131,14 @@ public client class Client {
         return check getDriveItem(self.httpClient, path);
     }
 
-    # Retrieve the metadata for a DriveItem in a Drive by file system path.
+    # Retrieves the metadata for a DriveItem in a Drive by file system path.
     # 
     # + itemPath - The file system path of the DriveItem. The hierarchy of the path allowed in this function is relative
     #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.
-    # + queryParams - Optional query parameters. 
-    #               - This method support OData query parameters to customize the response. It should be 
-    #                   an array of type `string` in the format `<QUERY_PARAMETER_NAME>=<PARAMETER_VALUE>`
-    #               - For more information about query parameters, refer here: 
-    #                   https://docs.microsoft.com/en-us/graph/query-parameters
-    # + return - A record of type `DriveItemData` if sucess. Else `Error`.
+    # + queryParams - Optional query parameters
+    #               - This method support OData query parameters to customize the response. It should be an array of type `string` in the format `<QUERY_PARAMETER_NAME>=<PARAMETER_VALUE>`
+    #               - For more information about query parameters, [visit](https://docs.microsoft.com/en-us/graph/query-parameters).
+    # + return - A record `onedrive:DriveItemData` if sucess. Else `onedrive:Error`.
     @display {label: "Get item metadata (Path based)"}
     remote isolated function getItemMetadataByPath(@display {label: "Item Path Relative to Drive Root"} string itemPath, 
                                                    @display {label: "Optional Query Parameters"} 
@@ -151,11 +147,11 @@ public client class Client {
         return check getDriveItem(self.httpClient, path);
     }
 
-    # Update the metadata for a DriveItem in a Drive referring by item ID.
+    # Updates the metadata for a DriveItem in a Drive referring by item ID.
     # 
     # + itemId - The ID of the DriveItem
-    # + replacementData - A record of type `DriveItem` which contains the values for properties that should be updated
-    # + return - A record of type `DriveItem` if sucess. Else `Error`.
+    # + replacementData - A record `onedrive:DriveItem` which contains the values for properties that should be updated
+    # + return - A record `onedrive:DriveItem` if sucess. Else `onedrive:Error`.
     @display {label: "Update item metadata (ID based)"}
     remote isolated function updateDriveItemById(@display {label: "Item ID"} string itemId, 
                                                  @display {label: "Replacement Item Data"} DriveItem replacementData)
@@ -164,12 +160,12 @@ public client class Client {
         return updateDriveItem(self.httpClient, path, replacementData); 
     }
 
-    # Update the metadata for a DriveItem in a Drive by file system path.
+    # Updates the metadata for a DriveItem in a Drive by file system path.
     # 
-    # + itemPath - The file system path of the DriveItem. The hierarchy of the path allowed in this function is relative
-    #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.
+    # + itemPath - The file system path of the DriveItem
+    #            - The hierarchy of the path allowed in this function is relative to the `root` of the respective Drive. So, the relative path from `root` must be provided.
     # + replacementData - A record of type `DriveItem` which contains the values for properties that should be updated
-    # + return - A record of type `DriveItem` if sucess. Else `Error`.
+    # + return - A record `onedrive:DriveItem` if sucess. Else `onedrive:Error`.
     @display {label: "Update item metadata (Path based)"}
     remote isolated function updateDriveItemByPath(@display {label: "Item Path Relative to Drive Root"} string itemPath, 
                                                    @display {label: "Replacement Item Data"} DriveItem replacementData)
@@ -178,10 +174,10 @@ public client class Client {
         return updateDriveItem(self.httpClient, path, replacementData); 
     }
 
-    # Delete a DriveItem in a Drive by using it's ID.
+    # Deletes a DriveItem in a Drive by using it's ID.
     # 
     # + itemId - The ID of the DriveItem
-    # + return - Returns `nil` is success. Else `Error`.
+    # + return - `onedrive:Error` if the operation fails or `()` if nothing is to be returned
     @display {label: "Delete drive item (ID based)"}
     remote isolated function deleteDriveItemById(@display {label: "Item ID"} string itemId) returns Error? {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, ALL_DRIVE_ITEMS, itemId]);
@@ -189,11 +185,11 @@ public client class Client {
         _ = check handleResponse(response);
     }
 
-    # Delete a DriveItem in a Drive by using it's file system path.
+    # Deletes a DriveItem in a Drive by using it's file system path.
     # 
-    # + itemPath - The file system path of the DriveItem. The hierarchy of the path allowed in this function is relative
-    #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.
-    # + return - Returns `nil` is success. Else `Error`.
+    # + itemPath - The file system path of the DriveItem
+    #            - The hierarchy of the path allowed in this function is relative to the `root` of the respective Drive. So, the relative path from `root` must be provided.
+    # + return - `onedrive:Error` if the operation fails or `()` if nothing is to be returned
     @display {label: "Delete drive item (Path based)"}
     remote isolated function deleteDriveItemByPath(@display {label: "Item Path Relative to Drive Root"} string itemPath) 
                                                    returns Error? {
@@ -202,14 +198,14 @@ public client class Client {
         _ = check handleResponse(response);
     }
 
-    # Restore a driveItem that has been deleted and is currently in the recycle bin. **NOTE:** This functionality is 
+    # Restores a driveItem that has been deleted and is currently in the recycle bin. <br/> **NOTE:** This functionality is 
     # currently only available for OneDrive Personal.
     # 
     # + itemId - The ID of the DriveItem
     # + parentFolderId - The ID of the parent item the deleted item will be restored to
-    # + name - The new name for the restored item. If this isn't provided, the same name will be used as 
-    #          the original.
-    # + return - A record of type `DriveItemData` if sucess. Else `Error`.
+    # + name - The new name for the restored item
+    #        - If this isn't provided, the same name will be used as the original.
+    # + return - A record `onedrive:DriveItemData` if sucess. Else `onedrive:Error`.
     @display {label: "Restore drive item"}
     remote isolated function restoreDriveItem(@display {label: "Item ID"} string itemId, 
                                               @display {label: "Parent Folder ID"} string? parentFolderId = (),
@@ -249,10 +245,11 @@ public client class Client {
     # location with a new name.
     # 
     # + itemId - The ID of the DriveItem
-    # + name - The new name for the copy. If this isn't provided, the same name will be used as the original.
-    # + parentReference - A record of type `ParentReference` that represents reference to the parent item the 
-    #                     copy will be created in.
-    # + return - A `string` which represents the ID of the newly created copy if sucess. Else `Error`.
+    # + name - The new name for the copy
+    #        - If this isn't provided, the same name will be used as the original.
+    # + parentReference - A record `onedrive:ParentReference` that represents reference to the parent item the 
+    #                     copy will be created in
+    # + return - A `string` which represents the ID of the newly created copy if sucess. Else `onedrive:Error`.
     @display {label: "Copy drive item (ID based)"}
     remote isolated function copyDriveItemWithId(@display {label: "Item ID"} string itemId, 
                                                  @display {label: "New File Name"} string? name = (), 
@@ -266,12 +263,13 @@ public client class Client {
     # Asynchronously creates a copy of a DriveItem (including any children), under a new parent item or at the same 
     # location with a new name.
     # 
-    # + itemPath - The file system path of the DriveItem. The hierarchy of the path allowed in this function is relative
-    #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.
-    # + name - The new name for the copy. If this isn't provided, the same name will be used as the original.
-    # + parentReference - A record of type `ParentReference` that represents reference to the parent item the 
+    # + itemPath - The file system path of the DriveItem  
+    #            - The hierarchy of the path allowed in this function is relative to the `root` of the respective Drive. So, the relative path from `root` must be provided.
+    # + name - The new name for the copy
+    #        - If this isn't provided, the same name will be used as the original.
+    # + parentReference - A record `onedrive:ParentReference` that represents reference to the parent item the 
     #                     copy will be created in.
-    # + return - A `string` which represents the ID of the newly created copy if sucess. Else `Error`.
+    # + return - A `string` which represents the ID of the newly created copy if sucess. Else `onedrive:Error`.
     @display {label: "Copy drive item (Path based)"}
     remote isolated function copyDriveItemInPath(@display {label: "Item Path Relative to Drive Root"} string itemPath, 
                                                  @display {label: "New Name For Copy"} string? name = (), 
@@ -282,12 +280,12 @@ public client class Client {
         return check copyDriveItem(self.httpClient, path, parentReference, name);
     }
 
-    # Download the contents of the primary stream (file) of a DriveItem using item ID. **NOTE:** Only driveItems with 
-    # the file property can be downloaded.
+    # Downloads the contents of the primary stream (file) of a DriveItem using item ID. <br/> **NOTE:** Only driveItems 
+    # with the file property can be downloaded.
     # 
     # + itemId - The ID of the DriveItem
     # + formatToConvert - Specify the format the item's content should be downloaded as.
-    # + return - A record of type `File`
+    # + return - A record `onedrive:File` if sucess. Else `onedrive:Error`.
     @display {label: "Download file (ID based)"}
     remote isolated function downloadFileById(@display {label: "Item ID"} string itemId, 
                                               @display {label: "Item Format Data"} FileFormat? formatToConvert = ()) 
@@ -303,15 +301,14 @@ public client class Client {
         return check downloadDriveItem(self.httpClient, path);
     }
 
-    # Download the contents of the primary stream (file) of a DriveItem using item path. **NOTE:** Only driveItems 
-    # with the file property can be downloaded.
+    # Downloads the contents of the primary stream (file) of a DriveItem using item path. <br/> **NOTE:** Only 
+    # driveItems with the file property can be downloaded.
     # 
-    # + itemPath - The file system path of the File. The hierarchy of the path allowed in this function is relative
-    #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.
-    #              example: Use the itempath as `/Documents/MyFile.xlsx` if MyFile.xlsx is located inside a folder called
-    #              Docuements.
+    # + itemPath - The file system path of the File
+    #            - The hierarchy of the path allowed in this function is relative to the `root` of the respective Drive. So, the relative path from `root` must be provided.
+    #            - **example:** Use the itempath as `/Documents/MyFile.xlsx` if MyFile.xlsx is located inside a folder called Docuements.
     # + formatToConvert - Specify the format the item's content should be downloaded as.
-    # + return - A record of type `File` if successful. Else `Error`.
+    # + return - A record `onedrive:File` if successful. Else `onedrive:Error`.
     @display {label: "Download file (Path based)"}
     remote isolated function downloadFileByPath(@display {label: "Item Path Relative to Drive Root"} string itemPath, 
                                                 @display {label: "Item Format Data"} FileFormat? formatToConvert = ()) 
@@ -327,13 +324,12 @@ public client class Client {
         return check downloadDriveItem(self.httpClient, path);
     }
 
-    # Download the contents of the primary stream (file) of a DriveItem using download URL. **NOTE:** Only driveItems 
+    # Downloads the contents of the primary stream (file) of a DriveItem using download URL. <br/> **NOTE:** Only driveItems 
     # with the file property can be downloaded.
     # 
     # + downloadUrl - Download URL for a specific DriveItem
-    # + partialContentOption - The value for the `Range` header to download a partial range of bytes from the 
-    #                          file.
-    # + return - A record of type `File` if successful. Else `Error`.
+    # + partialContentOption - The value for the `Range` header to download a partial range of bytes from the file
+    # + return - A record `onedrive:File` if successful. Else `onedrive:Error`.
     @display {label: "Download file by download URL"}
     remote isolated function downloadFileByDownloadUrl(@display {label: "Downloadable URL of File"} string downloadUrl, 
                                                        @display {label: "Byte Range for Partial Content"} 
@@ -431,13 +427,13 @@ public client class Client {
     //******************************************************************************************************************
 
     //************************ Functions for uploading and replacing the files using byte[] ****************************
-    # Upload a new file to the Drive. This method only supports files up to 4MB in size.
+    # Uploads a new file to the Drive. <br/> This method only supports files up to 4MB in size.
     # 
     # + parentFolderId - The folder ID of the parent folder where, the new file will be uploaded
     # + fileName - The name of the new file
     # + byteArray - An array of `byte` that represents a binary form of the file to be uploaded
     # + mimeType - The mime type of the uploading file
-    # + return - A record of type `DriveItemData` if sucess. Else `Error`.
+    # + return - A record `onedrive:DriveItemData` if sucess. Else `onedrive:Error`.
     @display {label: "Upload file (ID based)"}
     remote isolated function uploadFileToFolderById(@display {label: "Parent Folder ID"} string parentFolderId, 
                                                     @display {label: "File Name"} string fileName, 
@@ -449,16 +445,15 @@ public client class Client {
         return uploadDriveItemByteArray(self.httpClient, path, byteArray, mimeType); 
     }
 
-    # Upload a new file to the Drive. This method only supports files up to 4MB in size.
+    # Uploads a new file to the Drive. <br/> This method only supports files up to 4MB in size.
     # 
     # + parentFolderPath - The folder path of the parent folder relative to the `root` of the respective Drive where, 
-    #                      the new folder will be created.
-    #                      **NOTE:** When you want to create a folder on root itself, you must give the relative path of 
-    #                      the new folder only.    
+    #                      the new folder will be created
+    #                    - **NOTE:** When you want to create a folder on root itself, you must give the relative path of the new folder only.    
     # + fileName - The name of the new file
     # + byteArray - An array of `byte` that represents a binary form of the file to be uploaded
     # + mimeType - The mime type of the uploading file
-    # + return - A record of type `DriveItemData` if sucess. Else `Error`.
+    # + return - A record `onedrive:DriveItemData` if sucess. Else `onedrive:Error`.
     @display {label: "Upload file (Path based)"}
     remote isolated function uploadFileToFolderByPath(@display {label: "Parent Folder Path"} string parentFolderPath, 
                                                       @display {label: "File Name"} string fileName, 
@@ -470,13 +465,13 @@ public client class Client {
         return uploadDriveItemByteArray(self.httpClient, path, byteArray, mimeType); 
     }
 
-    # Update the contents of an existing file in the Drive. This method only supports files up to 4MB in size.
+    # Updates the contents of an existing file in the Drive. <br/> This method only supports files up to 4MB in size.
     # Here, the type of the file should be the same type as the file we replace with.
     # 
     # + itemId - The ID of the DriveItem
     # + byteArray - An array of `byte` that represents a binary form of the file to be uploaded
     # + mimeType - The mime type of the uploading file
-    # + return - A record of type `DriveItemData` if sucess. Else `Error`.
+    # + return - A record `onedrive:DriveItemData` if sucess. Else `onedrive:Error`.
     @display {label: "Replace file (ID based)"}
     remote isolated function replaceFileUsingId(@display {label: "Item ID"} string itemId, 
                                                 @display {label: "Array of Bytes"} byte[] byteArray, 
@@ -487,16 +482,15 @@ public client class Client {
         return uploadDriveItemByteArray(self.httpClient, path, byteArray, mimeType); 
     }
 
-    # Update the contents of an existing file in the Drive. This method only supports files up to 4MB in size.
+    # Updates the contents of an existing file in the Drive. <br/> This method only supports files up to 4MB in size.
     # Here, the type of the file should be the same type as the file we replace with.
     # 
-    # + itemPath - The file system path of the File. The hierarchy of the path allowed in this function is relative
-    #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.  
-    #              example: Use the itempath as `/Documents/MyFile.xlsx` if MyFile.xlsx is located inside a folder called
-    #              Docuements.
+    # + itemPath - The file system path of the File
+    #            - The hierarchy of the path allowed in this function is relative to the `root` of the respective Drive. So, the relative path from `root` must be provided.
+    #            - **example:** Use the itempath as `/Documents/MyFile.xlsx` if MyFile.xlsx is located inside a folder called Docuements.
     # + byteArray - An array of `byte` that represents a binary form of the file to be uploaded
     # + mimeType - The mime type of the uploading file
-    # + return - A record of type `DriveItemData` if sucess. Else `Error`.
+    # + return - A record `onedrive:DriveItemData` if sucess. Else `onedrive:Error`.
     @display {label: "Replace file (Path based)"}
     remote isolated function replaceFileUsingPath(@display {label: "Item Path Relative to Drive Root"} string itemPath,                                                    
                                                   @display {label: "Array of Bytes"} byte[] byteArray, 
@@ -508,17 +502,16 @@ public client class Client {
     }
     //******************************************************************************************************************
 
-    # Upload files up to the maximum file size. **NOTE:** Maximum bytes in any given request is less than 60 MiB.
+    # Uploads files up to the maximum file size. <br/> **NOTE:** Maximum bytes in any given request is less than 60 MiB.
     # 
-    # + itemPath - The file system path of the file (with extention). The hierarchy of the path allowed in this function 
-    #              is relative to the `root` of the respective Drive. So, the relative path from `root` must be provided.
+    # + itemPath - The file system path of the file (with extention)
+    #            - The hierarchy of the path allowed in this function is relative to the `root` of the respective Drive. So, the relative path from `root` must be provided.
     # + itemInfo - Additional data about the file being uploaded
-    # + binaryStream - Stream of content of file which we need to be uploaded. The size of each byte range in the stream 
-    #                  **MUST** be a multiple of 320 KiB (327,680 bytes). The recommended fragment size is between 
-    #                  5-10 MiB (5,242,880 bytes - 10,485,760 bytes)
-    #                  **Note:** For more information about upload large files, refer here: 
-    #                  https://docs.microsoft.com/en-us/onedrive/developer/rest-api/api/driveitem_createuploadsession?view=odsp-graph-online#best-practices
-    # + return - A record of type `DriveItemData` if sucess. Else `Error`.
+    # + binaryStream - Stream of content of file which we need to be uploaded
+    #                - The size of each byte range in the stream **MUST** be a multiple of 320 KiB (327,680 bytes). 
+    #                - The recommended fragment size is between 5-10 MiB (5,242,880 bytes - 10,485,760 bytes)
+    #                - **Note:** For more information about upload large files, [visit](https://docs.microsoft.com/en-us/onedrive/developer/rest-api/api/driveitem_createuploadsession?view=odsp-graph-online#best-practices).
+    # + return - A record `onedrive:DriveItemData` if sucess. Else `onedrive:Error`.
     @display {label: "Upload a large file"}
     remote function resumableUploadDriveItem(@display {label: "Item Path Relative to Drive Root"} string itemPath, 
                                              @display {label: "Information About File"} UploadMetadata itemInfo, 
@@ -562,16 +555,15 @@ public client class Client {
         }
     }
 
-    # Search the hierarchy of items for items matching a query.
+    # Searches the hierarchy of items for items matching a query.
     # 
-    # + searchText - The query text used to search for items. Values may be matched across several fields including 
+    # + searchText - The query text used to search for items
+    #              - Values may be matched across several fields including 
     #                filename, metadata, and file content.
-    # + queryParams - Optional query parameters. 
-    #               - This method support OData query parameters to customize the response. It should be 
-    #                   an array of type `string` in the format `<QUERY_PARAMETER_NAME>=<PARAMETER_VALUE>`
-    #               - For more information about query parameters, refer here: 
-    #                   https://docs.microsoft.com/en-us/graph/query-parameters
-    # + return - A stream of type `DriveItemData` if sucess. Else `Error`.
+    # + queryParams - Optional query parameters
+    #               - This method support OData query parameters to customize the response. It should be an array of type `string` in the format `<QUERY_PARAMETER_NAME>=<PARAMETER_VALUE>`
+    #               - For more information about query parameters, [visit](https://docs.microsoft.com/en-us/graph/query-parameters).
+    # + return - A stream  `onedrive:DriveItemData` if sucess. Else `onedrive:Error`.
     @display {label: "Search drive items"}
     remote isolated function searchDriveItems(@display {label: "Search text"} string searchText, 
                                               @display {label: "Optional Query Parameters"} string? queryParams = ()) 
@@ -587,14 +579,14 @@ public client class Client {
     // ****************************************** Operations on Permissions ********************************************
     // The Permission resource provides information about a sharing permission granted for a DriveItem resource.
 
-    # Create a new sharing link if the specified link type doesn't already exist for the 
-    # calling application. If a sharing link of the specified type already exists for the app, the existing sharing 
+    # Creates a new sharing link if the specified link type doesn't already exist for the 
+    # calling application. <br/> If a sharing link of the specified type already exists for the app, the existing sharing 
     # link will be returned.
     # 
     # + itemId - The ID of the DriveItem
-    # + options - A record of type `PermissionOptions` that represents the properties of the sharing link your 
-    #             application is requesting.
-    # + return - A record of type `Permission` if sucess. Else `Error`.
+    # + options - A record `onedrive:PermissionOptions` that represents the properties of the sharing link your 
+    #             application is requesting
+    # + return - A record `onedrive:Permission` if sucess. Else `onedrive:Error`.
     @display {label: "Get sharable links (ID based)"}
     remote isolated function getSharableLinkFromId(@display {label: "Item ID"} string itemId, 
                                                    @display {label: "Permission Options"} PermissionOptions options) 
@@ -604,15 +596,15 @@ public client class Client {
         return check getSharableLink(self.httpClient, path, options);
     }
 
-    # Create a new sharing link if the specified link type doesn't already exist for the 
-    # calling application. If a sharing link of the specified type already exists for the app, the existing sharing 
+    # Creates a new sharing link if the specified link type doesn't already exist for the 
+    # calling application. <br/> If a sharing link of the specified type already exists for the app, the existing sharing 
     # link will be returned.
     # 
-    # + itemPath - The file system path of the File. The hierarchy of the path allowed in this function is relative
-    #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.
-    # + options - A record of type `PermissionOptions` that represents the properties of the sharing link your 
-    #             application is requesting.
-    # + return - A record of type `Permission` if sucess. Else `Error`.
+    # + itemPath - The file system path of the File
+    #            - The hierarchy of the path allowed in this function is relative to the `root` of the respective Drive. So, the relative path from `root` must be provided.
+    # + options - A record `onedrive:PermissionOptions` that represents the properties of the sharing link your 
+    #             application is requesting
+    # + return - A record  `onedrive:Permission` if sucess. Else `onedrive:Error`.
     @display {label: "Get sharable links (Path based)"}
     remote isolated function getSharableLinkFromPath(@display {label: "Item Path Relative to Drive Root"} 
                                                      string itemPath, 
@@ -623,10 +615,10 @@ public client class Client {
         return check getSharableLink(self.httpClient, path, options);
     }
 
-    # Access a shared DriveItem by using sharing URL.
+    # Accesses a shared DriveItem by using sharing URL.
     # 
     # + sharingUrl - The URL that represents a sharing link reated for a DriveItem
-    # + return - A record of type `DriveItemData` if sucess. Else `Error`.
+    # + return - A record `onedrive:DriveItemData` if sucess. Else `onedrive:Error`.
     @display {label: "Get shared item metadata"}
     remote isolated function getSharedDriveItem(@display {label: "Shared URL"} string sharingUrl) returns 
                                                 DriveItemData|Error {
@@ -641,12 +633,12 @@ public client class Client {
         }
     }
 
-    # Sends a sharing invitation for a DriveItem. A sharing invitation provides permissions to the recipients and
+    # Sends a sharing invitation for a DriveItem. <br/> A sharing invitation provides permissions to the recipients and
     # optionally sends them an email with a sharing link.
     # 
     # + itemId - The ID of the DriveItem
-    # + invitation - A record of type `ItemShareInvitation` that contain metadata for sharing
-    # + return - A record of type `Permission` if sucess. Else `Error`.
+    # + invitation - A record `onedrive:ItemShareInvitation` that contain metadata for sharing
+    # + return - A record `onedrive:Permission` if sucess. Else `onedrive:Error`.
     @display {label: "Send Sharing Invitation (ID based)"}
     remote isolated function sendSharingInvitationById(@display {label: "Item ID"} string itemId, 
                                                        @display {label: "Sharing Invitation"} 
@@ -655,13 +647,13 @@ public client class Client {
         return check sendSharableLink(self.httpClient, path, invitation);
     }
 
-    # Sends a sharing invitation for a DriveItem. A sharing invitation provides permissions to the recipients and
+    # Sends a sharing invitation for a DriveItem. <br/> A sharing invitation provides permissions to the recipients and
     # optionally sends them an email with a sharing link.
     # 
-    # + itemPath - The file system path of the File. The hierarchy of the path allowed in this function is relative
-    #              to the `root` of the respective Drive. So, the relative path from `root` must be provided.
-    # + invitation - A record of type `ItemShareInvitation` that contain metadata for sharing
-    # + return - A record of type `Permission` if sucess. Else `Error`.
+    # + itemPath - The file system path of the File 
+    #            - The hierarchy of the path allowed in this function is relative to the `root` of the respective Drive. So, the relative path from `root` must be provided.
+    # + invitation - A record `onedrive:ItemShareInvitation` that contain metadata for sharing
+    # + return - A record `onedrive:Permission` if sucess. Else `onedrive:Error`.
     @display {label: "Send Sharing Invitation (Path based)"}
     remote isolated function sendSharingInvitationByPath(@display {label: "Item Path Relative to Drive Root"} 
                                                          string itemPath, @display {label: "Sharing Invitation"} 

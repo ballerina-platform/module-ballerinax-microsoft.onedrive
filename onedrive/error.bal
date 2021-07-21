@@ -18,25 +18,25 @@
 #
 # + code - An error code string for the error that occurred
 # + innererror - Optional. Additional error objects that may be more specific than the top level error.
-public type OdataErrorDetails record {
+type OdataErrorDetails record {
     //ErrorCode code;
     string code; // enum
     OdataErrorDetails innererror?;
 };
 
-# An error which occur when providing an invalid value
+# An error which occur when providing an invalid value.
 public type InputValidationError distinct error;
 
-# An errror occur due to an invalid payload received
+# An errror occur due to an invalid payload received.
 public type PayloadValidationError distinct error;
 
-# An error which occur when there is an invalid query parameter
+# An error which occur when there is an invalid query parameter.
 public type QueryParameterValidationError distinct error;
 
-# An error occur due to a failed failed request attempt
+# An error occur due to a failed failed request attempt.
 public type RequestFailedError distinct error;
 
-# Union of all types of errors
+# Union of all types of errors.
 public type Error PayloadValidationError|QueryParameterValidationError|InputValidationError|RequestFailedError|error;
 
 # Error messages

@@ -7,49 +7,43 @@ Ballerina Microsoft OneDrive Connector
 [Microsoft OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage) is a file hosting 
 service and synchronization service operated by Microsoft as part of its web version of Office.
  
-Ballerina connector for Microsoft OneDrive is connecting to OneDrive file storage API in Microsoft Graph v1.0 via Ballerina 
-language easily
+Ballerina connector for Microsoft OneDrive connects to OneDrive file storage API in Microsoft Graph v1.0 via Ballerina 
+language with ease.
  
-For more information, go to the module(s).
-- [ballerinax/microsoft.onedrive](https://central.ballerina.io/ballerinax/microsoft.onedrive)
+For more information, see module(s).
+- [microsoft.onedrive](onedrive/Module.md)
  
-## Building from the Source
-### Setting Up the Prerequisites
-1. Download and install Java SE Development Kit (JDK) version 11 (from one of the following locations).
- 
-  * [Oracle](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
- 
-  * [OpenJDK](https://adoptopenjdk.net/)
- 
-       > **Note:** Set the JAVA_HOME environment variable to the path name of the directory into which you installed
-       JDK.
+## Building from the source
+### Setting up the prerequisites
+1.  Download and install Java SE Development Kit (JDK) version 11. You can install either [OpenJDK](https://adoptopenjdk.net/) or [Oracle JDK](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
+   > **Note:** Set the JAVA_HOME environment variable to the path name of the directory into which you installed JDK.
  
 2. Download and install [Ballerina Swan Lake Beta2](https://ballerina.io/)
  
-### Building the Source
+### Building the source
  
-Execute the commands below to build from the source.
+Execute the following commands to build from the source:
  
-1. To build the package:
+- To build the package:
    ```   
    bal build -c ./onedrive
    ```
-2. To run the without tests:
+- To build the package without tests:
    ```
    bal build -c --skip-tests ./onedrive
    ```
-## Contributing to Ballerina
+## Contributing to ballerina
  
 As an open source project, Ballerina welcomes contributions from the community.
  
-For more information, go to the [contribution guidelines](https://github.com/ballerina-platform/ballerina-lang/blob/master/CONTRIBUTING.md).
+For more information, see [contribution guidelines](https://github.com/ballerina-platform/ballerina-lang/blob/master/CONTRIBUTING.md).
  
-## Code of Conduct
+## Code of conduct
  
 All contributors are encouraged to read the [Ballerina Code of Conduct](https://ballerina.io/code-of-conduct).
  
-## Useful Links
+## Useful links
  
-* Discuss code changes of the Ballerina project in [ballerina-dev@googlegroups.com](mailto:ballerina-dev@googlegroups.com).
+* Discuss code changes of the Ballerina project via [ballerina-dev@googlegroups.com](mailto:ballerina-dev@googlegroups.com).
 * Chat live with us via our [Slack channel](https://ballerina.io/community/slack/).
 * Post all technical questions on Stack Overflow with the [#ballerina](https://stackoverflow.com/questions/tagged/ballerina) tag.
