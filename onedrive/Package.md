@@ -6,7 +6,7 @@ The `microsoft.onedrive` package provides a [Ballerina](https://ballerina.io/) c
 ### Compatibility
 |                                                                        | Version                   |
 |------------------------------------------------------------------------|---------------------------|
-| Ballerina Language                                                     | Ballerina Swan Lake Beta2 |
+| Ballerina Language                                                     | Ballerina Swan Lake Beta3 |
 | [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview) | v1.0                      |
 
 ## Report issues
