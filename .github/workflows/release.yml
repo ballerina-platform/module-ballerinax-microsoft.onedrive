@@ -6,13 +6,11 @@ on:
 
 jobs:
     build:
-
         runs-on: ubuntu-latest
-
         steps:
             - uses: actions/checkout@v2
             - name: Ballerina Build
-              uses: ballerina-platform/ballerina-action/@master
+              uses: ballerina-platform/ballerina-action@slbeta2
               with:
                   args:
                       build -c ./onedrive
@@ -22,7 +20,7 @@ jobs:
                   CLIENT_ID: ${{ secrets.CLIENT_ID }}
                   CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
             - name: Ballerina Push
-              uses: ballerina-platform/ballerina-action/@master
+              uses: ballerina-platform/ballerina-action@slbeta2
               with:
                   args:
                       push
