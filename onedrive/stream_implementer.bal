@@ -22,22 +22,27 @@ class DriveItemStream {
     int index = 0;
     private final http:Client httpClient;
     private final string path;
+    string? queryParams;
+    Configuration config;
 
-    isolated function init(http:Client httpClient, string path) returns @tainted Error? {
+    isolated function init(Configuration config, http:Client httpClient, string path, string? queryParams = ()) 
+                           returns Error? {
         self.httpClient = httpClient;
         self.path = path;
         self.nextLink = EMPTY_STRING;
+        self.config = config;
+        self.queryParams = queryParams;
         self.currentEntries = check self.fetchRecordsInitial();
     }
 
-    public isolated function next() returns @tainted record {| DriveItemData value; |}|Error? {
+    public isolated function next() returns record {| DriveItemData value; |}|Error? {
         if(self.index < self.currentEntries.length()) {
             record {| DriveItemData value; |} singleRecord = {value: self.currentEntries[self.index]};
             self.index += 1;
             return singleRecord;
         }
         // This code block is for retrieving the next batch of records when the initial batch is finished.
-        if (self.nextLink != EMPTY_STRING) {
+        if (self.nextLink != EMPTY_STRING && !self.queryParams.toString().includes("$top")) {
             self.index = 0;
             self.currentEntries = check self.fetchRecordsNext();
             record {| DriveItemData value; |} singleRecord = {value: self.currentEntries[self.index]};
@@ -46,19 +51,23 @@ class DriveItemStream {
         }
     }
 
-    isolated function fetchRecordsInitial() returns @tainted DriveItemData[]|Error {
+    isolated function fetchRecordsInitial() returns DriveItemData[]|Error {
         http:Response response = check self.httpClient->get(self.path);
         map<json>|string? handledResponse = check handleResponse(response);
         return check self.getAndConvertToDriveItemArray(response);
     }
     
-    isolated function fetchRecordsNext() returns @tainted DriveItemData[]|Error {
-        http:Client nextPageClient = check new (self.nextLink);
+    isolated function fetchRecordsNext() returns DriveItemData[]|Error {
+        http:ClientSecureSocket? socketConfig = self.config?.secureSocketConfig;
+        http:Client nextPageClient = check new (self.nextLink, {
+            auth: self.config.clientConfig,
+            secureSocket: socketConfig
+        });        
         http:Response response = check nextPageClient->get(EMPTY_STRING);
         return check self.getAndConvertToDriveItemArray(response);
     }
 
-    isolated function getAndConvertToDriveItemArray(http:Response response) returns @tainted DriveItemData[]|error {
+    isolated function getAndConvertToDriveItemArray(http:Response response) returns DriveItemData[]|error {
         DriveItemData[] driveItems = [];
         map<json>|string? handledResponse = check handleResponse(response);
         if (handledResponse is map<json>) {

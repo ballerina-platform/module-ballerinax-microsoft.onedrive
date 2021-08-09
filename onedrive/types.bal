@@ -488,7 +488,7 @@ public type Tumbnail record {
 };
 
 // *********************************************** Input Record Types **************************************************
-# Drive item data
+# Drive item data.
 #
 # + name - Name of the item
 # + file - File metadata, if the item is a file
@@ -516,7 +516,7 @@ public type FolderMetadata record {|
     ConflictResolutionBehaviour conflictResolutionBehaviour?;
 |};
 
-# The reference data for the destination folder where the item will be copied
+# The reference data for the destination folder where the item will be copied.
 #
 # + id - ID of the destination folder  
 # + driveId - ID of the Drive the destination folder exist
@@ -612,7 +612,7 @@ public type PreviewOptions record {|
     int zoom?; 
 |};
 
-# Resource that represents the embeddable URLs for the preview
+# Resource that represents the embeddable URLs for the preview.
 #
 # + getUrl - URL suitable for embedding using HTTP GET (iframes, etc.) 
 # + postUrl - URL suitable for embedding using HTTP POST (form post, JS, etc.)

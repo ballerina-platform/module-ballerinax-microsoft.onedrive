@@ -86,6 +86,16 @@ public enum PublicationLevel {
     CHECKOUT_LEVEL = "checkout"
 }
 
+# The method by which the folder should be sorted.
+# 
+# + DEFAULT - The default sort order of the application
+# + NAME - Items should be arranged by the name property of the items
+# + TYPE - Items should be arranged by the type of item
+# + SIZE - Items should be arranged by the size property of the items
+# + CREATEDDATETIME - Items should be arranged by the takenDateTime property of the photo facet. If not available, the 
+#                     createdDateTime property should be used.
+# + LASTMODIFIEDDATETIME - Items should be arranged by the lastModifiedDateTime property of the items
+# + SEQUENCE - Items follow a custom sequence specified by the user
 public enum SortBy {
     DEFAULT = "default",
     NAME = "name",
@@ -96,11 +106,22 @@ public enum SortBy {
     SEQUENCE = "sequence"
 }
 
+# If value is `descending`, indicates that items should be sorted in descending order. Otherwise, items should be 
+# sorted ascending.
+# 
+# + ASCENDING - Items should be arranged in ascending order
+# + DESCENDING - Items should be arranged in descending order
 public enum SortOrder {
     ASCENDING = "ascending",
     DESCENDING = "descending"
 }
 
+# The type of view that should be used to represent the folder.
+# 
+# + DEFAULT_VIEWTYPE - The default view type for the application
+# + ICONS_VIEWTYPE - A view that uses icons to represent driveItems
+# + DETAILS_VIEWTYPE - A view with multiple columns that provide additional details about each item
+# + THUMBNAILS_VIEWTYPE - A view that uses larger thumbnails of driveItems to represent the items
 public enum ViewType {
     DEFAULT_VIEWTYPE = "default",
     ICONS_VIEWTYPE = "icons",
