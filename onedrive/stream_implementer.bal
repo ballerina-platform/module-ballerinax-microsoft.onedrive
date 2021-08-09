@@ -22,11 +22,16 @@ class DriveItemStream {
     int index = 0;
     private final http:Client httpClient;
     private final string path;
+    string? queryParams;
+    Configuration config;
 
-    isolated function init(http:Client httpClient, string path) returns @tainted Error? {
+    isolated function init(Configuration config, http:Client httpClient, string path, string? queryParams = ()) 
+                           returns @tainted Error? {
         self.httpClient = httpClient;
         self.path = path;
         self.nextLink = EMPTY_STRING;
+        self.config = config;
+        self.queryParams = queryParams;
         self.currentEntries = check self.fetchRecordsInitial();
     }
 
@@ -37,7 +42,7 @@ class DriveItemStream {
             return singleRecord;
         }
         // This code block is for retrieving the next batch of records when the initial batch is finished.
-        if (self.nextLink != EMPTY_STRING) {
+        if (self.nextLink != EMPTY_STRING && !self.queryParams.toString().includes("$top")) {
             self.index = 0;
             self.currentEntries = check self.fetchRecordsNext();
             record {| DriveItemData value; |} singleRecord = {value: self.currentEntries[self.index]};
@@ -53,7 +58,11 @@ class DriveItemStream {
     }
     
     isolated function fetchRecordsNext() returns @tainted DriveItemData[]|Error {
-        http:Client nextPageClient = check new (self.nextLink);
+        http:ClientSecureSocket? socketConfig = self.config?.secureSocketConfig;
+        http:Client nextPageClient = check new (self.nextLink, {
+            auth: self.config.clientConfig,
+            secureSocket: socketConfig
+        });        
         http:Response response = check nextPageClient->get(EMPTY_STRING);
         return check self.getAndConvertToDriveItemArray(response);
     }

@@ -25,7 +25,7 @@ isolated function handleResponse(http:Response httpResponse) returns @tainted ma
         return;
     }
     json errorPayload = check httpResponse.getJsonPayload();
-    string message = errorPayload.toString(); // Error should be defined as a user defined object
+    string message = errorPayload.toString(); 
     return error PayloadValidationError(message);
 }
 
@@ -40,7 +40,7 @@ isolated function encodeSharingUrl(string sharingUrl) returns string {
     return URL_PREFIX.concat(replacedString1);
 }
 
-isolated function createUrl(string[] pathParameters, string[] queryParameters = []) returns string|error {
+isolated function createUrl(string[] pathParameters, string? queryParameters = ()) returns string|error {
     string url = EMPTY_STRING;
     if (pathParameters.length() > ZERO) {
         foreach string element in pathParameters {
@@ -50,22 +50,22 @@ isolated function createUrl(string[] pathParameters, string[] queryParameters = 
             url += element;
         }
     }
-    if (queryParameters.length() > ZERO) {
-        url = url + check appendQueryOption(queryParameters[ZERO], QUESTION_MARK);
-        foreach string element in queryParameters.slice(1, queryParameters.length()) {
-            url += check appendQueryOption(element, AMPERSAND);
-        }
+    if (queryParameters is string) {
+        url = url + QUESTION_MARK + queryParameters;
     }
     return url;
 }
 
 isolated function createPathBasedUrl(string[] pathParametersBefore, string relativePathParameters,
-                                     string[] pathParametersAfter = [], string[] queryParameters = [])
+                                     string[] pathParametersAfter = [], string? queryParameters = ())
                                      returns string|error {
     string url = EMPTY_STRING;
     string beforeParameters = check createUrl(pathParametersBefore);
     string afterParameters = check createUrl(pathParametersAfter);
     url = beforeParameters + ":" + relativePathParameters + ":" + afterParameters;
+    if (queryParameters is string) {
+        url = url + QUESTION_MARK + queryParameters;
+    }
     return url;
 }
 
@@ -127,7 +127,7 @@ isolated function getasyncJobStatus(string monitorUrl) returns @tainted AsyncJob
         }
     }
     json errorPayload = check response.getJsonPayload();
-    string message = errorPayload.toString(); // Error should be defined as a user defined object
+    string message = errorPayload.toString(); 
     return error PayloadValidationError(message);
 }
 

@@ -13,6 +13,7 @@
 // KIND, either express or implied.  See the License for the
 // specific language governing permissions and limitations
 // under the License.
+
 import ballerina/http;
 import ballerina/io;
 
@@ -75,7 +76,7 @@ isolated function downloadDriveItem(http:Client httpClient, string url) returns 
         };  
     } else {
         json errorPayload = check response.getJsonPayload();
-        string message = errorPayload.toString(); // Error should be defined as a user defined object
+        string message = errorPayload.toString(); 
         return error PayloadValidationError(message);
     }
 }
@@ -91,7 +92,7 @@ isolated function handleDownloadPrtialItem(string webUrl, map<string> headerMap)
         }; 
     } else {
         json errorPayload = check response.getJsonPayload();
-        string message = errorPayload.toString(); // Error should be defined as a user defined object
+        string message = errorPayload.toString(); 
         return error PayloadValidationError(message);
     }
 }
@@ -164,7 +165,7 @@ isolated function handleResumableUploadResponse(http:Response httpResponse, stri
 
     }
     json errorPayload = check httpResponse.getJsonPayload();
-    string message = errorPayload.toString(); // Error should be defined as a user defined object
+    string message = errorPayload.toString();
     return error PayloadValidationError(message);
 }
 
@@ -182,13 +183,7 @@ isolated function setSpecficRequestHeaders(http:Request request, map<string> spe
 isolated function getSharableLink(http:Client httpClient, string url, PermissionOptions options) returns 
                                   @tainted Permission|Error {
     json permissionOptions = check options.cloneWithType(json);
-    http:Response response = check httpClient->post(url, permissionOptions);
-    map<json>|string? handledResponse = check handleResponse(response);
-    if (handledResponse is map<json>) {
-        return check handledResponse.cloneWithType(Permission);
-    } else {
-        return error PayloadValidationError(INVALID_RESPONSE);
-    }
+    return check httpClient->post(url, permissionOptions, targetType = Permission);
 }
 
 isolated function sendSharableLink(http:Client httpClient, string url, ItemShareInvitation invitation) returns 
@@ -199,13 +194,7 @@ isolated function sendSharableLink(http:Client httpClient, string url, ItemShare
         return error PayloadValidationError(INVALID_MESSAGE);
     }              
     json shareInvitation = check invitation.cloneWithType(json);
-    http:Response response = check httpClient->post(url, shareInvitation);
-    map<json>|string? handledResponse = check handleResponse(response);
-    if (handledResponse is map<json>) {
-        return check handledResponse.cloneWithType(Permission);
-    } else {
-        return error PayloadValidationError(INVALID_RESPONSE);
-    }
+    return check httpClient->post(url, shareInvitation, targetType = Permission);
 }
 
 isolated function copyDriveItem(http:Client httpClient, string url, ParentReference? parentReference, string? name) 
@@ -240,6 +229,6 @@ isolated function handleCopyItemResponse(http:Response httpResponse) returns @ta
         return asyncStatus?.resourceId;
     }
     json errorPayload = check httpResponse.getJsonPayload();
-    string message = errorPayload.toString(); // Error should be defined as a user defined object
+    string message = errorPayload.toString(); 
     return error PayloadValidationError(message);
 }
