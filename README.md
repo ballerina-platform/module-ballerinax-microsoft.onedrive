@@ -18,7 +18,7 @@ For more information, see module(s).
 1.  Download and install Java SE Development Kit (JDK) version 11. You can install either [OpenJDK](https://adoptopenjdk.net/) or [Oracle JDK](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
    > **Note:** Set the JAVA_HOME environment variable to the path name of the directory into which you installed JDK.
  
-2. Download and install [Ballerina Swan Lake Beta2](https://ballerina.io/)
+2. Download and install [Ballerina Swan Lake Beta3](https://ballerina.io/)
  
 ### Building the source
  
