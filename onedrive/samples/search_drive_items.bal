@@ -37,8 +37,8 @@ public function main() returns error? {
     
     string searchText = "<SEARCH_TEXT>";
 
-    stream<onedrive:DriveItemData, onedrive:Error>|onedrive:Error itemStream = driveClient->searchDriveItems(searchText);
-    if (itemStream is stream<onedrive:DriveItemData, onedrive:Error>) {
+    stream<onedrive:DriveItemData, onedrive:Error?>|onedrive:Error itemStream = driveClient->searchDriveItems(searchText);
+    if (itemStream is stream<onedrive:DriveItemData, onedrive:Error?>) {
         onedrive:Error? e = itemStream.forEach(isolated function (onedrive:DriveItemData queryResult) {
             log:printInfo(queryResult.toString());
         });
