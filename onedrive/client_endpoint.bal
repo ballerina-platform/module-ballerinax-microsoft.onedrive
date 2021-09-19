@@ -22,12 +22,12 @@ import ballerina/log;
 # 
 # + httpClient - the HTTP Client
 @display {
-    label: "Microsoft OneDrive Client", 
-    iconPath: "MSOneDriveLogo.svg"
+    label: "Microsoft OneDrive", 
+    iconPath: "resources/microsoft.onedrive.svg"
 }
 public isolated client class Client {
     final http:Client httpClient;
-    final readonly & Configuration config;
+    final readonly & ConnectionConfig config;
     # Gets invoked to initialize the `connector`.
     # The connector initialization requires setting the API credentials. 
     # Create a [Microsoft 365 Work and School account](https://www.office.com/) 
@@ -36,17 +36,8 @@ public isolated client class Client {
     # 
     # + onedriveConfig - Configurations required to initialize the `Client` endpoint
     # + return - Error at failure of client initialization
-    public isolated function init(Configuration onedriveConfig) returns error? {
-        http:BearerTokenConfig|http:OAuth2RefreshTokenGrantConfig clientConfig = onedriveConfig.clientConfig;
-        http:ClientSecureSocket? socketConfig = onedriveConfig?.secureSocketConfig;
-        self.httpClient = check new (BASE_URL, {
-            auth: clientConfig,
-            secureSocket: socketConfig,
-            cache: {
-                enabled: false // Disabled caching for now due to NLP exception in getting the stream for downloads.
-            },
-            followRedirects: {enabled: true, maxCount: 5}
-        });
+    public isolated function init(ConnectionConfig onedriveConfig) returns error? {
+        self.httpClient = check new (BASE_URL, onedriveConfig);
         self.config = onedriveConfig.cloneReadOnly();
     }
 

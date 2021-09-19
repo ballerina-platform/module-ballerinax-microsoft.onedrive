@@ -26,8 +26,8 @@ configurable string & readonly refreshToken = os:getEnv("REFRESH_TOKEN");
 configurable string & readonly clientId = os:getEnv("CLIENT_ID");
 configurable string & readonly clientSecret = os:getEnv("CLIENT_SECRET");
 
-Configuration configuration = {
-    clientConfig: {
+ConnectionConfig configuration = {
+    auth: {
         refreshUrl: refreshUrl,
         refreshToken : refreshToken,
         clientId : clientId,

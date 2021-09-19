@@ -22,8 +22,8 @@ import ballerinax/microsoft.onedrive;
 ### Step 2 - Create a new connector instance
 To make the connection, use the OAuth2 refresh token grant configuration.
 ```ballerina
-onedrive:Configuration configuration = {
-    clientConfig: {
+onedrive:ConnectionConfig configuration = {
+    auth: {
         refreshUrl: <REFRESH_URL>,
         refreshToken : <REFRESH_TOKEN>,
         clientId : <CLIENT_ID>,
