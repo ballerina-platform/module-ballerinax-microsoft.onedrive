@@ -703,8 +703,8 @@ function testSearchDriveItems() {
     runtime:sleep(2);
 
     string searchText = "newUploadByPath";
-    stream<DriveItemData, Error>|Error itemStream = oneDriveClient->searchDriveItems(searchText);
-    if (itemStream is stream<DriveItemData, Error>) {
+    stream<DriveItemData, Error?>|Error itemStream = oneDriveClient->searchDriveItems(searchText);
+    if (itemStream is stream<DriveItemData, Error?>) {
         Error? e = itemStream.forEach(isolated function (DriveItemData queryResult) {
             log:printInfo(queryResult.toString());
         });
