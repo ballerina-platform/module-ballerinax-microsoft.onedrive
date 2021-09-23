@@ -578,11 +578,11 @@ public client class Client {
     remote isolated function searchDriveItems(@display {label: "Search text"} string searchText, 
                                               @display {label: "Optional Query Parameters"} string? queryParams = ()) 
                                               returns @tainted @display {label: "DriveItem Stream"} 
-                                              stream<DriveItemData, Error>|Error {
+                                              stream<DriveItemData, Error?>|Error {
         string path = check createUrl([LOGGED_IN_USER, DRIVE_RESOURCE, DRIVE_ROOT, 
             string `search(q='${searchText}')`]);
         DriveItemStream objectInstance = check new (self.config, self.httpClient, path, queryParams);
-        stream<DriveItemData, error> finalStream = new (objectInstance);
+        stream<DriveItemData, Error?> finalStream = new (objectInstance);
         return finalStream;
     }
 
