@@ -24,8 +24,8 @@ configurable string & readonly clientId = ?;
 configurable string & readonly clientSecret = ?;
 
 public function main() returns error? {
-    onedrive:Configuration configuration = {
-        clientConfig: {
+    onedrive:ConnectionConfig configuration = {
+        auth: {
             refreshUrl: refreshUrl,
             refreshToken : refreshToken,
             clientId : clientId,

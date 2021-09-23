@@ -3,10 +3,9 @@ org= "ballerinax"
 name= "microsoft.onedrive"
 version= "1.0.1-SNAPSHOT"
 authors = ["Ballerina"]
-keywords = ["microsoft", "onedrive", "storage"]
+keywords = ["content & files/file management & storage", "cost/freemium", "vendor/microsoft"]
 repository = "https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive"
 license = ["Apache-2.0"]
 
 [build-options]
 observability-included=true
-

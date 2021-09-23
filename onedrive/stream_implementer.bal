@@ -23,9 +23,9 @@ class DriveItemStream {
     private final http:Client httpClient;
     private final string path;
     string? queryParams;
-    Configuration config;
+    ConnectionConfig config;
 
-    isolated function init(Configuration config, http:Client httpClient, string path, string? queryParams = ()) 
+    isolated function init(ConnectionConfig config, http:Client httpClient, string path, string? queryParams = ()) 
                            returns Error? {
         self.httpClient = httpClient;
         self.path = path;
@@ -58,11 +58,7 @@ class DriveItemStream {
     }
     
     isolated function fetchRecordsNext() returns DriveItemData[]|Error {
-        http:ClientSecureSocket? socketConfig = self.config?.secureSocketConfig;
-        http:Client nextPageClient = check new (self.nextLink, {
-            auth: self.config.clientConfig,
-            secureSocket: socketConfig
-        });        
+        http:Client nextPageClient = check new (self.nextLink, self.config);        
         http:Response response = check nextPageClient->get(EMPTY_STRING);
         return check self.getAndConvertToDriveItemArray(response);
     }

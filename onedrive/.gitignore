@@ -35,8 +35,8 @@ Config.toml
 # resource folder in tests folder
 /tests/resources
 
-# resources folder
-/resources
+# Generated json files in resources folder
+/resources/*.json
 
 # idea files
 *.idea
