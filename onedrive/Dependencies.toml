@@ -289,7 +289,7 @@ dependencies = [
 [[package]]
 org = "ballerinax"
 name = "microsoft.onedrive"
-version = "1.0.1-SNAPSHOT"
+version = "2.0.0"
 dependencies = [
 	{org = "ballerina", name = "file"},
 	{org = "ballerina", name = "http"},
@@ -301,8 +301,7 @@ dependencies = [
 	{org = "ballerina", name = "test"}
 ]
 modules = [
-	{org = "ballerinax", packageName = "microsoft.onedrive", moduleName = "microsoft.onedrive"},
-	{org = "ballerinax", packageName = "microsoft.onedrive", moduleName = "microsoft.onedrive.onedrive"}
+	{org = "ballerinax", packageName = "microsoft.onedrive", moduleName = "microsoft.onedrive"}
 ]
 
 
