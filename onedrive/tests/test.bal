@@ -72,6 +72,7 @@ function testCreateFoldersAndFiles() {
     } else {
         test:assertFail(msg = driveItem.message());
     }
+    io:println("\n\n");
 }
 
 @test:Config {
@@ -402,93 +403,93 @@ function testCopyDriveItemInPath() {
 }
 
 //********************* Tests for uploading and replacing the files using steam of bytes *******************************
-// @test:Config {
-//     enable: true
-// }
-// function testUploadFileToFolderById() {
-//     log:printInfo("client->uploadFileById()");
-//     runtime:sleep(2);
+@test:Config {
+    enable: true
+}
+function testUploadFileToFolderById() {
+    log:printInfo("client->uploadFileByIdAsStream()");
+    runtime:sleep(2);
 
-//     stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("onedrive/tests/files/logo.txt");
-//     string fileNameForNewUploadById = "newUpload.txt";
-//     string parentFolderId = collectorFolderId;
-//     string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+    stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("onedrive/tests/files/logo.txt");
+    string fileNameForNewUploadById = "newUpload.txt";
+    string parentFolderId = collectorFolderId;
+    string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-//     DriveItemData|Error itemInfo = oneDriveClient->uploadFileToFolderById(parentFolderId, fileNameForNewUploadById, 
-//         byteStream, mediaType);
-//     if (itemInfo is DriveItemData) {
-//         log:printInfo("Uploaded item " + itemInfo?.id.toString());
-//         idOfFileInCollector = <@untainted>itemInfo?.id.toString();
-//     } else {
-//         test:assertFail(msg = itemInfo.message());
-//     }
-//     io:println("\n\n");
-// }
+    DriveItemData|Error itemInfo = oneDriveClient->uploadFileToFolderByIdAsStream(parentFolderId, fileNameForNewUploadById, 
+        byteStream, mediaType);
+    if (itemInfo is DriveItemData) {
+        log:printInfo("Uploaded item " + itemInfo?.id.toString());
+        idOfFileInCollector = <@untainted>itemInfo?.id.toString();
+    } else {
+        test:assertFail(msg = itemInfo.message());
+    }
+    io:println("\n\n");
+}
 
-// @test:Config {
-//     enable: true
-// }
-// function testUploadFileToFolderByPath() {
-//     log:printInfo("client->uploadFileToFolderByPath()");
-//     runtime:sleep(2);
+@test:Config {
+    enable: true
+}
+function testUploadFileToFolderByPath() {
+    log:printInfo("client->uploadFileToFolderByPathAsStream()");
+    runtime:sleep(2);
 
-//     stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("onedrive/tests/files/logo.txt");
-//     string fileNameNewForNewUploadByPath = "newUploadByPath.txt";
-//     string parentFolderPath = collectorFolderPath;
-//     string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+    stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("onedrive/tests/files/logo.txt");
+    string fileNameNewForNewUploadByPath = "newUploadByPath.txt";
+    string parentFolderPath = collectorFolderPath;
+    string mediaType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-//     DriveItemData|Error itemInfo = oneDriveClient->uploadFileToFolderByPath(parentFolderPath, 
-//         fileNameNewForNewUploadByPath, byteStream, mediaType);
-//     if (itemInfo is DriveItemData) {
-//         log:printInfo("Uploaded item " + itemInfo?.id.toString());
-//         pathOfFileInCollector = collectorFolderPath + FORWARD_SLASH + fileNameNewForNewUploadByPath;
-//     } else {
-//         test:assertFail(msg = itemInfo.message());
-//     }
-//     io:println("\n\n");
-// }
+    DriveItemData|Error itemInfo = oneDriveClient->uploadFileToFolderByPathAsStream(parentFolderPath, 
+        fileNameNewForNewUploadByPath, byteStream, mediaType);
+    if (itemInfo is DriveItemData) {
+        log:printInfo("Uploaded item " + itemInfo?.id.toString());
+        pathOfFileInCollector = collectorFolderPath + FORWARD_SLASH + fileNameNewForNewUploadByPath;
+    } else {
+        test:assertFail(msg = itemInfo.message());
+    }
+    io:println("\n\n");
+}
 
-// @test:Config {
-//     enable: true,
-//     dependsOn: [testUploadFileToFolderById]
-// }
-// function testReplaceFileUsingId() {
-//     log:printInfo("client->replaceFileUsingId()");
-//     runtime:sleep(2);
+@test:Config {
+    enable: true,
+    dependsOn: [testUploadFileToFolderById]
+}
+function testReplaceFileUsingId() {
+    log:printInfo("client->replaceFileUsingIdAsStream()");
+    runtime:sleep(2);
 
-//     stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("onedrive/tests/files/github.png");
-//     string fileId = idOfFileInCollector;
-//     string mediType = "image/png";
+    stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("onedrive/tests/files/github.png");
+    string fileId = idOfFileInCollector;
+    string mediType = "image/png";
 
-//     DriveItemData|Error itemInfo = oneDriveClient->replaceFileUsingId(fileId, byteStream, mediType);
-//     if (itemInfo is DriveItemData) {
-//         log:printInfo("Replaced item " + itemInfo?.id.toString());
-//     } else {
-//         test:assertFail(msg = itemInfo.message());
-//     }
-//     io:println("\n\n");
-// }
+    DriveItemData|Error itemInfo = oneDriveClient->replaceFileUsingIdAsStream(fileId, byteStream, mediType);
+    if (itemInfo is DriveItemData) {
+        log:printInfo("Replaced item " + itemInfo?.id.toString());
+    } else {
+        test:assertFail(msg = itemInfo.message());
+    }
+    io:println("\n\n");
+}
 
-// @test:Config {
-//     enable: true,
-//     dependsOn: [testUploadFileToFolderByPath]
-// }
-// function testReplaceFileUsingPath() {
-//     log:printInfo("client->replaceFileUsingPath()");
-//     runtime:sleep(2);
+@test:Config {
+    enable: true,
+    dependsOn: [testUploadFileToFolderByPath]
+}
+function testReplaceFileUsingPath() {
+    log:printInfo("client->replaceFileUsingPathAsStream()");
+    runtime:sleep(2);
 
-//     stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("onedrive/tests/files/github.png");
-//     string filePath = pathOfFileInCollector;
-//     string mediType = "image/png";
+    stream<byte[],io:Error?> byteStream = checkpanic io:fileReadBlocksAsStream("onedrive/tests/files/github.png");
+    string filePath = pathOfFileInCollector;
+    string mediType = "image/png";
 
-//     DriveItemData|Error itemInfo = oneDriveClient->replaceFileUsingPath(filePath, byteStream, mediType);
-//     if (itemInfo is DriveItemData) {
-//         log:printInfo("Replaced item " + itemInfo?.id.toString());
-//     } else {
-//         test:assertFail(msg = itemInfo.message());
-//     }
-//     io:println("\n\n");
-// }
+    DriveItemData|Error itemInfo = oneDriveClient->replaceFileUsingPathAsStream(filePath, byteStream, mediType);
+    if (itemInfo is DriveItemData) {
+        log:printInfo("Replaced item " + itemInfo?.id.toString());
+    } else {
+        test:assertFail(msg = itemInfo.message());
+    }
+    io:println("\n\n");
+}
 //**********************************************************************************************************************
 
 
