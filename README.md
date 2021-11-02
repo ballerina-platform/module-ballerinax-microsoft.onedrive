@@ -26,11 +26,11 @@ Execute the following commands to build from the source:
  
 - To build the package:
    ```   
-   bal build -c ./onedrive
+   bal pack ./onedrive
    ```
-- To build the package without tests:
+- To run the tests after build:
    ```
-   bal build -c --skip-tests ./onedrive
+   bal test ./onedrive
    ```
 ## Contributing to ballerina
  

@@ -4,7 +4,6 @@ on: [push]
 
 jobs:
     build:
-
         runs-on: ubuntu-latest
 
         steps:
@@ -12,8 +11,11 @@ jobs:
             - name: Ballerina Build
               uses: ballerina-platform/ballerina-action/@nightly
               with:
-                  args:
-                      build -c ./onedrive
+                  args: pack ./onedrive
+            - name: Ballerina Test
+              uses: ballerina-platform/ballerina-action/@nightly
+              with:
+                  args: test ./onedrive
               env:
                   REFRESH_URL: ${{ secrets.REFRESH_URL }}
                   REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
