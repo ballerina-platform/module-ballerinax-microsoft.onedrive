@@ -23,7 +23,7 @@ import ballerina/log;
 # + httpClient - the HTTP Client
 @display {
     label: "Microsoft OneDrive", 
-    iconPath: "resources/microsoft.onedrive.svg"
+    iconPath: "icon.png"
 }
 public isolated client class Client {
     final http:Client httpClient;
