@@ -9,11 +9,11 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - name: Ballerina Build
-              uses: ballerina-platform/ballerina-action/@nightly
+              uses: ballerina-platform/ballerina-action@slbeta6
               with:
                   args: pack ./onedrive
             - name: Ballerina Test
-              uses: ballerina-platform/ballerina-action/@nightly
+              uses: ballerina-platform/ballerina-action@slbeta6
               with:
                   args: test ./onedrive
               env:
