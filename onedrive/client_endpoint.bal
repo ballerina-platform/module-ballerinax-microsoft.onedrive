@@ -520,7 +520,7 @@ public isolated client class Client {
             int startByte = ZERO;
             int endByte = ZERO;
                 map<json> finalData = {};
-                error? e = binaryStream.forEach(function(io:Block byteBlock) {
+                _ = check binaryStream.forEach(function(io:Block byteBlock) {
                     if (byteBlock.length() < MAXIMUM_FRAGMENT_SIZE) {
                         endByte = startByte + (byteBlock.length()-1);
                         if (remainingBytes < byteBlock.length()) {
@@ -539,6 +539,7 @@ public isolated client class Client {
                         panic error InputValidationError(MAX_FRAGMENT_SIZE_EXCEEDED);
                     }
                 });
+
                 return check convertToDriveItem(finalData);
             
         } else {

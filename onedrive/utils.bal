@@ -36,7 +36,7 @@ isolated function encodeSharingUrl(string sharingUrl) returns string {
         sharingUrlBase64 = sharingUrlBase64.substring(ZERO, lastIndex);
     }
     string replacedString1 = regex:replaceAll(sharingUrlBase64, FORWARD_SLASH, UNDERSCORE);
-    string replacedString2 = regex:replaceAll(replacedString1, PLUS_REGEX, MINUS_SIGN);
+    _ = regex:replaceAll(replacedString1, PLUS_REGEX, MINUS_SIGN);
     return URL_PREFIX.concat(replacedString1);
 }
 
