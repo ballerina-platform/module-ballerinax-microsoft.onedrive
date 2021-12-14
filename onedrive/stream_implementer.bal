@@ -49,11 +49,12 @@ class DriveItemStream {
             self.index += 1;
             return singleRecord;
         }
+        return;
     }
 
     isolated function fetchRecordsInitial() returns DriveItemData[]|Error {
         http:Response response = check self.httpClient->get(self.path);
-        map<json>|string? handledResponse = check handleResponse(response);
+        _ = check handleResponse(response);
         return check self.getAndConvertToDriveItemArray(response);
     }
     

@@ -599,6 +599,9 @@ function testDownloadFileById() {
     if (itemResponse is File) {
         byte[] content = let var item = itemResponse?.content in item is byte[] ? item : [];
         io:Error? result = io:fileWriteBytes("onedrive/tests/files/downloadedFileById.docx", content);
+        if (result is io:Error) {
+            log:printInfo(msg = result.message());
+        }
     } else {
         test:assertFail(msg = itemResponse.message());
     }
@@ -618,7 +621,10 @@ function testDownloadFileByPath() {
     File|Error itemResponse = oneDriveClient->downloadFileByPath(filePath);
     if (itemResponse is File) {
         byte[] content = let var item = itemResponse?.content in item is byte[] ? item : [];
-        io:Error? result = io:fileWriteBytes("onedrive/tests/files/downloadedFileByPath.docx", content);    
+        io:Error? result = io:fileWriteBytes("onedrive/tests/files/downloadedFileByPath.docx", content); 
+        if (result is io:Error) {
+            log:printInfo(msg = result.message());
+        }   
     } else {
         test:assertFail(msg = itemResponse.message());
     }
@@ -639,7 +645,10 @@ function testDownloadConvertedFileContentById() {
     File|Error itemResponse = oneDriveClient->downloadFileById(fileId, expectedFormat);
     if (itemResponse is File) {
         byte[] content = let var item = itemResponse?.content in item is byte[] ? item : [];
-        io:Error? result = io:fileWriteBytes("onedrive/tests/files/downloadedContentById." + MIMETYPE_PDF, content);    
+        io:Error? result = io:fileWriteBytes("onedrive/tests/files/downloadedContentById." + MIMETYPE_PDF, content); 
+        if (result is io:Error) {
+            log:printInfo(msg = result.message());
+        }   
     } else {
         test:assertFail(msg = itemResponse.message());
     }
@@ -661,6 +670,9 @@ function testDownloadConvertedFileContentByPath() {
     if (itemResponse is File) {
         byte[] content = let var item = itemResponse?.content in item is byte[] ? item : [];
         io:Error? result = io:fileWriteBytes("onedrive/tests/files/downloadedContentByPath." + MIMETYPE_PDF, content);
+        if (result is io:Error) {
+            log:printInfo(msg = result.message());
+        }
     } else {
         test:assertFail(msg = itemResponse.message());
     }
@@ -709,6 +721,9 @@ function testSearchDriveItems() {
         Error? e = itemStream.forEach(isolated function (DriveItemData queryResult) {
             log:printInfo(queryResult.toString());
         });
+        if (e is Error) {
+            log:printInfo(msg = e.message());
+        }
     } else {
         test:assertFail(msg = itemStream.message());
     }
