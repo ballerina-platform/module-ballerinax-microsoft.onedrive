@@ -29,13 +29,28 @@ jobs:
       - name: Ballerina Test
         uses: ballerina-platform/ballerina-action/@nightly
         with:
-          args: test ./onedrive
+          args: test --code-coverage ./onedrive
         env:
           JAVA_HOME: /usr/lib/jvm/default-jvm
           REFRESH_URL: ${{ secrets.REFRESH_URL }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+
+      # Read the ballerina test results
+      - name: Read Ballerina Test Results
+        id: test_results
+        run: |
+          content=`cat ./onedrive/target/report/test_results.json`                
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          echo "::set-output name=testResultsJson::$content"
+
+      # Print the code coverage information
+      - name: Code Coverage
+        run: |
+          echo "Code Coverage Percentage : ${{fromJson(steps.test_results.outputs.testResultsJson).coveragePercentage}}"
 
       # Send notification when build fails
       - name: Notify failure
