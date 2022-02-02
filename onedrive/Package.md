@@ -4,10 +4,10 @@ Connects to Microsoft OneDrive from Ballerina.
 The `microsoft.onedrive` package provides a [Ballerina](https://ballerina.io/) connector to easily connect to Microsoft OneDrive.
 
 ### Compatibility
-|                                                                        | Version                   |
-|------------------------------------------------------------------------|---------------------------|
-| Ballerina Language                                                     | Ballerina Swan Lake Beta6 |
-| [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview) | v1.0                      |
+|                                                                        | Version                      |
+|------------------------------------------------------------------------|------------------------------|
+| Ballerina Language                                                     | Ballerina Swan Lake 2201.0.0 |
+| [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview) | v1.0                         |
 
 ## Report issues
 To report bugs, request new features, start new discussions, view project boards, etc., go to the [Ballerina Extended Library repository](https://github.com/ballerina-platform/ballerina-extended-library)
