@@ -22,8 +22,6 @@ jobs:
         uses: ballerina-platform/ballerina-action/@nightly
         with:
           args: pack ./onedrive
-        env:
-          JAVA_HOME: /usr/lib/jvm/default-jvm
 
       # Test the ballerina project
       - name: Ballerina Test
@@ -31,7 +29,6 @@ jobs:
         with:
           args: test --code-coverage ./onedrive
         env:
-          JAVA_HOME: /usr/lib/jvm/default-jvm
           REFRESH_URL: ${{ secrets.REFRESH_URL }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
@@ -50,6 +47,8 @@ jobs:
       # Print the code coverage information
       - name: Code Coverage
         run: |
+          echo "Covered Code Lines : ${{fromJson(steps.test_results.outputs.testResultsJson).coveredLines}}"
+          echo "Total Code Lines : $(expr ${{fromJson(steps.test_results.outputs.testResultsJson).missedLines}} + ${{fromJson(steps.test_results.outputs.testResultsJson).coveredLines}})"
           echo "Code Coverage Percentage : ${{fromJson(steps.test_results.outputs.testResultsJson).coveragePercentage}}"
 
       # Send notification when build fails
