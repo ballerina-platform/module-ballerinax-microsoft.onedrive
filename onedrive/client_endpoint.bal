@@ -37,7 +37,24 @@ public isolated client class Client {
     # + onedriveConfig - Configurations required to initialize the `Client` endpoint
     # + return - Error at failure of client initialization
     public isolated function init(ConnectionConfig onedriveConfig) returns error? {
-        self.httpClient = check new (BASE_URL, onedriveConfig);
+        http:ClientConfiguration httpClientConfig = {
+            auth: onedriveConfig.auth,
+            httpVersion: onedriveConfig.httpVersion,
+            http1Settings: {...onedriveConfig.http1Settings},
+            http2Settings: onedriveConfig.http2Settings,
+            timeout: onedriveConfig.timeout,
+            forwarded: onedriveConfig.forwarded,
+            poolConfig: onedriveConfig.poolConfig,
+            cache: onedriveConfig.cache,
+            compression: onedriveConfig.compression,
+            circuitBreaker: onedriveConfig.circuitBreaker,
+            retryConfig: onedriveConfig.retryConfig,
+            responseLimits: onedriveConfig.responseLimits,
+            secureSocket: onedriveConfig.secureSocket,
+            proxy: onedriveConfig.proxy,
+            validation: onedriveConfig.validation
+        };
+        self.httpClient = check new (BASE_URL, httpClientConfig);
         self.config = onedriveConfig.cloneReadOnly();
     }
 
