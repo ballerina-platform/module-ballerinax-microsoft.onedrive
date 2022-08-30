@@ -1,8 +1,8 @@
 [package]
-distribution = "2201.0.0"
+distribution = "2201.2.0"
 org= "ballerinax"
 name= "microsoft.onedrive"
-version= "2.2.0"
+version= "2.3.0"
 authors = ["Ballerina"]
 keywords = ["Content & Files/File Management & Storage", "Cost/Freemium", "Vendor/Microsoft"]
 icon = "icon.png"
