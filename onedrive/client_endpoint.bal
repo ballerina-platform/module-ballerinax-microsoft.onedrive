@@ -38,7 +38,7 @@ public isolated client class Client {
     # + return - Error at failure of client initialization
     public isolated function init(ConnectionConfig onedriveConfig) returns error? {
         http:ClientConfiguration httpClientConfig = {
-            auth: onedriveConfig.auth,
+            auth: let var authConfig = onedriveConfig.auth in (authConfig is BearerTokenConfig ? authConfig : {...authConfig}),
             httpVersion: onedriveConfig.httpVersion,
             http1Settings: {...onedriveConfig.http1Settings},
             http2Settings: onedriveConfig.http2Settings,
