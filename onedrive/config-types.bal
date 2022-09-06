@@ -67,7 +67,6 @@ public type BearerTokenConfig record {|
 # + clockSkew - Clock skew (in seconds) that can be used to avoid token validation failures due to clock synchronization problems
 # + optionalParams - Map of the optional parameters used for the token endpoint
 # + credentialBearer - Bearer of the authentication credentials, which is sent to the token endpoint
-# + clientConfig - HTTP client configurations, which are used to call the token endpoint
 public type OAuth2RefreshTokenGrantConfig record {|
     string refreshUrl;
     string refreshToken;

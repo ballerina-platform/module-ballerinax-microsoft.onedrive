@@ -28,7 +28,7 @@ class DriveItemStream {
     isolated function init(ConnectionConfig config, http:Client httpClient, string path, string? queryParams = ()) 
                            returns Error? {
         self.config = {
-            auth: config.auth,
+            auth: let var authConfig = config.auth in (authConfig is BearerTokenConfig ? authConfig : {...authConfig}),
             httpVersion: config.httpVersion,
             http1Settings: {...config.http1Settings},
             http2Settings: config.http2Settings,
