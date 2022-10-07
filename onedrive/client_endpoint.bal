@@ -17,6 +17,7 @@
 import ballerina/http;
 import ballerina/io;
 import ballerina/log;
+import ballerinax/'client.config;
 
 # This is connecting to the Microsoft Graph RESTful web API that enables you to access Microsoft Cloud service resources.
 # 
@@ -34,28 +35,12 @@ public isolated client class Client {
     # and obtain tokens following [this guide](https://docs.microsoft.com/en-us/graph/auth-register-app-v2). Configure the Access token to 
     # have the [required permission](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-configure-app-expose-web-apis#add-a-scope).
     # 
-    # + onedriveConfig - Configurations required to initialize the `Client` endpoint
+    # + config - Configurations required to initialize the `Client` endpoint
     # + return - Error at failure of client initialization
-    public isolated function init(ConnectionConfig onedriveConfig) returns error? {
-        http:ClientConfiguration httpClientConfig = {
-            auth: let var authConfig = onedriveConfig.auth in (authConfig is BearerTokenConfig ? authConfig : {...authConfig}),
-            httpVersion: onedriveConfig.httpVersion,
-            http1Settings: {...onedriveConfig.http1Settings},
-            http2Settings: onedriveConfig.http2Settings,
-            timeout: onedriveConfig.timeout,
-            forwarded: onedriveConfig.forwarded,
-            poolConfig: onedriveConfig.poolConfig,
-            cache: onedriveConfig.cache,
-            compression: onedriveConfig.compression,
-            circuitBreaker: onedriveConfig.circuitBreaker,
-            retryConfig: onedriveConfig.retryConfig,
-            responseLimits: onedriveConfig.responseLimits,
-            secureSocket: onedriveConfig.secureSocket,
-            proxy: onedriveConfig.proxy,
-            validation: onedriveConfig.validation
-        };
+    public isolated function init(ConnectionConfig config) returns error? {
+        http:ClientConfiguration httpClientConfig = check config:constructHTTPClientConfig(config);
         self.httpClient = check new (BASE_URL, httpClientConfig);
-        self.config = onedriveConfig.cloneReadOnly();
+        self.config = config.cloneReadOnly();
     }
 
     // ************************************* Operations on a Drive resource ********************************************
