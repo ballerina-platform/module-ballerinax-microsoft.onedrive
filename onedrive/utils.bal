@@ -113,7 +113,12 @@ isolated function validateOdataSystemQueryOption(string queryOptionName, string 
 }
 
 isolated function getasyncJobStatus(string monitorUrl) returns AsyncJobStatus|error {
-    http:Client httpClient = check new(monitorUrl);
+    http:Client httpClient = check new (monitorUrl, {
+        httpVersion: http:HTTP_1_1,
+        http1Settings: {
+            chunking: http:CHUNKING_NEVER
+        }
+    });
     http:Response response = check httpClient->get(EMPTY_STRING);
     if (response.statusCode is http:STATUS_OK|http:STATUS_ACCEPTED|http:REDIRECT_SEE_OTHER_303) {
         json jsonResponse = check response.getJsonPayload();

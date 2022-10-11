@@ -29,6 +29,7 @@ class DriveItemStream {
     isolated function init(ConnectionConfig config, http:Client httpClient, string path, string? queryParams = ()) 
                            returns Error? {
         self.config = check config:constructHTTPClientConfig(config);
+        self.config.http1Settings = {chunking: http:CHUNKING_NEVER};
         self.httpClient = httpClient;
         self.path = path;
         self.nextLink = EMPTY_STRING;
