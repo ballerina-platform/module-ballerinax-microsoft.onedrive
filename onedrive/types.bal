@@ -23,6 +23,8 @@ public type ConnectionConfig record {|
     *config:ConnectionConfig;
     # Configurations related to client authentication
     http:BearerTokenConfig|config:OAuth2RefreshTokenGrantConfig auth;
+    # The HTTP version understood by the client
+    http:HttpVersion httpVersion = http:HTTP_1_1;
 |};
 
 # Represents a file, folder, or other item stored in a drive.
