@@ -82,7 +82,12 @@ isolated function downloadDriveItem(http:Client httpClient, string url) returns 
 }
 
 isolated function handleDownloadPrtialItem(string webUrl, map<string> headerMap) returns @tainted File|Error {
-    http:Client downloadClient = check new(webUrl);
+    http:Client downloadClient = check new (webUrl, {
+        httpVersion: http:HTTP_1_1,
+        http1Settings: {
+            chunking: http:CHUNKING_NEVER
+        }
+    });
     http:Response response = check downloadClient->get(EMPTY_STRING, headerMap);
     if (response.statusCode is http:STATUS_OK|http:STATUS_PARTIAL_CONTENT) {
         byte[] content = check response.getBinaryPayload();
@@ -128,6 +133,7 @@ isolated function uploadDriveItemByteArray(http:Client httpClient, string url, b
 isolated function uploadBytes(int fileSize, byte[] block, int startByte, int endByte, string uploadUrl) returns 
                               @tainted map<json>|Error {
     http:Client uploadClient = check new(uploadUrl, {
+        httpVersion: http:HTTP_1_1,
         timeout: REQUEST_TIMEOUT,
         http1Settings: {chunking: http:CHUNKING_NEVER},
         retryConfig : {

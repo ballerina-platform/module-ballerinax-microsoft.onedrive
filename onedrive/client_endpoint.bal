@@ -39,6 +39,7 @@ public isolated client class Client {
     # + return - Error at failure of client initialization
     public isolated function init(ConnectionConfig config) returns error? {
         http:ClientConfiguration httpClientConfig = check config:constructHTTPClientConfig(config);
+        httpClientConfig.http1Settings = {chunking: http:CHUNKING_NEVER};
         self.httpClient = check new (BASE_URL, httpClientConfig);
         self.config = config.cloneReadOnly();
     }
