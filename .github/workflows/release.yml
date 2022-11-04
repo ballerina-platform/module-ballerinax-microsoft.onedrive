@@ -14,15 +14,6 @@ jobs:
               uses: ballerina-platform/ballerina-action/@2201.2.1
               with:
                   args: pack ./onedrive
-            - name: Ballerina Test
-              uses: ballerina-platform/ballerina-action/@2201.2.1
-              with:
-                  args: test ./onedrive
-              env:
-                  REFRESH_URL: ${{ secrets.REFRESH_URL }}
-                  REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
-                  CLIENT_ID: ${{ secrets.CLIENT_ID }}
-                  CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
             - name: Ballerina Push
               uses: ballerina-platform/ballerina-action/@2201.2.1
               with:
