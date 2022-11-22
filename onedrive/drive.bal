@@ -68,7 +68,7 @@ isolated function updateDriveItem(http:Client httpClient, string url, DriveItem 
 
 isolated function downloadDriveItem(http:Client httpClient, string url) returns @tainted File|Error {
     http:Response response = check httpClient->get(<@untainted>url);
-    if (response.statusCode is http:REDIRECT_FOUND_302) {
+    if response.statusCode is http:REDIRECT_FOUND_302 {
         return check handleDownloadRedirected(check response.getHeader(http:LOCATION));
     } else {
         json errorPayload = check response.getJsonPayload();
@@ -77,7 +77,7 @@ isolated function downloadDriveItem(http:Client httpClient, string url) returns 
     }
 }
 
-isolated function handleDownloadRedirected(string webUrl) returns @tainted File|Error {
+isolated function handleDownloadRedirected(string webUrl) returns File|Error {
     http:Client downloadClient = check new (webUrl, {
         httpVersion: http:HTTP_1_1,
         http1Settings: {
