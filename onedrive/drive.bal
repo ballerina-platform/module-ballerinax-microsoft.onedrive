@@ -68,12 +68,29 @@ isolated function updateDriveItem(http:Client httpClient, string url, DriveItem 
 
 isolated function downloadDriveItem(http:Client httpClient, string url) returns @tainted File|Error {
     http:Response response = check httpClient->get(<@untainted>url);
+    if response.statusCode is http:REDIRECT_FOUND_302 {
+        return check handleDownloadRedirected(check response.getHeader(http:LOCATION));
+    } else {
+        json errorPayload = check response.getJsonPayload();
+        string message = errorPayload.toString(); 
+        return error PayloadValidationError(message);
+    }
+}
+
+isolated function handleDownloadRedirected(string webUrl) returns File|Error {
+    http:Client downloadClient = check new (webUrl, {
+        httpVersion: http:HTTP_1_1,
+        http1Settings: {
+            chunking: http:CHUNKING_NEVER
+        }
+    });
+    http:Response response = check downloadClient->get(EMPTY_STRING);
     if (response.statusCode is http:STATUS_OK) {
         byte[] content = check response.getBinaryPayload();
         return {
             content: content,
             mimeType: response.getContentType()
-        };  
+        }; 
     } else {
         json errorPayload = check response.getJsonPayload();
         string message = errorPayload.toString(); 
