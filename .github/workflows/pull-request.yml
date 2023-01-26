@@ -11,12 +11,15 @@ jobs:
       - name: Ballerina Build
         uses: ballerina-platform/ballerina-action/@nightly
         with:
-          args: pack ./onedrive
+          args: pack 
+        env:
+          WORKING_DIR: ./onedrive
       - name: Ballerina Test
         uses: ballerina-platform/ballerina-action/@nightly
         with:
-          args: test ./onedrive
+          args: test 
         env:
+          WORKING_DIR: ./onedrive
           REFRESH_URL: ${{ secrets.REFRESH_URL }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
