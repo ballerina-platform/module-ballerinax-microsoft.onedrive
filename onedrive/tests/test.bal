@@ -452,7 +452,7 @@ function testUploadFileToFolderByPath() {
 
 @test:Config {
     enable: true,
-    dependsOn: [testUploadFileToFolderById]
+    dependsOn: [testDownloadConvertedFileContentById, testDownloadConvertedFileContentByPath, testUploadFileToFolderById]
 }
 function testReplaceFileUsingId() {
     log:printInfo("client->replaceFileUsingIdAsStream()");
@@ -473,7 +473,7 @@ function testReplaceFileUsingId() {
 
 @test:Config {
     enable: true,
-    dependsOn: [testUploadFileToFolderByPath]
+    dependsOn: [testDownloadConvertedFileContentById, testDownloadConvertedFileContentByPath]
 }
 function testReplaceFileUsingPath() {
     log:printInfo("client->replaceFileUsingPathAsStream()");
@@ -545,7 +545,7 @@ function testUploadFileToFolderByPathAsArray() {
 
 @test:Config {
     enable: true,
-    dependsOn: [testUploadFileToFolderByIdAsArray]
+    dependsOn: [testDownloadConvertedFileContentById, testDownloadConvertedFileContentByPath]
 }
 function testReplaceFileUsingIdAsArray() {
     log:printInfo("client->replaceFileUsingId()");
@@ -566,7 +566,7 @@ function testReplaceFileUsingIdAsArray() {
 
 @test:Config {
     enable: true,
-    dependsOn: [testUploadFileToFolderByPathAsArray]
+    dependsOn: [testDownloadConvertedFileContentById, testDownloadConvertedFileContentByPath]
 }
 function testReplaceFileUsingPathAsArray() {
     log:printInfo("client->replaceFileUsingPath()");
@@ -723,7 +723,7 @@ function testSearchDriveItems() {
             log:printInfo(queryResult.toString());
         });
         if (e is Error) {
-            log:printInfo(msg = e.message());
+            log:printError(msg = e.message());
         }
     } else {
         test:assertFail(msg = itemStream.message());
