@@ -2,6 +2,7 @@ Ballerina Microsoft OneDrive Connector
 ===================
 [![Build Status](https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/workflows/CI/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-msgraph-onedrive/actions?query=workflow%3ACI)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/ballerina-platform/module-ballerinax-microsoft.onedrive.svg)](https://github.com/ballerina-platform/module-ballerinax-msgraph-onedrive/commits/master)
+[![GraalVM Check](https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/actions/workflows/build-with-bal-test-native.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/actions/workflows/build-with-bal-test-native.yml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 [Microsoft OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage) is a file hosting 
