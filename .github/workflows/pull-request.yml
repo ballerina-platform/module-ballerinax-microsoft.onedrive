@@ -14,13 +14,17 @@ jobs:
           args: pack 
         env:
           WORKING_DIR: ./onedrive
-      - name: Ballerina Test
+      - name: Ballerina Tests
+        # tests will be skipped if the PR is from a forked repository (as the secrets are not available)
+        if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
         uses: ballerina-platform/ballerina-action/@nightly
         with:
-          args: test 
+          args: test --test-report --code-coverage --coverage-format=xml 
         env:
           WORKING_DIR: ./onedrive
           REFRESH_URL: ${{ secrets.REFRESH_URL }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
