@@ -27,12 +27,12 @@ public function main() returns error? {
     onedrive:ConnectionConfig configuration = {
         auth: {
             refreshUrl: refreshUrl,
-            refreshToken : refreshToken,
-            clientId : clientId,
-            clientSecret : clientSecret
+            refreshToken: refreshToken,
+            clientId: clientId,
+            clientSecret: clientSecret
         }
     };
-    onedrive:Client driveClient = check new(configuration);
+    onedrive:Client driveClient = check new (configuration);
 
     log:printInfo("Download drive item by ID");
 

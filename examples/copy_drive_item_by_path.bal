@@ -26,20 +26,19 @@ public function main() returns error? {
     onedrive:ConnectionConfig configuration = {
         auth: {
             refreshUrl: refreshUrl,
-            refreshToken : refreshToken,
-            clientId : clientId,
-            clientSecret : clientSecret
+            refreshToken: refreshToken,
+            clientId: clientId,
+            clientSecret: clientSecret
         }
     };
-    onedrive:Client driveClient = check new(configuration);
-
+    onedrive:Client driveClient = check new (configuration);
 
     log:printInfo("Copy drive item by item path");
 
     string itemPath = "<PATH_OF_ITEM_TO_COPY>";
     string itemCopyName = "Copy";
 
-    string|onedrive:Error resourceId = driveClient->copyDriveItemInPath(itemPath, itemCopyName); 
+    string|onedrive:Error resourceId = driveClient->copyDriveItemInPath(itemPath, itemCopyName);
     // if there is a copy of same file already exists in the destination folder this operation will fail
     if (resourceId is string) {
         log:printInfo("Created a copy in with id " + resourceId);

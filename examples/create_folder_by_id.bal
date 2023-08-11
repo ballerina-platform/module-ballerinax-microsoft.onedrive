@@ -26,12 +26,12 @@ public function main() returns error? {
     onedrive:ConnectionConfig configuration = {
         auth: {
             refreshUrl: refreshUrl,
-            refreshToken : refreshToken,
-            clientId : clientId,
-            clientSecret : clientSecret
+            refreshToken: refreshToken,
+            clientId: clientId,
+            clientSecret: clientSecret
         }
     };
-    onedrive:Client driveClient = check new(configuration);
+    onedrive:Client driveClient = check new (configuration);
 
     log:printInfo("Create a folder in a folder specified by ID");
 
@@ -39,7 +39,7 @@ public function main() returns error? {
     string newFolderName = "Samples_Test";
     onedrive:FolderMetadata item = {
         name: newFolderName,
-        conflictResolutionBehaviour : "rename"
+        conflictResolutionBehaviour: "rename"
     };
 
     onedrive:DriveItemData|onedrive:Error driveItem = driveClient->createFolderById(parentID, item);

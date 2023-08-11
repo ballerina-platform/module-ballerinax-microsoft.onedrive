@@ -26,12 +26,12 @@ public function main() returns error? {
     onedrive:ConnectionConfig configuration = {
         auth: {
             refreshUrl: refreshUrl,
-            refreshToken : refreshToken,
-            clientId : clientId,
-            clientSecret : clientSecret
+            refreshToken: refreshToken,
+            clientId: clientId,
+            clientSecret: clientSecret
         }
     };
-    onedrive:Client driveClient = check new(configuration);
+    onedrive:Client driveClient = check new (configuration);
 
     log:printInfo("Send sharing invitation by ID");
 
@@ -45,7 +45,7 @@ public function main() returns error? {
         ]
     };
 
-    onedrive:Permission|onedrive:Error sharedPermisson = 
+    onedrive:Permission|onedrive:Error sharedPermisson =
         driveClient->sendSharingInvitationById(fileIdToShareWithInvitation, invitation);
     if (sharedPermisson is onedrive:Permission) {
         log:printInfo("Shared permission info" + sharedPermisson.toString());

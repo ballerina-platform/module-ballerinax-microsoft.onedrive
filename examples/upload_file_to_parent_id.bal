@@ -27,12 +27,12 @@ public function main() returns error? {
     onedrive:ConnectionConfig configuration = {
         auth: {
             refreshUrl: refreshUrl,
-            refreshToken : refreshToken,
-            clientId : clientId,
-            clientSecret : clientSecret
+            refreshToken: refreshToken,
+            clientId: clientId,
+            clientSecret: clientSecret
         }
     };
-    onedrive:Client driveClient = check new(configuration);
+    onedrive:Client driveClient = check new (configuration);
 
     log:printInfo("Upload drive item to a folder with given item ID");
 
@@ -41,7 +41,7 @@ public function main() returns error? {
     string parentFolderId = "<PARENT_FOLDER_ID>";
     string mediaType = "image/png";
 
-    onedrive:DriveItemData|onedrive:Error itemInfo = driveClient->uploadFileToFolderById(parentFolderId, 
+    onedrive:DriveItemData|onedrive:Error itemInfo = driveClient->uploadFileToFolderById(parentFolderId,
         fileNameForNewUploadById, byteArray, mediaType);
     if (itemInfo is onedrive:DriveItemData) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());

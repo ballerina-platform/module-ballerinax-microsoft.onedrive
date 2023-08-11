@@ -26,12 +26,12 @@ public function main() returns error? {
     onedrive:ConnectionConfig configuration = {
         auth: {
             refreshUrl: refreshUrl,
-            refreshToken : refreshToken,
-            clientId : clientId,
-            clientSecret : clientSecret
+            refreshToken: refreshToken,
+            clientId: clientId,
+            clientSecret: clientSecret
         }
     };
-    onedrive:Client driveClient = check new(configuration);
+    onedrive:Client driveClient = check new (configuration);
 
     log:printInfo("Move drive item by item ID");
 
@@ -39,7 +39,7 @@ public function main() returns error? {
     string parentFolderId = "root";
     onedrive:DriveItem replacement = {
         name: "Moved_to_Canva",
-        parentReference : {
+        parentReference: {
             id: parentFolderId
         }
     };

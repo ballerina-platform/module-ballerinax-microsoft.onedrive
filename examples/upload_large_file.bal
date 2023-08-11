@@ -28,26 +28,26 @@ public function main() returns error? {
     onedrive:ConnectionConfig configuration = {
         auth: {
             refreshUrl: refreshUrl,
-            refreshToken : refreshToken,
-            clientId : clientId,
-            clientSecret : clientSecret
+            refreshToken: refreshToken,
+            clientId: clientId,
+            clientSecret: clientSecret
         }
     };
-    onedrive:Client driveClient = check new(configuration);
+    onedrive:Client driveClient = check new (configuration);
 
     log:printInfo("Upload large file to a folder with given path");
 
     string localFilePath = "<LOCAL_FILE_PATH>";
 
-    stream<io:Block,io:Error?> fileStream = check io:fileReadBlocksAsStream(localFilePath, 
-        onedrive:DEFAULT_FRAGMENT_SIZE*8);
+    stream<io:Block, io:Error?> fileStream = check io:fileReadBlocksAsStream(localFilePath,
+        onedrive:DEFAULT_FRAGMENT_SIZE * 8);
     file:MetaData fileMetaData = check file:getMetaData(localFilePath);
     string uploadDestinationPath = "<UPLOAD_DETINATION_FILE_PATH_WITH_EXTENTION>";
     onedrive:UploadMetadata info = {
-        fileSize : fileMetaData.size
+        fileSize: fileMetaData.size
     };
 
-    onedrive:DriveItemData|onedrive:Error itemInfo = driveClient->resumableUploadDriveItem(uploadDestinationPath, info, 
+    onedrive:DriveItemData|onedrive:Error itemInfo = driveClient->resumableUploadDriveItem(uploadDestinationPath, info,
         fileStream);
     if (itemInfo is onedrive:DriveItemData) {
         log:printInfo("Uploaded item " + itemInfo?.id.toString());

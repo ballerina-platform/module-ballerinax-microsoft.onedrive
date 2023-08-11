@@ -27,17 +27,17 @@ public function main() returns error? {
     onedrive:ConnectionConfig configuration = {
         auth: {
             refreshUrl: refreshUrl,
-            refreshToken : refreshToken,
-            clientId : clientId,
-            clientSecret : clientSecret
+            refreshToken: refreshToken,
+            clientId: clientId,
+            clientSecret: clientSecret
         }
     };
-    onedrive:Client driveClient = check new(configuration);
+    onedrive:Client driveClient = check new (configuration);
 
     log:printInfo("Download drive item by path");
 
     string filePath = "<FILE_PATH>";
-    
+
     onedrive:File|onedrive:Error itemResponse = driveClient->downloadFileByPath(filePath);
     if (itemResponse is onedrive:File) {
         byte[] content = let var item = itemResponse?.content in item is byte[] ? item : [];

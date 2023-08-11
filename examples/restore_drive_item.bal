@@ -26,12 +26,12 @@ public function main() returns error? {
     onedrive:ConnectionConfig configuration = {
         auth: {
             refreshUrl: refreshUrl,
-            refreshToken : refreshToken,
-            clientId : clientId,
-            clientSecret : clientSecret
+            refreshToken: refreshToken,
+            clientId: clientId,
+            clientSecret: clientSecret
         }
     };
-    onedrive:Client driveClient = check new(configuration);
+    onedrive:Client driveClient = check new (configuration);
 
     log:printInfo("Restore drive item");
 
@@ -39,7 +39,7 @@ public function main() returns error? {
 
     onedrive:DriveItemData|onedrive:Error restoredDriveItem = driveClient->restoreDriveItem(itemId);
     if (restoredDriveItem is onedrive:DriveItemData) {
-        log:printInfo("Item restored "+ restoredDriveItem?.id.toString());
+        log:printInfo("Item restored " + restoredDriveItem?.id.toString());
         log:printInfo("Success!");
     } else {
         log:printError(restoredDriveItem.message());

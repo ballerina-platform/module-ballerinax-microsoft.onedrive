@@ -26,20 +26,20 @@ public function main() returns error? {
     onedrive:ConnectionConfig configuration = {
         auth: {
             refreshUrl: refreshUrl,
-            refreshToken : refreshToken,
-            clientId : clientId,
-            clientSecret : clientSecret
+            refreshToken: refreshToken,
+            clientId: clientId,
+            clientSecret: clientSecret
         }
     };
-    onedrive:Client driveClient = check new(configuration);
+    onedrive:Client driveClient = check new (configuration);
 
     log:printInfo("Search drive items");
-    
+
     string searchText = "<SEARCH_TEXT>";
 
     stream<onedrive:DriveItemData, onedrive:Error?>|onedrive:Error itemStream = driveClient->searchDriveItems(searchText);
     if (itemStream is stream<onedrive:DriveItemData, onedrive:Error?>) {
-        onedrive:Error? e = itemStream.forEach(isolated function (onedrive:DriveItemData queryResult) {
+        onedrive:Error? e = itemStream.forEach(isolated function(onedrive:DriveItemData queryResult) {
             log:printInfo(queryResult.toString());
         });
         log:printInfo("Success!");

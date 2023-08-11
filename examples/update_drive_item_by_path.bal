@@ -26,19 +26,19 @@ public function main() returns error? {
     onedrive:ConnectionConfig configuration = {
         auth: {
             refreshUrl: refreshUrl,
-            refreshToken : refreshToken,
-            clientId : clientId,
-            clientSecret : clientSecret
+            refreshToken: refreshToken,
+            clientId: clientId,
+            clientSecret: clientSecret
         }
     };
-    onedrive:Client driveClient = check new(configuration);
+    onedrive:Client driveClient = check new (configuration);
 
     log:printInfo("Update drive item by item path");
 
     string itemPath = "<PATH_OF_ITEM_TO_UPDATE>";
     onedrive:DriveItem replacement = {
         name: "Replaced_Design",
-        folder : {}
+        folder: {}
     };
 
     onedrive:DriveItemData|onedrive:Error driveItem = driveClient->updateDriveItemByPath(itemPath, replacement);
