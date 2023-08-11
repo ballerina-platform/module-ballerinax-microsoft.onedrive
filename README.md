@@ -27,11 +27,11 @@ Execute the following commands to build from the source:
  
 - To build the package:
    ```   
-   bal pack ./onedrive
+   bal build ./ballerina
    ```
 - To run the tests after build:
    ```
-   bal test ./onedrive
+   bal test ./ballerina
    ```
 ## Contributing to ballerina
  

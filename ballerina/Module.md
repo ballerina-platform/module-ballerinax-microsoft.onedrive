@@ -57,4 +57,4 @@ if (driveItem is onedrive:DriveItemData) {
 
 2. Use `bal run` command to compile and run the Ballerina program.
 
-**[You can find a list of samples here](https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/onedrive/samples)**
+**[You can find a list of samples here](https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/examples)**
