@@ -1,6 +1,7 @@
 Ballerina Microsoft OneDrive Connector
 ===================
 [![Build Status](https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/workflows/CI/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-msgraph-onedrive/actions?query=workflow%3ACI)
+[![codecov](https://codecov.io/gh/ballerina-platform/module-ballerinax-microsoft.onedrive/branch/master/graph/badge.svg)](https://codecov.io/gh/ballerina-platform/module-ballerinax-microsoft.onedrive)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/ballerina-platform/module-ballerinax-microsoft.onedrive.svg)](https://github.com/ballerina-platform/module-ballerinax-msgraph-onedrive/commits/master)
 [![GraalVM Check](https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/actions/workflows/build-with-bal-test-native.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/actions/workflows/build-with-bal-test-native.yml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -27,11 +28,11 @@ Execute the following commands to build from the source:
  
 - To build the package:
    ```   
-   bal pack ./onedrive
+   bal build ./ballerina
    ```
 - To run the tests after build:
    ```
-   bal test ./onedrive
+   bal test ./ballerina
    ```
 ## Contributing to ballerina
  
