@@ -38,13 +38,12 @@ isolated function convertToDriveItemArray(json[] sourceDriveItemObject) returns 
 }
 
 isolated function mapItemInfoToJson(UploadMetadata? info) returns json|error {
-    json? fileInfo = check info?.fileSystemInfo.cloneWithType(json);
     ItemInfo itemInfo = {};
 
     if (info?.description is string) {
         itemInfo.description = info?.description;
     }
-    itemInfo.fileSystemInfo = fileInfo;
+    itemInfo.fileSystemInfo = check info?.fileSystemInfo.cloneWithType();
     if (info?.name is string) {
         itemInfo.name = info?.name;
     }
