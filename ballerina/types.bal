@@ -565,7 +565,7 @@ public type UploadMetadata record {|
 # + recipients - A collection of recipients who will receive access and the sharing invitation 
 # + message - A plain text formatted message that is included in the sharing invitation. Maximum length 2000 characters.
 public type ItemShareInvitation record {|
-    boolean requireSignIn = false;
+    boolean requireSignIn = true;
     boolean sendInvitation = false;
     PermissionRole[] roles;
     DriveRecipient[] recipients;

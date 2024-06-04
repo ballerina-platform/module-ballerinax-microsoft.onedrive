@@ -14,6 +14,13 @@
 // specific language governing permissions and limitations
 // under the License.
 
+type ItemInfo record {
+    string description?;
+    json fileSystemInfo?;
+    string name?;
+    ConflictResolutionBehaviour \@microsoft\.graph\.conflictBehavior?; 
+};
+
 isolated function convertToDriveItem(map<json> sourceDriveItemObject) returns DriveItemData|error {
     DriveItemData convertedItem = check sourceDriveItemObject.cloneWithType(DriveItemData);
     convertedItem.downloadUrl = let var url = sourceDriveItemObject["@microsoft.graph.downloadUrl"] in url is string ?
@@ -31,12 +38,19 @@ isolated function convertToDriveItemArray(json[] sourceDriveItemObject) returns 
 }
 
 isolated function mapItemInfoToJson(UploadMetadata? info) returns json|error {
-    json fileInfo = check info?.fileSystemInfo.cloneWithType(json);
-    return {
-        description: let var desc = info?.description in desc is string ? desc : (), 
-        fileSystemInfo: fileInfo,
-        name: let var filename = info?.name in filename is string ? filename : (),
-        ["@microsoft.graph.conflictBehavior"]: let var behaviour = info?.conflictResolutionBehaviour in behaviour is 
-            ConflictResolutionBehaviour ? behaviour.toString() : ()
-    };
+    json? fileInfo = check info?.fileSystemInfo.cloneWithType(json);
+    ItemInfo itemInfo = {};
+
+    if (info?.description is string) {
+        itemInfo.description = info?.description;
+    }
+    itemInfo.fileSystemInfo = fileInfo;
+    if (info?.name is string) {
+        itemInfo.name = info?.name;
+    }
+    if (info?.conflictResolutionBehaviour is ConflictResolutionBehaviour) {
+        itemInfo.\@microsoft\.graph\.conflictBehavior = info?.conflictResolutionBehaviour;
+    }
+
+    return itemInfo.toJson();
 }
