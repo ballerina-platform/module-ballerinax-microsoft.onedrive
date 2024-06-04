@@ -831,6 +831,8 @@ function testSendSharingInvitationByPath() {
 }
 
 // *************************Supported only in Azure work and School accounts (NOT TESTED) **************************
+// TODO: Enable the below testcases when the issue: https://github.com/ballerina-platform/ballerina-library/issues/6609 is addressed.
+
 // @test:Config {
 //     enable: true,
 //     dependsOn: [testDeleteDriveItemById]
