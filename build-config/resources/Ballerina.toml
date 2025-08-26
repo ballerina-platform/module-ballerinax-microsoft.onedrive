@@ -2,11 +2,11 @@
 distribution = "2201.12.0"
 org = "ballerinax"
 name = "microsoft.onedrive"
-version = "3.0.0"
+version = "@toml.version@"
 license = ["Apache-2.0"]
 authors = ["Ballerina"]
-keywords = []
-# icon = "icon.png" # TODO: update icon.png
+keywords = [] # TODO: Add keywords
+# icon = "icon.png" # TODO: Add icon
 repository = "https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive"
 
 [build-options]

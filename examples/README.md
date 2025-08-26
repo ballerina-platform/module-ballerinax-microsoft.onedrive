@@ -1,34 +1,45 @@
 # Examples
 
-This directory contains a collection of sample code examples written in Ballerina. These examples demonstrate various
-use cases of the module. You can follow the instructions below to build and run these examples.
+The `ballerinax/microsoft.onedrive` connector provides practical examples illustrating usage in various scenarios.
 
-## Running an Example
+[//]: # (TODO: Add examples)
+1. 
+2. 
 
-Execute the following commands to build an example from the source.
+## Prerequisites
 
-* To build an example
+[//]: # (TODO: Add prerequisites)
 
-  `bal build <example-name>`
+## Running an example
 
+Execute the following commands to build an example from the source:
 
-* To run an example
+* To build an example:
 
-  `bal run <example-name>`
+    ```bash
+    bal build
+    ```
 
-## Building the Examples with the Local Module
+* To run an example:
 
-**Warning**: Because of the absence of support for reading local repositories for single Ballerina files, the bala of
-the module is manually written to the central repository as a workaround. Consequently, the bash script may modify your
-local Ballerina repositories.
+    ```bash
+    bal run
+    ```
 
-Execute the following commands to build all the examples against the changes you have made to the module locally.
+## Building the examples with the local module
 
-* To build all the examples
+**Warning**: Due to the absence of support for reading local repositories for single Ballerina files, the Bala of the module is manually written to the central repository as a workaround. Consequently, the bash script may modify your local Ballerina repositories.
 
-  `./build.sh build`
+Execute the following commands to build all the examples against the changes you have made to the module locally:
 
+* To build all the examples:
 
-* To run all the examples
+    ```bash
+    ./build.sh build
+    ```
 
-  `./build.sh run`
+* To run all the examples:
+
+    ```bash
+    ./build.sh run
+    ```
