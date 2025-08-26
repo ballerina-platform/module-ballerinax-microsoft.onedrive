@@ -22,7 +22,7 @@ plugins {
     id 'io.ballerina.plugin'
 }
 
-description = 'OneDrive - Ballerina'
+description = 'Microsoft OneDrive - Ballerina'
 
 def packageName = "microsoft.onedrive"
 def packageOrg = "ballerinax"

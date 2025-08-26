@@ -1,4 +1,4 @@
-# Ballerina OneDrive connector
+# Ballerina Microsoft OneDrive connector
 
 [![Build](https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/actions/workflows/ci.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/actions/workflows/ci.yml)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/ballerina-platform/module-ballerinax-microsoft.onedrive.svg)](https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/commits/master)
@@ -18,7 +18,7 @@
 
 ## Examples
 
-The `OneDrive` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-microsoft.onedrive/tree/main/examples/), covering the following use cases:
+The `microsoft.onedrive` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-microsoft.onedrive/tree/main/examples/), covering the following use cases:
 
 [//]: # (TODO: Add examples)
 
