@@ -1,14 +1,49 @@
-# Target folder of ballerina project
-/target
+# Compiled class file
+*.class
+*.balx
+# Log file
+*.log
 
-# resources folder
-/resources
+# BlueJ files
+*.ctxt
 
-# idea files
-*.idea
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
 
-# .ballerina files
-*.ballerina
+# macOS Files
+*.DS_Store
+
+# Package Files
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+*.deb
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Ignore everything in this directory
+target
+.classpath
+.settings
+.project
+*.iml
+*.iws
+*.ipr
+.m2
+.vscode/
+.cursor/
+.idea
+
+# Ignore ballerina files
+target/
+generated/
+.ballerina
+**/Config.toml
 
 # Ignore Gradle project-specific cache directory
 .gradle
@@ -16,14 +51,5 @@
 # Ignore Gradle build output directory
 build
 
-#
-*.log
-
-# .DS_Store files
-*.DS_Store
-
-# Compiled class file
-*.class
-**/.project
-**/.settings
-**/.classpath
+# Ignore Docker env file
+docker.env

@@ -2,7 +2,7 @@
 distribution = "2201.12.0"
 org = "ballerinax"
 name = "microsoft.onedrive"
-version = "3.0.0"
+version = "@toml.version@"
 license = ["Apache-2.0"]
 authors = ["Ballerina"]
 keywords = ["Content & Files/File Management & Storage", "Cost/Freemium", "Vendor/Microsoft"]
