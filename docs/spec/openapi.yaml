@@ -11,7 +11,7 @@ paths:
       tags:
         - drives.drive
       summary: Get entities from drives
-      operationId: drive_ListDrive
+      operationId: listDrive
       parameters:
         - $ref: '#/components/parameters/top'
         - $ref: '#/components/parameters/skip'
@@ -60,7 +60,7 @@ paths:
       tags:
         - drives.drive
       summary: Add new entity to drives
-      operationId: drive_CreateDrive
+      operationId: createDrive
       requestBody:
         description: New entity
         content:
@@ -83,7 +83,7 @@ paths:
       tags:
         - drives.drive
       summary: Get entity from drives by key
-      operationId: drive_GetDrive
+      operationId: getDrive
       parameters:
         - name: drive-id
           in: path
@@ -127,7 +127,7 @@ paths:
       tags:
         - drives.drive
       summary: Update entity in drives
-      operationId: drive_UpdateDrive
+      operationId: updateDrive
       parameters:
         - name: drive-id
           in: path
@@ -158,7 +158,7 @@ paths:
       tags:
         - drives.drive
       summary: Delete entity from drives
-      operationId: drive_DeleteDrive
+      operationId: deleteDrive
       parameters:
         - name: drive-id
           in: path
@@ -189,7 +189,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/drive-sharedwithme?view=graph-rest-1.0
-      operationId: drive_ListItem
+      operationId: listItem
       parameters:
         - name: drive-id
           in: path
@@ -247,7 +247,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Create new navigation property to items for drives
-      operationId: drive_CreateItem
+      operationId: createItem
       parameters:
         - name: drive-id
           in: path
@@ -280,7 +280,7 @@ paths:
         - drives.driveItem
       summary: Get items from drives
       description: All items contained in the drive. Read-only. Nullable.
-      operationId: drive_GetItem
+      operationId: getItem
       parameters:
         - name: drive-id
           in: path
@@ -332,7 +332,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Update the navigation property items in drives
-      operationId: drive_UpdateItem
+      operationId: updateItem
       parameters:
         - name: drive-id
           in: path
@@ -371,7 +371,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Delete navigation property items for drives
-      operationId: drive_DeleteItem
+      operationId: deleteItem
       parameters:
         - name: drive-id
           in: path
@@ -410,7 +410,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-list-children?view=graph-rest-1.0
-      operationId: drive.item_ListChild
+      operationId: listChildren
       parameters:
         - name: drive-id
           in: path
@@ -476,7 +476,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Create new navigation property to children for drives
-      operationId: drive.item_CreateChild
+      operationId: createChildren
       parameters:
         - name: drive-id
           in: path
@@ -517,7 +517,7 @@ paths:
         - drives.driveItem
       summary: Get children from drives
       description: Collection containing Item objects for the immediate children of Item. Only items representing folders have children. Read-only. Nullable.
-      operationId: drive.item_GetChild
+      operationId: getChildren
       parameters:
         - name: drive-id
           in: path
@@ -579,7 +579,7 @@ paths:
         - drives.driveItem
       summary: Get content for the navigation property children from drives
       description: 'The content stream, if the item represents a file.'
-      operationId: drive.item_GetChildrenContent
+      operationId: getChildrenContent
       parameters:
         - name: drive-id
           in: path
@@ -627,7 +627,7 @@ paths:
         - drives.driveItem
       summary: Update content for the navigation property children in drives
       description: 'The content stream, if the item represents a file.'
-      operationId: drive.item_SetChildrenContent
+      operationId: setChildrenContent
       parameters:
         - name: drive-id
           in: path
@@ -675,7 +675,7 @@ paths:
         - drives.driveItem
       summary: Delete content for the navigation property children in drives
       description: 'The content stream, if the item represents a file.'
-      operationId: drive.item_DeleteChildrenContent
+      operationId: deleteChildrenContent
       parameters:
         - name: drive-id
           in: path
@@ -717,7 +717,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Get the number of the resource
-      operationId: drive.item.child_GetCount
+      operationId: getChildrenCount
       parameters:
         - name: drive-id
           in: path
@@ -748,7 +748,7 @@ paths:
         - drives.driveItem
       summary: Get content for the navigation property items from drives
       description: 'The content stream, if the item represents a file.'
-      operationId: drive_GetItemsContent
+      operationId: getItemsContent
       parameters:
         - name: drive-id
           in: path
@@ -788,7 +788,7 @@ paths:
         - drives.driveItem
       summary: Update content for the navigation property items in drives
       description: 'The content stream, if the item represents a file.'
-      operationId: drive_SetItemsContent
+      operationId: setItemsContent
       parameters:
         - name: drive-id
           in: path
@@ -828,7 +828,7 @@ paths:
         - drives.driveItem
       summary: Delete content for the navigation property items in drives
       description: 'The content stream, if the item represents a file.'
-      operationId: drive_DeleteItemsContent
+      operationId: deleteItemsContent
       parameters:
         - name: drive-id
           in: path
@@ -862,7 +862,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Invoke action assignSensitivityLabel
-      operationId: drive.item_assignSensitivityLabel
+      operationId: assignSentitivityLabel
       parameters:
         - name: drive-id
           in: path
@@ -913,7 +913,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-checkin?view=graph-rest-1.0
-      operationId: drive.item_checkin
+      operationId: checkin
       parameters:
         - name: drive-id
           in: path
@@ -962,7 +962,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-checkout?view=graph-rest-1.0
-      operationId: drive.item_checkout
+      operationId: checkout
       parameters:
         - name: drive-id
           in: path
@@ -991,7 +991,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Invoke action copy
-      operationId: drive.item_copy
+      operationId: copy
       parameters:
         - name: drive-id
           in: path
@@ -1051,7 +1051,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-createlink?view=graph-rest-1.0
-      operationId: drive.item_createLink
+      operationId: createLink
       parameters:
         - name: drive-id
           in: path
@@ -1123,7 +1123,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Invoke action createUploadSession
-      operationId: drive.item_createUploadSession
+      operationId: createUploadSession
       parameters:
         - name: drive-id
           in: path
@@ -1172,7 +1172,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-discardcheckout?view=graph-rest-1.0
-      operationId: drive.item_discardCheckout
+      operationId: discardCheckout
       parameters:
         - name: drive-id
           in: path
@@ -1201,7 +1201,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Invoke action extractSensitivityLabels
-      operationId: drive.item_extractSensitivityLabel
+      operationId: extractSensitivityLabel
       parameters:
         - name: drive-id
           in: path
@@ -1238,7 +1238,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-follow?view=graph-rest-1.0
-      operationId: drive.item_follow
+      operationId: follow
       parameters:
         - name: drive-id
           in: path
@@ -1275,7 +1275,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-invite?view=graph-rest-1.0
-      operationId: drive.item_invite
+      operationId: invite
       parameters:
         - name: drive-id
           in: path
@@ -1362,7 +1362,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Invoke action permanentDelete
-      operationId: drive.item_permanentDelete
+      operationId: permanentDelete
       parameters:
         - name: drive-id
           in: path
@@ -1391,7 +1391,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Invoke action preview
-      operationId: drive.item_preview
+      operationId: preview
       parameters:
         - name: drive-id
           in: path
@@ -1445,7 +1445,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-restore?view=graph-rest-1.0
-      operationId: drive.item_restore
+      operationId: restore
       parameters:
         - name: drive-id
           in: path
@@ -1497,7 +1497,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-search?view=graph-rest-1.0
-      operationId: drive.item_search
+      operationId: search
       parameters:
         - name: drive-id
           in: path
@@ -1591,7 +1591,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-unfollow?view=graph-rest-1.0
-      operationId: drive.item_unfollow
+      operationId: unfollow
       parameters:
         - name: drive-id
           in: path
@@ -1620,7 +1620,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Invoke action validatePermission
-      operationId: drive.item_validatePermission
+      operationId: validatePermission
       parameters:
         - name: drive-id
           in: path
@@ -1664,7 +1664,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Get the number of the resource
-      operationId: drive.item_GetCount
+      operationId: getItemCount
       parameters:
         - name: drive-id
           in: path
@@ -1690,7 +1690,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/drive-recent?view=graph-rest-1.0
-      operationId: drive_recent
+      operationId: recent
       parameters:
         - name: drive-id
           in: path
@@ -1753,7 +1753,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-search?view=graph-rest-1.0
-      operationId: drive_search
+      operationId: searchWithinDriveItem
       parameters:
         - name: drive-id
           in: path
@@ -1824,7 +1824,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/drive-sharedwithme?view=graph-rest-1.0
-      operationId: drive_sharedGraphWPreMe
+      operationId: sharedWithMe
       parameters:
         - name: drive-id
           in: path
@@ -1884,7 +1884,7 @@ paths:
         - drives.driveItem
       summary: Get root from drives
       description: The root folder of the drive. Read-only.
-      operationId: drive_GetRoot
+      operationId: getRoot
       parameters:
         - name: drive-id
           in: path
@@ -1928,7 +1928,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Update the navigation property root in drives
-      operationId: drive_UpdateRoot
+      operationId: updateRoot
       parameters:
         - name: drive-id
           in: path
@@ -1959,7 +1959,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Delete navigation property root for drives
-      operationId: drive_DeleteRoot
+      operationId: deleteRoot
       parameters:
         - name: drive-id
           in: path
@@ -1987,7 +1987,7 @@ paths:
         - drives.driveItem
       summary: Get children from drives
       description: Collection containing Item objects for the immediate children of Item. Only items representing folders have children. Read-only. Nullable.
-      operationId: drive.root_ListChild
+      operationId: listChildrenInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2045,7 +2045,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Create new navigation property to children for drives
-      operationId: drive.root_CreateChild
+      operationId: createChildrenInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2078,7 +2078,7 @@ paths:
         - drives.driveItem
       summary: Get children from drives
       description: Collection containing Item objects for the immediate children of Item. Only items representing folders have children. Read-only. Nullable.
-      operationId: drive.root_GetChild
+      operationId: getChildrenInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2132,7 +2132,7 @@ paths:
         - drives.driveItem
       summary: Get content for the navigation property children from drives
       description: 'The content stream, if the item represents a file.'
-      operationId: drive.root_GetChildrenContent
+      operationId: getChildrenContentInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2172,7 +2172,7 @@ paths:
         - drives.driveItem
       summary: Update content for the navigation property children in drives
       description: 'The content stream, if the item represents a file.'
-      operationId: drive.root_SetChildrenContent
+      operationId: setChildrenContentInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2212,7 +2212,7 @@ paths:
         - drives.driveItem
       summary: Delete content for the navigation property children in drives
       description: 'The content stream, if the item represents a file.'
-      operationId: drive.root_DeleteChildrenContent
+      operationId: deleteChildrenContentInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2246,7 +2246,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Get the number of the resource
-      operationId: drive.root.child_GetCount
+      operationId: getChildrenCountInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2269,7 +2269,7 @@ paths:
         - drives.driveItem
       summary: Get content for the navigation property root from drives
       description: 'The content stream, if the item represents a file.'
-      operationId: drive_GetRootContent
+      operationId: getRootContent
       parameters:
         - name: drive-id
           in: path
@@ -2301,7 +2301,7 @@ paths:
         - drives.driveItem
       summary: Update content for the navigation property root in drives
       description: 'The content stream, if the item represents a file.'
-      operationId: drive_SetRootContent
+      operationId: setRootContent
       parameters:
         - name: drive-id
           in: path
@@ -2333,7 +2333,7 @@ paths:
         - drives.driveItem
       summary: Delete content for the navigation property root in drives
       description: 'The content stream, if the item represents a file.'
-      operationId: drive_DeleteRootContent
+      operationId: deleteRootContent
       parameters:
         - name: drive-id
           in: path
@@ -2359,7 +2359,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Invoke action assignSensitivityLabel
-      operationId: drive.root_assignSensitivityLabel
+      operationId: assignSentitivityLabelInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2402,7 +2402,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-checkin?view=graph-rest-1.0
-      operationId: drive.root_checkin
+      operationId: checkinInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2443,7 +2443,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-checkout?view=graph-rest-1.0
-      operationId: drive.root_checkout
+      operationId: checkoutInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2464,7 +2464,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Invoke action copy
-      operationId: drive.root_copy
+      operationId: copyInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2516,7 +2516,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-createlink?view=graph-rest-1.0
-      operationId: drive.root_createLink
+      operationId: createLinkInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2580,7 +2580,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Invoke action createUploadSession
-      operationId: drive.root_createUploadSession
+      operationId: createUploadSessionInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2621,7 +2621,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-discardcheckout?view=graph-rest-1.0
-      operationId: drive.root_discardCheckout
+      operationId: discardCheckoutInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2642,7 +2642,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Invoke action extractSensitivityLabels
-      operationId: drive.root_extractSensitivityLabel
+      operationId: extractSensitivityLabelsInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2671,7 +2671,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-follow?view=graph-rest-1.0
-      operationId: drive.root_follow
+      operationId: followInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2700,7 +2700,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-invite?view=graph-rest-1.0
-      operationId: drive.root_invite
+      operationId: inviteInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2779,7 +2779,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Invoke action permanentDelete
-      operationId: drive.root_permanentDelete
+      operationId: permanentDeleteInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2800,7 +2800,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Invoke action preview
-      operationId: drive.root_preview
+      operationId: previewInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2846,7 +2846,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-restore?view=graph-rest-1.0
-      operationId: drive.root_restore
+      operationId: restoreInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2890,7 +2890,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-search?view=graph-rest-1.0
-      operationId: drive.root_search
+      operationId: searchInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2976,7 +2976,7 @@ paths:
       externalDocs:
         description: Find more info here
         url: https://learn.microsoft.com/graph/api/driveitem-unfollow?view=graph-rest-1.0
-      operationId: drive.root_unfollow
+      operationId: unfollowInRoot
       parameters:
         - name: drive-id
           in: path
@@ -2997,7 +2997,7 @@ paths:
       tags:
         - drives.driveItem
       summary: Invoke action validatePermission
-      operationId: drive.root_validatePermission
+      operationId: validatePermissionInRoot
       parameters:
         - name: drive-id
           in: path
