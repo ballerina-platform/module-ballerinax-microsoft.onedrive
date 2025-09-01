@@ -11,6 +11,16 @@ These changes are done in order to improve the overall usability, and as workaro
 1. Removed `/users`, `/groups`, and `/sites` endpoints. In Microsoft Graph, OneDrive functionality is accessible from several root resources, not just under these subgroups. For details, see [Microsoft Graph root resources](https://learn.microsoft.com/en-us/onedrive/developer/rest-api/?view=odsp-graph-online#microsoft-graph-root-resources).
 2. Reduced the API set from over 200 endpoints to approximately 70, focusing on those most relevant for integration and omitting meta-level or rarely used APIs. For full list, see [MS OneDrive Endpoints](https://docs.google.com/spreadsheets/d/1_CVic4I9X7vZAMPK6ooVwiG-AJMXA0zgVb3Mly27it4/edit?gid=1884773845#gid=1884773845)
 3. Cleaned up and standardized operation IDs using AI-assisted naming for better clarity and consistency.
+4. Update 
+    ```
+    additionalProperties:
+      type: object
+    ```
+    to
+    ```
+    additionalProperties: true
+    ```
+    Due to [OpenAPI generation incorrectly resolves additional properties, object when included in oneOf type](https://github.com/ballerina-platform/ballerina-library/issues/8205)
 
 ## OpenAPI cli command
 

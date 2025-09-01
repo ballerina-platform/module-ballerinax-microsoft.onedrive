@@ -895,8 +895,7 @@ paths:
                 justificationText:
                   type: string
                   nullable: true
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -944,8 +943,7 @@ paths:
                 comment:
                   type: string
                   nullable: true
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -1029,8 +1027,7 @@ paths:
                   type: boolean
                   default: false
                   nullable: true
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -1105,8 +1102,7 @@ paths:
                   type: boolean
                   default: false
                   nullable: true
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -1150,8 +1146,7 @@ paths:
               properties:
                 item:
                   $ref: '#/components/schemas/microsoft.graph.driveItemUploadableProperties'
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -1330,8 +1325,7 @@ paths:
                 password:
                   type: string
                   nullable: true
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -1349,8 +1343,7 @@ paths:
                   '@odata.nextLink':
                     type: string
                     nullable: true
-                additionalProperties:
-                  type: object
+                additionalProperties: true
         default:
           $ref: '#/components/responses/error'
       x-ms-docs-operation-type: action
@@ -1423,8 +1416,7 @@ paths:
                   type: number
                   format: double
                   nullable: true
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -1475,8 +1467,7 @@ paths:
                 name:
                   type: string
                   nullable: true
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -1574,8 +1565,7 @@ paths:
                   '@odata.nextLink':
                     type: string
                     nullable: true
-                additionalProperties:
-                  type: object
+                additionalProperties: true
         default:
           $ref: '#/components/responses/error'
       x-ms-docs-operation-type: function
@@ -1650,8 +1640,7 @@ paths:
                   nullable: true
                 password:
                   type: string
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -2384,8 +2373,7 @@ paths:
                 justificationText:
                   type: string
                   nullable: true
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -2425,8 +2413,7 @@ paths:
                 comment:
                   type: string
                   nullable: true
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -2494,8 +2481,7 @@ paths:
                   type: boolean
                   default: false
                   nullable: true
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -2562,8 +2548,7 @@ paths:
                   type: boolean
                   default: false
                   nullable: true
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -2599,8 +2584,7 @@ paths:
               properties:
                 item:
                   $ref: '#/components/schemas/microsoft.graph.driveItemUploadableProperties'
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -2747,8 +2731,7 @@ paths:
                 password:
                   type: string
                   nullable: true
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -2766,8 +2749,7 @@ paths:
                   '@odata.nextLink':
                     type: string
                     nullable: true
-                additionalProperties:
-                  type: object
+                additionalProperties: true
         default:
           $ref: '#/components/responses/error'
       x-ms-docs-operation-type: action
@@ -2824,8 +2806,7 @@ paths:
                   type: number
                   format: double
                   nullable: true
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -2868,8 +2849,7 @@ paths:
                 name:
                   type: string
                   nullable: true
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -2959,8 +2939,7 @@ paths:
                   '@odata.nextLink':
                     type: string
                     nullable: true
-                additionalProperties:
-                  type: object
+                additionalProperties: true
         default:
           $ref: '#/components/responses/error'
       x-ms-docs-operation-type: function
@@ -3019,8 +2998,7 @@ paths:
                   nullable: true
                 password:
                   type: string
-              additionalProperties:
-                type: object
+              additionalProperties: true
         required: true
       responses:
         2XX:
@@ -3076,8 +3054,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.driveItem'
               description: Collection of common folders available in OneDrive. Read-only. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.driveItem:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.baseItem'
@@ -3180,8 +3157,7 @@ components:
               x-ms-navigationProperty: true
             workbook:
               $ref: '#/components/schemas/microsoft.graph.workbook'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.user:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.directoryObject'
@@ -3759,8 +3735,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.directoryObject'
               description: 'The groups, including nested groups, and directory roles that a user is a member of. Nullable.'
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
           description: Represents a Microsoft Entra user account.
     microsoft.graph.mailboxSettings:
       title: mailboxSettings
@@ -3792,8 +3767,7 @@ components:
           $ref: '#/components/schemas/microsoft.graph.userPurpose'
         workingHours:
           $ref: '#/components/schemas/microsoft.graph.workingHours'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.itemAnalytics:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -3809,8 +3783,7 @@ components:
               x-ms-navigationProperty: true
             lastSevenDays:
               $ref: '#/components/schemas/microsoft.graph.itemActivityStat'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.itemActivityStat:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -3851,8 +3824,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.itemActivity'
               description: Exposes the itemActivities represented in this itemActivityStat resource.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.itemActivity:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -3871,8 +3843,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.identitySet'
             driveItem:
               $ref: '#/components/schemas/microsoft.graph.driveItem'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.listItem:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.baseItem'
@@ -3901,8 +3872,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.listItemVersion'
               description: The list of previous versions of the list item.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.documentSetVersion:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.listItemVersion'
@@ -3930,15 +3900,13 @@ components:
               type: boolean
               description: 'If true, minor versions of items are also captured; otherwise, only major versions are captured. The default value is false.'
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.fieldValueSet:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
         - title: fieldValueSet
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.driveRecipient:
       title: driveRecipient
       type: object
@@ -3955,8 +3923,7 @@ components:
           type: string
           description: The unique identifier for the recipient in the directory.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.permission:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -4003,8 +3970,7 @@ components:
               type: string
               description: A unique token that can be used to access this shared item via the shares API. Read-only.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.listItemVersion:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.baseItemVersion'
@@ -4013,8 +3979,7 @@ components:
           properties:
             fields:
               $ref: '#/components/schemas/microsoft.graph.fieldValueSet'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.sensitivityLabelAssignmentMethod:
       title: sensitivityLabelAssignmentMethod
       enum:
@@ -4057,8 +4022,7 @@ components:
           type: string
           description: 'For OneDrive for Business and SharePoint, this property represents the ID of the site that contains the parent document library of the driveItem resource or the parent list of the listItem resource. The value is the same as the id property of that site resource. It is an opaque string that consists of three identifiers of the site. For OneDrive, this property is not populated.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.driveItemUploadableProperties:
       title: driveItemUploadableProperties
       type: object
@@ -4082,8 +4046,7 @@ components:
           type: string
           description: The name of the item (filename and extension). Read-write.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.uploadSession:
       title: uploadSession
       type: object
@@ -4104,8 +4067,7 @@ components:
           type: string
           description: The URL endpoint that accepts PUT requests for byte ranges of the file.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.extractSensitivityLabelsResult:
       title: extractSensitivityLabelsResult
       type: object
@@ -4115,8 +4077,7 @@ components:
           items:
             $ref: '#/components/schemas/microsoft.graph.sensitivityLabelAssignment'
           description: List of sensitivity labels assigned to a file.
-      additionalProperties:
-        type: object
+      additionalProperties: true
     ReferenceNumeric:
       enum:
         - '-INF'
@@ -4137,8 +4098,7 @@ components:
         postUrl:
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.itemRetentionLabel:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -4163,8 +4123,7 @@ components:
               nullable: true
             retentionSettings:
               $ref: '#/components/schemas/microsoft.graph.retentionLabelSettings'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.subscription:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -4225,8 +4184,7 @@ components:
             resource:
               type: string
               description: Required. Specifies the resource that is monitored for changes. Don't include the base URL (https://graph.microsoft.com/v1.0/). See the possible resource path values for each supported resource.
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.thumbnailSet:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -4241,8 +4199,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.thumbnail'
             source:
               $ref: '#/components/schemas/microsoft.graph.thumbnail'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.driveItemVersion:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.baseItemVersion'
@@ -4259,8 +4216,7 @@ components:
               description: Indicates the size of the content stream for this version of the item.
               format: int64
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.list:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.baseItem'
@@ -4309,8 +4265,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.subscription'
               description: The set of subscriptions on the list.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.columnDefinition:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -4407,8 +4362,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.columnValidation'
             sourceColumn:
               $ref: '#/components/schemas/microsoft.graph.columnDefinition'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.contentType:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -4491,8 +4445,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.columnDefinition'
               description: The collection of column definitions for this content type.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.columnLink:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -4503,8 +4456,7 @@ components:
               type: string
               description: The name of the column  in this content type.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.richLongRunningOperation:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.longRunningOperation'
@@ -4528,8 +4480,7 @@ components:
               type: string
               description: The type of the operation.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
           description: The status of a long-running operation.
     microsoft.graph.sharedDriveItem:
       allOf:
@@ -4557,8 +4508,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.driveItem'
             site:
               $ref: '#/components/schemas/microsoft.graph.site'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.site:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.baseItem'
@@ -4654,8 +4604,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.termStore.store'
               description: The collection of termStores under this site.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.baseItem:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -4698,8 +4647,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.user'
             lastModifiedByUser:
               $ref: '#/components/schemas/microsoft.graph.user'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.identitySet:
       title: identitySet
       type: object
@@ -4710,8 +4658,7 @@ components:
           $ref: '#/components/schemas/microsoft.graph.identity'
         user:
           $ref: '#/components/schemas/microsoft.graph.identity'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.quota:
       title: quota
       type: object
@@ -4742,8 +4689,7 @@ components:
           description: 'Total space used, in bytes. Read-only.'
           format: int64
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.sharepointIds:
       title: sharepointIds
       type: object
@@ -4776,13 +4722,11 @@ components:
           type: string
           description: The unique identifier (guid) for the item's site (SPWeb).
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.systemFacet:
       title: systemFacet
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.audio:
       title: audio
       type: object
@@ -4868,8 +4812,7 @@ components:
           description: The year the audio file was recorded.
           format: int32
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.bundle:
       title: bundle
       type: object
@@ -4883,8 +4826,7 @@ components:
           description: Number of children contained immediately within this container.
           format: int32
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.deleted:
       title: deleted
       type: object
@@ -4893,8 +4835,7 @@ components:
           type: string
           description: Represents the state of the deleted item.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.file:
       title: file
       type: object
@@ -4908,8 +4849,7 @@ components:
         processingMetadata:
           type: boolean
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.fileSystemInfo:
       title: fileSystemInfo
       type: object
@@ -4932,8 +4872,7 @@ components:
           description: The UTC date and time the file was last modified on a client.
           format: date-time
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.folder:
       title: folder
       type: object
@@ -4947,8 +4886,7 @@ components:
           nullable: true
         view:
           $ref: '#/components/schemas/microsoft.graph.folderView'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.image:
       title: image
       type: object
@@ -4967,8 +4905,7 @@ components:
           description: 'Optional. Width of the image, in pixels. Read-only.'
           format: int32
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.geoCoordinates:
       title: geoCoordinates
       type: object
@@ -4988,8 +4925,7 @@ components:
           description: 'Optional. The longitude, in decimal, for the item. Read-only.'
           format: double
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.malware:
       title: malware
       type: object
@@ -4998,8 +4934,7 @@ components:
           type: string
           description: Contains the virus details for the malware facet.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.package:
       title: package
       type: object
@@ -5008,16 +4943,14 @@ components:
           type: string
           description: 'A string indicating the type of package. While oneNote is the only currently defined value, you should expect other package types to be returned and handle them accordingly.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.pendingOperations:
       title: pendingOperations
       type: object
       properties:
         pendingContentUpdate:
           $ref: '#/components/schemas/microsoft.graph.pendingContentUpdate'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.photo:
       title: photo
       type: object
@@ -5070,8 +5003,7 @@ components:
           description: Represents the date and time the photo was taken. Read-only.
           format: date-time
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.publicationFacet:
       title: publicationFacet
       type: object
@@ -5086,8 +5018,7 @@ components:
           type: string
           description: The unique identifier for the version that is visible to the current caller. Read-only.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.remoteItem:
       title: remoteItem
       type: object
@@ -5149,13 +5080,11 @@ components:
           type: string
           description: URL that displays the resource in the browser. Read-only.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.root:
       title: root
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.searchResult:
       title: searchResult
       type: object
@@ -5164,8 +5093,7 @@ components:
           type: string
           description: A callback URL that can be used to record telemetry information. The application should issue a GET on this URL if the user interacts with this item to improve the quality of results.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.shared:
       title: shared
       type: object
@@ -5184,8 +5112,7 @@ components:
           description: The UTC date and time when the item was shared. Read-only.
           format: date-time
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.specialFolder:
       title: specialFolder
       type: object
@@ -5194,8 +5121,7 @@ components:
           type: string
           description: The unique identifier for this item in the /drive/special collection
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.video:
       title: video
       type: object
@@ -5260,8 +5186,7 @@ components:
           description: 'Width of the video, in pixels.'
           format: int32
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.workbook:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -5302,8 +5227,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.workbookWorksheet'
               description: Represents a collection of worksheets associated with the workbook. Read-only.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.directoryObject:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -5316,8 +5240,7 @@ components:
               description: Date and time when this object was deleted. Always null when the object hasn't been deleted.
               format: date-time
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.assignedLicense:
       title: assignedLicense
       type: object
@@ -5335,8 +5258,7 @@ components:
           description: The unique identifier for the SKU. Corresponds to the skuId from subscribedSkus or companySubscription.
           format: uuid
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.assignedPlan:
       title: assignedPlan
       type: object
@@ -5361,8 +5283,7 @@ components:
           description: 'A GUID that identifies the service plan. For a complete list of GUIDs and their equivalent friendly service names, see Product names and service plan identifiers for licensing.'
           format: uuid
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.authorizationInfo:
       title: authorizationInfo
       type: object
@@ -5372,13 +5293,11 @@ components:
           items:
             type: string
             nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.customSecurityAttributeValue:
       title: customSecurityAttributeValue
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.employeeOrgData:
       title: employeeOrgData
       type: object
@@ -5391,8 +5310,7 @@ components:
           type: string
           description: The name of the division in which the user works. Returned only on $select. Supports $filter.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.objectIdentity:
       title: objectIdentity
       type: object
@@ -5409,8 +5327,7 @@ components:
           type: string
           description: 'Specifies the user sign-in types in your directory, such as emailAddress, userName, federated, or userPrincipalName. federated represents a unique identifier for a user from an issuer that can be in any format chosen by the issuer. Setting or updating a userPrincipalName identity updates the value of the userPrincipalName property on the user object. The validations performed on the userPrincipalName property on the user object, for example, verified domains and acceptable characters, are performed when setting or updating a userPrincipalName identity. Extra validation is enforced on issuerAssignedId when the sign-in type is set to emailAddress or userName. This property can also be set to any custom string.  For more information about filtering behavior for this property, see Filtering on the identities property of a user.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.licenseAssignmentState:
       title: licenseAssignmentState
       type: object
@@ -5441,8 +5358,7 @@ components:
         state:
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.onPremisesExtensionAttributes:
       title: onPremisesExtensionAttributes
       type: object
@@ -5507,8 +5423,7 @@ components:
           type: string
           description: Ninth customizable extension attribute.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.onPremisesProvisioningError:
       title: onPremisesProvisioningError
       type: object
@@ -5531,8 +5446,7 @@ components:
           type: string
           description: Value of the property causing the error.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.passwordProfile:
       title: passwordProfile
       type: object
@@ -5549,8 +5463,7 @@ components:
           type: string
           description: 'The password for the user. This property is required when a user is created. It can be updated, but the user will be required to change the password on the next sign-in. The password must satisfy minimum requirements as specified by the user''s passwordPolicies property. By default, a strong password is required.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.userPrint:
       title: userPrint
       type: object
@@ -5560,8 +5473,7 @@ components:
           items:
             $ref: '#/components/schemas/microsoft.graph.printerShare'
           x-ms-navigationProperty: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.provisionedPlan:
       title: provisionedPlan
       type: object
@@ -5578,8 +5490,7 @@ components:
           type: string
           description: 'The name of the service; for example, ''AccessControlS2S''.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.serviceProvisioningError:
       title: serviceProvisioningError
       type: object
@@ -5598,8 +5509,7 @@ components:
           type: string
           description: 'Qualified service instance (for example, ''SharePoint/Dublin'') that published the service error information.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.signInActivity:
       title: signInActivity
       type: object
@@ -5634,8 +5544,7 @@ components:
           type: string
           description: The request ID of the last successful sign-in.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.userActivity:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -5697,8 +5606,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.activityHistoryItem'
               description: Optional. NavigationProperty/Containment; navigation property to the activity's historyItems.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.agreementAcceptance:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -5759,8 +5667,7 @@ components:
               type: string
               description: UPN of the user when the acceptance was recorded.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.appRoleAssignment:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.directoryObject'
@@ -5802,8 +5709,7 @@ components:
               description: The unique identifier (id) for the resource service principal for which the assignment is made. Required on create. Supports $filter (eq only).
               format: uuid
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.authentication:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -5876,8 +5782,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.windowsHelloForBusinessAuthenticationMethod'
               description: Represents the Windows Hello for Business authentication method registered to a user for authentication.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.calendar:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -5961,8 +5866,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.singleValueLegacyExtendedProperty'
               description: The collection of single-value extended properties defined for the calendar. Read-only. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.calendarGroup:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -5989,8 +5893,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.calendar'
               description: The calendars in the calendar group. Navigation property. Read-only. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.event:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.outlookItem'
@@ -6165,8 +6068,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.singleValueLegacyExtendedProperty'
               description: The collection of single-value extended properties defined for the event. Read-only. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.chat:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -6245,8 +6147,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.teamsTab'
               description: A collection of all the tabs in the chat. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.cloudClipboardRoot:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -6259,8 +6160,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.cloudClipboardItem'
               description: Represents a collection of Cloud Clipboard items.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.contactFolder:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -6299,8 +6199,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.singleValueLegacyExtendedProperty'
               description: The collection of single-value extended properties defined for the contactFolder. Read-only. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.contact:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.outlookItem'
@@ -6464,8 +6363,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.singleValueLegacyExtendedProperty'
               description: The collection of single-value extended properties defined for the contact. Read-only. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.userDataSecurityAndGovernance:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.dataSecurityAndGovernance'
@@ -6476,8 +6374,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.activitiesContainer'
             protectionScopes:
               $ref: '#/components/schemas/microsoft.graph.userProtectionScopeContainer'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.deviceManagementTroubleshootingEvent:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -6493,8 +6390,7 @@ components:
               type: string
               description: Time when the event occurred .
               format: date-time
-          additionalProperties:
-            type: object
+          additionalProperties: true
           description: Event representing an general failure.
     microsoft.graph.employeeExperienceUser:
       allOf:
@@ -6507,15 +6403,13 @@ components:
               items:
                 $ref: '#/components/schemas/microsoft.graph.learningCourseActivity'
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.extension:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
         - title: extension
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.inferenceClassification:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -6528,15 +6422,13 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.inferenceClassificationOverride'
               description: 'A set of overrides for a user to always classify messages from specific senders in certain ways: focused, or other. Read-only. Nullable.'
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.itemInsights:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.officeGraphInsights'
         - title: itemInsights
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.team:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -6653,8 +6545,7 @@ components:
               x-ms-navigationProperty: true
             template:
               $ref: '#/components/schemas/microsoft.graph.teamsTemplate'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.licenseDetails:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -6676,8 +6567,7 @@ components:
               type: string
               description: 'Unique SKU display name. Equal to the skuPartNumber on the related subscribedSku object; for example, AAD_Premium. Read-only.'
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.mailFolder:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -6747,8 +6637,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.singleValueLegacyExtendedProperty'
               description: The collection of single-value extended properties defined for the mailFolder. Read-only. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.managedAppRegistration:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -6822,8 +6711,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.managedAppOperation'
               description: Zero or more long running operations triggered on the app registration.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
           description: The ManagedAppEntity is the base entity type for all other entity types under app management workflow.
     microsoft.graph.managedDevice:
       allOf:
@@ -7101,8 +6989,7 @@ components:
               x-ms-navigationProperty: true
             windowsProtectionState:
               $ref: '#/components/schemas/microsoft.graph.windowsProtectionState'
-          additionalProperties:
-            type: object
+          additionalProperties: true
           description: 'Devices that are managed or pre-enrolled through Intune. Limited support for $filter: Only properties whose descriptions mention support for $filter may be used, and combinations of those filtered properties must use ''and'', not ''or''.'
     microsoft.graph.message:
       allOf:
@@ -7234,8 +7121,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.singleValueLegacyExtendedProperty'
               description: The collection of single-value extended properties defined for the message. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.oAuth2PermissionGrant:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -7260,8 +7146,7 @@ components:
               type: string
               description: 'A space-separated list of the claim values for delegated permissions that should be included in access tokens for the resource application (the API). For example, openid User.Read GroupMember.Read.All. Each claim value should match the value field of one of the delegated permissions defined by the API, listed in the oauth2PermissionScopes property of the resource service principal. Must not exceed 3,850 characters in length.'
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.onenote:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -7304,8 +7189,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.onenoteSection'
               description: The sections in all OneNote notebooks that are owned by the user or group.  Read-only. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.onlineMeeting:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.onlineMeetingBase'
@@ -7363,8 +7247,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.callTranscript'
               description: The transcripts of an online meeting. Read-only.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.outlookUser:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -7377,8 +7260,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.outlookCategory'
               description: A list of categories defined for the user.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.person:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -7463,8 +7345,7 @@ components:
               type: string
               description: The phonetic Japanese name of the person's company.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.resourceSpecificPermissionGrant:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.directoryObject'
@@ -7491,8 +7372,7 @@ components:
               type: string
               description: ID of the Microsoft Entra app that is hosting the resource. Read-only.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.profilePhoto:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -7513,8 +7393,7 @@ components:
               description: The width of the photo. Read-only.
               format: int32
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.plannerUser:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -7533,8 +7412,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.plannerTask'
               description: Read-only. Nullable. Returns the plannerPlans shared with the user.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.presence:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -7558,8 +7436,7 @@ components:
               readOnly: true
             statusMessage:
               $ref: '#/components/schemas/microsoft.graph.presenceStatusMessage'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.scopedRoleMembership:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -7574,8 +7451,7 @@ components:
               description: Unique identifier for the directory role that the member is in.
             roleMemberInfo:
               $ref: '#/components/schemas/microsoft.graph.identity'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.userSettings:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -7599,8 +7475,7 @@ components:
               items:
                 $ref: '#/components/schemas/microsoft.graph.windowsSetting'
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.userSolutionRoot:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -7609,8 +7484,7 @@ components:
           properties:
             workingTimeSchedule:
               $ref: '#/components/schemas/microsoft.graph.workingTimeSchedule'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.userTeamwork:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -7637,8 +7511,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.userScopeTeamsAppInstallation'
               description: The apps installed in the personal scope of this user.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.todo:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -7651,8 +7524,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.todoTaskList'
               description: The task lists in the users mailbox.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.automaticRepliesSetting:
       title: automaticRepliesSetting
       type: object
@@ -7673,8 +7545,7 @@ components:
           $ref: '#/components/schemas/microsoft.graph.dateTimeTimeZone'
         status:
           $ref: '#/components/schemas/microsoft.graph.automaticRepliesStatus'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.delegateMeetingMessageDeliveryOptions:
       title: delegateMeetingMessageDeliveryOptions
       enum:
@@ -7694,8 +7565,7 @@ components:
           type: string
           description: 'A locale representation for the user, which includes the user''s preferred language and country/region. For example, ''en-us''. The language component follows 2-letter codes as defined in ISO 639-1, and the country component follows 2-letter codes as defined in ISO 3166-1 alpha-2.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.userPurpose:
       title: userPurpose
       enum:
@@ -7730,8 +7600,7 @@ components:
           nullable: true
         timeZone:
           $ref: '#/components/schemas/microsoft.graph.timeZoneBase'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.entity:
       title: entity
       type: object
@@ -7739,8 +7608,7 @@ components:
         id:
           type: string
           description: The unique identifier for an entity. Read-only.
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.itemActionStat:
       title: itemActionStat
       type: object
@@ -7759,8 +7627,7 @@ components:
           description: The number of distinct actors that performed the action. Read-only.
           format: int32
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.incompleteData:
       title: incompleteData
       type: object
@@ -7775,13 +7642,11 @@ components:
           type: boolean
           description: Some data was not recorded due to excessive activity.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.accessAction:
       title: accessAction
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.contentTypeInfo:
       title: contentTypeInfo
       type: object
@@ -7794,8 +7659,7 @@ components:
           type: string
           description: The name of the content type.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.documentSetVersionItem:
       title: documentSetVersionItem
       type: object
@@ -7812,8 +7676,7 @@ components:
           type: string
           description: The version ID of the item.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.sharePointIdentitySet:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.identitySet'
@@ -7826,8 +7689,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.sharePointIdentity'
             siteUser:
               $ref: '#/components/schemas/microsoft.graph.sharePointIdentity'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.sharingInvitation:
       title: sharingInvitation
       type: object
@@ -7845,8 +7707,7 @@ components:
           type: boolean
           description: If true the recipient of the invitation needs to sign in in order to access the shared item. Read-only.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.sharingLink:
       title: sharingLink
       type: object
@@ -7873,8 +7734,7 @@ components:
           type: string
           description: A URL that opens the item in the browser on the OneDrive website.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.baseItemVersion:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -7891,8 +7751,7 @@ components:
               nullable: true
             publication:
               $ref: '#/components/schemas/microsoft.graph.publicationFacet'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.driveItemSource:
       title: driveItemSource
       type: object
@@ -7903,16 +7762,14 @@ components:
           type: string
           description: The external identifier for the drive item from the source.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.mediaSource:
       title: mediaSource
       type: object
       properties:
         contentCategory:
           $ref: '#/components/schemas/microsoft.graph.mediaSourceContentCategory'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.sensitivityLabelAssignment:
       title: sensitivityLabelAssignment
       type: object
@@ -7925,8 +7782,7 @@ components:
         tenantId:
           type: string
           description: The unique identifier for the tenant that hosts the file when this label is applied.
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.retentionLabelSettings:
       title: retentionLabelSettings
       type: object
@@ -7953,8 +7809,7 @@ components:
           type: boolean
           description: Specifies whether the item is locked. Read-write.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.thumbnail:
       title: thumbnail
       type: object
@@ -7986,8 +7841,7 @@ components:
           description: 'The width of the thumbnail, in pixels.'
           format: int32
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.listInfo:
       title: listInfo
       type: object
@@ -8004,13 +7858,11 @@ components:
           type: string
           description: 'An enumerated value that represents the base list template used in creating the list. Possible values include documentLibrary, genericList, task, survey, announcements, contacts, and more.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.booleanColumn:
       title: booleanColumn
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.calculatedColumn:
       title: calculatedColumn
       type: object
@@ -8027,8 +7879,7 @@ components:
           type: string
           description: 'The output type used to format values in this column. Possible values are: boolean, currency, dateTime, number, or text.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.choiceColumn:
       title: choiceColumn
       type: object
@@ -8047,13 +7898,11 @@ components:
           type: string
           description: 'How the choices are to be presented in the UX. Must be one of checkBoxes, dropDownMenu, or radioButtons'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.contentApprovalStatusColumn:
       title: contentApprovalStatusColumn
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.currencyColumn:
       title: currencyColumn
       type: object
@@ -8062,8 +7911,7 @@ components:
           type: string
           description: Specifies the locale from which to infer the currency symbol.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.dateTimeColumn:
       title: dateTimeColumn
       type: object
@@ -8076,8 +7924,7 @@ components:
           type: string
           description: Indicates whether the value should be presented as a date only or a date and time. Must be one of dateOnly or dateTime
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.defaultColumnValue:
       title: defaultColumnValue
       type: object
@@ -8090,13 +7937,11 @@ components:
           type: string
           description: The direct value to use as the default value for the column.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.geolocationColumn:
       title: geolocationColumn
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.hyperlinkOrPictureColumn:
       title: hyperlinkOrPictureColumn
       type: object
@@ -8105,8 +7950,7 @@ components:
           type: boolean
           description: Specifies whether the display format used for URL columns is an image or a hyperlink.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.lookupColumn:
       title: lookupColumn
       type: object
@@ -8131,8 +7975,7 @@ components:
           type: string
           description: 'If specified, this column is a secondary lookup, pulling an additional field from the list item looked up by the primary lookup. Use the list item looked up by the primary as the source for the column named here.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.numberColumn:
       title: numberColumn
       type: object
@@ -8155,8 +7998,7 @@ components:
           description: The minimum permitted value.
           format: double
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.personOrGroupColumn:
       title: personOrGroupColumn
       type: object
@@ -8173,8 +8015,7 @@ components:
           type: string
           description: How to display the information about the person or group chosen. See below.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.termColumn:
       title: termColumn
       type: object
@@ -8191,8 +8032,7 @@ components:
           $ref: '#/components/schemas/microsoft.graph.termStore.term'
         termSet:
           $ref: '#/components/schemas/microsoft.graph.termStore.set'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.textColumn:
       title: textColumn
       type: object
@@ -8223,13 +8063,11 @@ components:
           type: string
           description: The type of text being stored. Must be one of plain or richText
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.thumbnailColumn:
       title: thumbnailColumn
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.columnTypes:
       title: columnTypes
       enum:
@@ -8270,8 +8108,7 @@ components:
           type: string
           description: 'The formula to validate column value. For examples, see Examples of common formulas in lists.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.documentSet:
       title: documentSet
       type: object
@@ -8308,8 +8145,7 @@ components:
           items:
             $ref: '#/components/schemas/microsoft.graph.columnDefinition'
           x-ms-navigationProperty: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.documentSetContent:
       title: documentSetContent
       type: object
@@ -8324,8 +8160,7 @@ components:
           type: string
           description: Folder name in which the file will be placed when a new document set is created in the library.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.contentTypeOrder:
       title: contentTypeOrder
       type: object
@@ -8341,8 +8176,7 @@ components:
           description: Specifies the position in which the content type appears in the selection UI.
           format: int32
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.longRunningOperation:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -8371,8 +8205,7 @@ components:
               type: string
               description: Details about the status of the operation.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
           description: The status of a long-running operation.
     microsoft.graph.publicError:
       title: publicError
@@ -8397,8 +8230,7 @@ components:
           type: string
           description: The target of the error.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.siteCollection:
       title: siteCollection
       type: object
@@ -8415,8 +8247,7 @@ components:
           nullable: true
         root:
           $ref: '#/components/schemas/microsoft.graph.root'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.baseSitePage:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.baseItem'
@@ -8431,8 +8262,7 @@ components:
               type: string
               description: Title of the sitePage.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.termStore.store:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -8459,8 +8289,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.termStore.set'
               description: Collection of all sets available in the term store. This relationship can only be used to load a specific term set.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.driveCollectionResponse:
       title: Collection of drive
       type: object
@@ -8472,8 +8301,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.ODataErrors.ODataError:
       required:
         - error
@@ -8481,8 +8309,7 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/microsoft.graph.ODataErrors.MainError'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.driveItemCollectionResponse:
       title: Collection of driveItem
       type: object
@@ -8494,8 +8321,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     ODataCountResponse:
       type: integer
       format: int32
@@ -8510,8 +8336,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.itemActivityStatCollectionResponse:
       title: Collection of itemActivityStat
       type: object
@@ -8523,8 +8348,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.itemActivityCollectionResponse:
       title: Collection of itemActivity
       type: object
@@ -8536,8 +8360,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.documentSetVersionCollectionResponse:
       title: Collection of documentSetVersion
       type: object
@@ -8549,8 +8372,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.listItemVersionCollectionResponse:
       title: Collection of listItemVersion
       type: object
@@ -8562,8 +8384,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.permissionCollectionResponse:
       title: Collection of permission
       type: object
@@ -8575,8 +8396,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.subscriptionCollectionResponse:
       title: Collection of subscription
       type: object
@@ -8588,8 +8408,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.thumbnailSetCollectionResponse:
       title: Collection of thumbnailSet
       type: object
@@ -8601,8 +8420,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.driveItemVersionCollectionResponse:
       title: Collection of driveItemVersion
       type: object
@@ -8614,8 +8432,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.columnDefinitionCollectionResponse:
       title: Collection of columnDefinition
       type: object
@@ -8627,8 +8444,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.contentTypeCollectionResponse:
       title: Collection of contentType
       type: object
@@ -8640,8 +8456,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.columnLinkCollectionResponse:
       title: Collection of columnLink
       type: object
@@ -8653,8 +8468,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.listItemCollectionResponse:
       title: Collection of listItem
       type: object
@@ -8666,8 +8480,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.richLongRunningOperationCollectionResponse:
       title: Collection of richLongRunningOperation
       type: object
@@ -8679,8 +8492,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.sharedDriveItemCollectionResponse:
       title: Collection of sharedDriveItem
       type: object
@@ -8692,8 +8504,7 @@ components:
         '@odata.nextLink':
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.identity:
       title: identity
       type: object
@@ -8706,8 +8517,7 @@ components:
           type: string
           description: 'Unique identifier for the identity or actor. For example, in the access reviews decisions API, this property might record the id of the principal, that is, the group, user, or application that''s subject to review.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.storagePlanInformation:
       title: storagePlanInformation
       type: object
@@ -8716,8 +8526,7 @@ components:
           type: boolean
           description: Indicates whether there are higher storage quota plans available. Read-only.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.album:
       title: album
       type: object
@@ -8726,8 +8535,7 @@ components:
           type: string
           description: Unique identifier of the driveItem that is the cover of the album.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.hashes:
       title: hashes
       type: object
@@ -8748,8 +8556,7 @@ components:
           type: string
           description: This property isn't supported. Don't use.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.folderView:
       title: folderView
       type: object
@@ -8766,8 +8573,7 @@ components:
           type: string
           description: The type of view that should be used to represent the folder.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.pendingContentUpdate:
       title: pendingContentUpdate
       type: object
@@ -8778,8 +8584,7 @@ components:
           description: Date and time the pending binary operation was queued in UTC time. Read-only.
           format: date-time
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.workbookApplication:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -8789,8 +8594,7 @@ components:
             calculationMode:
               type: string
               description: 'Returns the calculation mode used in the workbook. Possible values are: Automatic, AutomaticExceptTables, Manual.'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookComment:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -8810,15 +8614,13 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.workbookCommentReply'
               description: The list of replies to the comment. Read-only. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookFunctions:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
         - title: workbookFunctions
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookNamedItem:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -8847,8 +8649,7 @@ components:
               description: Indicates whether the object is visible.
             worksheet:
               $ref: '#/components/schemas/microsoft.graph.workbookWorksheet'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookOperation:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -8863,8 +8664,7 @@ components:
               nullable: true
             status:
               $ref: '#/components/schemas/microsoft.graph.workbookOperationStatus'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookTable:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -8920,8 +8720,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.workbookTableSort'
             worksheet:
               $ref: '#/components/schemas/microsoft.graph.workbookWorksheet'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookWorksheet:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -8967,8 +8766,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.workbookTable'
               description: The list of tables that are part of the worksheet. Read-only.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.printerShare:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.printerBase'
@@ -8999,13 +8797,11 @@ components:
               x-ms-navigationProperty: true
             printer:
               $ref: '#/components/schemas/microsoft.graph.printer'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.Json:
       title: Json
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.status:
       title: status
       enum:
@@ -9034,8 +8830,7 @@ components:
         displayText:
           type: string
           description: 'Required. Short text description of the user''s unique activity (for example, document name in cases where an activity refers to document creation)'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.activityHistoryItem:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -9086,8 +8881,7 @@ components:
               nullable: true
             activity:
               $ref: '#/components/schemas/microsoft.graph.userActivity'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.agreementAcceptanceState:
       title: agreementAcceptanceState
       enum:
@@ -9105,8 +8899,7 @@ components:
               type: string
               description: The email address registered to this user.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.fido2AuthenticationMethod:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.authenticationMethod'
@@ -9139,15 +8932,13 @@ components:
               type: string
               description: The manufacturer-assigned model of the FIDO2 security key.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.authenticationMethod:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
         - title: authenticationMethod
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.microsoftAuthenticatorAuthenticationMethod:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.authenticationMethod'
@@ -9174,8 +8965,7 @@ components:
               nullable: true
             device:
               $ref: '#/components/schemas/microsoft.graph.device'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.passwordAuthenticationMethod:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.authenticationMethod'
@@ -9192,8 +8982,7 @@ components:
               type: string
               description: 'For security, the password is always returned as null from a LIST or GET operation.'
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.phoneAuthenticationMethod:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.authenticationMethod'
@@ -9208,8 +8997,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.authenticationPhoneType'
             smsSignInState:
               $ref: '#/components/schemas/microsoft.graph.authenticationMethodSignInState'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.platformCredentialAuthenticationMethod:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.authenticationMethod'
@@ -9232,8 +9020,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.authenticationMethodPlatform'
             device:
               $ref: '#/components/schemas/microsoft.graph.device'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.softwareOathAuthenticationMethod:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.authenticationMethod'
@@ -9244,8 +9031,7 @@ components:
               type: string
               description: The secret key of the method. Always returns null.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.temporaryAccessPassAuthenticationMethod:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.authenticationMethod'
@@ -9287,8 +9073,7 @@ components:
               type: string
               description: The Temporary Access Pass used to authenticate. Returned only on creation of a new temporaryAccessPassAuthenticationMethod object; Hidden in subsequent read operations and returned as null with GET.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.windowsHelloForBusinessAuthenticationMethod:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.authenticationMethod'
@@ -9309,8 +9094,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.authenticationMethodKeyStrength'
             device:
               $ref: '#/components/schemas/microsoft.graph.device'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.onlineMeetingProviderType:
       title: onlineMeetingProviderType
       enum:
@@ -9346,8 +9130,7 @@ components:
           type: string
           description: The display name of the person or entity.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.calendarPermission:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -9371,8 +9154,7 @@ components:
               nullable: true
             role:
               $ref: '#/components/schemas/microsoft.graph.calendarRoleType'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.multiValueLegacyExtendedProperty:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -9385,8 +9167,7 @@ components:
                 type: string
                 nullable: true
               description: A collection of property values.
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.singleValueLegacyExtendedProperty:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -9397,8 +9178,7 @@ components:
               type: string
               description: A property value.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.outlookItem:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -9427,8 +9207,7 @@ components:
               description: 'The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z'
               format: date-time
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.attendee:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.attendeeBase'
@@ -9439,8 +9218,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.timeSlot'
             status:
               $ref: '#/components/schemas/microsoft.graph.responseStatus'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.itemBody:
       title: itemBody
       type: object
@@ -9451,8 +9229,7 @@ components:
           nullable: true
         contentType:
           $ref: '#/components/schemas/microsoft.graph.bodyType'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.dateTimeTimeZone:
       title: dateTimeTimeZone
       type: object
@@ -9464,8 +9241,7 @@ components:
           type: string
           description: 'Represents a time zone, for example, ''Pacific Standard Time''. See below for more possible values.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.importance:
       title: importance
       enum:
@@ -9501,8 +9277,7 @@ components:
           nullable: true
         uniqueIdType:
           $ref: '#/components/schemas/microsoft.graph.locationUniqueIdType'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.onlineMeetingInfo:
       title: onlineMeetingInfo
       type: object
@@ -9534,16 +9309,14 @@ components:
           type: string
           description: The toll number that can be used to join the conference.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.recipient:
       title: recipient
       type: object
       properties:
         emailAddress:
           $ref: '#/components/schemas/microsoft.graph.emailAddress'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.patternedRecurrence:
       title: patternedRecurrence
       type: object
@@ -9552,8 +9325,7 @@ components:
           $ref: '#/components/schemas/microsoft.graph.recurrencePattern'
         range:
           $ref: '#/components/schemas/microsoft.graph.recurrenceRange'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.responseStatus:
       title: responseStatus
       type: object
@@ -9566,8 +9338,7 @@ components:
           description: 'The date and time when the response was returned. It uses ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z'
           format: date-time
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.sensitivity:
       title: sensitivity
       enum:
@@ -9623,8 +9394,7 @@ components:
               type: number
               description: The length of the attachment in bytes.
               format: int32
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.chatType:
       title: chatType
       enum:
@@ -9647,8 +9417,7 @@ components:
           nullable: true
         organizer:
           $ref: '#/components/schemas/microsoft.graph.teamworkUserIdentity'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.chatViewpoint:
       title: chatViewpoint
       type: object
@@ -9663,8 +9432,7 @@ components:
           description: Represents the dateTime up until which the current user has read chatMessages in a specific chat.
           format: date-time
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.teamsAppInstallation:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -9677,8 +9445,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.teamsApp'
             teamsAppDefinition:
               $ref: '#/components/schemas/microsoft.graph.teamsAppDefinition'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.chatMessageInfo:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -9703,8 +9470,7 @@ components:
               nullable: true
             messageType:
               $ref: '#/components/schemas/microsoft.graph.chatMessageType'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.conversationMember:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -9727,8 +9493,7 @@ components:
               description: The timestamp denoting how far back a conversation's history is shared with the conversation member. This property is settable only for members of a chat.
               format: date-time
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.chatMessage:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -9832,8 +9597,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.chatMessage'
               description: Replies for a specified message. Supports $expand for channel messages.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.pinnedChatMessageInfo:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -9842,8 +9606,7 @@ components:
           properties:
             message:
               $ref: '#/components/schemas/microsoft.graph.chatMessage'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.teamsTab:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -9862,8 +9625,7 @@ components:
               nullable: true
             teamsApp:
               $ref: '#/components/schemas/microsoft.graph.teamsApp'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.cloudClipboardItem:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -9891,8 +9653,7 @@ components:
               items:
                 $ref: '#/components/schemas/microsoft.graph.cloudClipboardItemPayload'
               description: A cloudClipboardItem can have multiple cloudClipboardItemPayload objects in the payloads. A window can place more than one clipboard object on the clipboard. Each one represents the same information in a different clipboard format.
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.physicalAddress:
       title: physicalAddress
       type: object
@@ -9917,8 +9678,7 @@ components:
           type: string
           description: The street.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.dataSecurityAndGovernance:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -9930,8 +9690,7 @@ components:
               items:
                 $ref: '#/components/schemas/microsoft.graph.sensitivityLabel'
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.activitiesContainer:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -9944,15 +9703,13 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.contentActivity'
               description: Collection of activity logs related to content processing.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.userProtectionScopeContainer:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
         - title: userProtectionScopeContainer
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.learningCourseActivity:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -9987,8 +9744,7 @@ components:
               nullable: true
             status:
               $ref: '#/components/schemas/microsoft.graph.courseStatus'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.inferenceClassificationOverride:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -9999,8 +9755,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.inferenceClassificationType'
             senderEmailAddress:
               $ref: '#/components/schemas/microsoft.graph.emailAddress'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.officeGraphInsights:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -10025,8 +9780,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.usedInsight'
               description: 'Calculated relationship that identifies the latest documents viewed or modified by a user, including OneDrive for work or school and SharePoint documents, ranked by recency of use.'
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.teamFunSettings:
       title: teamFunSettings
       type: object
@@ -10045,8 +9799,7 @@ components:
           nullable: true
         giphyContentRating:
           $ref: '#/components/schemas/microsoft.graph.giphyRatingType'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.teamGuestSettings:
       title: teamGuestSettings
       type: object
@@ -10059,8 +9812,7 @@ components:
           type: boolean
           description: 'If set to true, guests can delete channels.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.teamMemberSettings:
       title: teamMemberSettings
       type: object
@@ -10089,8 +9841,7 @@ components:
           type: boolean
           description: 'If set to true, members can delete channels.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.teamMessagingSettings:
       title: teamMessagingSettings
       type: object
@@ -10115,8 +9866,7 @@ components:
           type: boolean
           description: 'If set to true, users can edit their messages.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.teamSpecialization:
       title: teamSpecialization
       enum:
@@ -10154,8 +9904,7 @@ components:
           description: Count of owners in a team.
           format: int32
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.teamVisibilityType:
       title: teamVisibilityType
       enum:
@@ -10239,8 +9988,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.teamsTab'
               description: A collection of all the tabs in the channel. A navigation property.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.group:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.directoryObject'
@@ -10559,8 +10307,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.directoryObject'
               description: The direct and transitive members of a group. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
           description: Represents a Microsoft Entra group.
     microsoft.graph.teamsAsyncOperation:
       allOf:
@@ -10598,8 +10345,7 @@ components:
               type: string
               description: The location of the object that's created or modified as result of this async operation. This URL should be treated as an opaque value and not parsed into its component paths.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.schedule:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -10721,8 +10467,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.timeOff'
               description: The instances of times off in the schedule.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.teamworkTag:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -10756,15 +10501,13 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.teamworkTagMember'
               description: Users assigned to the tag.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.teamsTemplate:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
         - title: teamsTemplate
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.servicePlanInfo:
       title: servicePlanInfo
       type: object
@@ -10787,8 +10530,7 @@ components:
           type: string
           description: The name of the service plan.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.messageRule:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -10824,13 +10566,11 @@ components:
               description: 'Indicates the order in which the rule is executed, among other rules.'
               format: int32
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.mobileAppIdentifier:
       title: mobileAppIdentifier
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
       description: The identifier for a mobile app.
     microsoft.graph.managedAppFlaggedReason:
       title: managedAppFlaggedReason
@@ -10876,8 +10616,7 @@ components:
               type: string
               description: Version of the entity.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
           description: The ManagedAppPolicy resource represents a base type for platform specific policies.
     microsoft.graph.managedAppOperation:
       allOf:
@@ -10902,8 +10641,7 @@ components:
               type: string
               description: Version of the entity.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
           description: Represents an operation applied against an app registration.
     microsoft.graph.complianceState:
       title: complianceState
@@ -10964,8 +10702,7 @@ components:
         windowsUpdateForBusiness:
           type: boolean
           description: Whether Windows Update for Business is managed by Intune
-      additionalProperties:
-        type: object
+      additionalProperties: true
       description: configuration Manager client enabled features
     microsoft.graph.deviceActionResult:
       title: deviceActionResult
@@ -10987,8 +10724,7 @@ components:
           type: string
           description: Time the action was initiated
           format: date-time
-      additionalProperties:
-        type: object
+      additionalProperties: true
       description: Device action result
     microsoft.graph.deviceEnrollmentType:
       title: deviceEnrollmentType
@@ -11188,8 +10924,7 @@ components:
           type: string
           description: Operating system running with limited services that is used to prepare a computer for Windows
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.deviceRegistrationState:
       title: deviceRegistrationState
       enum:
@@ -11478,8 +11213,7 @@ components:
               type: string
               description: Display name for the device category.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
           description: 'Device categories provides a way to organize your devices. Using device categories, company administrators can define their own categories that make sense to their company. These categories can then be applied to a device in the Intune Azure console or selected by a user during device enrollment. You can filter reports and create dynamic Azure Active Directory device groups based on device categories.'
     microsoft.graph.deviceCompliancePolicyState:
       allOf:
@@ -11511,8 +11245,7 @@ components:
               type: number
               description: The version of the policy
               format: int32
-          additionalProperties:
-            type: object
+          additionalProperties: true
           description: Device Compliance Policy State for a given device.
     microsoft.graph.deviceConfigurationState:
       allOf:
@@ -11544,8 +11277,7 @@ components:
               type: number
               description: The version of the policy
               format: int32
-          additionalProperties:
-            type: object
+          additionalProperties: true
           description: Support for this Entity is being deprecated starting May 2026 & will no longer be supported.
     microsoft.graph.deviceLogCollectionResponse:
       allOf:
@@ -11591,8 +11323,7 @@ components:
               nullable: true
             status:
               $ref: '#/components/schemas/microsoft.graph.appLogUploadState'
-          additionalProperties:
-            type: object
+          additionalProperties: true
           description: Windows Log Collection request entity.
     microsoft.graph.windowsProtectionState:
       allOf:
@@ -11688,8 +11419,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.windowsDeviceMalwareState'
               description: Device malware list
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
           description: Device protection status entity.
     microsoft.graph.followupFlag:
       title: followupFlag
@@ -11703,8 +11433,7 @@ components:
           $ref: '#/components/schemas/microsoft.graph.followupFlagStatus'
         startDateTime:
           $ref: '#/components/schemas/microsoft.graph.dateTimeTimeZone'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.inferenceClassificationType:
       title: inferenceClassificationType
       enum:
@@ -11723,8 +11452,7 @@ components:
           type: string
           description: The value in a key-value pair.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.notebook:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.onenoteEntityHierarchyModel'
@@ -11763,8 +11491,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.onenoteSection'
               description: The sections in the notebook. Read-only. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.onenoteOperation:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.operation'
@@ -11785,8 +11512,7 @@ components:
               type: string
               description: 'The resource URI for the object. For example, the resource URI for a copied page or section.'
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.onenotePage:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.onenoteEntitySchemaObjectModel'
@@ -11841,8 +11567,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.notebook'
             parentSection:
               $ref: '#/components/schemas/microsoft.graph.onenoteSection'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.onenoteResource:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.onenoteEntityBaseModel'
@@ -11858,8 +11583,7 @@ components:
               type: string
               description: The URL for downloading the content
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.sectionGroup:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.onenoteEntityHierarchyModel'
@@ -11890,8 +11614,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.onenoteSection'
               description: The sections in the section group. Read-only. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.onenoteSection:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.onenoteEntityHierarchyModel'
@@ -11918,8 +11641,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.notebook'
             parentSectionGroup:
               $ref: '#/components/schemas/microsoft.graph.sectionGroup'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.onlineMeetingBase:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -12015,8 +11737,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.meetingAttendanceReport'
               description: The attendance reports of an online meeting. Read-only.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.broadcastMeetingSettings:
       title: broadcastMeetingSettings
       type: object
@@ -12041,8 +11762,7 @@ components:
           type: boolean
           description: Indicates whether video on demand is enabled for this Teams live event. Default value is false.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.meetingParticipants:
       title: meetingParticipants
       type: object
@@ -12054,8 +11774,7 @@ components:
           description: Information about the meeting attendees.
         organizer:
           $ref: '#/components/schemas/microsoft.graph.meetingParticipantInfo'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.callRecording:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -12097,8 +11816,7 @@ components:
               type: string
               description: The URL that can be used to access the content of the recording. Read-only.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.callTranscript:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -12145,8 +11863,7 @@ components:
               type: string
               description: The URL that can be used to access the content of the transcript. Read-only.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.outlookCategory:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -12159,8 +11876,7 @@ components:
               type: string
               description: 'A unique name that identifies a category in the user''s mailbox. After a category is created, the name cannot be changed. Read-only.'
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.personType:
       title: personType
       type: object
@@ -12173,8 +11889,7 @@ components:
           type: string
           description: 'The secondary type of data source, such as OrganizationUser.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.phone:
       title: phone
       type: object
@@ -12191,8 +11906,7 @@ components:
           nullable: true
         type:
           $ref: '#/components/schemas/microsoft.graph.phoneType'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.scoredEmailAddress:
       title: scoredEmailAddress
       type: object
@@ -12211,8 +11925,7 @@ components:
           nullable: true
         selectionLikelihood:
           $ref: '#/components/schemas/microsoft.graph.selectionLikelihoodInfo'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.website:
       title: website
       type: object
@@ -12227,8 +11940,7 @@ components:
           nullable: true
         type:
           $ref: '#/components/schemas/microsoft.graph.websiteType'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.plannerPlan:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -12266,8 +11978,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.plannerTask'
               description: Read-only. Nullable. Collection of tasks in the plan.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.plannerTask:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -12378,8 +12089,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.plannerTaskDetails'
             progressTaskBoardFormat:
               $ref: '#/components/schemas/microsoft.graph.plannerProgressTaskBoardTaskFormat'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.outOfOfficeSettings:
       title: outOfOfficeSettings
       type: object
@@ -12392,8 +12102,7 @@ components:
           type: string
           description: The out-of-office message configured by the user in the Outlook client (Automatic replies) or the Teams client (Schedule out of office).
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.presenceStatusMessage:
       title: presenceStatusMessage
       type: object
@@ -12408,8 +12117,7 @@ components:
           description: Time in which the status message was published.Read-only.publishedDateTime isn't available when you request the presence of another user.
           format: date-time
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.userInsightsSettings:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -12419,8 +12127,7 @@ components:
             isEnabled:
               type: boolean
               description: True if the user's itemInsights and meeting hours insights are enabled; false if the user's itemInsights and meeting hours insights are disabled. The default value is true. Optional.
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.shiftPreferences:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.changeTrackedEntity'
@@ -12432,8 +12139,7 @@ components:
               items:
                 $ref: '#/components/schemas/microsoft.graph.shiftAvailability'
               description: Availability of the user to be scheduled for work and its recurrence pattern.
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.userStorage:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -12442,8 +12148,7 @@ components:
           properties:
             quota:
               $ref: '#/components/schemas/microsoft.graph.unifiedStorageQuota'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.windowsSetting:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -12466,22 +12171,19 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.windowsSettingInstance'
               description: A collection of setting values for a given windowsSetting.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workingTimeSchedule:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
         - title: workingTimeSchedule
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.associatedTeamInfo:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.teamInfo'
         - title: associatedTeamInfo
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.userScopeTeamsAppInstallation:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.teamsAppInstallation'
@@ -12490,8 +12192,7 @@ components:
           properties:
             chat:
               $ref: '#/components/schemas/microsoft.graph.chat'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.todoTaskList:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -12522,8 +12223,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.todoTask'
               description: The tasks in this task list. Read-only. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.externalAudienceScope:
       title: externalAudienceScope
       enum:
@@ -12557,8 +12257,7 @@ components:
           type: string
           description: 'The name of a time zone. It can be a standard time zone name such as ''Hawaii-Aleutian Standard Time'', or ''Customized Time Zone'' for a custom time zone.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.sharePointIdentity:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.identity'
@@ -12569,8 +12268,7 @@ components:
               type: string
               description: The sign in name of the SharePoint identity.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.driveItemSourceApplication:
       title: driveItemSourceApplication
       enum:
@@ -12656,8 +12354,7 @@ components:
               x-ms-navigationProperty: true
             set:
               $ref: '#/components/schemas/microsoft.graph.termStore.set'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.termStore.set:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -12704,8 +12401,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.termStore.term'
               description: All the terms under the set.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.displayNameLocalization:
       title: displayNameLocalization
       type: object
@@ -12718,8 +12414,7 @@ components:
           type: string
           description: Provides the language culture-code and friendly name of the language that the displayName field has been provided in.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.longRunningOperationStatus:
       title: longRunningOperationStatus
       enum:
@@ -12745,8 +12440,7 @@ components:
           type: string
           description: The target of the error.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.publicInnerError:
       title: publicInnerError
       type: object
@@ -12768,16 +12462,14 @@ components:
           type: string
           description: The target of the error.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.siteArchivalDetails:
       title: siteArchivalDetails
       type: object
       properties:
         archiveStatus:
           $ref: '#/components/schemas/microsoft.graph.siteArchiveStatus'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.pageLayoutType:
       title: pageLayoutType
       enum:
@@ -12818,8 +12510,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.termStore.set'
               description: 'All sets under the group in a term [store].'
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.ODataErrors.MainError:
       required:
         - code
@@ -12840,8 +12531,7 @@ components:
             $ref: '#/components/schemas/microsoft.graph.ODataErrors.ErrorDetails'
         innerError:
           $ref: '#/components/schemas/microsoft.graph.ODataErrors.InnerError'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.workbookCommentReply:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -12855,8 +12545,7 @@ components:
             contentType:
               type: string
               description: The content type for the reply.
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookOperationError:
       title: workbookOperationError
       type: object
@@ -12871,8 +12560,7 @@ components:
           type: string
           description: The error message.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.workbookOperationStatus:
       title: workbookOperationStatus
       enum:
@@ -12901,8 +12589,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.Json'
             filter:
               $ref: '#/components/schemas/microsoft.graph.workbookFilter'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookTableRow:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -12917,8 +12604,7 @@ components:
               format: int32
             values:
               $ref: '#/components/schemas/microsoft.graph.Json'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookTableSort:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -12936,8 +12622,7 @@ components:
             method:
               type: string
               description: 'The Chinese character ordering method last used to sort the table. The possible values are: PinYin, StrokeCount. Read-only.'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChart:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -12986,8 +12671,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.workbookChartTitle'
             worksheet:
               $ref: '#/components/schemas/microsoft.graph.workbookWorksheet'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookPivotTable:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -13000,8 +12684,7 @@ components:
               nullable: true
             worksheet:
               $ref: '#/components/schemas/microsoft.graph.workbookWorksheet'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookWorksheetProtection:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -13013,8 +12696,7 @@ components:
             protected:
               type: boolean
               description: Indicates whether the worksheet is protected.  Read-only.
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.printerBase:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -13050,8 +12732,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.printJob'
               description: The list of jobs that are queued for printing by the printer/printerShare.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.printerShareViewpoint:
       title: printerShareViewpoint
       type: object
@@ -13062,8 +12743,7 @@ components:
           description: 'Date and time when the printer was last used by the signed-in user. The timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z.'
           format: date-time
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.printer:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.printerBase'
@@ -13105,8 +12785,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.printTaskTrigger'
               description: A list of task triggers that are associated with the printer.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.imageInfo:
       title: imageInfo
       type: object
@@ -13126,8 +12805,7 @@ components:
           type: string
           description: Optional; URI that points to an icon which represents the application used to generate the activity
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.attestationLevel:
       title: attestationLevel
       enum:
@@ -13305,8 +12983,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.directoryObject'
               description: Groups and administrative units that the device is a member of. This operation is transitive. Supports $expand.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.authenticationPhoneType:
       title: authenticationPhoneType
       enum:
@@ -13364,8 +13041,7 @@ components:
           properties:
             type:
               $ref: '#/components/schemas/microsoft.graph.attendeeType'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.timeSlot:
       title: timeSlot
       type: object
@@ -13374,8 +13050,7 @@ components:
           $ref: '#/components/schemas/microsoft.graph.dateTimeTimeZone'
         start:
           $ref: '#/components/schemas/microsoft.graph.dateTimeTimeZone'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.bodyType:
       title: bodyType
       enum:
@@ -13411,8 +13086,7 @@ components:
           description: The longitude of the location.
           format: double
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.locationType:
       title: locationType
       enum:
@@ -13469,8 +13143,7 @@ components:
           format: int32
         type:
           $ref: '#/components/schemas/microsoft.graph.recurrencePatternType'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.recurrenceRange:
       title: recurrenceRange
       type: object
@@ -13499,8 +13172,7 @@ components:
           nullable: true
         type:
           $ref: '#/components/schemas/microsoft.graph.recurrenceRangeType'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.responseType:
       title: responseType
       enum:
@@ -13519,8 +13191,7 @@ components:
           properties:
             userIdentityType:
               $ref: '#/components/schemas/microsoft.graph.teamworkUserIdentityType'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.teamsAppPermissionSet:
       title: teamsAppPermissionSet
       type: object
@@ -13530,8 +13201,7 @@ components:
           items:
             $ref: '#/components/schemas/microsoft.graph.teamsAppResourceSpecificPermission'
           description: A collection of resource-specific permissions.
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.teamsApp:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -13554,8 +13224,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.teamsAppDefinition'
               description: The details for each version of the app.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.teamsAppDefinition:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -13595,20 +13264,17 @@ components:
               nullable: true
             bot:
               $ref: '#/components/schemas/microsoft.graph.teamworkBot'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.eventMessageDetail:
       title: eventMessageDetail
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.chatMessageFromIdentitySet:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.identitySet'
         - title: chatMessageFromIdentitySet
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.chatMessageType:
       title: chatMessageType
       enum:
@@ -13650,8 +13316,7 @@ components:
           type: string
           description: 'The URL to a thumbnail image that the channel can use if it supports using an alternative, smaller form of content or contentUrl. For example, if you set contentType to application/word and set contentUrl to the location of the Word document, you might include a thumbnail image that represents the document. The channel could display the thumbnail image instead of the document. When the user selects the image, the channel would open the document.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.channelIdentity:
       title: channelIdentity
       type: object
@@ -13664,8 +13329,7 @@ components:
           type: string
           description: The identity of the team in which the message was posted.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.chatMessageImportance:
       title: chatMessageImportance
       enum:
@@ -13691,8 +13355,7 @@ components:
           type: string
           description: 'String used to represent the mention. For example, a user''s display name, a team name.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.chatMessageHistoryItem:
       title: chatMessageHistoryItem
       type: object
@@ -13706,8 +13369,7 @@ components:
           format: date-time
         reaction:
           $ref: '#/components/schemas/microsoft.graph.chatMessageReaction'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.chatMessagePolicyViolation:
       title: chatMessagePolicyViolation
       type: object
@@ -13724,8 +13386,7 @@ components:
           $ref: '#/components/schemas/microsoft.graph.chatMessagePolicyViolationUserActionTypes'
         verdictDetails:
           $ref: '#/components/schemas/microsoft.graph.chatMessagePolicyViolationVerdictDetailsTypes'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.chatMessageReaction:
       title: chatMessageReaction
       type: object
@@ -13748,15 +13409,13 @@ components:
           description: 'The reaction type. Supported values include Unicode characters, custom, and some backward-compatible reaction types, such as like, angry, sad, laugh, heart, and surprised.'
         user:
           $ref: '#/components/schemas/microsoft.graph.chatMessageReactionIdentitySet'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.chatMessageHostedContent:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.teamworkHostedContent'
         - title: chatMessageHostedContent
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.teamsTabConfiguration:
       title: teamsTabConfiguration
       type: object
@@ -13777,8 +13436,7 @@ components:
           type: string
           description: Url for showing tab contents outside of Teams.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.cloudClipboardItemPayload:
       title: cloudClipboardItemPayload
       type: object
@@ -13789,8 +13447,7 @@ components:
         formatName:
           type: string
           description: For a list of possible values see formatName values.
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.sensitivityLabel:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -13839,8 +13496,7 @@ components:
               items:
                 $ref: '#/components/schemas/microsoft.graph.sensitivityLabel'
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.contentActivity:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -13857,8 +13513,7 @@ components:
               type: string
               description: ID of the user.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.courseStatus:
       title: courseStatus
       enum:
@@ -13887,8 +13542,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.entity'
             resource:
               $ref: '#/components/schemas/microsoft.graph.entity'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.trending:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -13912,8 +13566,7 @@ components:
               nullable: true
             resource:
               $ref: '#/components/schemas/microsoft.graph.entity'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.usedInsight:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -13928,8 +13581,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.resourceVisualization'
             resource:
               $ref: '#/components/schemas/microsoft.graph.entity'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.giphyRatingType:
       title: giphyRatingType
       enum:
@@ -13974,8 +13626,7 @@ components:
           description: Count of owners in a channel.
           format: int32
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.sharedWithChannelTeamInfo:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.teamInfo'
@@ -13992,8 +13643,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.conversationMember'
               description: A collection of team members who have access to the shared channel.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.assignedLabel:
       title: assignedLabel
       type: object
@@ -14006,8 +13656,7 @@ components:
           type: string
           description: The unique identifier of the label.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.licenseProcessingState:
       title: licenseProcessingState
       type: object
@@ -14015,8 +13664,7 @@ components:
         state:
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.conversation:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -14048,8 +13696,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.conversationThread'
               description: A collection of all the conversation threads in the conversation. A navigation property. Read-only. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.groupLifecyclePolicy:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -14071,8 +13718,7 @@ components:
               type: string
               description: 'The group type for which the expiration policy applies. Possible values are All, Selected or None.'
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.plannerGroup:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -14085,8 +13731,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.plannerPlan'
               description: Read-only. Nullable. Returns the plannerPlans owned by the group.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.groupSetting:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -14106,8 +13751,7 @@ components:
               items:
                 $ref: '#/components/schemas/microsoft.graph.settingValue'
               description: Collection of name-value pairs corresponding to the name and defaultValue properties in the referenced groupSettingTemplates object.
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.conversationThread:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -14151,8 +13795,7 @@ components:
               items:
                 $ref: '#/components/schemas/microsoft.graph.post'
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.operationError:
       title: operationError
       type: object
@@ -14165,8 +13808,7 @@ components:
           type: string
           description: Operation error message.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.teamsAsyncOperationType:
       title: teamsAsyncOperationType
       enum:
@@ -14205,8 +13847,7 @@ components:
       properties:
         approvedLocation:
           $ref: '#/components/schemas/microsoft.graph.geoCoordinates'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.dayNote:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.changeTrackedEntity'
@@ -14223,8 +13864,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.itemBody'
             sharedDayNote:
               $ref: '#/components/schemas/microsoft.graph.itemBody'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.offerShiftRequest:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.scheduleChangeRequest'
@@ -14250,8 +13890,7 @@ components:
               type: string
               description: The sender's shift ID.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.openShiftChangeRequest:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.scheduleChangeRequest'
@@ -14262,8 +13901,7 @@ components:
               type: string
               description: ID for the open shift.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.openShift:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.changeTrackedEntity'
@@ -14282,8 +13920,7 @@ components:
               nullable: true
             sharedOpenShift:
               $ref: '#/components/schemas/microsoft.graph.openShiftItem'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.schedulingGroup:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.changeTrackedEntity'
@@ -14309,8 +13946,7 @@ components:
                 type: string
                 nullable: true
               description: The list of user IDs that are a member of the schedulingGroup. Required.
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.shift:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.changeTrackedEntity'
@@ -14333,8 +13969,7 @@ components:
               type: string
               description: ID of the user assigned to the shift. Required.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.swapShiftsChangeRequest:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.offerShiftRequest'
@@ -14345,8 +13980,7 @@ components:
               type: string
               description: The recipient's Shift ID
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.timeCard:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.changeTrackedEntity'
@@ -14374,8 +14008,7 @@ components:
               type: string
               description: User ID to which the timeCard belongs.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.timeOffReason:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.changeTrackedEntity'
@@ -14396,8 +14029,7 @@ components:
               type: boolean
               description: Indicates whether the timeOffReason can be used when creating new entities or updating existing ones. Required.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.timeOffRequest:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.scheduleChangeRequest'
@@ -14420,8 +14052,7 @@ components:
               type: string
               description: The reason for the time off.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.timeOff:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.changeTrackedEntity'
@@ -14440,8 +14071,7 @@ components:
               type: string
               description: ID of the user assigned to the timeOff. Required.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.teamworkTagType:
       title: teamworkTagType
       enum:
@@ -14466,8 +14096,7 @@ components:
               type: string
               description: The user ID of the member.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.messageRuleActions:
       title: messageRuleActions
       type: object
@@ -14519,8 +14148,7 @@ components:
           type: boolean
           description: Indicates whether subsequent rules should be evaluated.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.messageRulePredicates:
       title: messageRulePredicates
       type: object
@@ -14653,8 +14281,7 @@ components:
           description: Represents the strings that appear in the subject of an incoming message in order for the condition or exception to apply.
         withinSizeRange:
           $ref: '#/components/schemas/microsoft.graph.sizeRange'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.actionState:
       title: actionState
       enum:
@@ -14784,8 +14411,7 @@ components:
           type: string
           description: UserPrincipalName.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
       description: Device Compilance Policy Setting State for a given device.
     microsoft.graph.complianceStatus:
       title: complianceStatus
@@ -14850,8 +14476,7 @@ components:
           type: string
           description: UserPrincipalName.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
       description: Device Configuration Setting State for a given device.
     microsoft.graph.appLogUploadState:
       title: appLogUploadState
@@ -15071,8 +14696,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.windowsMalwareState'
             threatState:
               $ref: '#/components/schemas/microsoft.graph.windowsMalwareThreatState'
-          additionalProperties:
-            type: object
+          additionalProperties: true
           description: Malware detection entity.
     microsoft.graph.followupFlagStatus:
       title: followupFlagStatus
@@ -15101,8 +14725,7 @@ components:
               description: 'The date and time when the notebook was last modified. The timestamp represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.'
               format: date-time
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.notebookLinks:
       title: notebookLinks
       type: object
@@ -15111,8 +14734,7 @@ components:
           $ref: '#/components/schemas/microsoft.graph.externalLink'
         oneNoteWebUrl:
           $ref: '#/components/schemas/microsoft.graph.externalLink'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.onenoteUserRole:
       title: onenoteUserRole
       enum:
@@ -15141,8 +14763,7 @@ components:
               nullable: true
             status:
               $ref: '#/components/schemas/microsoft.graph.operationStatus'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.onenoteOperationError:
       title: onenoteOperationError
       type: object
@@ -15155,8 +14776,7 @@ components:
           type: string
           description: The error message.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.onenoteEntitySchemaObjectModel:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.onenoteEntityBaseModel'
@@ -15169,8 +14789,7 @@ components:
               description: 'The date and time when the page was created. The timestamp represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.'
               format: date-time
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.pageLinks:
       title: pageLinks
       type: object
@@ -15179,8 +14798,7 @@ components:
           $ref: '#/components/schemas/microsoft.graph.externalLink'
         oneNoteWebUrl:
           $ref: '#/components/schemas/microsoft.graph.externalLink'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.onenoteEntityBaseModel:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -15191,8 +14809,7 @@ components:
               type: string
               description: The endpoint where you can get details about the page. Read-only.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.sectionLinks:
       title: sectionLinks
       type: object
@@ -15201,8 +14818,7 @@ components:
           $ref: '#/components/schemas/microsoft.graph.externalLink'
         oneNoteWebUrl:
           $ref: '#/components/schemas/microsoft.graph.externalLink'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.allowedLobbyAdmitterRoles:
       title: allowedLobbyAdmitterRoles
       enum:
@@ -15266,8 +14882,7 @@ components:
             type: string
             nullable: true
           description: List of toll numbers that are displayed in the meeting invite.
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.chatInfo:
       title: chatInfo
       type: object
@@ -15284,8 +14899,7 @@ components:
           type: string
           description: The unique identifier for a thread in Microsoft Teams.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.chatRestrictions:
       title: chatRestrictions
       type: object
@@ -15294,8 +14908,7 @@ components:
           type: boolean
           description: Indicates whether only text is allowed in the meeting chat. Optional.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.joinMeetingIdSettings:
       title: joinMeetingIdSettings
       type: object
@@ -15312,8 +14925,7 @@ components:
           type: string
           description: The passcode to join a meeting.  Optional. Read-only.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.lobbyBypassSettings:
       title: lobbyBypassSettings
       type: object
@@ -15324,8 +14936,7 @@ components:
           nullable: true
         scope:
           $ref: '#/components/schemas/microsoft.graph.lobbyBypassScope'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.meetingChatHistoryDefaultMode:
       title: meetingChatHistoryDefaultMode
       enum:
@@ -15345,8 +14956,7 @@ components:
           type: boolean
           description: Indicates whether to apply a watermark to everyone's video feed.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.meetingAttendanceReport:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -15383,8 +14993,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.attendanceRecord'
               description: List of attendance records of an attendance report. Read-only.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.broadcastMeetingAudience:
       title: broadcastMeetingAudience
       enum:
@@ -15411,8 +15020,7 @@ components:
             type: string
             nullable: true
           description: The translation languages (choose up to 6).
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.meetingParticipantInfo:
       title: meetingParticipantInfo
       type: object
@@ -15425,8 +15033,7 @@ components:
           type: string
           description: User principal name of the participant.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.categoryColor:
       title: categoryColor
       enum:
@@ -15500,8 +15107,7 @@ components:
           type: string
           description: The full canonical URL of the container. Optional.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.plannerBucket:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -15525,8 +15131,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.plannerTask'
               description: Read-only. Nullable. The collection of tasks in the bucket.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.plannerPlanDetails:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -15537,18 +15142,15 @@ components:
               $ref: '#/components/schemas/microsoft.graph.plannerCategoryDescriptions'
             sharedWith:
               $ref: '#/components/schemas/microsoft.graph.plannerUserIds'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.plannerAppliedCategories:
       title: plannerAppliedCategories
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.plannerAssignments:
       title: plannerAssignments
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.plannerPreviewType:
       title: plannerPreviewType
       enum:
@@ -15570,8 +15172,7 @@ components:
               type: string
               description: 'Hint value used to order the task on the AssignedTo view of the Task Board when the task isn''t assigned to anyone, or if the orderHintsByAssignee dictionary doesn''t provide an order hint for the user the task is assigned to. The format is defined as outlined here.'
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.plannerBucketTaskBoardTaskFormat:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -15582,8 +15183,7 @@ components:
               type: string
               description: 'Hint used to order tasks in the bucket view of the task board. For details about the supported format, see Using order hints in Planner.'
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.plannerTaskDetails:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -15600,8 +15200,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.plannerPreviewType'
             references:
               $ref: '#/components/schemas/microsoft.graph.plannerExternalReferences'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.plannerProgressTaskBoardTaskFormat:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -15612,8 +15211,7 @@ components:
               type: string
               description: 'Hint value used to order the task on the progress view of the task board. For details about the supported format, see Using order hints in Planner.'
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.changeTrackedEntity:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -15638,8 +15236,7 @@ components:
               format: date-time
               nullable: true
               readOnly: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.shiftAvailability:
       title: shiftAvailability
       type: object
@@ -15655,8 +15252,7 @@ components:
           type: string
           description: Specifies the time zone for the indicated time.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.unifiedStorageQuota:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -15690,8 +15286,7 @@ components:
               items:
                 $ref: '#/components/schemas/microsoft.graph.serviceStorageQuotaBreakdown'
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.windowsSettingType:
       title: windowsSettingType
       enum:
@@ -15724,8 +15319,7 @@ components:
             payload:
               type: string
               description: Base64-encoded JSON setting value.
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.teamInfo:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -15742,8 +15336,7 @@ components:
               nullable: true
             team:
               $ref: '#/components/schemas/microsoft.graph.team'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.wellknownListName:
       title: wellknownListName
       enum:
@@ -15835,8 +15428,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.linkedResource'
               description: A collection of resources linked to the task.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.termStore.localizedDescription:
       title: localizedDescription
       type: object
@@ -15849,8 +15441,7 @@ components:
           type: string
           description: The language tag for the label.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.termStore.localizedLabel:
       title: localizedLabel
       type: object
@@ -15867,8 +15458,7 @@ components:
           type: string
           description: The name of the label.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.keyValue:
       title: keyValue
       type: object
@@ -15881,8 +15471,7 @@ components:
           type: string
           description: Value for the key-value pair.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.termStore.relation:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -15897,8 +15486,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.termStore.set'
             toTerm:
               $ref: '#/components/schemas/microsoft.graph.termStore.term'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.termStore.localizedName:
       title: localizedName
       type: object
@@ -15911,8 +15499,7 @@ components:
           type: string
           description: The name in the localized language.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.siteArchiveStatus:
       title: siteArchiveStatus
       enum:
@@ -15942,12 +15529,10 @@ components:
         target:
           type: string
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.ODataErrors.InnerError:
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
       description: The structure of this object is service-specific
     microsoft.graph.workbookFilter:
       allOf:
@@ -15957,8 +15542,7 @@ components:
           properties:
             criteria:
               $ref: '#/components/schemas/microsoft.graph.workbookFilterCriteria'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookSortField:
       title: workbookSortField
       type: object
@@ -15984,8 +15568,7 @@ components:
         sortOn:
           type: string
           description: 'Represents the type of sorting of this condition. The possible values are: Value, CellColor, FontColor, Icon.'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.workbookChartAxes:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -15998,8 +15581,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.workbookChartAxis'
             valueAxis:
               $ref: '#/components/schemas/microsoft.graph.workbookChartAxis'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartDataLabels:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -16040,8 +15622,7 @@ components:
               nullable: true
             format:
               $ref: '#/components/schemas/microsoft.graph.workbookChartDataLabelFormat'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartAreaFormat:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -16052,8 +15633,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.workbookChartFill'
             font:
               $ref: '#/components/schemas/microsoft.graph.workbookChartFont'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartLegend:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -16073,8 +15653,7 @@ components:
               description: Indicates whether the chart legend is visible.
             format:
               $ref: '#/components/schemas/microsoft.graph.workbookChartLegendFormat'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartSeries:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -16093,8 +15672,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.workbookChartPoint'
               description: A collection of all points in the series. Read-only.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartTitle:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -16114,8 +15692,7 @@ components:
               description: Indicates whether the chart title is visible.
             format:
               $ref: '#/components/schemas/microsoft.graph.workbookChartTitleFormat'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookWorksheetProtectionOptions:
       title: workbookWorksheetProtectionOptions
       type: object
@@ -16153,8 +15730,7 @@ components:
         allowSort:
           type: boolean
           description: Represents the worksheet protection option of allowing using sort feature.
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.printerCapabilities:
       title: printerCapabilities
       type: object
@@ -16307,8 +15883,7 @@ components:
             format: int32
             nullable: true
           description: A list of supported top margins(in microns) for the printer.
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.printerDefaults:
       title: printerDefaults
       type: object
@@ -16379,8 +15954,7 @@ components:
           $ref: '#/components/schemas/microsoft.graph.printQuality'
         scaling:
           $ref: '#/components/schemas/microsoft.graph.printScaling'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.printerLocation:
       title: printerLocation
       type: object
@@ -16463,8 +16037,7 @@ components:
           items:
             type: string
             nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.printerStatus:
       title: printerStatus
       type: object
@@ -16480,8 +16053,7 @@ components:
           description: The list of details describing why the printer is in the current state. Valid values are described in the following table. Read-only.
         state:
           $ref: '#/components/schemas/microsoft.graph.printerProcessingState'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.printJob:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -16534,8 +16106,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.printTask'
               description: A list of printTasks that were triggered by this print job.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.printConnector:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -16561,8 +16132,7 @@ components:
               type: string
               description: The DateTimeOffset when the connector was registered.
               format: date-time
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.printTaskTrigger:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -16573,8 +16143,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.printEvent'
             definition:
               $ref: '#/components/schemas/microsoft.graph.printTaskDefinition'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.alternativeSecurityId:
       title: alternativeSecurityId
       type: object
@@ -16595,8 +16164,7 @@ components:
           description: For internal use only.
           format: int32
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.attendeeType:
       title: attendeeType
       enum:
@@ -16653,8 +16221,7 @@ components:
           type: string
           description: The name of the resource-specific permission.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.teamsAppDistributionMethod:
       title: teamsAppDistributionMethod
       enum:
@@ -16673,8 +16240,7 @@ components:
           nullable: true
         requiredPermissionSet:
           $ref: '#/components/schemas/microsoft.graph.teamsAppPermissionSet'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.teamsAppPublishingState:
       title: teamsAppPublishingState
       enum:
@@ -16688,8 +16254,7 @@ components:
         - $ref: '#/components/schemas/microsoft.graph.entity'
         - title: teamworkBot
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.chatMessageMentionedIdentitySet:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.identitySet'
@@ -16698,8 +16263,7 @@ components:
           properties:
             conversation:
               $ref: '#/components/schemas/microsoft.graph.teamworkConversationIdentity'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.chatMessageActions:
       title: chatMessageActions
       enum:
@@ -16738,8 +16302,7 @@ components:
             type: string
             nullable: true
           description: 'The list of improper data in the message that was detected by the data loss prevention app. Each DLP app defines its own conditions, examples include ''Credit Card Number'' and ''Social Security Number''.'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.chatMessagePolicyViolationUserActionTypes:
       title: chatMessagePolicyViolationUserActionTypes
       enum:
@@ -16764,8 +16327,7 @@ components:
         - $ref: '#/components/schemas/microsoft.graph.identitySet'
         - title: chatMessageReactionIdentitySet
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.teamworkHostedContent:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -16781,8 +16343,7 @@ components:
               type: string
               description: 'Write only. Content type. such as image/png, image/jpg.'
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.labelActionSource:
       title: labelActionSource
       enum:
@@ -16808,8 +16369,7 @@ components:
               nullable: true
             value:
               $ref: '#/components/schemas/microsoft.graph.usageRights'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.processContentRequest:
       title: processContentRequest
       type: object
@@ -16827,8 +16387,7 @@ components:
           $ref: '#/components/schemas/microsoft.graph.integratedApplicationMetadata'
         protectedAppMetadata:
           $ref: '#/components/schemas/microsoft.graph.protectedApplicationMetadata'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.sharingDetail:
       title: sharingDetail
       type: object
@@ -16851,8 +16410,7 @@ components:
           type: string
           description: 'Determines the way the document was shared. Can be by a 1Link1, 1Attachment1, 1Group1, 1Site1.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.resourceReference:
       title: resourceReference
       type: object
@@ -16869,8 +16427,7 @@ components:
           type: string
           description: A URL leading to the referenced item.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.resourceVisualization:
       title: resourceVisualization
       type: object
@@ -16907,8 +16464,7 @@ components:
           type: string
           description: The item's media type. Can be used for filtering for a specific file based on a specific type. See the section Type property values for supported types.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.usageDetails:
       title: usageDetails
       type: object
@@ -16925,8 +16481,7 @@ components:
           description: 'The date and time the resource was last modified by the user. The timestamp represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.'
           format: date-time
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.settingValue:
       title: settingValue
       type: object
@@ -16939,8 +16494,7 @@ components:
           type: string
           description: Value of the setting.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.post:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.outlookItem'
@@ -17000,8 +16554,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.singleValueLegacyExtendedProperty'
               description: The collection of single-value extended properties defined for the post. Read-only. Nullable.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.scheduleChangeRequest:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.changeTrackedEntity'
@@ -17044,8 +16597,7 @@ components:
               readOnly: true
             state:
               $ref: '#/components/schemas/microsoft.graph.scheduleChangeState'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.openShiftItem:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.shiftItem'
@@ -17058,8 +16610,7 @@ components:
               type: number
               description: Count of the number of slots for the given open shift.
               format: int32
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.shiftItem:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.scheduleEntity'
@@ -17079,8 +16630,7 @@ components:
               type: string
               description: The shift notes for the shiftItem.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.timeCardBreak:
       title: timeCardBreak
       type: object
@@ -17095,8 +16645,7 @@ components:
           $ref: '#/components/schemas/microsoft.graph.itemBody'
         start:
           $ref: '#/components/schemas/microsoft.graph.timeCardEvent'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.timeCardEvent:
       title: timeCardEvent
       type: object
@@ -17112,8 +16661,7 @@ components:
           nullable: true
         notes:
           $ref: '#/components/schemas/microsoft.graph.itemBody'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.confirmedBy:
       title: confirmedBy
       enum:
@@ -17137,8 +16685,7 @@ components:
           $ref: '#/components/schemas/microsoft.graph.timeCardEvent'
         clockOutEvent:
           $ref: '#/components/schemas/microsoft.graph.timeCardEvent'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.timeCardState:
       title: timeCardState
       enum:
@@ -17183,8 +16730,7 @@ components:
               type: string
               description: ID of the timeOffReason for this timeOffItem. Required.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.messageActionFlag:
       title: messageActionFlag
       enum:
@@ -17218,8 +16764,7 @@ components:
           description: The minimum size (in kilobytes) that an incoming message must have in order for a condition or exception to apply.
           format: int32
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.settingSource:
       title: settingSource
       type: object
@@ -17234,8 +16779,7 @@ components:
           nullable: true
         sourceType:
           $ref: '#/components/schemas/microsoft.graph.settingSourceType'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.windowsMalwareCategory:
       title: windowsMalwareCategory
       enum:
@@ -17625,8 +17169,7 @@ components:
           type: string
           description: The URL of the link.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.lobbyBypassScope:
       title: lobbyBypassScope
       enum:
@@ -17650,8 +17193,7 @@ components:
           type: string
           description: 'The identifier for a virtualEventExternalInformation object that associates the virtual event with an event ID in an external application. This association bundles all the information (both supported and not supported in virtualEvent) into one virtual event object. Optional. If set, the maximum supported length is 256 characters.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.attendanceRecord:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -17686,8 +17228,7 @@ components:
               description: Total duration of the attendances in seconds.
               format: int32
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.onlineMeetingRole:
       title: onlineMeetingRole
       enum:
@@ -17808,28 +17349,23 @@ components:
           type: string
           description: The label associated with Category 9
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.plannerUserIds:
       title: plannerUserIds
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.plannerOrderHintsByAssignee:
       title: plannerOrderHintsByAssignee
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.plannerChecklistItems:
       title: plannerChecklistItems
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.plannerExternalReferences:
       title: plannerExternalReferences
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.timeRange:
       title: timeRange
       type: object
@@ -17846,15 +17382,13 @@ components:
           description: Start time for the time range.
           format: time
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.serviceStorageQuotaBreakdown:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.storageQuotaBreakdown'
         - title: serviceStorageQuotaBreakdown
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.taskStatus:
       title: taskStatus
       enum:
@@ -17890,8 +17424,7 @@ components:
               type: number
               description: The length of the attachment in bytes.
               format: int32
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.attachmentSession:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -17915,8 +17448,7 @@ components:
                 type: string
                 nullable: true
               description: 'Indicates a single value {start} that represents the location in the file where the next upload should begin.'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.checklistItem:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -17942,8 +17474,7 @@ components:
               type: boolean
               description: State that indicates whether the item is checked off or not.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.linkedResource:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -17966,8 +17497,7 @@ components:
               type: string
               description: Deep link to the linkedResource.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.termStore.relationType:
       title: relationType
       enum:
@@ -18004,8 +17534,7 @@ components:
           description: 'An operator in a cell; for example, =, >, <, <=, or <>.'
         values:
           $ref: '#/components/schemas/microsoft.graph.Json'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.workbookIcon:
       title: workbookIcon
       type: object
@@ -18019,8 +17548,7 @@ components:
         set:
           type: string
           description: 'The set that the icon is part of. The possible values are: Invalid, ThreeArrows, ThreeArrowsGray, ThreeFlags, ThreeTrafficLights1, ThreeTrafficLights2, ThreeSigns, ThreeSymbols, ThreeSymbols2, FourArrows, FourArrowsGray, FourRedToBlack, FourRating, FourTrafficLights, FiveArrows, FiveArrowsGray, FiveRating, FiveQuarters, ThreeStars, ThreeTriangles, FiveBoxes.'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.workbookChartAxis:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -18043,8 +17571,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.workbookChartGridlines'
             title:
               $ref: '#/components/schemas/microsoft.graph.workbookChartAxisTitle'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartDataLabelFormat:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -18055,15 +17582,13 @@ components:
               $ref: '#/components/schemas/microsoft.graph.workbookChartFill'
             font:
               $ref: '#/components/schemas/microsoft.graph.workbookChartFont'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartFill:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
         - title: workbookChartFill
           type: object
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartFont:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -18095,8 +17620,7 @@ components:
               type: string
               description: 'The type of underlining applied to the font. The possible values are: None, Single.'
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartLegendFormat:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -18107,8 +17631,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.workbookChartFill'
             font:
               $ref: '#/components/schemas/microsoft.graph.workbookChartFont'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartSeriesFormat:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -18119,8 +17642,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.workbookChartFill'
             line:
               $ref: '#/components/schemas/microsoft.graph.workbookChartLineFormat'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartPoint:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -18131,8 +17653,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.Json'
             format:
               $ref: '#/components/schemas/microsoft.graph.workbookChartPointFormat'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartTitleFormat:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -18143,8 +17664,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.workbookChartFill'
             font:
               $ref: '#/components/schemas/microsoft.graph.workbookChartFont'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.printColorMode:
       title: printColorMode
       enum:
@@ -18168,8 +17688,7 @@ components:
           description: The inclusive lower bound of the integer range.
           format: int64
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.printDuplexMode:
       title: printDuplexMode
       enum:
@@ -19209,8 +18728,7 @@ components:
           $ref: '#/components/schemas/microsoft.graph.printQuality'
         scaling:
           $ref: '#/components/schemas/microsoft.graph.printScaling'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.userIdentity:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.identity'
@@ -19225,8 +18743,7 @@ components:
               type: string
               description: The userPrincipalName attribute of the user.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.printJobStatus:
       title: printJobStatus
       type: object
@@ -19244,8 +18761,7 @@ components:
           description: True if the job was acknowledged by a printer; false otherwise. Read-only.
         state:
           $ref: '#/components/schemas/microsoft.graph.printJobProcessingState'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.printDocument:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -19276,8 +18792,7 @@ components:
               description: The time the document was uploaded. Read-only
               format: date-time
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.printTask:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -19293,8 +18808,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.printTaskDefinition'
             trigger:
               $ref: '#/components/schemas/microsoft.graph.printTaskTrigger'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.printEvent:
       title: printEvent
       enum:
@@ -19318,8 +18832,7 @@ components:
                 $ref: '#/components/schemas/microsoft.graph.printTask'
               description: A list of tasks that have been created based on this definition. The list includes currently running tasks and recently completed tasks. Read-only.
               x-ms-navigationProperty: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.teamsAppResourceSpecificPermissionType:
       title: teamsAppResourceSpecificPermissionType
       enum:
@@ -19335,8 +18848,7 @@ components:
           properties:
             conversationIdentityType:
               $ref: '#/components/schemas/microsoft.graph.teamworkConversationIdentityType'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.usageRights:
       title: usageRights
       enum:
@@ -19370,8 +18882,7 @@ components:
       properties:
         activity:
           $ref: '#/components/schemas/microsoft.graph.userActivityType'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.processContentMetadataBase:
       title: processContentMetadataBase
       type: object
@@ -19411,8 +18922,7 @@ components:
           description: 'A sequence number indicating the order in which content was generated or should be processed, required when correlationId is used.'
           format: int64
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.deviceMetadata:
       title: deviceMetadata
       type: object
@@ -19427,8 +18937,7 @@ components:
           nullable: true
         operatingSystemSpecifications:
           $ref: '#/components/schemas/microsoft.graph.operatingSystemSpecifications'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.integratedApplicationMetadata:
       title: integratedApplicationMetadata
       type: object
@@ -19441,8 +18950,7 @@ components:
           type: string
           description: The version number of the integrated application.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.protectedApplicationMetadata:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.integratedApplicationMetadata'
@@ -19451,8 +18959,7 @@ components:
           properties:
             applicationLocation:
               $ref: '#/components/schemas/microsoft.graph.policyLocation'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.insightIdentity:
       title: insightIdentity
       type: object
@@ -19469,8 +18976,7 @@ components:
           type: string
           description: The ID of the user who shared the item.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.scheduleChangeRequestActor:
       title: scheduleChangeRequestActor
       enum:
@@ -19504,8 +19010,7 @@ components:
           nullable: true
         theme:
           $ref: '#/components/schemas/microsoft.graph.scheduleEntityTheme'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.shiftActivity:
       title: shiftActivity
       type: object
@@ -19536,8 +19041,7 @@ components:
           nullable: true
         theme:
           $ref: '#/components/schemas/microsoft.graph.scheduleEntityTheme'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.settingSourceType:
       title: settingSourceType
       enum:
@@ -19567,8 +19071,7 @@ components:
           description: The time the attendee left in UTC.
           format: date-time
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.virtualEventExternalRegistrationInformation:
       title: virtualEventExternalRegistrationInformation
       type: object
@@ -19581,8 +19084,7 @@ components:
           type: string
           description: 'The identifier for a virtualEventExternalRegistrationInformation object. Optional. If set, the maximum supported length is 256 characters.'
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.storageQuotaBreakdown:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -19599,8 +19101,7 @@ components:
               type: number
               format: int64
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartAxisFormat:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -19611,8 +19112,7 @@ components:
               $ref: '#/components/schemas/microsoft.graph.workbookChartFont'
             line:
               $ref: '#/components/schemas/microsoft.graph.workbookChartLineFormat'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartGridlines:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -19624,8 +19124,7 @@ components:
               description: Indicates whether the axis gridlines are visible.
             format:
               $ref: '#/components/schemas/microsoft.graph.workbookChartGridlinesFormat'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartAxisTitle:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -19641,8 +19140,7 @@ components:
               description: A Boolean that specifies the visibility of an axis title.
             format:
               $ref: '#/components/schemas/microsoft.graph.workbookChartAxisTitleFormat'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartLineFormat:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -19653,8 +19151,7 @@ components:
               type: string
               description: The HTML color code that represents the color of lines in the chart.
               nullable: true
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartPointFormat:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -19663,8 +19160,7 @@ components:
           properties:
             fill:
               $ref: '#/components/schemas/microsoft.graph.workbookChartFill'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.printMargin:
       title: printMargin
       type: object
@@ -19697,8 +19193,7 @@ components:
           description: The margin in microns from the top edge.
           format: int32
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.printJobStateDetail:
       title: printJobStateDetail
       enum:
@@ -19733,8 +19228,7 @@ components:
           description: A human-readable description of the current processing state of the printTask.
         state:
           $ref: '#/components/schemas/microsoft.graph.printTaskProcessingState'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.appIdentity:
       title: appIdentity
       type: object
@@ -19755,8 +19249,7 @@ components:
           type: string
           description: Refers to the Service Principal Name is the Application name in the tenant.
           nullable: true
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.teamworkConversationIdentityType:
       title: teamworkConversationIdentityType
       enum:
@@ -19777,8 +19270,7 @@ components:
     microsoft.graph.contentBase:
       title: contentBase
       type: object
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.operatingSystemSpecifications:
       title: operatingSystemSpecifications
       type: object
@@ -19789,8 +19281,7 @@ components:
         operatingSystemVersion:
           type: string
           description: The version string of the operating system.
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.policyLocation:
       title: policyLocation
       type: object
@@ -19798,8 +19289,7 @@ components:
         value:
           type: string
           description: 'The actual value representing the location. Location value is specific for concretetype of the  policyLocation - policyLocationDomain, policyLocationUrl, or policyLocationApplication (for example, ''contoso.com'', ''https://partner.contoso.com/upload'', ''83ef198a-0396-4893-9d4f-d36efbffcaaa'').'
-      additionalProperties:
-        type: object
+      additionalProperties: true
     microsoft.graph.scheduleEntityTheme:
       title: scheduleEntityTheme
       enum:
@@ -19825,8 +19315,7 @@ components:
           properties:
             line:
               $ref: '#/components/schemas/microsoft.graph.workbookChartLineFormat'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.workbookChartAxisTitleFormat:
       allOf:
         - $ref: '#/components/schemas/microsoft.graph.entity'
@@ -19835,8 +19324,7 @@ components:
           properties:
             font:
               $ref: '#/components/schemas/microsoft.graph.workbookChartFont'
-          additionalProperties:
-            type: object
+          additionalProperties: true
     microsoft.graph.printTaskProcessingState:
       title: printTaskProcessingState
       enum:
@@ -19970,8 +19458,7 @@ components:
               '@odata.nextLink':
                 type: string
                 nullable: true
-            additionalProperties:
-              type: object
+            additionalProperties: true
     searchResponse:
       description: Success
       content:
@@ -19987,8 +19474,7 @@ components:
               '@odata.nextLink':
                 type: string
                 nullable: true
-            additionalProperties:
-              type: object
+            additionalProperties: true
     sharedWithMeResponse:
       description: Success
       content:
@@ -20004,8 +19490,7 @@ components:
               '@odata.nextLink':
                 type: string
                 nullable: true
-            additionalProperties:
-              type: object
+            additionalProperties: true
     microsoft.graph.sharedDriveItemCollectionResponse:
       description: Retrieved collection
       content:
