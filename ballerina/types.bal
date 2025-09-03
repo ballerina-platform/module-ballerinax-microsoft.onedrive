@@ -562,6 +562,26 @@ public type driveItemid_microsoft_graph_copy_body record {
     boolean? includeAllVersionHistory = false;
 };
 
+# Represents the Queries record for the operation: listItemsByPath
+public type ListItemsByPathQueries record {
+    # Skip the first n items
+    int \$skip?;
+    # Show only the first n items
+    int \$top?;
+    # Filter items by property values
+    string \$filter?;
+    # Search items by search phrases
+    string \$search?;
+    # Order items by property values
+    string[] \$orderby?;
+    # Expand related entities
+    string[] \$expand?;
+    # Include count of items
+    boolean \$count?;
+    # Select properties to be returned
+    string[] \$select?;
+};
+
 public type microsoft\.graph\.checklistItem record {
     *microsoft\.graph\.entity;
     string? checkedDateTime?;
@@ -1963,6 +1983,13 @@ public type microsoft\.graph\.columnValidation record {
     string? formula?;
 };
 
+public type rootpathtoitem_microsoft_graph_copy_body record {
+    string? name?;
+    microsoft\.graph\.itemReference parentReference?;
+    boolean? childrenOnly = false;
+    boolean? includeAllVersionHistory = false;
+};
+
 public type microsoft\.graph\.sensitivity "normal"|"personal"|"private"|"confidential";
 
 public type microsoft\.graph\.extension record {
@@ -2446,6 +2473,12 @@ public type microsoft\.graph\.mailFolder record {
     microsoft\.graph\.message[] messages?;
     microsoft\.graph\.multiValueLegacyExtendedProperty[] multiValueExtendedProperties?;
     microsoft\.graph\.singleValueLegacyExtendedProperty[] singleValueExtendedProperties?;
+};
+
+# Represents the Headers record for the operation: deleteChildrenContentByPath
+public type DeleteChildrenContentByPathHeaders record {
+    # ETag
+    string If\-Match?;
 };
 
 public type microsoft\.graph\.teamworkBot record {
@@ -3935,6 +3968,12 @@ public type microsoft\.graph\.broadcastMeetingCaptionSettings record {
     string[] translationLanguages?;
 };
 
+# Represents the Headers record for the operation: deleteItemByPath
+public type DeleteItemByPathHeaders record {
+    # ETag
+    string If\-Match?;
+};
+
 public type microsoft\.graph\.teamworkConversationIdentityType "team"|"channel"|"chat"|"unknownFutureValue";
 
 public type microsoft\.graph\.sectionLinks record {
@@ -4041,6 +4080,14 @@ public type microsoft\.graph\.columnLink record {
 public type microsoft\.graph\.virtualEventExternalRegistrationInformation record {
     string? referrer?;
     string? registrationId?;
+};
+
+# Represents the Queries record for the operation: getItemByPath
+public type GetItemByPathQueries record {
+    # Expand related entities
+    string[] \$expand?;
+    # Select properties to be returned
+    string[] \$select?;
 };
 
 public type microsoft\.graph\.storageQuotaBreakdown record {
@@ -4435,6 +4482,12 @@ public type microsoft\.graph\.file record {
     microsoft\.graph\.hashes hashes?;
     string? mimeType?;
     boolean? processingMetadata?;
+};
+
+# Represents the Queries record for the operation: getChildrenContentByPath
+public type GetChildrenContentByPathQueries record {
+    # Format of the content
+    string \$format?;
 };
 
 public type microsoft\.graph\.hashes record {
