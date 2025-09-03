@@ -1970,6 +1970,131 @@ paths:
         default:
           $ref: '#/components/responses/error'
       x-ms-docs-operation-type: operation
+  '/drives/{drive-id}/root:{path-to-item}':
+    get:
+      tags:
+        - drives.driveItem
+      summary: Get root from drives
+      description: The root folder of the drive. Read-only.
+      operationId: getItemByPath
+      parameters:
+        - name: drive-id
+          in: path
+          description: The unique identifier of drive
+          required: true
+          style: simple
+          schema:
+            type: string
+          x-ms-docs-key-type: drive
+        - name: path-to-item
+          in: path
+          description: Path relative to root folder
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: $select
+          in: query
+          description: Select properties to be returned
+          style: form
+          explode: false
+          schema:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        - name: $expand
+          in: query
+          description: Expand related entities
+          style: form
+          explode: false
+          schema:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+      responses:
+        2XX:
+          description: Retrieved navigation property
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/microsoft.graph.driveItem'
+        default:
+          $ref: '#/components/responses/error'
+      x-ms-docs-operation-type: operation
+    patch:
+      tags:
+        - drives.driveItem
+      summary: Update the navigation property root in drives
+      operationId: updateItemByPath
+      parameters:
+        - name: drive-id
+          in: path
+          description: The unique identifier of drive
+          required: true
+          style: simple
+          schema:
+            type: string
+          x-ms-docs-key-type: drive
+        - name: path-to-item
+          in: path
+          description: Path relative to root folder
+          required: true
+          style: simple
+          schema:
+            type: string
+
+      requestBody:
+        description: New navigation property values
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/microsoft.graph.driveItem'
+        required: true
+      responses:
+        2XX:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/microsoft.graph.driveItem'
+        default:
+          $ref: '#/components/responses/error'
+      x-ms-docs-operation-type: operation
+    delete:
+      tags:
+        - drives.driveItem
+      summary: Delete navigation property root for drives
+      operationId: deleteItemByPath
+      parameters:
+        - name: drive-id
+          in: path
+          description: The unique identifier of drive
+          required: true
+          style: simple
+          schema:
+            type: string
+          x-ms-docs-key-type: drive
+        - name: path-to-item
+          in: path
+          description: Path relative to root folder
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: If-Match
+          in: header
+          description: ETag
+          style: simple
+          schema:
+            type: string
+      responses:
+        2XX:
+          description: Success
+        default:
+          $ref: '#/components/responses/error'
+      x-ms-docs-operation-type: operation
   '/drives/{drive-id}/root/children':
     get:
       tags:
@@ -2061,6 +2186,223 @@ paths:
         default:
           $ref: '#/components/responses/error'
       x-ms-docs-operation-type: operation
+  '/drives/{drive-id}/root:{path-to-folder}:/children':
+    get:
+      tags:
+        - drives.driveItem
+      summary: Get children from drives
+      description: Collection containing Item objects for the immediate children of Item. Only items representing folders have children. Read-only. Nullable.
+      operationId: listItemsByPath
+      parameters:
+        - name: drive-id
+          in: path
+          description: The unique identifier of drive
+          required: true
+          style: simple
+          schema:
+            type: string
+          x-ms-docs-key-type: drive
+        - name: path-to-folder
+          in: path
+          description: Path relative to root folder
+          required: true
+          style: simple
+          schema:
+            type: string
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/filter'
+        - $ref: '#/components/parameters/count'
+        - name: $orderby
+          in: query
+          description: Order items by property values
+          style: form
+          explode: false
+          schema:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        - name: $select
+          in: query
+          description: Select properties to be returned
+          style: form
+          explode: false
+          schema:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        - name: $expand
+          in: query
+          description: Expand related entities
+          style: form
+          explode: false
+          schema:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+      responses:
+        2XX:
+          $ref: '#/components/responses/microsoft.graph.driveItemCollectionResponse'
+        default:
+          $ref: '#/components/responses/error'
+      x-ms-pageable:
+        nextLinkName: '@odata.nextLink'
+        operationName: listMore
+      x-ms-docs-operation-type: operation
+    post:
+      tags:
+        - drives.driveItem
+      summary: Create new navigation property to children for drives
+      operationId: createItemByPath
+      parameters:
+        - name: drive-id
+          in: path
+          description: The unique identifier of drive
+          required: true
+          style: simple
+          schema:
+            type: string
+          x-ms-docs-key-type: drive
+        - name: path-to-folder
+          in: path
+          description: Path relative to root folder
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        description: New navigation property
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/microsoft.graph.driveItem'
+        required: true
+      responses:
+        2XX:
+          description: Created navigation property.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/microsoft.graph.driveItem'
+        default:
+          $ref: '#/components/responses/error'
+      x-ms-docs-operation-type: operation
+  '/drives/{drive-id}/root:{path-to-item}:/content':
+    get:
+      tags:
+        - drives.driveItem
+      summary: Get content for the navigation property children from drives
+      description: 'The content stream, if the item represents a file.'
+      operationId: getChildrenContentByPath
+      parameters:
+        - name: drive-id
+          in: path
+          description: The unique identifier of drive
+          required: true
+          style: simple
+          schema:
+            type: string
+          x-ms-docs-key-type: drive
+        - name: path-to-item
+          in: path
+          description: Path relative to root folder
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: $format
+          in: query
+          description: Format of the content
+          style: form
+          explode: false
+          schema:
+            type: string
+      responses:
+        2XX:
+          description: Retrieved media content
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        default:
+          $ref: '#/components/responses/error'
+    put:
+      tags:
+        - drives.driveItem
+      summary: Update content for the navigation property children in drives
+      description: 'The content stream, if the item represents a file.'
+      operationId: setChildrenContentByPath
+      parameters:
+        - name: drive-id
+          in: path
+          description: The unique identifier of drive
+          required: true
+          style: simple
+          schema:
+            type: string
+          x-ms-docs-key-type: drive
+        - name: path-to-item
+          in: path
+          description: Path relative to root folder
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        description: New media content.
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+        required: true
+      responses:
+        2XX:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/microsoft.graph.driveItem'
+        default:
+          $ref: '#/components/responses/error'
+    delete:
+      tags:
+        - drives.driveItem
+      summary: Delete content for the navigation property children in drives
+      description: 'The content stream, if the item represents a file.'
+      operationId: deleteChildrenContentByPath
+      parameters:
+        - name: drive-id
+          in: path
+          description: The unique identifier of drive
+          required: true
+          style: simple
+          schema:
+            type: string
+          x-ms-docs-key-type: drive
+        - name: path-to-item
+          in: path
+          description: Path relative to root folder
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: If-Match
+          in: header
+          description: ETag
+          style: simple
+          schema:
+            type: string
+      responses:
+        2XX:
+          description: Success
+        default:
+          $ref: '#/components/responses/error'
   '/drives/{drive-id}/root/children/{driveItem-id}':
     get:
       tags:
@@ -2461,6 +2803,60 @@ paths:
           schema:
             type: string
           x-ms-docs-key-type: drive
+      requestBody:
+        description: Action parameters
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  nullable: true
+                parentReference:
+                  $ref: '#/components/schemas/microsoft.graph.itemReference'
+                childrenOnly:
+                  type: boolean
+                  default: false
+                  nullable: true
+                includeAllVersionHistory:
+                  type: boolean
+                  default: false
+                  nullable: true
+              additionalProperties: true
+        required: true
+      responses:
+        2XX:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/microsoft.graph.driveItem'
+        default:
+          $ref: '#/components/responses/error'
+      x-ms-docs-operation-type: action
+  '/drives/{drive-id}/root:{path-to-item}:/microsoft.graph.copy':
+    post:
+      tags:
+        - drives.driveItem
+      summary: Invoke action copy
+      operationId: copyByPath
+      parameters:
+        - name: drive-id
+          in: path
+          description: The unique identifier of drive
+          required: true
+          style: simple
+          schema:
+            type: string
+          x-ms-docs-key-type: drive
+        - name: path-to-item
+          in: path
+          description: Path relative to root folder
+          required: true
+          style: simple
+          schema:
+            type: string
       requestBody:
         description: Action parameters
         content:
