@@ -14,9 +14,8 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerinax/microsoft.onedrive;
-import ballerina/log;
 import ballerina/io;
+import ballerinax/microsoft.onedrive;
 
 configurable string refreshToken = ?;
 configurable string clientId = ?;
@@ -41,17 +40,17 @@ public function main() returns error? {
         limit 1
         select item.id ?: "";
 
-    log:printInfo("Creating Upload Folder");
+    io:println("Creating Upload Folder");
     _ = check oneDrive->createChildrenInRoot(driveId,
         {
         name: "Upload",
         folder: {}
     });
 
-    log:printInfo("Upload File");
+    io:println("Uploading File");
     byte[] fileContent = checkpanic io:fileReadBytes("files/github.png");
     onedrive:microsoft\.graph\.driveItem driveItem = check oneDrive->setChildrenContentByPath(
         driveId, "/Upload/github.png", fileContent);
-    log:printInfo(string `File Uploaded. File ID: ${driveItem.id ?: ""}`);
+    io:println(string `File Uploaded. File ID: ${driveItem.id ?: ""}`);
 
 }
