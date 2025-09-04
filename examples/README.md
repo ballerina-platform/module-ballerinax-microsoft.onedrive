@@ -2,13 +2,24 @@
 
 The `ballerinax/microsoft.onedrive` connector provides practical examples illustrating usage in various scenarios.
 
-[//]: # (TODO: Add examples)
-1. 
-2. 
+1. [Upload File](https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/examples/upload-file) - This example demonstrates how to use the Ballerina Microsoft OneDrive connector to upload a file from your local system to your OneDrive account.
 
 ## Prerequisites
 
-[//]: # (TODO: Add prerequisites)
+### 1. Setup OneDrive API
+
+Refer to the [Setup Guide](https://central.ballerina.io/ballerinax/microsoft.onedrive/latest#setup-guide) for necessary credentials (client ID, secret, tokens).
+
+### 2. Configuration
+
+Configure OneDrive API credentials in `Config.toml` in the example directory:
+
+```toml
+refreshToken="<Refresh Token>"
+clientId="<Client Id>"
+clientSecret="<Client Secret>"
+```
+
 
 ## Running an example
 
