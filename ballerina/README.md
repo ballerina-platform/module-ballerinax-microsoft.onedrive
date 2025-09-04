@@ -143,6 +143,6 @@ onedrive:microsoft\.graph\.driveCollectionResponse driveItems = check oneDriveCl
 
 ## Examples
 
-The `microsoft.onedrive` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-microsoft.onedrive/tree/main/examples/), covering the following use cases:
+The `microsoft.onedrive` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-microsoft.onedrive/tree/master/examples/), covering the following use cases:
 
 1. [Upload File](https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive/tree/master/examples/upload-file) - This example demonstrates how to use the Ballerina Microsoft OneDrive connector to upload a file from your local system to your OneDrive account.
