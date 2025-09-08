@@ -123,7 +123,7 @@ Create a `onedrive:ConnectionConfig` with the obtained OAuth2.0 tokens and initi
 ```ballerina
 configurable string clientId = ?;
 configurable string clientSecret = ?;
-configurable string refreshToken = o?;
+configurable string refreshToken = ?;
 
 onedrive:Client onedrive = check new (
     config = {
@@ -144,7 +144,7 @@ Now, utilize the available connector operations.
 #### See all the drives available
 
 ```ballerina
-onedrive:microsoft\.graph\.driveCollectionResponse driveItems = check oneDriveClient->listDrive();
+onedrive:DriveCollectionResponse driveItems = check oneDriveClient->listDrive();
 ```
 
 ## Examples
