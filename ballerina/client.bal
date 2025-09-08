@@ -37,7 +37,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Retrieved collection 
-    remote isolated function listDrive(map<string|string[]> headers = {}, *ListDriveQueries queries) returns microsoft\.graph\.driveCollectionResponse|error {
+    remote isolated function listDrive(map<string|string[]> headers = {}, *ListDriveQueries queries) returns DriveCollectionResponse|error {
         string resourcePath = string `/drives`;
         map<Encoding> queryParamEncoding = {"$orderby": {style: FORM, explode: false}, "$select": {style: FORM, explode: false}, "$expand": {style: FORM, explode: false}};
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
@@ -49,7 +49,7 @@ public isolated client class Client {
     # + headers - Headers to be sent with the request 
     # + payload - New entity 
     # + return - Created entity 
-    remote isolated function createDrive(microsoft\.graph\.drive payload, map<string|string[]> headers = {}) returns microsoft\.graph\.drive|error {
+    remote isolated function createDrive(Drive payload, map<string|string[]> headers = {}) returns Drive|error {
         string resourcePath = string `/drives`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
@@ -59,12 +59,12 @@ public isolated client class Client {
 
     # Get entity from drives by key
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Retrieved entity 
-    remote isolated function getDrive(string drive\-id, map<string|string[]> headers = {}, *GetDriveQueries queries) returns microsoft\.graph\.drive|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}`;
+    remote isolated function getDrive(string driveId, map<string|string[]> headers = {}, *GetDriveQueries queries) returns Drive|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}`;
         map<Encoding> queryParamEncoding = {"$select": {style: FORM, explode: false}, "$expand": {style: FORM, explode: false}};
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
         return self.clientEp->get(resourcePath, headers);
@@ -72,23 +72,23 @@ public isolated client class Client {
 
     # Delete entity from drives
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function deleteDrive(string drive\-id, DeleteDriveHeaders headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}`;
+    remote isolated function deleteDrive(string driveId, DeleteDriveHeaders headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}`;
         map<string|string[]> httpHeaders = http:getHeaderMap(headers);
         return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
 
     # Update entity in drives
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + payload - New property values 
     # + return - Success 
-    remote isolated function updateDrive(string drive\-id, microsoft\.graph\.drive payload, map<string|string[]> headers = {}) returns microsoft\.graph\.drive|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}`;
+    remote isolated function updateDrive(string driveId, Drive payload, map<string|string[]> headers = {}) returns Drive|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -97,12 +97,12 @@ public isolated client class Client {
 
     # drive: sharedWithMe
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Retrieved collection 
-    remote isolated function listItem(string drive\-id, map<string|string[]> headers = {}, *ListItemQueries queries) returns microsoft\.graph\.driveItemCollectionResponse|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items`;
+    remote isolated function listItem(string driveId, map<string|string[]> headers = {}, *ListItemQueries queries) returns DriveItemCollectionResponse|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items`;
         map<Encoding> queryParamEncoding = {"$orderby": {style: FORM, explode: false}, "$select": {style: FORM, explode: false}, "$expand": {style: FORM, explode: false}};
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
         return self.clientEp->get(resourcePath, headers);
@@ -110,12 +110,12 @@ public isolated client class Client {
 
     # Create new navigation property to items for drives
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + payload - New navigation property 
-    # + return - Created navigation property. 
-    remote isolated function createItem(string drive\-id, microsoft\.graph\.driveItem payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items`;
+    # + return - Created navigation property 
+    remote isolated function createItem(string driveId, DriveItem payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -124,13 +124,13 @@ public isolated client class Client {
 
     # Get items from drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Retrieved navigation property 
-    remote isolated function getItem(string drive\-id, string driveItem\-id, map<string|string[]> headers = {}, *GetItemQueries queries) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}`;
+    remote isolated function getItem(string driveId, string driveItemId, map<string|string[]> headers = {}, *GetItemQueries queries) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}`;
         map<Encoding> queryParamEncoding = {"$select": {style: FORM, explode: false}, "$expand": {style: FORM, explode: false}};
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
         return self.clientEp->get(resourcePath, headers);
@@ -138,25 +138,25 @@ public isolated client class Client {
 
     # Delete navigation property items for drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function deleteItem(string drive\-id, string driveItem\-id, DeleteItemHeaders headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}`;
+    remote isolated function deleteItem(string driveId, string driveItemId, DeleteItemHeaders headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}`;
         map<string|string[]> httpHeaders = http:getHeaderMap(headers);
         return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
 
     # Update the navigation property items in drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + payload - New navigation property values 
     # + return - Success 
-    remote isolated function updateItem(string drive\-id, string driveItem\-id, microsoft\.graph\.driveItem payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}`;
+    remote isolated function updateItem(string driveId, string driveItemId, DriveItem payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -165,13 +165,13 @@ public isolated client class Client {
 
     # List children of a driveItem
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Retrieved collection 
-    remote isolated function listChildren(string drive\-id, string driveItem\-id, map<string|string[]> headers = {}, *ListChildrenQueries queries) returns microsoft\.graph\.driveItemCollectionResponse|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/children`;
+    remote isolated function listChildren(string driveId, string driveItemId, map<string|string[]> headers = {}, *ListChildrenQueries queries) returns DriveItemCollectionResponse|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/children`;
         map<Encoding> queryParamEncoding = {"$orderby": {style: FORM, explode: false}, "$select": {style: FORM, explode: false}, "$expand": {style: FORM, explode: false}};
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
         return self.clientEp->get(resourcePath, headers);
@@ -179,13 +179,13 @@ public isolated client class Client {
 
     # Create new navigation property to children for drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + payload - New navigation property 
-    # + return - Created navigation property. 
-    remote isolated function createChildren(string drive\-id, string driveItem\-id, microsoft\.graph\.driveItem payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/children`;
+    # + return - Created navigation property 
+    remote isolated function createChildren(string driveId, string driveItemId, DriveItem payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/children`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -194,14 +194,14 @@ public isolated client class Client {
 
     # Get children from drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
-    # + driveItem\-id1 - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
+    # + driveItemId1 - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Retrieved navigation property 
-    remote isolated function getChildren(string drive\-id, string driveItem\-id, string driveItem\-id1, map<string|string[]> headers = {}, *GetChildrenQueries queries) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/children/${getEncodedUri(driveItem\-id1)}`;
+    remote isolated function getChildren(string driveId, string driveItemId, string driveItemId1, map<string|string[]> headers = {}, *GetChildrenQueries queries) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/children/${getEncodedUri(driveItemId1)}`;
         map<Encoding> queryParamEncoding = {"$select": {style: FORM, explode: false}, "$expand": {style: FORM, explode: false}};
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
         return self.clientEp->get(resourcePath, headers);
@@ -209,28 +209,28 @@ public isolated client class Client {
 
     # Get content for the navigation property children from drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
-    # + driveItem\-id1 - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
+    # + driveItemId1 - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Retrieved media content 
-    remote isolated function getChildrenContent(string drive\-id, string driveItem\-id, string driveItem\-id1, map<string|string[]> headers = {}, *GetChildrenContentQueries queries) returns byte[]|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/children/${getEncodedUri(driveItem\-id1)}/content`;
+    remote isolated function getChildrenContent(string driveId, string driveItemId, string driveItemId1, map<string|string[]> headers = {}, *GetChildrenContentQueries queries) returns byte[]|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/children/${getEncodedUri(driveItemId1)}/content`;
         resourcePath = resourcePath + check getPathForQueryParam(queries);
         return self.clientEp->get(resourcePath, headers);
     }
 
     # Update content for the navigation property children in drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
-    # + driveItem\-id1 - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
+    # + driveItemId1 - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
-    # + payload - New media content. 
+    # + payload - New media content 
     # + return - Success 
-    remote isolated function setChildrenContent(string drive\-id, string driveItem\-id, string driveItem\-id1, byte[] payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/children/${getEncodedUri(driveItem\-id1)}/content`;
+    remote isolated function setChildrenContent(string driveId, string driveItemId, string driveItemId1, byte[] payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/children/${getEncodedUri(driveItemId1)}/content`;
         http:Request request = new;
         request.setPayload(payload, "application/octet-stream");
         return self.clientEp->put(resourcePath, request, headers);
@@ -238,52 +238,52 @@ public isolated client class Client {
 
     # Delete content for the navigation property children in drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
-    # + driveItem\-id1 - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
+    # + driveItemId1 - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function deleteChildrenContent(string drive\-id, string driveItem\-id, string driveItem\-id1, DeleteChildrenContentHeaders headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/children/${getEncodedUri(driveItem\-id1)}/content`;
+    remote isolated function deleteChildrenContent(string driveId, string driveItemId, string driveItemId1, DeleteChildrenContentHeaders headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/children/${getEncodedUri(driveItemId1)}/content`;
         map<string|string[]> httpHeaders = http:getHeaderMap(headers);
         return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
 
     # Get the number of the resource
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - The count of the resource 
-    remote isolated function getChildrenCount(string drive\-id, string driveItem\-id, map<string|string[]> headers = {}, *GetChildrenCountQueries queries) returns string|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/children/$count`;
+    remote isolated function getChildrenCount(string driveId, string driveItemId, map<string|string[]> headers = {}, *GetChildrenCountQueries queries) returns string|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/children/$count`;
         resourcePath = resourcePath + check getPathForQueryParam(queries);
         return self.clientEp->get(resourcePath, headers);
     }
 
     # Get content for the navigation property items from drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Retrieved media content 
-    remote isolated function getItemsContent(string drive\-id, string driveItem\-id, map<string|string[]> headers = {}, *GetItemsContentQueries queries) returns byte[]|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/content`;
+    remote isolated function getItemsContent(string driveId, string driveItemId, map<string|string[]> headers = {}, *GetItemsContentQueries queries) returns byte[]|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/content`;
         resourcePath = resourcePath + check getPathForQueryParam(queries);
         return self.clientEp->get(resourcePath, headers);
     }
 
     # Update content for the navigation property items in drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
-    # + payload - New media content. 
+    # + payload - New media content 
     # + return - Success 
-    remote isolated function setItemsContent(string drive\-id, string driveItem\-id, byte[] payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/content`;
+    remote isolated function setItemsContent(string driveId, string driveItemId, byte[] payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/content`;
         http:Request request = new;
         request.setPayload(payload, "application/octet-stream");
         return self.clientEp->put(resourcePath, request, headers);
@@ -291,25 +291,25 @@ public isolated client class Client {
 
     # Delete content for the navigation property items in drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function deleteItemsContent(string drive\-id, string driveItem\-id, DeleteItemsContentHeaders headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/content`;
+    remote isolated function deleteItemsContent(string driveId, string driveItemId, DeleteItemsContentHeaders headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/content`;
         map<string|string[]> httpHeaders = http:getHeaderMap(headers);
         return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
 
     # Invoke action assignSensitivityLabel
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function assignSentitivityLabel(string drive\-id, string driveItem\-id, driveItemid_microsoft_graph_assignSensitivityLabel_body payload, map<string|string[]> headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/microsoft.graph.assignSensitivityLabel`;
+    remote isolated function assignSentitivityLabel(string driveId, string driveItemId, DriveItemIdMicrosoftGraphAssignSensitivityLabelBody payload, map<string|string[]> headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/microsoft.graph.assignSensitivityLabel`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -318,13 +318,13 @@ public isolated client class Client {
 
     # Invoke action checkin
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function checkin(string drive\-id, string driveItem\-id, driveItemid_microsoft_graph_checkin_body payload, map<string|string[]> headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/microsoft.graph.checkin`;
+    remote isolated function checkin(string driveId, string driveItemId, DriveItemIdMicrosoftGraphCheckinBody payload, map<string|string[]> headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/microsoft.graph.checkin`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -333,25 +333,25 @@ public isolated client class Client {
 
     # Invoke action checkout
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function checkout(string drive\-id, string driveItem\-id, map<string|string[]> headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/microsoft.graph.checkout`;
+    remote isolated function checkout(string driveId, string driveItemId, map<string|string[]> headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/microsoft.graph.checkout`;
         http:Request request = new;
         return self.clientEp->post(resourcePath, request, headers);
     }
 
     # Invoke action copy
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function copy(string drive\-id, string driveItem\-id, driveItemid_microsoft_graph_copy_body payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/microsoft.graph.copy`;
+    remote isolated function copy(string driveId, string driveItemId, DriveItemIdMicrosoftGraphCopyBody payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/microsoft.graph.copy`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -360,13 +360,13 @@ public isolated client class Client {
 
     # Invoke action createLink
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function createLink(string drive\-id, string driveItem\-id, driveItemid_microsoft_graph_createLink_body payload, map<string|string[]> headers = {}) returns microsoft\.graph\.permission|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/microsoft.graph.createLink`;
+    remote isolated function createLink(string driveId, string driveItemId, DriveItemIdMicrosoftGraphCreateLinkBody payload, map<string|string[]> headers = {}) returns Permission|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/microsoft.graph.createLink`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -375,13 +375,13 @@ public isolated client class Client {
 
     # Invoke action createUploadSession
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function createUploadSession(string drive\-id, string driveItem\-id, driveItemid_microsoft_graph_createUploadSession_body payload, map<string|string[]> headers = {}) returns microsoft\.graph\.uploadSession|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/microsoft.graph.createUploadSession`;
+    remote isolated function createUploadSession(string driveId, string driveItemId, DriveItemIdMicrosoftGraphCreateUploadSessionBody payload, map<string|string[]> headers = {}) returns UploadSession|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/microsoft.graph.createUploadSession`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -390,49 +390,49 @@ public isolated client class Client {
 
     # Invoke action discardCheckout
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function discardCheckout(string drive\-id, string driveItem\-id, map<string|string[]> headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/microsoft.graph.discardCheckout`;
+    remote isolated function discardCheckout(string driveId, string driveItemId, map<string|string[]> headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/microsoft.graph.discardCheckout`;
         http:Request request = new;
         return self.clientEp->post(resourcePath, request, headers);
     }
 
     # Invoke action extractSensitivityLabels
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function extractSensitivityLabel(string drive\-id, string driveItem\-id, map<string|string[]> headers = {}) returns microsoft\.graph\.extractSensitivityLabelsResult|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/microsoft.graph.extractSensitivityLabels`;
+    remote isolated function extractSensitivityLabel(string driveId, string driveItemId, map<string|string[]> headers = {}) returns ExtractSensitivityLabelsResult|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/microsoft.graph.extractSensitivityLabels`;
         http:Request request = new;
         return self.clientEp->post(resourcePath, request, headers);
     }
 
     # Invoke action follow
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function follow(string drive\-id, string driveItem\-id, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/microsoft.graph.follow`;
+    remote isolated function follow(string driveId, string driveItemId, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/microsoft.graph.follow`;
         http:Request request = new;
         return self.clientEp->post(resourcePath, request, headers);
     }
 
     # Invoke action invite
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function invite(string drive\-id, string driveItem\-id, driveItemid_microsoft_graph_invite_body payload, map<string|string[]> headers = {}) returns Collection\ of\ permission|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/microsoft.graph.invite`;
+    remote isolated function invite(string driveId, string driveItemId, DriveItemIdMicrosoftGraphInviteBody payload, map<string|string[]> headers = {}) returns CollectionOfPermission|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/microsoft.graph.invite`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -441,25 +441,25 @@ public isolated client class Client {
 
     # Invoke action permanentDelete
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function permanentDelete(string drive\-id, string driveItem\-id, map<string|string[]> headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/microsoft.graph.permanentDelete`;
+    remote isolated function permanentDelete(string driveId, string driveItemId, map<string|string[]> headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/microsoft.graph.permanentDelete`;
         http:Request request = new;
         return self.clientEp->post(resourcePath, request, headers);
     }
 
     # Invoke action preview
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function preview(string drive\-id, string driveItem\-id, driveItemid_microsoft_graph_preview_body payload, map<string|string[]> headers = {}) returns microsoft\.graph\.itemPreviewInfo|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/microsoft.graph.preview`;
+    remote isolated function preview(string driveId, string driveItemId, DriveItemIdMicrosoftGraphPreviewBody payload, map<string|string[]> headers = {}) returns ItemPreviewInfo|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/microsoft.graph.preview`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -468,13 +468,13 @@ public isolated client class Client {
 
     # Invoke action restore
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function restore(string drive\-id, string driveItem\-id, driveItemid_microsoft_graph_restore_body payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/microsoft.graph.restore`;
+    remote isolated function restore(string driveId, string driveItemId, DriveItemIdMicrosoftGraphRestoreBody payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/microsoft.graph.restore`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -483,14 +483,14 @@ public isolated client class Client {
 
     # Invoke function search
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + q - Usage: q='{q}'
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    remote isolated function search(string drive\-id, string driveItem\-id, string? q, map<string|string[]> headers = {}, *SearchQueries queries) returns Collection\ of\ driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/microsoft.graph.search(q='${getEncodedUri(q)}')`;
+    remote isolated function search(string driveId, string driveItemId, string? q, map<string|string[]> headers = {}, *SearchQueries queries) returns CollectionOfDriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/microsoft.graph.search(q='${getEncodedUri(q)}')`;
         map<Encoding> queryParamEncoding = {"$select": {style: FORM, explode: false}, "$orderby": {style: FORM, explode: false}, "$expand": {style: FORM, explode: false}};
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
         return self.clientEp->get(resourcePath, headers);
@@ -498,25 +498,25 @@ public isolated client class Client {
 
     # Invoke action unfollow
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function unfollow(string drive\-id, string driveItem\-id, map<string|string[]> headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/microsoft.graph.unfollow`;
+    remote isolated function unfollow(string driveId, string driveItemId, map<string|string[]> headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/microsoft.graph.unfollow`;
         http:Request request = new;
         return self.clientEp->post(resourcePath, request, headers);
     }
 
     # Invoke action validatePermission
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function validatePermission(string drive\-id, string driveItem\-id, driveItemid_microsoft_graph_validatePermission_body payload, map<string|string[]> headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/${getEncodedUri(driveItem\-id)}/microsoft.graph.validatePermission`;
+    remote isolated function validatePermission(string driveId, string driveItemId, DriveItemIdMicrosoftGraphValidatePermissionBody payload, map<string|string[]> headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/${getEncodedUri(driveItemId)}/microsoft.graph.validatePermission`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -525,24 +525,24 @@ public isolated client class Client {
 
     # Get the number of the resource
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - The count of the resource 
-    remote isolated function getItemCount(string drive\-id, map<string|string[]> headers = {}, *GetItemCountQueries queries) returns string|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/items/$count`;
+    remote isolated function getItemCount(string driveId, map<string|string[]> headers = {}, *GetItemCountQueries queries) returns string|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/items/$count`;
         resourcePath = resourcePath + check getPathForQueryParam(queries);
         return self.clientEp->get(resourcePath, headers);
     }
 
     # Invoke function recent
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    remote isolated function recent(string drive\-id, map<string|string[]> headers = {}, *RecentQueries queries) returns Collection\ of\ driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/microsoft.graph.recent()`;
+    remote isolated function recent(string driveId, map<string|string[]> headers = {}, *RecentQueries queries) returns CollectionOfDriveItem_1|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/microsoft.graph.recent()`;
         map<Encoding> queryParamEncoding = {"$select": {style: FORM, explode: false}, "$orderby": {style: FORM, explode: false}, "$expand": {style: FORM, explode: false}};
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
         return self.clientEp->get(resourcePath, headers);
@@ -550,13 +550,13 @@ public isolated client class Client {
 
     # Invoke function search
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + q - Usage: q='{q}'
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    remote isolated function searchWithinDriveItem(string drive\-id, string? q, map<string|string[]> headers = {}, *SearchWithinDriveItemQueries queries) returns Collection\ of\ driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/microsoft.graph.search(q='${getEncodedUri(q)}')`;
+    remote isolated function searchWithinDriveItem(string driveId, string? q, map<string|string[]> headers = {}, *SearchWithinDriveItemQueries queries) returns CollectionOfDriveItem_1|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/microsoft.graph.search(q='${getEncodedUri(q)}')`;
         map<Encoding> queryParamEncoding = {"$select": {style: FORM, explode: false}, "$orderby": {style: FORM, explode: false}, "$expand": {style: FORM, explode: false}};
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
         return self.clientEp->get(resourcePath, headers);
@@ -564,12 +564,12 @@ public isolated client class Client {
 
     # Invoke function sharedWithMe
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    remote isolated function sharedWithMe(string drive\-id, map<string|string[]> headers = {}, *SharedWithMeQueries queries) returns Collection\ of\ driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/microsoft.graph.sharedWithMe()`;
+    remote isolated function sharedWithMe(string driveId, map<string|string[]> headers = {}, *SharedWithMeQueries queries) returns CollectionOfDriveItem_1|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/microsoft.graph.sharedWithMe()`;
         map<Encoding> queryParamEncoding = {"$select": {style: FORM, explode: false}, "$orderby": {style: FORM, explode: false}, "$expand": {style: FORM, explode: false}};
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
         return self.clientEp->get(resourcePath, headers);
@@ -577,12 +577,12 @@ public isolated client class Client {
 
     # Get root from drives
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Retrieved navigation property 
-    remote isolated function getRoot(string drive\-id, map<string|string[]> headers = {}, *GetRootQueries queries) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root`;
+    remote isolated function getRoot(string driveId, map<string|string[]> headers = {}, *GetRootQueries queries) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root`;
         map<Encoding> queryParamEncoding = {"$select": {style: FORM, explode: false}, "$expand": {style: FORM, explode: false}};
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
         return self.clientEp->get(resourcePath, headers);
@@ -590,23 +590,23 @@ public isolated client class Client {
 
     # Delete navigation property root for drives
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function deleteRoot(string drive\-id, DeleteRootHeaders headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root`;
+    remote isolated function deleteRoot(string driveId, DeleteRootHeaders headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root`;
         map<string|string[]> httpHeaders = http:getHeaderMap(headers);
         return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
 
     # Update the navigation property root in drives
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + payload - New navigation property values 
     # + return - Success 
-    remote isolated function updateRoot(string drive\-id, microsoft\.graph\.driveItem payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root`;
+    remote isolated function updateRoot(string driveId, DriveItem payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -615,13 +615,13 @@ public isolated client class Client {
 
     # Get root from drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + path\-to\-item - Path relative to root folder
+    # + driveId - The unique identifier of drive
+    # + pathToItem - Path relative to root folder
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Retrieved navigation property 
-    remote isolated function getItemByPath(string drive\-id, string path\-to\-item, map<string|string[]> headers = {}, *GetItemByPathQueries queries) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root:${getEncodedUri(path\-to\-item)}`;
+    remote isolated function getItemByPath(string driveId, string pathToItem, map<string|string[]> headers = {}, *GetItemByPathQueries queries) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root:${getEncodedUri(pathToItem)}`;
         map<Encoding> queryParamEncoding = {"$select": {style: FORM, explode: false}, "$expand": {style: FORM, explode: false}};
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
         return self.clientEp->get(resourcePath, headers);
@@ -629,25 +629,25 @@ public isolated client class Client {
 
     # Delete navigation property root for drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + path\-to\-item - Path relative to root folder
+    # + driveId - The unique identifier of drive
+    # + pathToItem - Path relative to root folder
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function deleteItemByPath(string drive\-id, string path\-to\-item, DeleteItemByPathHeaders headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root:${getEncodedUri(path\-to\-item)}`;
+    remote isolated function deleteItemByPath(string driveId, string pathToItem, DeleteItemByPathHeaders headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root:${getEncodedUri(pathToItem)}`;
         map<string|string[]> httpHeaders = http:getHeaderMap(headers);
         return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
 
     # Update the navigation property root in drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + path\-to\-item - Path relative to root folder
+    # + driveId - The unique identifier of drive
+    # + pathToItem - Path relative to root folder
     # + headers - Headers to be sent with the request 
     # + payload - New navigation property values 
     # + return - Success 
-    remote isolated function updateItemByPath(string drive\-id, string path\-to\-item, microsoft\.graph\.driveItem payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root:${getEncodedUri(path\-to\-item)}`;
+    remote isolated function updateItemByPath(string driveId, string pathToItem, DriveItem payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root:${getEncodedUri(pathToItem)}`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -656,12 +656,12 @@ public isolated client class Client {
 
     # Get children from drives
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Retrieved collection 
-    remote isolated function listChildrenInRoot(string drive\-id, map<string|string[]> headers = {}, *ListChildrenInRootQueries queries) returns microsoft\.graph\.driveItemCollectionResponse|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/children`;
+    remote isolated function listChildrenInRoot(string driveId, map<string|string[]> headers = {}, *ListChildrenInRootQueries queries) returns DriveItemCollectionResponse|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/children`;
         map<Encoding> queryParamEncoding = {"$orderby": {style: FORM, explode: false}, "$select": {style: FORM, explode: false}, "$expand": {style: FORM, explode: false}};
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
         return self.clientEp->get(resourcePath, headers);
@@ -669,12 +669,12 @@ public isolated client class Client {
 
     # Create new navigation property to children for drives
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + payload - New navigation property 
-    # + return - Created navigation property. 
-    remote isolated function createChildrenInRoot(string drive\-id, microsoft\.graph\.driveItem payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/children`;
+    # + return - Created navigation property 
+    remote isolated function createChildrenInRoot(string driveId, DriveItem payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/children`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -683,13 +683,13 @@ public isolated client class Client {
 
     # Get children from drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + path\-to\-folder - Path relative to root folder
+    # + driveId - The unique identifier of drive
+    # + pathToFolder - Path relative to root folder
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Retrieved collection 
-    remote isolated function listItemsByPath(string drive\-id, string path\-to\-folder, map<string|string[]> headers = {}, *ListItemsByPathQueries queries) returns microsoft\.graph\.driveItemCollectionResponse|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root:${getEncodedUri(path\-to\-folder)}:/children`;
+    remote isolated function listItemsByPath(string driveId, string pathToFolder, map<string|string[]> headers = {}, *ListItemsByPathQueries queries) returns DriveItemCollectionResponse|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root:${getEncodedUri(pathToFolder)}:/children`;
         map<Encoding> queryParamEncoding = {"$orderby": {style: FORM, explode: false}, "$select": {style: FORM, explode: false}, "$expand": {style: FORM, explode: false}};
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
         return self.clientEp->get(resourcePath, headers);
@@ -697,13 +697,13 @@ public isolated client class Client {
 
     # Create new navigation property to children for drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + path\-to\-folder - Path relative to root folder
+    # + driveId - The unique identifier of drive
+    # + pathToFolder - Path relative to root folder
     # + headers - Headers to be sent with the request 
     # + payload - New navigation property 
-    # + return - Created navigation property. 
-    remote isolated function createItemByPath(string drive\-id, string path\-to\-folder, microsoft\.graph\.driveItem payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root:${getEncodedUri(path\-to\-folder)}:/children`;
+    # + return - Created navigation property 
+    remote isolated function createItemByPath(string driveId, string pathToFolder, DriveItem payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root:${getEncodedUri(pathToFolder)}:/children`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -712,26 +712,26 @@ public isolated client class Client {
 
     # Get content for the navigation property children from drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + path\-to\-item - Path relative to root folder
+    # + driveId - The unique identifier of drive
+    # + pathToItem - Path relative to root folder
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Retrieved media content 
-    remote isolated function getChildrenContentByPath(string drive\-id, string path\-to\-item, map<string|string[]> headers = {}, *GetChildrenContentByPathQueries queries) returns byte[]|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root:${getEncodedUri(path\-to\-item)}:/content`;
+    remote isolated function getChildrenContentByPath(string driveId, string pathToItem, map<string|string[]> headers = {}, *GetChildrenContentByPathQueries queries) returns byte[]|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root:${getEncodedUri(pathToItem)}:/content`;
         resourcePath = resourcePath + check getPathForQueryParam(queries);
         return self.clientEp->get(resourcePath, headers);
     }
 
     # Update content for the navigation property children in drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + path\-to\-item - Path relative to root folder
+    # + driveId - The unique identifier of drive
+    # + pathToItem - Path relative to root folder
     # + headers - Headers to be sent with the request 
-    # + payload - New media content. 
+    # + payload - New media content 
     # + return - Success 
-    remote isolated function setChildrenContentByPath(string drive\-id, string path\-to\-item, byte[] payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root:${getEncodedUri(path\-to\-item)}:/content`;
+    remote isolated function setChildrenContentByPath(string driveId, string pathToItem, byte[] payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root:${getEncodedUri(pathToItem)}:/content`;
         http:Request request = new;
         request.setPayload(payload, "application/octet-stream");
         return self.clientEp->put(resourcePath, request, headers);
@@ -739,25 +739,25 @@ public isolated client class Client {
 
     # Delete content for the navigation property children in drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + path\-to\-item - Path relative to root folder
+    # + driveId - The unique identifier of drive
+    # + pathToItem - Path relative to root folder
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function deleteChildrenContentByPath(string drive\-id, string path\-to\-item, DeleteChildrenContentByPathHeaders headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root:${getEncodedUri(path\-to\-item)}:/content`;
+    remote isolated function deleteChildrenContentByPath(string driveId, string pathToItem, DeleteChildrenContentByPathHeaders headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root:${getEncodedUri(pathToItem)}:/content`;
         map<string|string[]> httpHeaders = http:getHeaderMap(headers);
         return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
 
     # Get children from drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Retrieved navigation property 
-    remote isolated function getChildrenInRoot(string drive\-id, string driveItem\-id, map<string|string[]> headers = {}, *GetChildrenInRootQueries queries) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/children/${getEncodedUri(driveItem\-id)}`;
+    remote isolated function getChildrenInRoot(string driveId, string driveItemId, map<string|string[]> headers = {}, *GetChildrenInRootQueries queries) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/children/${getEncodedUri(driveItemId)}`;
         map<Encoding> queryParamEncoding = {"$select": {style: FORM, explode: false}, "$expand": {style: FORM, explode: false}};
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
         return self.clientEp->get(resourcePath, headers);
@@ -765,26 +765,26 @@ public isolated client class Client {
 
     # Get content for the navigation property children from drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Retrieved media content 
-    remote isolated function getChildrenContentInRoot(string drive\-id, string driveItem\-id, map<string|string[]> headers = {}, *GetChildrenContentInRootQueries queries) returns byte[]|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/children/${getEncodedUri(driveItem\-id)}/content`;
+    remote isolated function getChildrenContentInRoot(string driveId, string driveItemId, map<string|string[]> headers = {}, *GetChildrenContentInRootQueries queries) returns byte[]|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/children/${getEncodedUri(driveItemId)}/content`;
         resourcePath = resourcePath + check getPathForQueryParam(queries);
         return self.clientEp->get(resourcePath, headers);
     }
 
     # Update content for the navigation property children in drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
-    # + payload - New media content. 
+    # + payload - New media content 
     # + return - Success 
-    remote isolated function setChildrenContentInRoot(string drive\-id, string driveItem\-id, byte[] payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/children/${getEncodedUri(driveItem\-id)}/content`;
+    remote isolated function setChildrenContentInRoot(string driveId, string driveItemId, byte[] payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/children/${getEncodedUri(driveItemId)}/content`;
         http:Request request = new;
         request.setPayload(payload, "application/octet-stream");
         return self.clientEp->put(resourcePath, request, headers);
@@ -792,48 +792,48 @@ public isolated client class Client {
 
     # Delete content for the navigation property children in drives
     #
-    # + drive\-id - The unique identifier of drive
-    # + driveItem\-id - The unique identifier of driveItem
+    # + driveId - The unique identifier of drive
+    # + driveItemId - The unique identifier of driveItem
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function deleteChildrenContentInRoot(string drive\-id, string driveItem\-id, DeleteChildrenContentInRootHeaders headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/children/${getEncodedUri(driveItem\-id)}/content`;
+    remote isolated function deleteChildrenContentInRoot(string driveId, string driveItemId, DeleteChildrenContentInRootHeaders headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/children/${getEncodedUri(driveItemId)}/content`;
         map<string|string[]> httpHeaders = http:getHeaderMap(headers);
         return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
 
     # Get the number of the resource
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - The count of the resource 
-    remote isolated function getChildrenCountInRoot(string drive\-id, map<string|string[]> headers = {}, *GetChildrenCountInRootQueries queries) returns string|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/children/$count`;
+    remote isolated function getChildrenCountInRoot(string driveId, map<string|string[]> headers = {}, *GetChildrenCountInRootQueries queries) returns string|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/children/$count`;
         resourcePath = resourcePath + check getPathForQueryParam(queries);
         return self.clientEp->get(resourcePath, headers);
     }
 
     # Get content for the navigation property root from drives
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Retrieved media content 
-    remote isolated function getRootContent(string drive\-id, map<string|string[]> headers = {}, *GetRootContentQueries queries) returns byte[]|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/content`;
+    remote isolated function getRootContent(string driveId, map<string|string[]> headers = {}, *GetRootContentQueries queries) returns byte[]|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/content`;
         resourcePath = resourcePath + check getPathForQueryParam(queries);
         return self.clientEp->get(resourcePath, headers);
     }
 
     # Update content for the navigation property root in drives
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
-    # + payload - New media content. 
+    # + payload - New media content 
     # + return - Success 
-    remote isolated function setRootContent(string drive\-id, byte[] payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/content`;
+    remote isolated function setRootContent(string driveId, byte[] payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/content`;
         http:Request request = new;
         request.setPayload(payload, "application/octet-stream");
         return self.clientEp->put(resourcePath, request, headers);
@@ -841,23 +841,23 @@ public isolated client class Client {
 
     # Delete content for the navigation property root in drives
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function deleteRootContent(string drive\-id, DeleteRootContentHeaders headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/content`;
+    remote isolated function deleteRootContent(string driveId, DeleteRootContentHeaders headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/content`;
         map<string|string[]> httpHeaders = http:getHeaderMap(headers);
         return self.clientEp->delete(resourcePath, headers = httpHeaders);
     }
 
     # Invoke action assignSensitivityLabel
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function assignSentitivityLabelInRoot(string drive\-id, root_microsoft_graph_assignSensitivityLabel_body payload, map<string|string[]> headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/microsoft.graph.assignSensitivityLabel`;
+    remote isolated function assignSentitivityLabelInRoot(string driveId, DriveItemIdMicrosoftGraphAssignSensitivityLabelBody payload, map<string|string[]> headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/microsoft.graph.assignSensitivityLabel`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -866,12 +866,12 @@ public isolated client class Client {
 
     # Invoke action checkin
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function checkinInRoot(string drive\-id, root_microsoft_graph_checkin_body payload, map<string|string[]> headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/microsoft.graph.checkin`;
+    remote isolated function checkinInRoot(string driveId, DriveItemIdMicrosoftGraphCheckinBody payload, map<string|string[]> headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/microsoft.graph.checkin`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -880,23 +880,23 @@ public isolated client class Client {
 
     # Invoke action checkout
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function checkoutInRoot(string drive\-id, map<string|string[]> headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/microsoft.graph.checkout`;
+    remote isolated function checkoutInRoot(string driveId, map<string|string[]> headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/microsoft.graph.checkout`;
         http:Request request = new;
         return self.clientEp->post(resourcePath, request, headers);
     }
 
     # Invoke action copy
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function copyInRoot(string drive\-id, root_microsoft_graph_copy_body payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/microsoft.graph.copy`;
+    remote isolated function copyInRoot(string driveId, DriveItemIdMicrosoftGraphCopyBody payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/microsoft.graph.copy`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -905,13 +905,13 @@ public isolated client class Client {
 
     # Invoke action copy
     #
-    # + drive\-id - The unique identifier of drive
-    # + path\-to\-item - Path relative to root folder
+    # + driveId - The unique identifier of drive
+    # + pathToItem - Path relative to root folder
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function copyByPath(string drive\-id, string path\-to\-item, rootpathtoitem_microsoft_graph_copy_body payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root:${getEncodedUri(path\-to\-item)}:/microsoft.graph.copy`;
+    remote isolated function copyByPath(string driveId, string pathToItem, DriveItemIdMicrosoftGraphCopyBody payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root:${getEncodedUri(pathToItem)}:/microsoft.graph.copy`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -920,12 +920,12 @@ public isolated client class Client {
 
     # Invoke action createLink
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function createLinkInRoot(string drive\-id, root_microsoft_graph_createLink_body payload, map<string|string[]> headers = {}) returns microsoft\.graph\.permission|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/microsoft.graph.createLink`;
+    remote isolated function createLinkInRoot(string driveId, DriveItemIdMicrosoftGraphCreateLinkBody payload, map<string|string[]> headers = {}) returns Permission|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/microsoft.graph.createLink`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -934,12 +934,12 @@ public isolated client class Client {
 
     # Invoke action createUploadSession
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function createUploadSessionInRoot(string drive\-id, root_microsoft_graph_createUploadSession_body payload, map<string|string[]> headers = {}) returns microsoft\.graph\.uploadSession|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/microsoft.graph.createUploadSession`;
+    remote isolated function createUploadSessionInRoot(string driveId, DriveItemIdMicrosoftGraphCreateUploadSessionBody payload, map<string|string[]> headers = {}) returns UploadSession|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/microsoft.graph.createUploadSession`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -948,45 +948,45 @@ public isolated client class Client {
 
     # Invoke action discardCheckout
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function discardCheckoutInRoot(string drive\-id, map<string|string[]> headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/microsoft.graph.discardCheckout`;
+    remote isolated function discardCheckoutInRoot(string driveId, map<string|string[]> headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/microsoft.graph.discardCheckout`;
         http:Request request = new;
         return self.clientEp->post(resourcePath, request, headers);
     }
 
     # Invoke action extractSensitivityLabels
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function extractSensitivityLabelsInRoot(string drive\-id, map<string|string[]> headers = {}) returns microsoft\.graph\.extractSensitivityLabelsResult|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/microsoft.graph.extractSensitivityLabels`;
+    remote isolated function extractSensitivityLabelsInRoot(string driveId, map<string|string[]> headers = {}) returns ExtractSensitivityLabelsResult|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/microsoft.graph.extractSensitivityLabels`;
         http:Request request = new;
         return self.clientEp->post(resourcePath, request, headers);
     }
 
     # Invoke action follow
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function followInRoot(string drive\-id, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/microsoft.graph.follow`;
+    remote isolated function followInRoot(string driveId, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/microsoft.graph.follow`;
         http:Request request = new;
         return self.clientEp->post(resourcePath, request, headers);
     }
 
     # Invoke action invite
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function inviteInRoot(string drive\-id, root_microsoft_graph_invite_body payload, map<string|string[]> headers = {}) returns Collection\ of\ permission|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/microsoft.graph.invite`;
+    remote isolated function inviteInRoot(string driveId, DriveItemIdMicrosoftGraphInviteBody payload, map<string|string[]> headers = {}) returns CollectionOfPermission|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/microsoft.graph.invite`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -995,23 +995,23 @@ public isolated client class Client {
 
     # Invoke action permanentDelete
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function permanentDeleteInRoot(string drive\-id, map<string|string[]> headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/microsoft.graph.permanentDelete`;
+    remote isolated function permanentDeleteInRoot(string driveId, map<string|string[]> headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/microsoft.graph.permanentDelete`;
         http:Request request = new;
         return self.clientEp->post(resourcePath, request, headers);
     }
 
     # Invoke action preview
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function previewInRoot(string drive\-id, root_microsoft_graph_preview_body payload, map<string|string[]> headers = {}) returns microsoft\.graph\.itemPreviewInfo|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/microsoft.graph.preview`;
+    remote isolated function previewInRoot(string driveId, DriveItemIdMicrosoftGraphPreviewBody payload, map<string|string[]> headers = {}) returns ItemPreviewInfo|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/microsoft.graph.preview`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -1020,12 +1020,12 @@ public isolated client class Client {
 
     # Invoke action restore
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function restoreInRoot(string drive\-id, root_microsoft_graph_restore_body payload, map<string|string[]> headers = {}) returns microsoft\.graph\.driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/microsoft.graph.restore`;
+    remote isolated function restoreInRoot(string driveId, DriveItemIdMicrosoftGraphRestoreBody payload, map<string|string[]> headers = {}) returns DriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/microsoft.graph.restore`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");
@@ -1034,13 +1034,13 @@ public isolated client class Client {
 
     # Invoke function search
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + q - Usage: q='{q}'
     # + headers - Headers to be sent with the request 
     # + queries - Queries to be sent with the request 
     # + return - Success 
-    remote isolated function searchInRoot(string drive\-id, string? q, map<string|string[]> headers = {}, *SearchInRootQueries queries) returns Collection\ of\ driveItem|error {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/microsoft.graph.search(q='${getEncodedUri(q)}')`;
+    remote isolated function searchInRoot(string driveId, string? q, map<string|string[]> headers = {}, *SearchInRootQueries queries) returns CollectionOfDriveItem|error {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/microsoft.graph.search(q='${getEncodedUri(q)}')`;
         map<Encoding> queryParamEncoding = {"$select": {style: FORM, explode: false}, "$orderby": {style: FORM, explode: false}, "$expand": {style: FORM, explode: false}};
         resourcePath = resourcePath + check getPathForQueryParam(queries, queryParamEncoding);
         return self.clientEp->get(resourcePath, headers);
@@ -1048,23 +1048,23 @@ public isolated client class Client {
 
     # Invoke action unfollow
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + return - Success 
-    remote isolated function unfollowInRoot(string drive\-id, map<string|string[]> headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/microsoft.graph.unfollow`;
+    remote isolated function unfollowInRoot(string driveId, map<string|string[]> headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/microsoft.graph.unfollow`;
         http:Request request = new;
         return self.clientEp->post(resourcePath, request, headers);
     }
 
     # Invoke action validatePermission
     #
-    # + drive\-id - The unique identifier of drive
+    # + driveId - The unique identifier of drive
     # + headers - Headers to be sent with the request 
     # + payload - Action parameters 
     # + return - Success 
-    remote isolated function validatePermissionInRoot(string drive\-id, root_microsoft_graph_validatePermission_body payload, map<string|string[]> headers = {}) returns error? {
-        string resourcePath = string `/drives/${getEncodedUri(drive\-id)}/root/microsoft.graph.validatePermission`;
+    remote isolated function validatePermissionInRoot(string driveId, DriveItemIdMicrosoftGraphValidatePermissionBody payload, map<string|string[]> headers = {}) returns error? {
+        string resourcePath = string `/drives/${getEncodedUri(driveId)}/root/microsoft.graph.validatePermission`;
         http:Request request = new;
         json jsonBody = jsondata:toJson(payload);
         request.setPayload(jsonBody, "application/json");

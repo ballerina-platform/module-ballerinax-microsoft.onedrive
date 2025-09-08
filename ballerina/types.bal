@@ -17,1152 +17,867 @@
 // specific language governing permissions and limitations
 // under the License.
 
+import ballerina/constraint;
 import ballerina/http;
 
-public type microsoft\.graph\.timeClockSettings record {
-    microsoft\.graph\.geoCoordinates approvedLocation?;
+public type SensitivityLabel record {
+    *Entity;
+    *SensitivityLabel1;
 };
 
-# Represents the Queries record for the operation: getChildrenCount
-public type GetChildrenCountQueries record {
-    # Filter items by property values
-    string \$filter?;
-    # Search items by search phrases
-    string \$search?;
+public type ActivitiesContainer record {
+    *Entity;
+    *ActivitiesContainer1;
 };
 
-public type microsoft\.graph\.multiValueLegacyExtendedProperty record {
-    *microsoft\.graph\.entity;
-    string[] value?;
+public type AuthenticationMethod record {
+    *Entity;
+    *AuthenticationMethod1;
 };
 
-public type microsoft\.graph\.plannerBucketTaskBoardTaskFormat record {
-    *microsoft\.graph\.entity;
-    string? orderHint?;
+public type ConfirmedBy "none"|"user"|"manager"|"unknownFutureValue";
+
+public type PublicationFacet record {
+    IdentitySet checkedOutBy?;
+    # The state of publication for this document. Either published or checkout. Read-only.
+    string? level?;
+    # The unique identifier for the version that is visible to the current caller. Read-only.
+    string? versionId?;
 };
 
-public type microsoft\.graph\.contentActivity record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.processContentRequest contentMetadata?;
-    string? scopeIdentifier?;
-    string? userId?;
-};
-
-public type microsoft\.graph\.permission record {
-    *microsoft\.graph\.entity;
-    string? expirationDateTime?;
-    microsoft\.graph\.identitySet grantedTo?;
-    microsoft\.graph\.identitySet[] grantedToIdentities?;
-    microsoft\.graph\.sharePointIdentitySet[] grantedToIdentitiesV2?;
-    microsoft\.graph\.sharePointIdentitySet grantedToV2?;
-    boolean? hasPassword?;
-    microsoft\.graph\.itemReference inheritedFrom?;
-    microsoft\.graph\.sharingInvitation invitation?;
-    microsoft\.graph\.sharingLink link?;
-    string[] roles?;
-    string? shareId?;
-};
-
-public type microsoft\.graph\.meetingChatMode "enabled"|"disabled"|"limited"|"unknownFutureValue";
-
-public type microsoft\.graph\.onenote record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.notebook[] notebooks?;
-    microsoft\.graph\.onenoteOperation[] operations?;
-    microsoft\.graph\.onenotePage[] pages?;
-    microsoft\.graph\.onenoteResource[] resources?;
-    microsoft\.graph\.sectionGroup[] sectionGroups?;
-    microsoft\.graph\.onenoteSection[] sections?;
-};
-
-public type microsoft\.graph\.workbookChartLegendFormat record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.workbookChartFill fill?;
-    microsoft\.graph\.workbookChartFont font?;
-};
-
-public type microsoft\.graph\.messageRuleActions record {
-    string[] assignCategories?;
-    string? copyToFolder?;
-    boolean? delete?;
-    microsoft\.graph\.recipient[] forwardAsAttachmentTo?;
-    microsoft\.graph\.recipient[] forwardTo?;
-    boolean? markAsRead?;
-    microsoft\.graph\.importance markImportance?;
-    string? moveToFolder?;
-    boolean? permanentDelete?;
-    microsoft\.graph\.recipient[] redirectTo?;
-    boolean? stopProcessingRules?;
-};
-
-public type microsoft\.graph\.onenoteOperationError record {
-    string? code?;
-    string? message?;
-};
-
-public type microsoft\.graph\.calendar record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.onlineMeetingProviderType[] allowedOnlineMeetingProviders?;
-    boolean? canEdit?;
-    boolean? canShare?;
-    boolean? canViewPrivateItems?;
-    string? changeKey?;
-    microsoft\.graph\.calendarColor color?;
-    microsoft\.graph\.onlineMeetingProviderType defaultOnlineMeetingProvider?;
-    string? hexColor?;
-    boolean? isDefaultCalendar?;
-    boolean? isRemovable?;
-    boolean? isTallyingResponses?;
-    string? name?;
-    microsoft\.graph\.emailAddress owner?;
-    microsoft\.graph\.calendarPermission[] calendarPermissions?;
-    microsoft\.graph\.event[] calendarView?;
-    microsoft\.graph\.event[] events?;
-    microsoft\.graph\.multiValueLegacyExtendedProperty[] multiValueExtendedProperties?;
-    microsoft\.graph\.singleValueLegacyExtendedProperty[] singleValueExtendedProperties?;
-};
-
-public type microsoft\.graph\.plannerAssignments record {
-};
-
-public type microsoft\.graph\.contentType record {
-    *microsoft\.graph\.entity;
-    string[] associatedHubsUrls?;
-    string? description?;
-    microsoft\.graph\.documentSet documentSet?;
-    microsoft\.graph\.documentSetContent documentTemplate?;
-    string? group?;
-    boolean? hidden?;
-    microsoft\.graph\.itemReference inheritedFrom?;
-    boolean? isBuiltIn?;
-    string? name?;
-    microsoft\.graph\.contentTypeOrder 'order?;
-    string? parentId?;
-    boolean? propagateChanges?;
-    boolean? readOnly?;
-    boolean? sealed?;
-    microsoft\.graph\.contentType base?;
-    microsoft\.graph\.contentType[] baseTypes?;
-    microsoft\.graph\.columnLink[] columnLinks?;
-    microsoft\.graph\.columnDefinition[] columnPositions?;
-    microsoft\.graph\.columnDefinition[] columns?;
-};
-
-public type microsoft\.graph\.giphyRatingType "strict"|"moderate"|"unknownFutureValue";
-
-public type microsoft\.graph\.userStorage record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.unifiedStorageQuota quota?;
-};
-
-public type microsoft\.graph\.settingSourceType "deviceConfiguration"|"deviceIntent";
-
-public type microsoft\.graph\.userTeamwork record {
-    *microsoft\.graph\.entity;
-    string? locale?;
-    string? region?;
-    microsoft\.graph\.associatedTeamInfo[] associatedTeams?;
-    microsoft\.graph\.userScopeTeamsAppInstallation[] installedApps?;
-};
-
-public type root_microsoft_graph_assignSensitivityLabel_body record {
-    string? sensitivityLabelId?;
-    microsoft\.graph\.sensitivityLabelAssignmentMethod assignmentMethod?;
-    string? justificationText?;
-};
-
-public type microsoft\.graph\.timeCardState "clockedIn"|"onBreak"|"clockedOut"|"unknownFutureValue";
-
-public type microsoft\.graph\.chatRestrictions record {
-    boolean? allowTextOnly?;
-};
-
-public type microsoft\.graph\.malware record {
-    string? description?;
-};
-
-public type microsoft\.graph\.mobileAppIdentifier record {
-};
-
-public type microsoft\.graph\.learningCourseActivity record {
-    *microsoft\.graph\.entity;
-    string? completedDateTime?;
-    decimal? completionPercentage?;
-    string? externalcourseActivityId?;
-    string learnerUserId?;
-    string learningContentId?;
-    string? learningProviderId?;
-    microsoft\.graph\.courseStatus status?;
-};
-
-public type microsoft\.graph\.eventType "singleInstance"|"occurrence"|"exception"|"seriesMaster";
-
-public type microsoft\.graph\.locationUniqueIdType "unknown"|"locationStore"|"directory"|"private"|"bing";
-
-# Represents the Queries record for the operation: listItem
-public type ListItemQueries record {
-    # Skip the first n items
-    int \$skip?;
-    # Show only the first n items
-    int \$top?;
-    # Filter items by property values
-    string \$filter?;
-    # Search items by search phrases
-    string \$search?;
-    # Order items by property values
-    string[] \$orderby?;
-    # Expand related entities
-    string[] \$expand?;
-    # Include count of items
-    boolean \$count?;
-    # Select properties to be returned
-    string[] \$select?;
-};
-
-public type microsoft\.graph\.authentication record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.emailAuthenticationMethod[] emailMethods?;
-    microsoft\.graph\.fido2AuthenticationMethod[] fido2Methods?;
-    microsoft\.graph\.authenticationMethod[] methods?;
-    microsoft\.graph\.microsoftAuthenticatorAuthenticationMethod[] microsoftAuthenticatorMethods?;
-    microsoft\.graph\.longRunningOperation[] operations?;
-    microsoft\.graph\.passwordAuthenticationMethod[] passwordMethods?;
-    microsoft\.graph\.phoneAuthenticationMethod[] phoneMethods?;
-    microsoft\.graph\.platformCredentialAuthenticationMethod[] platformCredentialMethods?;
-    microsoft\.graph\.softwareOathAuthenticationMethod[] softwareOathMethods?;
-    microsoft\.graph\.temporaryAccessPassAuthenticationMethod[] temporaryAccessPassMethods?;
-    microsoft\.graph\.windowsHelloForBusinessAuthenticationMethod[] windowsHelloForBusinessMethods?;
-};
-
-public type microsoft\.graph\.resourceReference record {
-    string? id?;
-    string? 'type?;
-    string? webUrl?;
-};
-
-public type microsoft\.graph\.plannerPlan record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.plannerPlanContainer container?;
-    microsoft\.graph\.identitySet createdBy?;
-    string? createdDateTime?;
-    string? owner?;
-    string title?;
-    microsoft\.graph\.plannerBucket[] buckets?;
-    microsoft\.graph\.plannerPlanDetails details?;
-    microsoft\.graph\.plannerTask[] tasks?;
-};
-
-public type microsoft\.graph\.userActivityType "uploadText"|"uploadFile"|"downloadText"|"downloadFile"|"unknownFutureValue";
-
-public type microsoft\.graph\.todoTaskList record {
-    *microsoft\.graph\.entity;
-    string? displayName?;
-    boolean isOwner?;
-    boolean isShared?;
-    microsoft\.graph\.wellknownListName wellknownListName?;
-    microsoft\.graph\.extension[] extensions?;
-    microsoft\.graph\.todoTask[] tasks?;
-};
-
-public type microsoft\.graph\.workbookChartDataLabels record {
-    *microsoft\.graph\.entity;
-    string? position?;
-    string? separator?;
-    boolean? showBubbleSize?;
-    boolean? showCategoryName?;
-    boolean? showLegendKey?;
-    boolean? showPercentage?;
-    boolean? showSeriesName?;
-    boolean? showValue?;
-    microsoft\.graph\.workbookChartDataLabelFormat format?;
-};
-
-public type microsoft\.graph\.onlineMeetingProviderType "unknown"|"skypeForBusiness"|"skypeForConsumer"|"teamsForBusiness";
-
-public type microsoft\.graph\.printOrientation "portrait"|"landscape"|"reverseLandscape"|"reversePortrait"|"unknownFutureValue";
-
-public type microsoft\.graph\.thumbnailSet record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.thumbnail large?;
-    microsoft\.graph\.thumbnail medium?;
-    microsoft\.graph\.thumbnail small?;
-    microsoft\.graph\.thumbnail 'source?;
-};
-
-public type microsoft\.graph\.termStore\.localizedDescription record {
-    string? description?;
-    string? languageTag?;
-};
-
-public type microsoft\.graph\.agreementAcceptance record {
-    *microsoft\.graph\.entity;
-    string? agreementFileId?;
-    string? agreementId?;
-    string? deviceDisplayName?;
-    string? deviceId?;
-    string? deviceOSType?;
-    string? deviceOSVersion?;
-    string? expirationDateTime?;
-    string? recordedDateTime?;
-    microsoft\.graph\.agreementAcceptanceState state?;
-    string? userDisplayName?;
-    string? userEmail?;
-    string? userId?;
-    string? userPrincipalName?;
-};
-
-public type microsoft\.graph\.sectionGroup record {
-    *microsoft\.graph\.onenoteEntityHierarchyModel;
-    string? sectionGroupsUrl?;
-    string? sectionsUrl?;
-    microsoft\.graph\.notebook parentNotebook?;
-    microsoft\.graph\.sectionGroup parentSectionGroup?;
-    microsoft\.graph\.sectionGroup[] sectionGroups?;
-    microsoft\.graph\.onenoteSection[] sections?;
-};
-
-public type microsoft\.graph\.termStore\.relation record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.termStore\.relationType relationship?;
-    microsoft\.graph\.termStore\.term fromTerm?;
-    microsoft\.graph\.termStore\.set set?;
-    microsoft\.graph\.termStore\.term toTerm?;
-};
-
-public type microsoft\.graph\.openShiftChangeRequest record {
-    *microsoft\.graph\.scheduleChangeRequest;
-    string? openShiftId?;
-};
-
-public type microsoft\.graph\.shiftActivity record {
-    string? code?;
-    string? displayName?;
-    string? endDateTime?;
-    boolean? isPaid?;
-    string? startDateTime?;
-    microsoft\.graph\.scheduleEntityTheme theme?;
-};
-
-public type microsoft\.graph\.sharingLink record {
-    microsoft\.graph\.identity application?;
-    boolean? preventsDownload?;
-    string? scope?;
-    string? 'type?;
-    string? webHtml?;
-    string? webUrl?;
-};
-
-public type microsoft\.graph\.workbookTable record {
-    *microsoft\.graph\.entity;
-    boolean highlightFirstColumn?;
-    boolean highlightLastColumn?;
-    string? legacyId?;
-    string? name?;
-    boolean showBandedColumns?;
-    boolean showBandedRows?;
-    boolean showFilterButton?;
-    boolean showHeaders?;
-    boolean showTotals?;
-    string? style?;
-    microsoft\.graph\.workbookTableColumn[] columns?;
-    microsoft\.graph\.workbookTableRow[] rows?;
-    microsoft\.graph\.workbookTableSort sort?;
-    microsoft\.graph\.workbookWorksheet worksheet?;
-};
-
-public type microsoft\.graph\.deviceCategory record {
-    *microsoft\.graph\.entity;
-    string? description?;
-    string? displayName?;
-};
-
-public type microsoft\.graph\.actionState "none"|"pending"|"canceled"|"active"|"done"|"failed"|"notSupported";
-
-public type microsoft\.graph\.itemAnalytics record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.itemActivityStat allTime?;
-    microsoft\.graph\.itemActivityStat[] itemActivityStats?;
-    microsoft\.graph\.itemActivityStat lastSevenDays?;
-};
-
-public type microsoft\.graph\.termStore\.store record {
-    *microsoft\.graph\.entity;
-    string defaultLanguageTag?;
-    string[] languageTags?;
-    microsoft\.graph\.termStore\.group[] groups?;
-    microsoft\.graph\.termStore\.set[] sets?;
-};
-
-public type microsoft\.graph\.timeOffReasonIconType "none"|"car"|"calendar"|"running"|"plane"|"firstAid"|"doctor"|"notWorking"|"clock"|"juryDuty"|"globe"|"cup"|"phone"|"weather"|"umbrella"|"piggyBank"|"dog"|"cake"|"trafficCone"|"pin"|"sunny"|"unknownFutureValue";
-
-public type microsoft\.graph\.mediaSourceContentCategory "meeting"|"liveStream"|"presentation"|"screenRecording"|"story"|"profile"|"chat"|"note"|"comment"|"unknownFutureValue";
-
-public type microsoft\.graph\.timeOff record {
-    *microsoft\.graph\.changeTrackedEntity;
-    microsoft\.graph\.timeOffItem draftTimeOff?;
+public type OpenShift1 record {
+    OpenShiftItem draftOpenShift?;
+    # The openShift is marked for deletion, a process that is finalized when the schedule is shared.
     boolean? isStagedForDeletion?;
-    microsoft\.graph\.timeOffItem sharedTimeOff?;
-    string? userId?;
+    # The ID of the schedulingGroup that contains the openShift.
+    string? schedulingGroupId?;
+    OpenShiftItem sharedOpenShift?;
 };
 
-# Represents the Headers record for the operation: deleteRootContent
-public type DeleteRootContentHeaders record {
-    # ETag
-    string If\-Match?;
+public type PrintJob1 record {
+    # The dateTimeOffset when the job was acknowledged. Read-only.
+    string? acknowledgedDateTime?;
+    PrintJobConfiguration configuration?;
+    UserIdentity createdBy?;
+    # The DateTimeOffset when the job was created. Read-only.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string createdDateTime?;
+    # The error code of the print job. Read-only.
+    decimal? errorCode?;
+    # If true, document can be fetched by printer.
+    boolean isFetchable?;
+    # Contains the source job URL, if the job has been redirected from another printer.
+    string? redirectedFrom?;
+    # Contains the destination job URL, if the job has been redirected to another printer.
+    string? redirectedTo?;
+    PrintJobStatus status?;
+    PrintDocument[] documents?;
+    # A list of printTasks that were triggered by this print job.
+    PrintTask[] tasks?;
 };
 
-public type microsoft\.graph\.calculatedColumn record {
-    string? format?;
-    string? formula?;
-    string? outputType?;
+public type TeamworkUserIdentity1 record {
+    TeamworkUserIdentityType userIdentityType?;
 };
 
-public type microsoft\.graph\.baseItemVersion record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.identitySet lastModifiedBy?;
-    string? lastModifiedDateTime?;
-    microsoft\.graph\.publicationFacet publication?;
+public type DriveRecipient record {
+    # The alias of the domain object, for cases where an email address is unavailable (for example, security groups).
+    string? alias?;
+    # The email address for the recipient, if the recipient has an associated email address.
+    string? email?;
+    # The unique identifier for the recipient in the directory.
+    string? objectId?;
 };
 
-public type microsoft\.graph\.managedDevice record {
-    *microsoft\.graph\.entity;
-    string? activationLockBypassCode?;
-    string? androidSecurityPatchLevel?;
-    string? azureADDeviceId?;
-    boolean? azureADRegistered?;
-    string complianceGracePeriodExpirationDateTime?;
-    microsoft\.graph\.complianceState complianceState?;
-    microsoft\.graph\.configurationManagerClientEnabledFeatures configurationManagerClientEnabledFeatures?;
-    microsoft\.graph\.deviceActionResult[] deviceActionResults?;
-    string? deviceCategoryDisplayName?;
-    microsoft\.graph\.deviceEnrollmentType deviceEnrollmentType?;
-    microsoft\.graph\.deviceHealthAttestationState deviceHealthAttestationState?;
-    string? deviceName?;
-    microsoft\.graph\.deviceRegistrationState deviceRegistrationState?;
-    boolean easActivated?;
-    string easActivationDateTime?;
-    string? easDeviceId?;
-    string? emailAddress?;
-    string enrolledDateTime?;
-    string? enrollmentProfileName?;
-    string? ethernetMacAddress?;
-    microsoft\.graph\.deviceManagementExchangeAccessState exchangeAccessState?;
-    microsoft\.graph\.deviceManagementExchangeAccessStateReason exchangeAccessStateReason?;
-    string exchangeLastSuccessfulSyncDateTime?;
-    decimal freeStorageSpaceInBytes?;
-    string? iccid?;
-    string? imei?;
-    boolean isEncrypted?;
-    boolean isSupervised?;
-    string? jailBroken?;
-    string lastSyncDateTime?;
-    string? managedDeviceName?;
-    microsoft\.graph\.managedDeviceOwnerType managedDeviceOwnerType?;
-    microsoft\.graph\.managementAgentType managementAgent?;
-    string managementCertificateExpirationDate?;
-    string? manufacturer?;
-    string? meid?;
-    string? model?;
-    string? notes?;
-    string? operatingSystem?;
-    string? osVersion?;
-    microsoft\.graph\.managedDevicePartnerReportedHealthState partnerReportedThreatState?;
-    string? phoneNumber?;
-    decimal physicalMemoryInBytes?;
-    string? remoteAssistanceSessionErrorDetails?;
-    string? remoteAssistanceSessionUrl?;
-    boolean? requireUserEnrollmentApproval?;
-    string? serialNumber?;
-    string? subscriberCarrier?;
-    decimal totalStorageSpaceInBytes?;
-    string? udid?;
-    string? userDisplayName?;
-    string? userId?;
-    string? userPrincipalName?;
-    string? wiFiMacAddress?;
-    microsoft\.graph\.deviceCategory deviceCategory?;
-    microsoft\.graph\.deviceCompliancePolicyState[] deviceCompliancePolicyStates?;
-    microsoft\.graph\.deviceConfigurationState[] deviceConfigurationStates?;
-    microsoft\.graph\.deviceLogCollectionResponse[] logCollectionRequests?;
-    microsoft\.graph\.user[] users?;
-    microsoft\.graph\.windowsProtectionState windowsProtectionState?;
-};
-
-# Represents the Queries record for the operation: getDrive
-public type GetDriveQueries record {
-    # Expand related entities
-    string[] \$expand?;
-    # Select properties to be returned
-    string[] \$select?;
-};
-
-public type microsoft\.graph\.fido2AuthenticationMethod record {
-    *microsoft\.graph\.authenticationMethod;
-    string? aaGuid?;
-    string[] attestationCertificates?;
-    microsoft\.graph\.attestationLevel attestationLevel?;
-    string? createdDateTime?;
+public type GroupSetting1 record {
+    # Display name of this group of settings, which comes from the associated template.
     string? displayName?;
-    string? model?;
+    # Unique identifier for the tenant-level groupSettingTemplates object that's been customized for this group-level settings object. Read-only.
+    string? templateId?;
+    # Collection of name-value pairs corresponding to the name and defaultValue properties in the referenced groupSettingTemplates object.
+    SettingValue[] values?;
 };
 
-public type microsoft\.graph\.integratedApplicationMetadata record {
-    string? name?;
-    string? version?;
-};
-
-public type microsoft\.graph\.printDocument record {
-    *microsoft\.graph\.entity;
-    string? contentType?;
+# Device Compliance Policy State for a given device
+public type DeviceCompliancePolicyState1 record {
+    # The name of the policy for this policyBase
     string? displayName?;
-    string? downloadedDateTime?;
-    decimal size?;
-    string? uploadedDateTime?;
+    # Supported platform types for policies
+    PolicyPlatformType platformType?;
+    # Count of how many setting a policy holds
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal settingCount?;
+    DeviceCompliancePolicySettingState[] settingStates?;
+    ComplianceStatus state?;
+    # The version of the policy
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal version?;
 };
 
-public type microsoft\.graph\.documentSetContent record {
-    microsoft\.graph\.contentTypeInfo contentType?;
-    string? fileName?;
-    string? folderName?;
+public type Status "active"|"updated"|"deleted"|"ignored"|"unknownFutureValue";
+
+# Device categories provides a way to organize your devices. Using device categories, company administrators can define their own categories that make sense to their company. These categories can then be applied to a device in the Intune Azure console or selected by a user during device enrollment. You can filter reports and create dynamic Azure Active Directory device groups based on device categories
+public type DeviceCategory1 record {
+    # Optional description for the device category.
+    string? description?;
+    # Display name for the device category.
+    string? displayName?;
 };
 
-public type microsoft\.graph\.userSettings record {
-    *microsoft\.graph\.entity;
-    boolean contributionToContentDiscoveryAsOrganizationDisabled?;
-    boolean contributionToContentDiscoveryDisabled?;
-    microsoft\.graph\.userInsightsSettings itemInsights?;
-    microsoft\.graph\.shiftPreferences shiftPreferences?;
-    microsoft\.graph\.userStorage storage?;
-    microsoft\.graph\.windowsSetting[] windows?;
+public type WorkbookChartPoint1 record {
+    Json value?;
+    WorkbookChartPointFormat format?;
 };
 
-public type microsoft\.graph\.responseType "none"|"organizer"|"tentativelyAccepted"|"accepted"|"declined"|"notResponded";
-
-public type microsoft\.graph\.plannerUserIds record {
+public type TimeClockSettings record {
+    GeoCoordinates approvedLocation?;
 };
 
-public type microsoft\.graph\.emailAddress record {
-    string? address?;
+public type ShiftPreferences1 record {
+    # Availability of the user to be scheduled for work and its recurrence pattern.
+    ShiftAvailability[] availability?;
+};
+
+public type ExternalAudienceScope "none"|"contactsOnly"|"all";
+
+public type CalendarGroup1 record {
+    # Identifies the version of the calendar group. Every time the calendar group is changed, ChangeKey changes as well. This allows Exchange to apply changes to the correct version of the object. Read-only.
+    string? changeKey?;
+    # The class identifier. Read-only.
+    string? classId?;
+    # The group name.
     string? name?;
+    # The calendars in the calendar group. Navigation property. Read-only. Nullable.
+    Calendar[] calendars?;
 };
 
-public type microsoft\.graph\.licenseAssignmentState record {
-    string? assignedByGroup?;
-    microsoft\.graph\.licenseAssignmentStateDisabledPlansItemsString[] disabledPlans?;
-    string? 'error?;
-    string? lastUpdatedDateTime?;
-    string? skuId?;
-    string? state?;
+public type ConversationMember1 record {
+    # The display name of the user.
+    string? displayName?;
+    # The roles for that user. This property contains more qualifiers only when relevant - for example, if the member has owner privileges, the roles property contains owner as one of the values. Similarly, if the member is an in-tenant guest, the roles property contains guest as one of the values. A basic member shouldn't have any values specified in the roles property. An Out-of-tenant external member is assigned the owner role.
+    string[] roles?;
+    # The timestamp denoting how far back a conversation's history is shared with the conversation member. This property is settable only for members of a chat.
+    string? visibleHistoryStartDateTime?;
 };
 
-public type driveItemid_microsoft_graph_copy_body record {
+public type ChatMessagePolicyViolation record {
+    ChatMessagePolicyViolationDlpActionTypes dlpAction?;
+    # Justification text provided by the sender of the message when overriding a policy violation.
+    string? justificationText?;
+    ChatMessagePolicyViolationPolicyTip policyTip?;
+    ChatMessagePolicyViolationUserActionTypes userAction?;
+    ChatMessagePolicyViolationVerdictDetailsTypes verdictDetails?;
+};
+
+# Possible ways of adding a mobile device to management
+public type DeviceEnrollmentType "unknown"|"userEnrollment"|"deviceEnrollmentManager"|"appleBulkWithUser"|"appleBulkWithoutUser"|"windowsAzureADJoin"|"windowsBulkUserless"|"windowsAutoEnrollment"|"windowsBulkAzureDomainJoin"|"windowsCoManagement"|"windowsAzureADJoinUsingDeviceAuth"|"appleUserEnrollment"|"appleUserEnrollmentWithServiceAccount"|"unknownFutureValue";
+
+public type InferenceClassificationOverride1 record {
+    InferenceClassificationType classifyAs?;
+    EmailAddress senderEmailAddress?;
+};
+
+public type PrinterFeedOrientation "longEdgeFirst"|"shortEdgeFirst"|"unknownFutureValue";
+
+public type DriveItem1 record {
+    Audio audio?;
+    Bundle bundle?;
+    # The content stream, if the item represents a file.
+    string? content?;
+    # An eTag for the content of the item. This eTag isn't changed if only the metadata is changed. Note This property isn't returned if the item is a folder. Read-only.
+    string? cTag?;
+    Deleted deleted?;
+    File file?;
+    FileSystemInfo fileSystemInfo?;
+    Folder folder?;
+    Image image?;
+    GeoCoordinates location?;
+    Malware malware?;
+    Package package?;
+    PendingOperations pendingOperations?;
+    Photo photo?;
+    PublicationFacet publication?;
+    RemoteItem remoteItem?;
+    Root root?;
+    SearchResult searchResult?;
+    Shared shared?;
+    SharepointIds sharepointIds?;
+    # Size of the item in bytes. Read-only.
+    decimal? size?;
+    SpecialFolder specialFolder?;
+    Video video?;
+    # WebDAV compatible URL for the item.
+    string? webDavUrl?;
+    ItemAnalytics analytics?;
+    # Collection containing Item objects for the immediate children of Item. Only items representing folders have children. Read-only. Nullable.
+    DriveItem[] children?;
+    ListItem listItem?;
+    # The set of permissions for the item. Read-only. Nullable.
+    Permission[] permissions?;
+    ItemRetentionLabel retentionLabel?;
+    # The set of subscriptions on the item. Only supported on the root of a drive.
+    Subscription[] subscriptions?;
+    # Collection of thumbnailSet objects associated with the item. For more information, see getting thumbnails. Read-only. Nullable.
+    ThumbnailSet[] thumbnails?;
+    # The list of previous versions of the item. For more info, see getting previous versions. Read-only. Nullable.
+    DriveItemVersion[] versions?;
+    Workbook workbook?;
+};
+
+public type DriveItemIdMicrosoftGraphCopyBody record {
     string? name?;
-    microsoft\.graph\.itemReference parentReference?;
+    ItemReference parentReference?;
     boolean? childrenOnly = false;
     boolean? includeAllVersionHistory = false;
 };
 
-# Represents the Queries record for the operation: listItemsByPath
-public type ListItemsByPathQueries record {
-    # Skip the first n items
-    int \$skip?;
-    # Show only the first n items
-    int \$top?;
-    # Filter items by property values
-    string \$filter?;
-    # Search items by search phrases
-    string \$search?;
-    # Order items by property values
-    string[] \$orderby?;
-    # Expand related entities
-    string[] \$expand?;
-    # Include count of items
-    boolean \$count?;
-    # Select properties to be returned
-    string[] \$select?;
-};
-
-public type microsoft\.graph\.checklistItem record {
-    *microsoft\.graph\.entity;
-    string? checkedDateTime?;
+public type TeamsAsyncOperation1 record {
+    # Number of times the operation was attempted before being marked successful or failed.
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal attemptsCount?;
+    # Time when the operation was created.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
     string createdDateTime?;
+    OperationError 'error?;
+    # Time when the async operation was last updated.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string lastActionDateTime?;
+    TeamsAsyncOperationType operationType?;
+    TeamsAsyncOperationStatus status?;
+    # The ID of the object that's created or modified as result of this async operation, typically a team.
+    string? targetResourceId?;
+    # The location of the object that's created or modified as result of this async operation. This URL should be treated as an opaque value and not parsed into its component paths.
+    string? targetResourceLocation?;
+};
+
+public type ChatMessageFromIdentitySet1 record {
+};
+
+public type TeamsAppResourceSpecificPermission record {
+    TeamsAppResourceSpecificPermissionType permissionType?;
+    # The name of the resource-specific permission.
+    string? permissionValue?;
+};
+
+public type PlannerExternalReferences record {
+};
+
+public type OfferShiftRequest record {
+    *ScheduleChangeRequest;
+    *OfferShiftRequest1;
+};
+
+public type PrintMultipageLayout "clockwiseFromTopLeft"|"counterclockwiseFromTopLeft"|"counterclockwiseFromTopRight"|"clockwiseFromTopRight"|"counterclockwiseFromBottomLeft"|"clockwiseFromBottomLeft"|"counterclockwiseFromBottomRight"|"clockwiseFromBottomRight"|"unknownFutureValue";
+
+public type MeetingAttendanceReport1 record {
+    # The external information of a virtual event. Returned only for event organizers or coorganizers. Read-only.
+    VirtualEventExternalInformation[] externalEventInformation?;
+    # UTC time when the meeting ended. Read-only.
+    string? meetingEndDateTime?;
+    # UTC time when the meeting started. Read-only.
+    string? meetingStartDateTime?;
+    # Total number of participants. Read-only.
+    decimal? totalParticipantCount?;
+    # List of attendance records of an attendance report. Read-only.
+    AttendanceRecord[] attendanceRecords?;
+};
+
+public type ChatMessagePolicyViolationDlpActionTypes "none"|"notifySender"|"blockAccess"|"blockAccessExternal";
+
+public type TodoTaskList1 record {
+    # The name of the task list.
     string? displayName?;
-    boolean? isChecked?;
+    # True if the user is owner of the given task list.
+    boolean isOwner?;
+    # True if the task list is shared with other users
+    boolean isShared?;
+    WellknownListName wellknownListName?;
+    # The collection of open extensions defined for the task list. Nullable.
+    Extension[] extensions?;
+    # The tasks in this task list. Read-only. Nullable.
+    TodoTask[] tasks?;
 };
 
-public type microsoft\.graph\.printFinishing "none"|"staple"|"punch"|"cover"|"bind"|"saddleStitch"|"stitchEdge"|"stapleTopLeft"|"stapleBottomLeft"|"stapleTopRight"|"stapleBottomRight"|"stitchLeftEdge"|"stitchTopEdge"|"stitchRightEdge"|"stitchBottomEdge"|"stapleDualLeft"|"stapleDualTop"|"stapleDualRight"|"stapleDualBottom"|"unknownFutureValue"|"stapleTripleLeft"|"stapleTripleTop"|"stapleTripleRight"|"stapleTripleBottom"|"bindLeft"|"bindTop"|"bindRight"|"bindBottom"|"foldAccordion"|"foldDoubleGate"|"foldGate"|"foldHalf"|"foldHalfZ"|"foldLeftGate"|"foldLetter"|"foldParallel"|"foldPoster"|"foldRightGate"|"foldZ"|"foldEngineeringZ"|"punchTopLeft"|"punchBottomLeft"|"punchTopRight"|"punchBottomRight"|"punchDualLeft"|"punchDualTop"|"punchDualRight"|"punchDualBottom"|"punchTripleLeft"|"punchTripleTop"|"punchTripleRight"|"punchTripleBottom"|"punchQuadLeft"|"punchQuadTop"|"punchQuadRight"|"punchQuadBottom"|"fold"|"trim"|"bale"|"bookletMaker"|"coat"|"laminate"|"trimAfterPages"|"trimAfterDocuments"|"trimAfterCopies"|"trimAfterJob";
-
-public type microsoft\.graph\.documentSetVersionItem record {
-    string? itemId?;
-    string? title?;
-    string? versionId?;
+public type Notebook1 record {
+    # Indicates whether this is the user's default notebook. Read-only.
+    boolean? isDefault?;
+    # Indicates whether the notebook is shared. If true, the contents of the notebook can be seen by people other than the owner. Read-only.
+    boolean? isShared?;
+    NotebookLinks links?;
+    # The URL for the sectionGroups navigation property, which returns all the section groups in the notebook. Read-only.
+    string? sectionGroupsUrl?;
+    # The URL for the sections navigation property, which returns all the sections in the notebook. Read-only.
+    string? sectionsUrl?;
+    OnenoteUserRole userRole?;
+    # The section groups in the notebook. Read-only. Nullable.
+    SectionGroup[] sectionGroups?;
+    # The sections in the notebook. Read-only. Nullable.
+    OnenoteSection[] sections?;
 };
 
-public type microsoft\.graph\.contentBase record {
+public type OperationStatus "NotStarted"|"Running"|"Completed"|"Failed";
+
+public type Deleted record {
+    # Represents the state of the deleted item.
+    string? state?;
 };
 
-public type microsoft\.graph\.channelSummary record {
-    decimal? guestsCount?;
-    boolean? hasMembersFromOtherTenants?;
-    decimal? membersCount?;
-    decimal? ownersCount?;
+public type WorkbookTableRow1 record {
+    # The index of the row within the rows collection of the table. Zero-based. Read-only.
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal index?;
+    Json values?;
 };
 
-public type microsoft\.graph\.teamworkUserIdentity record {
-    *microsoft\.graph\.identity;
-    microsoft\.graph\.teamworkUserIdentityType userIdentityType?;
+public type WorkbookApplication record {
+    *Entity;
+    *WorkbookApplication1;
 };
 
-public type microsoft\.graph\.album record {
-    string? coverImageItemId?;
+public type PrinterCapabilitiesBottomMarginsItemsNumber decimal?;
+
+public type PlannerGroup1 record {
+    # Read-only. Nullable. Returns the plannerPlans owned by the group.
+    PlannerPlan[] plans?;
 };
 
-public type microsoft\.graph\.externalAudienceScope "none"|"contactsOnly"|"all";
-
-public type microsoft\.graph\.externalLink record {
-    string? href?;
+public type ServicePlanInfo record {
+    # The object the service plan can be assigned to. The possible values are:User - service plan can be assigned to individual users.Company - service plan can be assigned to the entire tenant.
+    string? appliesTo?;
+    # The provisioning status of the service plan. The possible values are:Success - Service is fully provisioned.Disabled - Service is disabled.Error - The service plan isn't provisioned and is in an error state.PendingInput - The service isn't provisioned and is awaiting service confirmation.PendingActivation - The service is provisioned but requires explicit activation by an administrator (for example, Intune_O365 service plan)PendingProvisioning - Microsoft has added a new service to the product SKU and it isn't activated in the tenant.
+    string? provisioningStatus?;
+    # The unique identifier of the service plan.
+    string? servicePlanId?;
+    # The name of the service plan.
+    string? servicePlanName?;
 };
 
-public type microsoft\.graph\.pageLinks record {
-    microsoft\.graph\.externalLink oneNoteClientUrl?;
-    microsoft\.graph\.externalLink oneNoteWebUrl?;
+# Device protection status entity
+public type WindowsProtectionState1 record {
+    # Current anti malware version
+    string? antiMalwareVersion?;
+    # Computer endpoint protection state
+    WindowsDeviceHealthState deviceState?;
+    # Current endpoint protection engine's version
+    string? engineVersion?;
+    # When TRUE indicates full scan is overdue, when FALSE indicates full scan is not overdue. Defaults to setting on client device.
+    boolean? fullScanOverdue?;
+    # When TRUE indicates full scan is required, when FALSE indicates full scan is not required. Defaults to setting on client device.
+    boolean? fullScanRequired?;
+    # When TRUE indicates the device is a virtual machine, when FALSE indicates the device is not a virtual machine. Defaults to setting on client device.
+    boolean? isVirtualMachine?;
+    # Last quick scan datetime
+    string? lastFullScanDateTime?;
+    # Last full scan signature version
+    string? lastFullScanSignatureVersion?;
+    # Last quick scan datetime
+    string? lastQuickScanDateTime?;
+    # Last quick scan signature version
+    string? lastQuickScanSignatureVersion?;
+    # Last device health status reported time
+    string? lastReportedDateTime?;
+    # When TRUE indicates anti malware is enabled when FALSE indicates anti malware is not enabled.
+    boolean? malwareProtectionEnabled?;
+    # When TRUE indicates network inspection system enabled, when FALSE indicates network inspection system is not enabled. Defaults to setting on client device.
+    boolean? networkInspectionSystemEnabled?;
+    # Product Status of Windows Defender
+    WindowsDefenderProductStatus productStatus?;
+    # When TRUE indicates quick scan is overdue, when FALSE indicates quick scan is not overdue. Defaults to setting on client device.
+    boolean? quickScanOverdue?;
+    # When TRUE indicates real time protection is enabled, when FALSE indicates real time protection is not enabled. Defaults to setting on client device.
+    boolean? realTimeProtectionEnabled?;
+    # When TRUE indicates reboot is required, when FALSE indicates when TRUE indicates reboot is not required. Defaults to setting on client device.
+    boolean? rebootRequired?;
+    # When TRUE indicates signature is out of date, when FALSE indicates signature is not out of date. Defaults to setting on client device.
+    boolean? signatureUpdateOverdue?;
+    # Current malware definitions version
+    string? signatureVersion?;
+    # When TRUE indicates the Windows Defender tamper protection feature is enabled, when FALSE indicates the Windows Defender tamper protection feature is not enabled. Defaults to setting on client device.
+    boolean? tamperProtectionEnabled?;
+    # Device malware list
+    WindowsDeviceMalwareState[] detectedMalwareState?;
 };
 
-public type microsoft\.graph\.onenoteEntitySchemaObjectModel record {
-    *microsoft\.graph\.onenoteEntityBaseModel;
-    string? createdDateTime?;
+public type Workbook record {
+    *Entity;
+    *Workbook1;
 };
 
-public type microsoft\.graph\.sharepointIds record {
-    string? listId?;
-    string? listItemId?;
-    string? listItemUniqueId?;
-    string? siteId?;
-    string? siteUrl?;
-    string? tenantId?;
-    string? webId?;
-};
-
-public type microsoft\.graph\.longRunningOperationStatus "notStarted"|"running"|"succeeded"|"failed"|"unknownFutureValue";
-
-public type microsoft\.graph\.dateTimeTimeZone record {
-    string dateTime?;
-    string? timeZone?;
-};
-
-public type microsoft\.graph\.recurrenceRange record {
-    string? endDate?;
-    decimal numberOfOccurrences?;
-    string? recurrenceTimeZone?;
-    string? startDate?;
-    microsoft\.graph\.recurrenceRangeType 'type?;
-};
-
-public type microsoft\.graph\.driveCollectionResponse record {
-    microsoft\.graph\.drive[] value?;
-    string? \@odata\.nextLink?;
-};
-
-public type root_microsoft_graph_invite_body record {
-    boolean? requireSignIn = false;
-    string[] roles?;
-    boolean? sendInvitation = false;
-    string? message?;
-    microsoft\.graph\.driveRecipient[] recipients?;
-    boolean? retainInheritedPermissions = false;
-    string? expirationDateTime?;
-    string? password?;
-};
-
-public type microsoft\.graph\.authenticationMethodPlatform "unknown"|"windows"|"macOS"|"iOS"|"android"|"linux"|"unknownFutureValue";
-
-public type microsoft\.graph\.userProtectionScopeContainer record {
-    *microsoft\.graph\.entity;
-};
-
-public type microsoft\.graph\.printerDefaults record {
-    microsoft\.graph\.printColorMode colorMode?;
-    string? contentType?;
-    decimal? copiesPerJob?;
-    decimal? dpi?;
-    microsoft\.graph\.printDuplexMode duplexMode?;
-    microsoft\.graph\.printFinishing[] finishings?;
-    boolean? fitPdfToPage?;
-    string? inputBin?;
-    string? mediaColor?;
-    string? mediaSize?;
-    string? mediaType?;
-    microsoft\.graph\.printMultipageLayout multipageLayout?;
-    microsoft\.graph\.printOrientation orientation?;
-    string? outputBin?;
-    decimal? pagesPerSheet?;
-    microsoft\.graph\.printQuality quality?;
-    microsoft\.graph\.printScaling scaling?;
-};
-
-public type microsoft\.graph\.driveItemCollectionResponse record {
-    microsoft\.graph\.driveItem[] value?;
-    string? \@odata\.nextLink?;
-};
-
-public type microsoft\.graph\.listItemVersion record {
-    *microsoft\.graph\.baseItemVersion;
-    microsoft\.graph\.fieldValueSet fields?;
-};
-
-public type microsoft\.graph\.userPurpose "user"|"linked"|"shared"|"room"|"equipment"|"others"|"unknownFutureValue";
-
-public type microsoft\.graph\.workingTimeSchedule record {
-    *microsoft\.graph\.entity;
-};
-
-public type microsoft\.graph\.messageActionFlag "any"|"call"|"doNotForward"|"followUp"|"fyi"|"forward"|"noResponseNecessary"|"read"|"reply"|"replyToAll"|"review";
-
-public type microsoft\.graph\.userActivity record {
-    *microsoft\.graph\.entity;
-    string activationUrl?;
-    string activitySourceHost?;
-    string appActivityId?;
-    string? appDisplayName?;
-    microsoft\.graph\.Json contentInfo?;
-    string? contentUrl?;
-    string? createdDateTime?;
-    string? expirationDateTime?;
-    string? fallbackUrl?;
+public type TeamsAppDefinition1 record {
+    TeamsAppAuthorization authorization?;
+    IdentitySet createdBy?;
+    # Verbose description of the application.
+    string? description?;
+    # The name of the app provided by the app developer.
+    string? displayName?;
     string? lastModifiedDateTime?;
-    microsoft\.graph\.status status?;
-    string? userTimezone?;
-    microsoft\.graph\.visualInfo visualElements?;
-    microsoft\.graph\.activityHistoryItem[] historyItems?;
-};
-
-public type microsoft\.graph\.listInfo record {
-    boolean? contentTypesEnabled?;
-    boolean? hidden?;
-    string? template?;
-};
-
-public type root_microsoft_graph_restore_body record {
-    microsoft\.graph\.itemReference parentReference?;
-    string? name?;
-};
-
-public type microsoft\.graph\.status "active"|"updated"|"deleted"|"ignored"|"unknownFutureValue";
-
-public type microsoft\.graph\.operatingSystemSpecifications record {
-    string operatingSystemPlatform?;
-    string operatingSystemVersion?;
-};
-
-public type microsoft\.graph\.printJobStatus record {
-    string description?;
-    microsoft\.graph\.printJobStateDetail[] details?;
-    boolean isAcquiredByPrinter?;
-    microsoft\.graph\.printJobProcessingState state?;
-};
-
-public type microsoft\.graph\.workbookCommentReply record {
-    *microsoft\.graph\.entity;
-    string? content?;
-    string contentType?;
-};
-
-public type microsoft\.graph\.windowsSetting record {
-    *microsoft\.graph\.entity;
-    string? payloadType?;
-    microsoft\.graph\.windowsSettingType settingType?;
-    string? windowsDeviceId?;
-    microsoft\.graph\.windowsSettingInstance[] instances?;
-};
-
-public type microsoft\.graph\.policyPlatformType "android"|"androidForWork"|"iOS"|"macOS"|"windowsPhone81"|"windows81AndLater"|"windows10AndLater"|"all";
-
-public type microsoft\.graph\.timeSlot record {
-    microsoft\.graph\.dateTimeTimeZone end?;
-    microsoft\.graph\.dateTimeTimeZone 'start?;
-};
-
-public type microsoft\.graph\.teamsTab record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.teamsTabConfiguration configuration?;
-    string? displayName?;
-    string? webUrl?;
-    microsoft\.graph\.teamsApp teamsApp?;
-};
-
-public type microsoft\.graph\.publicErrorDetail record {
-    string? code?;
-    string? message?;
-    string? target?;
-};
-
-public type microsoft\.graph\.onenoteEntityBaseModel record {
-    *microsoft\.graph\.entity;
-    string? self?;
-};
-
-public type microsoft\.graph\.plannerChecklistItems record {
-};
-
-public type microsoft\.graph\.managedAppPolicy record {
-    *microsoft\.graph\.entity;
-    string createdDateTime?;
-    string? description?;
-    string displayName?;
-    string lastModifiedDateTime?;
+    TeamsAppPublishingState publishingState?;
+    # Short description of the application.
+    string? shortDescription?;
+    # The ID from the Teams app manifest.
+    string? teamsAppId?;
+    # The version number of the application.
     string? version?;
+    TeamworkBot bot?;
 };
 
-public type microsoft\.graph\.event record {
-    *microsoft\.graph\.outlookItem;
-    boolean? allowNewTimeProposals?;
-    microsoft\.graph\.attendee[] attendees?;
-    microsoft\.graph\.itemBody body?;
-    string? bodyPreview?;
-    string[] cancelledOccurrences?;
-    microsoft\.graph\.dateTimeTimeZone end?;
-    boolean? hasAttachments?;
-    boolean? hideAttendees?;
-    string? iCalUId?;
-    microsoft\.graph\.importance importance?;
-    boolean? isAllDay?;
-    boolean? isCancelled?;
-    boolean? isDraft?;
-    boolean? isOnlineMeeting?;
-    boolean? isOrganizer?;
-    boolean? isReminderOn?;
-    microsoft\.graph\.location location?;
-    microsoft\.graph\.location[] locations?;
-    microsoft\.graph\.onlineMeetingInfo onlineMeeting?;
-    microsoft\.graph\.onlineMeetingProviderType onlineMeetingProvider?;
-    string? onlineMeetingUrl?;
-    microsoft\.graph\.recipient organizer?;
-    string? originalEndTimeZone?;
-    string? originalStart?;
-    string? originalStartTimeZone?;
-    microsoft\.graph\.patternedRecurrence recurrence?;
-    decimal? reminderMinutesBeforeStart?;
-    boolean? responseRequested?;
-    microsoft\.graph\.responseStatus responseStatus?;
-    microsoft\.graph\.sensitivity sensitivity?;
-    string? seriesMasterId?;
-    microsoft\.graph\.freeBusyStatus showAs?;
-    microsoft\.graph\.dateTimeTimeZone 'start?;
-    string? subject?;
-    string? transactionId?;
-    microsoft\.graph\.eventType 'type?;
-    string? webLink?;
-    microsoft\.graph\.attachment[] attachments?;
-    microsoft\.graph\.calendar calendar?;
-    microsoft\.graph\.event[] exceptionOccurrences?;
-    microsoft\.graph\.extension[] extensions?;
-    microsoft\.graph\.event[] instances?;
-    microsoft\.graph\.multiValueLegacyExtendedProperty[] multiValueExtendedProperties?;
-    microsoft\.graph\.singleValueLegacyExtendedProperty[] singleValueExtendedProperties?;
+public type SettingSourceType "deviceConfiguration"|"deviceIntent";
+
+public type WorkbookChartLegendFormat record {
+    *Entity;
+    *WorkbookChartLegendFormat1;
 };
 
-public type microsoft\.graph\.textColumn record {
-    boolean? allowMultipleLines?;
-    boolean? appendChangesToExistingText?;
-    decimal? linesForEditing?;
-    decimal? maxLength?;
-    string? textType?;
+public type Audio record {
+    # The title of the album for this audio file.
+    string? album?;
+    # The artist named on the album for the audio file.
+    string? albumArtist?;
+    # The performing artist for the audio file.
+    string? artist?;
+    # Bitrate expressed in kbps.
+    decimal? bitrate?;
+    # The name of the composer of the audio file.
+    string? composers?;
+    # Copyright information for the audio file.
+    string? copyright?;
+    # The number of the disc this audio file came from.
+    decimal? disc?;
+    # The total number of discs in this album.
+    decimal? discCount?;
+    # Duration of the audio file, expressed in milliseconds
+    decimal? duration?;
+    # The genre of this audio file.
+    string? genre?;
+    # Indicates if the file is protected with digital rights management.
+    boolean? hasDrm?;
+    # Indicates if the file is encoded with a variable bitrate.
+    boolean? isVariableBitrate?;
+    # The title of the audio file.
+    string? title?;
+    # The number of the track on the original disc for this audio file.
+    decimal? track?;
+    # The total number of tracks on the original disc for this audio file.
+    decimal? trackCount?;
+    # The year the audio file was recorded.
+    decimal? year?;
 };
 
-public type microsoft\.graph\.group record {
-    *microsoft\.graph\.directoryObject;
-    boolean? allowExternalSenders?;
-    microsoft\.graph\.assignedLabel[] assignedLabels?;
-    microsoft\.graph\.assignedLicense[] assignedLicenses?;
-    boolean? autoSubscribeNewMembers?;
-    string? classification?;
-    string? createdDateTime?;
-    string? description?;
-    string? displayName?;
-    string? expirationDateTime?;
-    string[] groupTypes?;
-    boolean? hasMembersWithLicenseErrors?;
-    boolean? hideFromAddressLists?;
-    boolean? hideFromOutlookClients?;
-    boolean? isArchived?;
-    boolean? isAssignableToRole?;
-    boolean? isManagementRestricted?;
-    boolean? isSubscribedByMail?;
-    microsoft\.graph\.licenseProcessingState licenseProcessingState?;
-    string? mail?;
-    boolean? mailEnabled?;
-    string? mailNickname?;
-    string? membershipRule?;
-    string? membershipRuleProcessingState?;
-    string? onPremisesDomainName?;
-    string? onPremisesLastSyncDateTime?;
-    string? onPremisesNetBiosName?;
-    microsoft\.graph\.onPremisesProvisioningError[] onPremisesProvisioningErrors?;
-    string? onPremisesSamAccountName?;
-    string? onPremisesSecurityIdentifier?;
-    boolean? onPremisesSyncEnabled?;
-    string? preferredDataLocation?;
-    string? preferredLanguage?;
-    string[] proxyAddresses?;
-    string? renewedDateTime?;
-    boolean? securityEnabled?;
-    string? securityIdentifier?;
-    microsoft\.graph\.serviceProvisioningError[] serviceProvisioningErrors?;
-    string? theme?;
-    string? uniqueName?;
-    decimal? unseenCount?;
-    string? visibility?;
-    microsoft\.graph\.directoryObject[] acceptedSenders?;
-    microsoft\.graph\.appRoleAssignment[] appRoleAssignments?;
-    microsoft\.graph\.calendar calendar?;
-    microsoft\.graph\.event[] calendarView?;
-    microsoft\.graph\.conversation[] conversations?;
-    microsoft\.graph\.directoryObject createdOnBehalfOf?;
-    microsoft\.graph\.drive drive?;
-    microsoft\.graph\.drive[] drives?;
-    microsoft\.graph\.event[] events?;
-    microsoft\.graph\.extension[] extensions?;
-    microsoft\.graph\.groupLifecyclePolicy[] groupLifecyclePolicies?;
-    microsoft\.graph\.directoryObject[] memberOf?;
-    microsoft\.graph\.directoryObject[] members?;
-    microsoft\.graph\.directoryObject[] membersWithLicenseErrors?;
-    microsoft\.graph\.onenote onenote?;
-    microsoft\.graph\.directoryObject[] owners?;
-    microsoft\.graph\.resourceSpecificPermissionGrant[] permissionGrants?;
-    microsoft\.graph\.profilePhoto photo?;
-    microsoft\.graph\.profilePhoto[] photos?;
-    microsoft\.graph\.plannerGroup planner?;
-    microsoft\.graph\.directoryObject[] rejectedSenders?;
-    microsoft\.graph\.groupSetting[] settings?;
-    microsoft\.graph\.site[] sites?;
-    microsoft\.graph\.team team?;
-    microsoft\.graph\.conversationThread[] threads?;
-    microsoft\.graph\.directoryObject[] transitiveMemberOf?;
-    microsoft\.graph\.directoryObject[] transitiveMembers?;
+public type AuthenticationPhoneType "mobile"|"alternateMobile"|"office"|"unknownFutureValue";
+
+public type TeamworkUserIdentity record {
+    *Identity;
+    *TeamworkUserIdentity1;
 };
 
-public type microsoft\.graph\.deviceManagementTroubleshootingEvent record {
-    *microsoft\.graph\.entity;
+# Event representing an general failure
+public type DeviceManagementTroubleshootingEvent1 record {
+    # Id used for tracing the failure in the service.
     string? correlationId?;
+    # Time when the event occurred .
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
     string eventDateTime?;
 };
 
-public type microsoft\.graph\.virtualEventExternalInformation record {
-    string? applicationId?;
-    string? externalEventId?;
+public type PrintJobConfiguration record {
+    # Whether the printer should collate pages wehen printing multiple copies of a multi-page document.
+    boolean? collate?;
+    PrintColorMode colorMode?;
+    # The number of copies that should be printed. Read-only.
+    decimal? copies?;
+    # The resolution to use when printing the job, expressed in dots per inch (DPI). Read-only.
+    decimal? dpi?;
+    PrintDuplexMode duplexMode?;
+    PrinterFeedOrientation feedOrientation?;
+    # Finishing processes to use when printing.
+    PrintFinishing[] finishings?;
+    # True to fit each page of a PDF document to a physical sheet of media; false to let the printer decide how to lay out impressions.
+    boolean? fitPdfToPage?;
+    # The input bin (tray) to use when printing. See the printer's capabilities for a list of supported input bins.
+    string? inputBin?;
+    PrintMargin margin?;
+    # The media size to use when printing. Supports standard size names for ISO and ANSI media sizes. Valid values listed in the printerCapabilities topic.
+    string? mediaSize?;
+    # The default media (such as paper) type to print the document on.
+    string? mediaType?;
+    PrintMultipageLayout multipageLayout?;
+    PrintOrientation orientation?;
+    # The output bin to place completed prints into. See the printer's capabilities for a list of supported output bins.
+    string? outputBin?;
+    # The page ranges to print. Read-only.
+    IntegerRange[] pageRanges?;
+    # The number of document pages to print on each sheet.
+    decimal? pagesPerSheet?;
+    PrintQuality quality?;
+    PrintScaling scaling?;
 };
 
-public type microsoft\.graph\.documentSet record {
-    microsoft\.graph\.contentTypeInfo[] allowedContentTypes?;
-    microsoft\.graph\.documentSetContent[] defaultContents?;
-    boolean? propagateWelcomePageChanges?;
-    boolean? shouldPrefixNameToFile?;
-    string? welcomePageUrl?;
-    microsoft\.graph\.columnDefinition[] sharedColumns?;
-    microsoft\.graph\.columnDefinition[] welcomePageColumns?;
-};
-
-public type microsoft\.graph\.policyLocation record {
-    string value?;
-};
-
-public type microsoft\.graph\.complianceState "unknown"|"compliant"|"noncompliant"|"conflict"|"error"|"inGracePeriod"|"configManager";
-
-public type microsoft\.graph\.printMargin record {
-    decimal? bottom?;
+public type WorkbookChart1 record {
+    # Represents the height, in points, of the chart object.
+    decimal? height?;
+    # The distance, in points, from the left side of the chart to the worksheet origin.
     decimal? left?;
-    decimal? right?;
+    # Represents the name of a chart object.
+    string? name?;
+    # Represents the distance, in points, from the top edge of the object to the top of row 1 (on a worksheet) or the top of the chart area (on a chart).
     decimal? top?;
+    # Represents the width, in points, of the chart object.
+    decimal? width?;
+    WorkbookChartAxes axes?;
+    WorkbookChartDataLabels dataLabels?;
+    WorkbookChartAreaFormat format?;
+    WorkbookChartLegend legend?;
+    # Represents either a single series or collection of series in the chart. Read-only.
+    WorkbookChartSeries[] series?;
+    WorkbookChartTitle title?;
+    WorkbookWorksheet worksheet?;
 };
 
-public type microsoft\.graph\.deviceCompliancePolicySettingState record {
-    string? currentValue?;
-    decimal errorCode?;
-    string? errorDescription?;
-    string? instanceDisplayName?;
-    string? setting?;
-    string? settingName?;
-    microsoft\.graph\.settingSource[] sources?;
-    microsoft\.graph\.complianceStatus state?;
-    string? userEmail?;
-    string? userId?;
-    string? userName?;
-    string? userPrincipalName?;
+public type DataSecurityAndGovernance1 record {
+    SensitivityLabel[] sensitivityLabels?;
 };
 
-public type driveItemid_microsoft_graph_restore_body record {
-    microsoft\.graph\.itemReference parentReference?;
-    string? name?;
+public type TeamsAppAuthorization record {
+    # The registration ID of the Microsoft Entra app ID associated with the teamsApp.
+    string? clientAppId?;
+    TeamsAppPermissionSet requiredPermissionSet?;
 };
 
-public type microsoft\.graph\.automaticRepliesStatus "disabled"|"alwaysEnabled"|"scheduled";
-
-public type microsoft\.graph\.workbookChartPoint record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.Json value?;
-    microsoft\.graph\.workbookChartPointFormat format?;
+public type Event1 record {
+    # true if the meeting organizer allows invitees to propose a new time when responding; otherwise, false. Optional. The default is true.
+    boolean? allowNewTimeProposals?;
+    # The collection of attendees for the event.
+    Attendee[] attendees?;
+    ItemBody body?;
+    # The preview of the message associated with the event. It's in text format.
+    string? bodyPreview?;
+    # Contains occurrenceId property values of canceled instances in a recurring series, if the event is the series master. Instances in a recurring series that are canceled are called canceled occurences.Returned only on $select in a Get operation which specifies the ID (seriesMasterId property value) of a series master event.
+    string[] cancelledOccurrences?;
+    DateTimeTimeZone end?;
+    # Set to true if the event has attachments.
+    boolean? hasAttachments?;
+    # When set to true, each attendee only sees themselves in the meeting request and meeting Tracking list. The default is false.
+    boolean? hideAttendees?;
+    # A unique identifier for an event across calendars. This ID is different for each occurrence in a recurring series. Read-only.
+    string? iCalUId?;
+    Importance importance?;
+    # Set to true if the event lasts all day. If true, regardless of whether it's a single-day or multi-day event, start, and endtime must be set to midnight and be in the same time zone.
+    boolean? isAllDay?;
+    # Set to true if the event has been canceled.
+    boolean? isCancelled?;
+    # Set to true if the user has updated the meeting in Outlook but hasn't sent the updates to attendees. Set to false if all changes are sent, or if the event is an appointment without any attendees.
+    boolean? isDraft?;
+    # True if this event has online meeting information (that is, onlineMeeting points to an onlineMeetingInfo resource), false otherwise. Default is false (onlineMeeting is null). Optional.  After you set isOnlineMeeting to true, Microsoft Graph initializes onlineMeeting. Subsequently, Outlook ignores any further changes to isOnlineMeeting, and the meeting remains available online.
+    boolean? isOnlineMeeting?;
+    # Set to true if the calendar owner (specified by the owner property of the calendar) is the organizer of the event (specified by the organizer property of the event). It also applies if a delegate organized the event on behalf of the owner.
+    boolean? isOrganizer?;
+    # Set to true if an alert is set to remind the user of the event.
+    boolean? isReminderOn?;
+    Location location?;
+    # The locations where the event is held or attended from. The location and locations properties always correspond with each other. If you update the location property, any prior locations in the locations collection are removed and replaced by the new location value.
+    Location[] locations?;
+    OnlineMeetingInfo onlineMeeting?;
+    OnlineMeetingProviderType onlineMeetingProvider?;
+    # A URL for an online meeting. The property is set only when an organizer specifies in Outlook that an event is an online meeting such as Skype. Read-only.To access the URL to join an online meeting, use joinUrl which is exposed via the onlineMeeting property of the event. The onlineMeetingUrl property will be deprecated in the future.
+    string? onlineMeetingUrl?;
+    Recipient organizer?;
+    # The end time zone that was set when the event was created. A value of tzone://Microsoft/Custom indicates that a legacy custom time zone was set in desktop Outlook.
+    string? originalEndTimeZone?;
+    # Represents the start time of an event when it's initially created as an occurrence or exception in a recurring series. This property is not returned for events that are single instances. Its date and time information is expressed in ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
+    string? originalStart?;
+    # The start time zone that was set when the event was created. A value of tzone://Microsoft/Custom indicates that a legacy custom time zone was set in desktop Outlook.
+    string? originalStartTimeZone?;
+    PatternedRecurrence recurrence?;
+    # The number of minutes before the event start time that the reminder alert occurs.
+    decimal? reminderMinutesBeforeStart?;
+    # Default is true, which represents the organizer would like an invitee to send a response to the event.
+    boolean? responseRequested?;
+    ResponseStatus responseStatus?;
+    Sensitivity sensitivity?;
+    # The ID for the recurring series master item, if this event is part of a recurring series.
+    string? seriesMasterId?;
+    FreeBusyStatus showAs?;
+    DateTimeTimeZone 'start?;
+    # The text of the event's subject line.
+    string? subject?;
+    # A custom identifier specified by a client app for the server to avoid redundant POST operations in case of client retries to create the same event. It's useful when low network connectivity causes the client to time out before receiving a response from the server for the client's prior create-event request. After you set transactionId when creating an event, you can't change transactionId in a subsequent update. This property is only returned in a response payload if an app has set it. Optional.
+    string? transactionId?;
+    EventType 'type?;
+    # The URL to open the event in Outlook on the web.Outlook on the web opens the event in the browser if you are signed in to your mailbox. Otherwise, Outlook on the web prompts you to sign in.This URL can't be accessed from within an iFrame.
+    string? webLink?;
+    # The collection of FileAttachment, ItemAttachment, and referenceAttachment attachments for the event. Navigation property. Read-only. Nullable.
+    Attachment[] attachments?;
+    Calendar calendar?;
+    # Contains the id property values of the event instances that are exceptions in a recurring series.Exceptions can differ from other occurrences in a recurring series, such as the subject, start or end times, or attendees. Exceptions don't include canceled occurrences.Returned only on $select and $expand in a GET operation that specifies the ID (seriesMasterId property value) of a series master event.
+    Event[] exceptionOccurrences?;
+    # The collection of open extensions defined for the event. Nullable.
+    Extension[] extensions?;
+    # The occurrences of a recurring series, if the event is a series master. This property includes occurrences that are part of the recurrence pattern, and exceptions modified, but doesn't include occurrences canceled from the series. Navigation property. Read-only. Nullable.
+    Event[] instances?;
+    # The collection of multi-value extended properties defined for the event. Read-only. Nullable.
+    MultiValueLegacyExtendedProperty[] multiValueExtendedProperties?;
+    # The collection of single-value extended properties defined for the event. Read-only. Nullable.
+    SingleValueLegacyExtendedProperty[] singleValueExtendedProperties?;
 };
 
-public type microsoft\.graph\.scopedRoleMembership record {
-    *microsoft\.graph\.entity;
-    string administrativeUnitId?;
-    string roleId?;
-    microsoft\.graph\.identity roleMemberInfo?;
-};
-
-public type microsoft\.graph\.teamworkOnlineMeetingInfo record {
-    string? calendarEventId?;
-    string? joinWebUrl?;
-    microsoft\.graph\.teamworkUserIdentity organizer?;
-};
-
-public type microsoft\.graph\.accessAction record {
-};
-
-public type microsoft\.graph\.signInActivity record {
-    string? lastNonInteractiveSignInDateTime?;
-    string? lastNonInteractiveSignInRequestId?;
-    string? lastSignInDateTime?;
-    string? lastSignInRequestId?;
-    string? lastSuccessfulSignInDateTime?;
-    string? lastSuccessfulSignInRequestId?;
-};
-
-public type microsoft\.graph\.activityHistoryItem record {
-    *microsoft\.graph\.entity;
-    decimal? activeDurationSeconds?;
-    string? createdDateTime?;
-    string? expirationDateTime?;
-    string? lastActiveDateTime?;
-    string? lastModifiedDateTime?;
-    string startedDateTime?;
-    microsoft\.graph\.status status?;
-    string? userTimezone?;
-    microsoft\.graph\.userActivity activity?;
-};
-
-public type microsoft\.graph\.windowsMalwareSeverity "unknown"|"low"|"moderate"|"high"|"severe";
-
-public type microsoft\.graph\.managedDevicePartnerReportedHealthState "unknown"|"activated"|"deactivated"|"secured"|"lowSeverity"|"mediumSeverity"|"highSeverity"|"unresponsive"|"compromised"|"misconfigured";
-
-public type microsoft\.graph\.windowsMalwareState "unknown"|"detected"|"cleaned"|"quarantined"|"removed"|"allowed"|"blocked"|"cleanFailed"|"quarantineFailed"|"removeFailed"|"allowFailed"|"abandoned"|"blockFailed";
-
-public type microsoft\.graph\.chatType "oneOnOne"|"group"|"meeting"|"unknownFutureValue";
-
-public type microsoft\.graph\.trending record {
-    *microsoft\.graph\.entity;
-    string? lastModifiedDateTime?;
-    microsoft\.graph\.resourceReference resourceReference?;
-    microsoft\.graph\.resourceVisualization resourceVisualization?;
-    decimal? weight?;
-    microsoft\.graph\.entity 'resource?;
-};
-
-public type microsoft\.graph\.serviceProvisioningError record {
-    string? createdDateTime?;
-    boolean? isResolved?;
-    string? serviceInstance?;
-};
-
-public type microsoft\.graph\.chatMessageReactionIdentitySet record {
-    *microsoft\.graph\.identitySet;
-};
-
-public type microsoft\.graph\.siteCollection record {
-    microsoft\.graph\.siteArchivalDetails archivalDetails?;
-    string? dataLocationCode?;
-    string? hostname?;
-    microsoft\.graph\.root root?;
-};
-
-public type microsoft\.graph\.chatMessagePolicyViolationPolicyTip record {
-    string? complianceUrl?;
-    string? generalText?;
-    string[] matchedConditionDescriptions?;
-};
-
-public type microsoft\.graph\.printerProcessingState "unknown"|"idle"|"processing"|"stopped"|"unknownFutureValue";
-
-public type microsoft\.graph\.plannerGroup record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.plannerPlan[] plans?;
-};
-
-public type microsoft\.graph\.device record {
-    *microsoft\.graph\.directoryObject;
-    boolean? accountEnabled?;
-    microsoft\.graph\.alternativeSecurityId[] alternativeSecurityIds?;
-    string? approximateLastSignInDateTime?;
-    string? complianceExpirationDateTime?;
-    string? deviceCategory?;
-    string? deviceId?;
-    string? deviceMetadata?;
-    string? deviceOwnership?;
-    decimal? deviceVersion?;
-    string? displayName?;
-    string? enrollmentProfileName?;
-    string? enrollmentType?;
-    boolean? isCompliant?;
-    boolean? isManaged?;
-    boolean? isManagementRestricted?;
-    boolean? isRooted?;
-    string? managementType?;
-    string? manufacturer?;
-    string? mdmAppId?;
-    string? model?;
-    string? onPremisesLastSyncDateTime?;
-    string? onPremisesSecurityIdentifier?;
-    boolean? onPremisesSyncEnabled?;
-    string? operatingSystem?;
-    string? operatingSystemVersion?;
-    string[] physicalIds?;
-    string? profileType?;
-    string? registrationDateTime?;
-    string[] systemLabels?;
-    string? trustType?;
-    microsoft\.graph\.extension[] extensions?;
-    microsoft\.graph\.directoryObject[] memberOf?;
-    microsoft\.graph\.directoryObject[] registeredOwners?;
-    microsoft\.graph\.directoryObject[] registeredUsers?;
-    microsoft\.graph\.directoryObject[] transitiveMemberOf?;
-};
-
-public type microsoft\.graph\.driveRecipient record {
-    string? alias?;
-    string? email?;
-    string? objectId?;
-};
-
-public type microsoft\.graph\.taskStatus "notStarted"|"inProgress"|"completed"|"waitingOnOthers"|"deferred";
-
-public type microsoft\.graph\.printerShare record {
-    *microsoft\.graph\.printerBase;
+public type PrinterShare1 record {
+    # If true, all users and groups will be granted access to this printer share. This supersedes the allow lists defined by the allowedUsers and allowedGroups navigation properties.
     boolean allowAllUsers?;
+    # The DateTimeOffset when the printer share was created. Read-only.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
     string createdDateTime?;
-    microsoft\.graph\.printerShareViewpoint viewPoint?;
-    microsoft\.graph\.group[] allowedGroups?;
-    microsoft\.graph\.user[] allowedUsers?;
-    microsoft\.graph\.printer printer?;
+    PrinterShareViewpoint viewPoint?;
+    # The groups whose users have access to print using the printer.
+    Group[] allowedGroups?;
+    # The users who have access to print using the printer.
+    User[] allowedUsers?;
+    Printer printer?;
 };
 
-public type microsoft\.graph\.termStore\.localizedName record {
-    string? languageTag?;
-    string? name?;
+public type Shift record {
+    *ChangeTrackedEntity;
+    *Shift1;
 };
 
-public type driveItemid_microsoft_graph_createLink_body record {
-    string? 'type?;
-    string? scope?;
-    string? expirationDateTime?;
-    string? password?;
-    string? message?;
-    microsoft\.graph\.driveRecipient[] recipients?;
-    boolean? retainInheritedPermissions = false;
-    boolean? sendNotification = false;
+public type PasswordAuthenticationMethod record {
+    *AuthenticationMethod;
+    *PasswordAuthenticationMethod1;
 };
 
-public type microsoft\.graph\.entity record {
-    string id?;
+public type ChatMessage record {
+    *Entity;
+    *ChatMessage1;
+};
+
+public type ItemActivityStat1 record {
+    ItemActionStat access?;
+    ItemActionStat create?;
+    ItemActionStat delete?;
+    ItemActionStat edit?;
+    # When the interval ends. Read-only.
+    string? endDateTime?;
+    IncompleteData incompleteData?;
+    # Indicates whether the item is 'trending.' Read-only.
+    boolean? isTrending?;
+    ItemActionStat move?;
+    # When the interval starts. Read-only.
+    string? startDateTime?;
+    # Exposes the itemActivities represented in this itemActivityStat resource.
+    ItemActivity[] activities?;
+};
+
+public type AssignedLabel record {
+    # The display name of the label. Read-only.
+    string? displayName?;
+    # The unique identifier of the label.
+    string? labelId?;
+};
+
+public type PrintDocument1 record {
+    # The document's content (MIME) type. Read-only.
+    string? contentType?;
+    # The document's name. Read-only.
+    string? displayName?;
+    # The time the document was downloaded. Read-only
+    string? downloadedDateTime?;
+    # The document's size in bytes. Read-only.
+    decimal size?;
+    # The time the document was uploaded. Read-only
+    string? uploadedDateTime?;
+};
+
+public type PlannerUserIds record {
+};
+
+public type TeamInfo record {
+    *Entity;
+    *TeamInfo1;
+};
+
+public type RecurrenceRangeType "endDate"|"noEnd"|"numbered";
+
+public type Term record {
+    # Date and time of term creation. Read-only.
+    string? createdDateTime?;
+    # Description about term that is dependent on the languageTag.
+    TermStoreLocalizedDescription[] descriptions?;
+    # Label metadata for a term.
+    TermStoreLocalizedLabel[] labels?;
+    # Last date and time of term modification. Read-only.
+    string? lastModifiedDateTime?;
+    # Collection of properties on the term.
+    KeyValue[] properties?;
+    # Children of current term.
+    TermStoreTerm[] children?;
+    # To indicate which terms are related to the current term as either pinned or reused.
+    TermStoreRelation[] relations?;
+    TermStoreSet set?;
+};
+
+public type MessageRuleActions record {
+    # A list of categories to be assigned to a message.
+    string[] assignCategories?;
+    # The ID of a folder that a message is to be copied to.
+    string? copyToFolder?;
+    # Indicates whether a message should be moved to the Deleted Items folder.
+    boolean? delete?;
+    # The email addresses of the recipients to which a message should be forwarded as an attachment.
+    Recipient[] forwardAsAttachmentTo?;
+    # The email addresses of the recipients to which a message should be forwarded.
+    Recipient[] forwardTo?;
+    # Indicates whether a message should be marked as read.
+    boolean? markAsRead?;
+    Importance markImportance?;
+    # The ID of the folder that a message will be moved to.
+    string? moveToFolder?;
+    # Indicates whether a message should be permanently deleted and not saved to the Deleted Items folder.
+    boolean? permanentDelete?;
+    # The email addresses to which a message should be redirected.
+    Recipient[] redirectTo?;
+    # Indicates whether subsequent rules should be evaluated.
+    boolean? stopProcessingRules?;
+};
+
+public type TermStoreTermGroupScope "global"|"system"|"siteCollection"|"unknownFutureValue";
+
+public type BroadcastMeetingAudience "roleIsAttendee"|"organization"|"everyone"|"unknownFutureValue";
+
+public type DriveItemSource record {
+    DriveItemSourceApplication application?;
+    # The external identifier for the drive item from the source.
+    string? externalId?;
+};
+
+public type Video record {
+    # Number of audio bits per sample.
+    decimal? audioBitsPerSample?;
+    # Number of audio channels.
+    decimal? audioChannels?;
+    # Name of the audio format (AAC, MP3, etc.).
+    string? audioFormat?;
+    # Number of audio samples per second.
+    decimal? audioSamplesPerSecond?;
+    # Bit rate of the video in bits per second.
+    decimal? bitrate?;
+    # Duration of the file in milliseconds.
+    decimal? duration?;
+    # 'Four character code' name of the video format.
+    string? fourCC?;
+    # Frame rate of the video.
+    decimal? frameRate?;
+    # Height of the video, in pixels.
+    decimal? height?;
+    # Width of the video, in pixels.
+    decimal? width?;
+};
+
+public type ChatMessageInfo record {
+    *Entity;
+    *ChatMessageInfo1;
+};
+
+public type DocumentSet record {
+    # Content types allowed in document set.
+    ContentTypeInfo[] allowedContentTypes?;
+    # Default contents of document set.
+    DocumentSetContent[] defaultContents?;
+    # Specifies whether to push welcome page changes to inherited content types.
+    boolean? propagateWelcomePageChanges?;
+    # Indicates whether to add the name of the document set to each file name.
+    boolean? shouldPrefixNameToFile?;
+    # Welcome page absolute URL.
+    string? welcomePageUrl?;
+    ColumnDefinition[] sharedColumns?;
+    ColumnDefinition[] welcomePageColumns?;
+};
+
+public type TermStoreRelation record {
+    *Entity;
+    *Relation;
+};
+
+public type Attendee1 record {
+    TimeSlot proposedNewTime?;
+    ResponseStatus status?;
+};
+
+public type AutomaticRepliesStatus "disabled"|"alwaysEnabled"|"scheduled";
+
+public type ServiceStorageQuotaBreakdown1 record {
+};
+
+public type DriveItemIdMicrosoftGraphValidatePermissionBody record {
+    string? challengeToken?;
+    string password?;
+};
+
+public type TeamworkConversationIdentity record {
+    *Identity;
+    *TeamworkConversationIdentity1;
+};
+
+public type PrinterProcessingState "unknown"|"idle"|"processing"|"stopped"|"unknownFutureValue";
+
+public type PrinterDefaults record {
+    PrintColorMode colorMode?;
+    # The default content (MIME) type to use when processing documents.
+    string? contentType?;
+    # The default number of copies printed per job.
+    decimal? copiesPerJob?;
+    # The default resolution in DPI to use when printing the job.
+    decimal? dpi?;
+    PrintDuplexMode duplexMode?;
+    # The default set of finishings to apply to print jobs. Valid values are described in the following table.
+    PrintFinishing[] finishings?;
+    # The default fitPdfToPage setting. True to fit each page of a PDF document to a physical sheet of media; false to let the printer decide how to lay out impressions.
+    boolean? fitPdfToPage?;
+    # The default input bin that serves as the paper source.
+    string? inputBin?;
+    # The default media (such as paper) color to print the document on.
+    string? mediaColor?;
+    # The default media size to use. Supports standard size names for ISO and ANSI media sizes. Valid values are listed in the printerCapabilities topic.
+    string? mediaSize?;
+    # The default media (such as paper) type to print the document on.
+    string? mediaType?;
+    PrintMultipageLayout multipageLayout?;
+    PrintOrientation orientation?;
+    # The default output bin to place completed prints into. See the printer's capabilities for a list of supported output bins.
+    string? outputBin?;
+    # The default number of document pages to print on each sheet.
+    decimal? pagesPerSheet?;
+    PrintQuality quality?;
+    PrintScaling scaling?;
+};
+
+# The ManagedAppPolicy resource represents a base type for platform specific policies
+public type ManagedAppPolicy1 record {
+    # The date and time the policy was created.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string createdDateTime?;
+    # The policy's description.
+    string? description?;
+    # Policy display name.
+    string displayName?;
+    # Last time the policy was modified.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string lastModifiedDateTime?;
+    # Version of the entity.
+    string? version?;
+};
+
+public type StoragePlanInformation record {
+    # Indicates whether there are higher storage quota plans available. Read-only.
+    boolean? upgradeAvailable?;
+};
+
+public type OnenoteEntityBaseModel record {
+    *Entity;
+    *OnenoteEntityBaseModel1;
+};
+
+public type TeamsApp record {
+    *Entity;
+    *TeamsApp1;
 };
 
 # OAuth2 Refresh Token Grant Configs
@@ -1172,1546 +887,5297 @@ public type OAuth2RefreshTokenGrantConfig record {|
     string refreshUrl = "https://login.microsoftonline.com/common/oauth2/v2.0/token";
 |};
 
-public type microsoft\.graph\.subscription record {
-    *microsoft\.graph\.entity;
-    string? applicationId?;
-    string changeType?;
-    string? clientState?;
-    string? creatorId?;
-    string? encryptionCertificate?;
-    string? encryptionCertificateId?;
-    string expirationDateTime?;
-    boolean? includeResourceData?;
-    string? latestSupportedTlsVersion?;
-    string? lifecycleNotificationUrl?;
-    string? notificationQueryOptions?;
-    string notificationUrl?;
-    string? notificationUrlAppId?;
-    string 'resource?;
+public type TeamworkOnlineMeetingInfo record {
+    # The identifier of the calendar event associated with the meeting.
+    string? calendarEventId?;
+    # The URL that users click to join or uniquely identify the meeting.
+    string? joinWebUrl?;
+    TeamworkUserIdentity organizer?;
 };
 
-public type microsoft\.graph\.chatMessagePolicyViolation record {
-    microsoft\.graph\.chatMessagePolicyViolationDlpActionTypes dlpAction?;
-    string? justificationText?;
-    microsoft\.graph\.chatMessagePolicyViolationPolicyTip policyTip?;
-    microsoft\.graph\.chatMessagePolicyViolationUserActionTypes userAction?;
-    microsoft\.graph\.chatMessagePolicyViolationVerdictDetailsTypes verdictDetails?;
-};
-
-public type microsoft\.graph\.meetingAttendanceReport record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.virtualEventExternalInformation[] externalEventInformation?;
-    string? meetingEndDateTime?;
-    string? meetingStartDateTime?;
-    decimal? totalParticipantCount?;
-    microsoft\.graph\.attendanceRecord[] attendanceRecords?;
-};
-
-public type microsoft\.graph\.uploadSession record {
-    string? expirationDateTime?;
-    string[] nextExpectedRanges?;
-    string? uploadUrl?;
-};
-
-public type microsoft\.graph\.phoneType "home"|"business"|"mobile"|"other"|"assistant"|"homeFax"|"businessFax"|"otherFax"|"pager"|"radio";
-
-public type microsoft\.graph\.shared record {
-    microsoft\.graph\.identitySet owner?;
-    string? scope?;
-    microsoft\.graph\.identitySet sharedBy?;
-    string? sharedDateTime?;
-};
-
-public type microsoft\.graph\.openShiftItem record {
-    *microsoft\.graph\.shiftItem;
-    decimal openSlotCount?;
-};
-
-public type microsoft\.graph\.printJobProcessingState "unknown"|"pending"|"processing"|"paused"|"stopped"|"completed"|"canceled"|"aborted"|"unknownFutureValue";
-
-public type microsoft\.graph\.softwareOathAuthenticationMethod record {
-    *microsoft\.graph\.authenticationMethod;
-    string? secretKey?;
-};
-
-public type microsoft\.graph\.teamsAppDefinition record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.teamsAppAuthorization authorization?;
-    microsoft\.graph\.identitySet createdBy?;
-    string? description?;
+public type ShiftItem1 record {
+    # An incremental part of a shift which can cover details of when and where an employee is during their shift. For example, an assignment or a scheduled break or lunch. Required.
+    ShiftActivity[] activities?;
+    # The shift label of the shiftItem.
     string? displayName?;
-    string? lastModifiedDateTime?;
-    microsoft\.graph\.teamsAppPublishingState publishingState?;
-    string? shortDescription?;
-    string? teamsAppId?;
-    string? version?;
-    microsoft\.graph\.teamworkBot bot?;
+    # The shift notes for the shiftItem.
+    string? notes?;
 };
 
-public type microsoft\.graph\.teamworkTagMember record {
-    *microsoft\.graph\.entity;
-    string? displayName?;
-    string? tenantId?;
-    string? userId?;
+public type ContentActivity record {
+    *Entity;
+    *ContentActivity1;
 };
 
-public type microsoft\.graph\.team record {
-    *microsoft\.graph\.entity;
-    string? classification?;
-    string? createdDateTime?;
-    string? description?;
-    string? displayName?;
-    string? firstChannelName?;
-    microsoft\.graph\.teamFunSettings funSettings?;
-    microsoft\.graph\.teamGuestSettings guestSettings?;
-    string? internalId?;
-    boolean? isArchived?;
-    microsoft\.graph\.teamMemberSettings memberSettings?;
-    microsoft\.graph\.teamMessagingSettings messagingSettings?;
-    microsoft\.graph\.teamSpecialization specialization?;
-    microsoft\.graph\.teamSummary summary?;
-    string? tenantId?;
-    microsoft\.graph\.teamVisibilityType visibility?;
-    string? webUrl?;
-    microsoft\.graph\.channel[] allChannels?;
-    microsoft\.graph\.channel[] channels?;
-    microsoft\.graph\.group group?;
-    microsoft\.graph\.channel[] incomingChannels?;
-    microsoft\.graph\.teamsAppInstallation[] installedApps?;
-    microsoft\.graph\.conversationMember[] members?;
-    microsoft\.graph\.teamsAsyncOperation[] operations?;
-    microsoft\.graph\.resourceSpecificPermissionGrant[] permissionGrants?;
-    microsoft\.graph\.profilePhoto photo?;
-    microsoft\.graph\.channel primaryChannel?;
-    microsoft\.graph\.schedule schedule?;
-    microsoft\.graph\.teamworkTag[] tags?;
-    microsoft\.graph\.teamsTemplate template?;
+public type AllowedLobbyAdmitterRoles "organizerAndCoOrganizersAndPresenters"|"organizerAndCoOrganizers"|"unknownFutureValue";
+
+public type MessageRule record {
+    *Entity;
+    *MessageRule1;
 };
 
-public type microsoft\.graph\.chatMessageType "message"|"chatEvent"|"typing"|"unknownFutureValue"|"systemEventMessage";
-
-public type microsoft\.graph\.deviceLogCollectionResponse record {
-    *microsoft\.graph\.entity;
-    string? enrolledByUser?;
-    string? expirationDateTimeUTC?;
-    string? initiatedByUserPrincipalName?;
-    string managedDeviceId?;
-    string? receivedDateTimeUTC?;
-    string? requestedDateTimeUTC?;
-    decimal? sizeInKB?;
-    microsoft\.graph\.appLogUploadState status?;
+public type UserTeamwork1 record {
+    # Represents the location that a user selected in Microsoft Teams and doesn't follow the Office's locale setting. A user's locale is represented by their preferred language and country or region. For example, en-us. The language component follows two-letter codes as defined in ISO 639-1, and the country component follows two-letter codes as defined in ISO 3166-1 alpha-2.
+    string? locale?;
+    # Represents the region of the organization or the user. For users with multigeo licenses, the property contains the user's region (if available). For users without multigeo licenses, the property contains the organization's region.The region value can be any region supported by the Teams payload. The possible values are: Americas, Europe and MiddleEast, Asia Pacific, UAE, Australia, Brazil, Canada, Switzerland, Germany, France, India, Japan, South Korea, Norway, Singapore, United Kingdom, South Africa, Sweden, Qatar, Poland, Italy, Israel, Spain, Mexico, USGov Community Cloud, USGov Community Cloud High, USGov Department of Defense, and China.
+    string? region?;
+    # The list of associatedTeamInfo objects that a user is associated with.
+    AssociatedTeamInfo[] associatedTeams?;
+    # The apps installed in the personal scope of this user.
+    UserScopeTeamsAppInstallation[] installedApps?;
 };
 
-public type microsoft\.graph\.audioConferencing record {
-    string? conferenceId?;
-    string? dialinUrl?;
-    string? tollFreeNumber?;
-    string[] tollFreeNumbers?;
-    string? tollNumber?;
-    string[] tollNumbers?;
+public type MeetingParticipants record {
+    # Information about the meeting attendees.
+    MeetingParticipantInfo[] attendees?;
+    MeetingParticipantInfo organizer?;
 };
 
-public type driveItemid_microsoft_graph_validatePermission_body record {
-    string? challengeToken?;
-    string password?;
+public type PlannerOrderHintsByAssignee record {
 };
 
-public type microsoft\.graph\.weekIndex "first"|"second"|"third"|"fourth"|"last";
-
-public type microsoft\.graph\.publicError record {
-    string? code?;
-    microsoft\.graph\.publicErrorDetail[] details?;
-    microsoft\.graph\.publicInnerError innerError?;
-    string? message?;
-    string? target?;
+public type LongRunningOperation record {
+    *Entity;
+    *LongRunningOperation1;
 };
 
-public type microsoft\.graph\.plannerProgressTaskBoardTaskFormat record {
-    *microsoft\.graph\.entity;
-    string? orderHint?;
+public type ItemReference record {
+    # Unique identifier of the drive instance that contains the driveItem. Only returned if the item is located in a drive. Read-only.
+    string? driveId?;
+    # Identifies the type of drive. Only returned if the item is located in a drive. See drive resource for values.
+    string? driveType?;
+    # Unique identifier of the driveItem in the drive or a listItem in a list. Read-only.
+    string? id?;
+    # The name of the item being referenced. Read-only.
+    string? name?;
+    # Percent-encoded path that can be used to navigate to the item. Read-only.
+    string? path?;
+    # A unique identifier for a shared resource that can be accessed via the Shares API.
+    string? shareId?;
+    SharepointIds sharepointIds?;
+    # For OneDrive for Business and SharePoint, this property represents the ID of the site that contains the parent document library of the driveItem resource or the parent list of the listItem resource. The value is the same as the id property of that site resource. It is an opaque string that consists of three identifiers of the site. For OneDrive, this property is not populated.
+    string? siteId?;
 };
 
-public type microsoft\.graph\.teamsTemplate record {
-    *microsoft\.graph\.entity;
+public type DayNote record {
+    *ChangeTrackedEntity;
+    *DayNote1;
 };
 
-public type microsoft\.graph\.driveItemVersion record {
-    *microsoft\.graph\.baseItemVersion;
+public type WorkbookWorksheetProtection1 record {
+    WorkbookWorksheetProtectionOptions options?;
+    # Indicates whether the worksheet is protected.  Read-only.
+    boolean protected?;
+};
+
+public type WorkbookPivotTable1 record {
+    # The name of the pivot table.
+    string? name?;
+    WorkbookWorksheet worksheet?;
+};
+
+public type ListItem record {
+    *BaseItem;
+    *ListItem1;
+};
+
+public type DriveItemVersion1 record {
+    # The content stream for this version of the item.
     string? content?;
+    # Indicates the size of the content stream for this version of the item.
     decimal? size?;
 };
 
-public type microsoft\.graph\.numberColumn record {
+public type TeamworkBot1 record {
+};
+
+public type NumberColumn record {
+    # How many decimal places to display. See below for information about the possible values.
     string? decimalPlaces?;
+    # How the value should be presented in the UX. Must be one of number or percentage. If unspecified, treated as number.
     string? displayAs?;
+    # The maximum permitted value.
     decimal? maximum?;
+    # The minimum permitted value.
     decimal? minimum?;
 };
 
-public type microsoft\.graph\.responseStatus record {
-    microsoft\.graph\.responseType response?;
-    string? time?;
+public type OfferShiftRequest1 record {
+    # The date and time when the recipient approved or declined the request.
+    string? recipientActionDateTime?;
+    # The message sent by the recipient regarding the request.
+    string? recipientActionMessage?;
+    # The recipient's user ID.
+    string? recipientUserId?;
+    # The sender's shift ID.
+    string? senderShiftId?;
 };
 
-public type microsoft\.graph\.operation record {
-    *microsoft\.graph\.entity;
+public type SiteCollection record {
+    SiteArchivalDetails archivalDetails?;
+    # The geographic region code for where this site collection resides. Only present for multi-geo tenants. Read-only.
+    string? dataLocationCode?;
+    # The hostname for the site collection. Read-only.
+    string? hostname?;
+    Root root?;
+};
+
+public type DeviceConfigurationState record {
+    *Entity;
+    *DeviceConfigurationState1;
+};
+
+public type ServiceProvisioningError record {
+    # The date and time at which the error occurred.
     string? createdDateTime?;
-    string? lastActionDateTime?;
-    microsoft\.graph\.operationStatus status?;
+    # Indicates whether the error has been attended to.
+    boolean? isResolved?;
+    # Qualified service instance (for example, 'SharePoint/Dublin') that published the service error information.
+    string? serviceInstance?;
 };
 
-public type microsoft\.graph\.allowedLobbyAdmitterRoles "organizerAndCoOrganizersAndPresenters"|"organizerAndCoOrganizers"|"unknownFutureValue";
-
-public type microsoft\.graph\.workbookWorksheetProtectionOptions record {
-    boolean allowAutoFilter?;
-    boolean allowDeleteColumns?;
-    boolean allowDeleteRows?;
-    boolean allowFormatCells?;
-    boolean allowFormatColumns?;
-    boolean allowFormatRows?;
-    boolean allowInsertColumns?;
-    boolean allowInsertHyperlinks?;
-    boolean allowInsertRows?;
-    boolean allowPivotTables?;
-    boolean allowSort?;
+public type PlannerPlanDetails1 record {
+    PlannerCategoryDescriptions categoryDescriptions?;
+    PlannerUserIds sharedWith?;
 };
 
-public type microsoft\.graph\.calendarGroup record {
-    *microsoft\.graph\.entity;
-    string? changeKey?;
-    string? classId?;
-    string? name?;
-    microsoft\.graph\.calendar[] calendars?;
+public type LabelActionSource "manual"|"automatic"|"recommended"|"none"|"unknownFutureValue";
+
+public type AuthenticationMethod1 record {
 };
 
-public type microsoft\.graph\.teamworkUserIdentityType "aadUser"|"onPremiseAadUser"|"anonymousGuest"|"federatedUser"|"personalMicrosoftAccountUser"|"skypeUser"|"phoneUser"|"unknownFutureValue"|"emailUser";
-
-public type microsoft\.graph\.chatViewpoint record {
-    boolean? isHidden?;
-    string? lastMessageReadDateTime?;
+public type ActivityMetadata record {
+    UserActivityType activity?;
 };
 
-public type microsoft\.graph\.protectedApplicationMetadata record {
-    *microsoft\.graph\.integratedApplicationMetadata;
-    microsoft\.graph\.policyLocation applicationLocation?;
+public type PrinterShareViewpoint record {
+    # Date and time when the printer was last used by the signed-in user. The timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z.
+    string? lastUsedDateTime?;
 };
 
-public type microsoft\.graph\.microsoftAuthenticatorAuthenticationMethod record {
-    *microsoft\.graph\.authenticationMethod;
+public type PrinterShare record {
+    *PrinterBase;
+    *PrinterShare1;
+};
+
+public type ActivityHistoryItem1 record {
+    # Optional. The duration of active user engagement. if not supplied, this is calculated from the startedDateTime and lastActiveDateTime.
+    decimal? activeDurationSeconds?;
+    # Set by the server. DateTime in UTC when the object was created on the server.
     string? createdDateTime?;
-    string? deviceTag?;
-    string? displayName?;
-    string? phoneAppVersion?;
-    microsoft\.graph\.device device?;
-};
-
-public type microsoft\.graph\.personType record {
-    string? 'class?;
-    string? subclass?;
-};
-
-public type microsoft\.graph\.mediaSource record {
-    microsoft\.graph\.mediaSourceContentCategory contentCategory?;
-};
-
-# Represents the Queries record for the operation: searchInRoot
-public type SearchInRootQueries record {
-    # Skip the first n items
-    int \$skip?;
-    # Show only the first n items
-    int \$top?;
-    # Filter items by property values
-    string \$filter?;
-    # Search items by search phrases
-    string \$search?;
-    # Order items by property values
-    string[] \$orderby?;
-    # Expand related entities
-    string[] \$expand?;
-    # Include count of items
-    boolean \$count?;
-    # Select properties to be returned
-    string[] \$select?;
-};
-
-# Represents the Queries record for the operation: getRootContent
-public type GetRootContentQueries record {
-    # Format of the content
-    string \$format?;
-};
-
-public type microsoft\.graph\.workbookTableRow record {
-    *microsoft\.graph\.entity;
-    decimal index?;
-    microsoft\.graph\.Json values?;
-};
-
-public type microsoft\.graph\.dataSecurityAndGovernance record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.sensitivityLabel[] sensitivityLabels?;
-};
-
-public type microsoft\.graph\.channel record {
-    *microsoft\.graph\.entity;
-    string? createdDateTime?;
-    string? description?;
-    string displayName?;
-    string? email?;
-    boolean? isArchived?;
-    boolean? isFavoriteByDefault?;
-    microsoft\.graph\.channelMembershipType membershipType?;
-    microsoft\.graph\.channelSummary summary?;
-    string? tenantId?;
-    string? webUrl?;
-    microsoft\.graph\.conversationMember[] allMembers?;
-    microsoft\.graph\.driveItem filesFolder?;
-    microsoft\.graph\.conversationMember[] members?;
-    microsoft\.graph\.chatMessage[] messages?;
-    microsoft\.graph\.sharedWithChannelTeamInfo[] sharedWithTeams?;
-    microsoft\.graph\.teamsTab[] tabs?;
-};
-
-public type microsoft\.graph\.watermarkProtectionValues record {
-    boolean? isEnabledForContentSharing?;
-    boolean? isEnabledForVideo?;
-};
-
-public type microsoft\.graph\.teamsAppPermissionSet record {
-    microsoft\.graph\.teamsAppResourceSpecificPermission[] resourceSpecificPermissions?;
-};
-
-public type microsoft\.graph\.workbookFilter record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.workbookFilterCriteria criteria?;
-};
-
-public type microsoft\.graph\.attestationLevel "attested"|"notAttested"|"unknownFutureValue";
-
-public type microsoft\.graph\.printerCapabilitiesBottomMarginsItemsNumber decimal?;
-
-public type microsoft\.graph\.audio record {
-    string? album?;
-    string? albumArtist?;
-    string? artist?;
-    decimal? bitrate?;
-    string? composers?;
-    string? copyright?;
-    decimal? disc?;
-    decimal? discCount?;
-    decimal? duration?;
-    string? genre?;
-    boolean? hasDrm?;
-    boolean? isVariableBitrate?;
-    string? title?;
-    decimal? track?;
-    decimal? trackCount?;
-    decimal? year?;
-};
-
-public type microsoft\.graph\.termColumn record {
-    boolean? allowMultipleValues?;
-    boolean? showFullyQualifiedName?;
-    microsoft\.graph\.termStore\.term parentTerm?;
-    microsoft\.graph\.termStore\.set termSet?;
-};
-
-public type microsoft\.graph\.inferenceClassificationOverride record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.inferenceClassificationType classifyAs?;
-    microsoft\.graph\.emailAddress senderEmailAddress?;
-};
-
-public type driveItemid_microsoft_graph_createUploadSession_body record {
-    microsoft\.graph\.driveItemUploadableProperties item?;
-};
-
-public type microsoft\.graph\.plannerOrderHintsByAssignee record {
-};
-
-public type microsoft\.graph\.importance "low"|"normal"|"high";
-
-public type microsoft\.graph\.workbookChartAxis record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.Json majorUnit?;
-    microsoft\.graph\.Json maximum?;
-    microsoft\.graph\.Json minimum?;
-    microsoft\.graph\.Json minorUnit?;
-    microsoft\.graph\.workbookChartAxisFormat format?;
-    microsoft\.graph\.workbookChartGridlines majorGridlines?;
-    microsoft\.graph\.workbookChartGridlines minorGridlines?;
-    microsoft\.graph\.workbookChartAxisTitle title?;
-};
-
-public type microsoft\.graph\.chatMessageActions "reactionAdded"|"reactionRemoved"|"actionUndefined"|"unknownFutureValue";
-
-public type microsoft\.graph\.calendarPermission record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.calendarRoleType[] allowedRoles?;
-    microsoft\.graph\.emailAddress emailAddress?;
-    boolean? isInsideOrganization?;
-    boolean? isRemovable?;
-    microsoft\.graph\.calendarRoleType role?;
-};
-
-public type microsoft\.graph\.confirmedBy "none"|"user"|"manager"|"unknownFutureValue";
-
-public type microsoft\.graph\.phoneAuthenticationMethod record {
-    *microsoft\.graph\.authenticationMethod;
-    string? phoneNumber?;
-    microsoft\.graph\.authenticationPhoneType phoneType?;
-    microsoft\.graph\.authenticationMethodSignInState smsSignInState?;
-};
-
-public type microsoft\.graph\.onlineMeeting record {
-    *microsoft\.graph\.onlineMeetingBase;
-    string? attendeeReport?;
-    microsoft\.graph\.broadcastMeetingSettings broadcastSettings?;
-    string? creationDateTime?;
-    string? endDateTime?;
-    string? externalId?;
-    boolean? isBroadcast?;
-    string? meetingTemplateId?;
-    microsoft\.graph\.meetingParticipants participants?;
-    string? startDateTime?;
-    microsoft\.graph\.callRecording[] recordings?;
-    microsoft\.graph\.callTranscript[] transcripts?;
-};
-
-public type microsoft\.graph\.termStore\.term record {
-    *microsoft\.graph\.entity;
-    string? createdDateTime?;
-    microsoft\.graph\.termStore\.localizedDescription[] descriptions?;
-    microsoft\.graph\.termStore\.localizedLabel[] labels?;
+    # Optional. UTC DateTime when the activityHistoryItem will undergo hard-delete. Can be set by the client.
+    string? expirationDateTime?;
+    # Optional. UTC DateTime when the activityHistoryItem (activity session) was last understood as active or finished - if null, activityHistoryItem status should be Ongoing.
+    string? lastActiveDateTime?;
+    # Set by the server. DateTime in UTC when the object was modified on the server.
     string? lastModifiedDateTime?;
-    microsoft\.graph\.keyValue[] properties?;
-    microsoft\.graph\.termStore\.term[] children?;
-    microsoft\.graph\.termStore\.relation[] relations?;
-    microsoft\.graph\.termStore\.set set?;
+    # Required. UTC DateTime when the activityHistoryItem (activity session) was started. Required for timeline history.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string startedDateTime?;
+    Status status?;
+    # Optional. The timezone in which the user's device used to generate the activity was located at activity creation time. Values supplied as Olson IDs in order to support cross-platform representation.
+    string? userTimezone?;
+    UserActivity activity?;
 };
+
+public type DeviceCategory record {
+    *Entity;
+    *DeviceCategory1;
+};
+
+public type OnlineMeetingRole "attendee"|"presenter"|"unknownFutureValue"|"producer"|"coorganizer";
+
+public type TeamsApp1 record {
+    # The name of the catalog app provided by the app developer in the Microsoft Teams zip app package.
+    string? displayName?;
+    TeamsAppDistributionMethod distributionMethod?;
+    # The ID of the catalog provided by the app developer in the Microsoft Teams zip app package.
+    string? externalId?;
+    # The details for each version of the app.
+    TeamsAppDefinition[] appDefinitions?;
+};
+
+public type Printer1 record {
+    # True if the printer has a physical device for printing. Read-only.
+    boolean hasPhysicalDevice?;
+    # True if the printer is shared; false otherwise. Read-only.
+    boolean isShared?;
+    # The most recent dateTimeOffset when a printer interacted with Universal Print. Read-only.
+    string? lastSeenDateTime?;
+    # The DateTimeOffset when the printer was registered. Read-only.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string registeredDateTime?;
+    # The connectors that are associated with the printer.
+    PrintConnector[] connectors?;
+    # The list of printerShares that are associated with the printer. Currently, only one printerShare can be associated with the printer. Read-only. Nullable.
+    PrinterShare[] shares?;
+    # A list of task triggers that are associated with the printer.
+    PrintTaskTrigger[] taskTriggers?;
+};
+
+public type ComplianceStatus "unknown"|"notApplicable"|"compliant"|"remediated"|"nonCompliant"|"error"|"conflict"|"notAssigned";
 
 # Represents the Queries record for the operation: searchWithinDriveItem
 public type SearchWithinDriveItemQueries record {
     # Skip the first n items
-    int \$skip?;
+    @http:Query {name: "$skip"}
+    int skip?;
     # Show only the first n items
-    int \$top?;
+    @http:Query {name: "$top"}
+    int top?;
     # Filter items by property values
-    string \$filter?;
+    @http:Query {name: "$filter"}
+    string filter?;
     # Search items by search phrases
-    string \$search?;
+    @http:Query {name: "$search"}
+    string search?;
     # Order items by property values
-    string[] \$orderby?;
+    @http:Query {name: "$orderby"}
+    string[] orderby?;
     # Expand related entities
-    string[] \$expand?;
+    @http:Query {name: "$expand"}
+    string[] expand?;
     # Include count of items
-    boolean \$count?;
+    @http:Query {name: "$count"}
+    boolean count?;
     # Select properties to be returned
-    string[] \$select?;
+    @http:Query {name: "$select"}
+    string[] 'select?;
 };
 
-public type microsoft\.graph\.workingHours record {
-    microsoft\.graph\.dayOfWeek[] daysOfWeek?;
-    string? endTime?;
-    string? startTime?;
-    microsoft\.graph\.timeZoneBase timeZone?;
+public type Json record {
 };
 
-public type microsoft\.graph\.workbookChartAxisTitle record {
-    *microsoft\.graph\.entity;
-    string? text?;
-    boolean visible?;
-    microsoft\.graph\.workbookChartAxisTitleFormat format?;
+public type HyperlinkOrPictureColumn record {
+    # Specifies whether the display format used for URL columns is an image or a hyperlink.
+    boolean? isPicture?;
 };
 
-public type microsoft\.graph\.message record {
-    *microsoft\.graph\.outlookItem;
-    microsoft\.graph\.recipient[] bccRecipients?;
-    microsoft\.graph\.itemBody body?;
-    string? bodyPreview?;
-    microsoft\.graph\.recipient[] ccRecipients?;
-    string? conversationId?;
-    string? conversationIndex?;
-    microsoft\.graph\.followupFlag flag?;
-    microsoft\.graph\.recipient 'from?;
-    boolean? hasAttachments?;
-    microsoft\.graph\.importance importance?;
-    microsoft\.graph\.inferenceClassificationType inferenceClassification?;
-    microsoft\.graph\.internetMessageHeader[] internetMessageHeaders?;
-    string? internetMessageId?;
-    boolean? isDeliveryReceiptRequested?;
-    boolean? isDraft?;
-    boolean? isRead?;
-    boolean? isReadReceiptRequested?;
-    string? parentFolderId?;
-    string? receivedDateTime?;
-    microsoft\.graph\.recipient[] replyTo?;
-    microsoft\.graph\.recipient sender?;
-    string? sentDateTime?;
-    string? subject?;
-    microsoft\.graph\.recipient[] toRecipients?;
-    microsoft\.graph\.itemBody uniqueBody?;
-    string? webLink?;
-    microsoft\.graph\.attachment[] attachments?;
-    microsoft\.graph\.extension[] extensions?;
-    microsoft\.graph\.multiValueLegacyExtendedProperty[] multiValueExtendedProperties?;
-    microsoft\.graph\.singleValueLegacyExtendedProperty[] singleValueExtendedProperties?;
+public type PlatformCredentialAuthenticationMethod record {
+    *AuthenticationMethod;
+    *PlatformCredentialAuthenticationMethod1;
 };
 
-public type microsoft\.graph\.recurrencePatternType "daily"|"weekly"|"absoluteMonthly"|"relativeMonthly"|"absoluteYearly"|"relativeYearly";
-
-public type microsoft\.graph\.eventMessageDetail record {
+public type ProtectedApplicationMetadata1 record {
+    PolicyLocation applicationLocation?;
 };
 
-public type root_microsoft_graph_validatePermission_body record {
-    string? challengeToken?;
-    string password?;
-};
-
-public type microsoft\.graph\.agreementAcceptanceState "accepted"|"declined"|"unknownFutureValue";
-
-public type microsoft\.graph\.itemActionStat record {
-    decimal? actionCount?;
-    decimal? actorCount?;
-};
-
-public type microsoft\.graph\.onlineMeetingPresenters "everyone"|"organization"|"roleIsPresenter"|"organizer"|"unknownFutureValue";
-
-public type microsoft\.graph\.teamsAppPublishingState "submitted"|"rejected"|"published"|"unknownFutureValue";
-
-public type microsoft\.graph\.onlineMeetingRole "attendee"|"presenter"|"unknownFutureValue"|"producer"|"coorganizer";
-
-public type microsoft\.graph\.locationType "default"|"conferenceRoom"|"homeAddress"|"businessAddress"|"geoCoordinates"|"streetAddress"|"hotel"|"restaurant"|"localBusiness"|"postalAddress";
-
-public type microsoft\.graph\.defaultColumnValue record {
-    string? formula?;
+public type SettingValue record {
+    # Name of the setting (as defined by the groupSettingTemplate).
+    string? name?;
+    # Value of the setting.
     string? value?;
 };
 
-public type microsoft\.graph\.attendeeType "required"|"optional"|"resource";
-
-public type microsoft\.graph\.settingSource record {
-    string? displayName?;
-    string? id?;
-    microsoft\.graph\.settingSourceType sourceType?;
+public type MeetingParticipantInfo record {
+    IdentitySet identity?;
+    OnlineMeetingRole role?;
+    # User principal name of the participant.
+    string? upn?;
 };
 
-public type microsoft\.graph\.callRecording record {
-    *microsoft\.graph\.entity;
-    string? callId?;
-    string? content?;
-    string? contentCorrelationId?;
-    string? createdDateTime?;
-    string? endDateTime?;
-    string? meetingId?;
-    microsoft\.graph\.identitySet meetingOrganizer?;
-    string? recordingContentUrl?;
-};
-
-public type microsoft\.graph\.printerFeedOrientation "longEdgeFirst"|"shortEdgeFirst"|"unknownFutureValue";
-
-public type microsoft\.graph\.chatMessageAttachment record {
-    string? content?;
-    string? contentType?;
-    string? contentUrl?;
-    string? id?;
+public type ColumnLink1 record {
+    # The name of the column  in this content type.
     string? name?;
-    string? teamsAppId?;
-    string? thumbnailUrl?;
 };
 
-public type microsoft\.graph\.attendeeBase record {
-    *microsoft\.graph\.recipient;
-    microsoft\.graph\.attendeeType 'type?;
+public type TeamsAppInstallation record {
+    *Entity;
+    *TeamsAppInstallation1;
 };
 
-public type microsoft\.graph\.workbookChartDataLabelFormat record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.workbookChartFill fill?;
-    microsoft\.graph\.workbookChartFont font?;
+public type WorkbookChartDataLabelFormat1 record {
+    WorkbookChartFill fill?;
+    WorkbookChartFont font?;
 };
 
-public type microsoft\.graph\.shiftAvailability record {
-    microsoft\.graph\.patternedRecurrence recurrence?;
-    microsoft\.graph\.timeRange[] timeSlots?;
-    string? timeZone?;
+public type DateTimeColumn record {
+    # How the value should be presented in the UX. Must be one of default, friendly, or standard. See below for more details. If unspecified, treated as default.
+    string? displayAs?;
+    # Indicates whether the value should be presented as a date only or a date and time. Must be one of dateOnly or dateTime
+    string? format?;
 };
 
-public type microsoft\.graph\.printerShareViewpoint record {
-    string? lastUsedDateTime?;
+public type Person record {
+    *Entity;
+    *Person1;
 };
 
-public type microsoft\.graph\.chatMessage record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.chatMessageAttachment[] attachments?;
-    microsoft\.graph\.itemBody body?;
-    microsoft\.graph\.channelIdentity channelIdentity?;
-    string? chatId?;
-    string? createdDateTime?;
-    string? deletedDateTime?;
-    string? etag?;
-    microsoft\.graph\.eventMessageDetail eventDetail?;
-    microsoft\.graph\.chatMessageFromIdentitySet 'from?;
-    microsoft\.graph\.chatMessageImportance importance?;
-    string? lastEditedDateTime?;
-    string? lastModifiedDateTime?;
-    string locale?;
-    microsoft\.graph\.chatMessageMention[] mentions?;
-    microsoft\.graph\.chatMessageHistoryItem[] messageHistory?;
-    microsoft\.graph\.chatMessageType messageType?;
-    microsoft\.graph\.chatMessagePolicyViolation policyViolation?;
-    microsoft\.graph\.chatMessageReaction[] reactions?;
-    string? replyToId?;
-    string? subject?;
-    string? summary?;
-    string? webUrl?;
-    microsoft\.graph\.chatMessageHostedContent[] hostedContents?;
-    microsoft\.graph\.chatMessage[] replies?;
+public type PlannerAssignedToTaskBoardTaskFormat record {
+    *Entity;
+    *PlannerAssignedToTaskBoardTaskFormat1;
 };
 
-public type microsoft\.graph\.messageRule record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.messageRuleActions actions?;
-    microsoft\.graph\.messageRulePredicates conditions?;
-    string? displayName?;
-    microsoft\.graph\.messageRulePredicates exceptions?;
-    boolean? hasError?;
-    boolean? isEnabled?;
-    boolean? isReadOnly?;
-    decimal? sequence?;
+public type PrinterCapabilitiesTopMarginsItemsNumber decimal?;
+
+public type WorkbookChartGridlinesFormat record {
+    *Entity;
+    *WorkbookChartGridlinesFormat1;
 };
 
-public type microsoft\.graph\.processContentRequest record {
-    microsoft\.graph\.activityMetadata activityMetadata?;
-    microsoft\.graph\.processContentMetadataBase[] contentEntries?;
-    microsoft\.graph\.deviceMetadata deviceMetadata?;
-    microsoft\.graph\.integratedApplicationMetadata integratedAppMetadata?;
-    microsoft\.graph\.protectedApplicationMetadata protectedAppMetadata?;
+public type TeamMemberSettings record {
+    # If set to true, members can add and remove apps.
+    boolean? allowAddRemoveApps?;
+    # If set to true, members can add and update private channels.
+    boolean? allowCreatePrivateChannels?;
+    # If set to true, members can add and update channels.
+    boolean? allowCreateUpdateChannels?;
+    # If set to true, members can add, update, and remove connectors.
+    boolean? allowCreateUpdateRemoveConnectors?;
+    # If set to true, members can add, update, and remove tabs.
+    boolean? allowCreateUpdateRemoveTabs?;
+    # If set to true, members can delete channels.
+    boolean? allowDeleteChannels?;
 };
 
-public type microsoft\.graph\.person record {
-    *microsoft\.graph\.entity;
-    string? birthday?;
+public type TermStoreLocalizedName record {
+    # The language tag for the label.
+    string? languageTag?;
+    # The name in the localized language.
+    string? name?;
+};
+
+# Represents a Microsoft Entra user account
+public type User1 record {
+    # A freeform text entry field for the user to describe themselves. Returned only on $select.
+    string? aboutMe?;
+    # true if the account is enabled; otherwise, false. This property is required when a user is created. Returned only on $select. Supports $filter (eq, ne, not, and in).
+    boolean? accountEnabled?;
+    # Sets the age group of the user. Allowed values: null, Minor, NotAdult, and Adult. For more information, see legal age group property definitions. Returned only on $select. Supports $filter (eq, ne, not, and in).
+    string? ageGroup?;
+    # The licenses that are assigned to the user, including inherited (group-based) licenses. This property doesn't differentiate between directly assigned and inherited licenses. Use the licenseAssignmentStates property to identify the directly assigned and inherited licenses. Not nullable. Returned only on $select. Supports $filter (eq, not, /$count eq 0, /$count ne 0).
+    AssignedLicense[] assignedLicenses?;
+    # The plans that are assigned to the user. Read-only. Not nullable. Returned only on $select. Supports $filter (eq and not).
+    AssignedPlan[] assignedPlans?;
+    AuthorizationInfo authorizationInfo?;
+    # The birthday of the user. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014, is 2014-01-01T00:00:00Z. Returned only on $select.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string birthday?;
+    # The telephone numbers for the user. NOTE: Although it's a string collection, only one number can be set for this property. Read-only for users synced from the on-premises directory. Returned by default. Supports $filter (eq, not, ge, le, startsWith).
+    string[] businessPhones?;
+    # The city where the user is located. Maximum length is 128 characters. Returned only on $select. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values).
+    string? city?;
+    # The name of the company that the user is associated with. This property can be useful for describing the company that a guest comes from. The maximum length is 64 characters.Returned only on $select. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values).
     string? companyName?;
+    # Sets whether consent was obtained for minors. Allowed values: null, Granted, Denied, and NotRequired. For more information, see legal age group property definitions. Returned only on $select. Supports $filter (eq, ne, not, and in).
+    string? consentProvidedForMinor?;
+    # The country or region where the user is located; for example, US or UK. Maximum length is 128 characters. Returned only on $select. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values).
+    string? country?;
+    # The date and time the user was created, in ISO 8601 format and UTC. The value can't be modified and is automatically populated when the entity is created. Nullable. For on-premises users, the value represents when they were first created in Microsoft Entra ID. Property is null for some users created before June 2018 and on-premises users that were synced to Microsoft Entra ID before June 2018. Read-only. Returned only on $select. Supports $filter (eq, ne, not , ge, le, in).
+    string? createdDateTime?;
+    # Indicates whether the user account was created through one of the following methods:  As a regular school or work account (null). As an external account (Invitation). As a local account for an Azure Active Directory B2C tenant (LocalAccount). Through self-service sign-up by an internal user using email verification (EmailVerified). Through self-service sign-up by a guest signing up through a link that is part of a user flow (SelfServiceSignUp). Read-only.Returned only on $select. Supports $filter (eq, ne, not, in).
+    string? creationType?;
+    CustomSecurityAttributeValue customSecurityAttributes?;
+    # The name of the department in which the user works. Maximum length is 64 characters. Returned only on $select. Supports $filter (eq, ne, not , ge, le, in, and eq on null values).
     string? department?;
+    # The limit on the maximum number of devices that the user is permitted to enroll. Allowed values are 5 or 1000.
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal deviceEnrollmentLimit?;
+    # The name displayed in the address book for the user. This value is usually the combination of the user's first name, middle initial, and family name. This property is required when a user is created and it can't be cleared during updates. Maximum length is 256 characters. Returned by default. Supports $filter (eq, ne, not , ge, le, in, startsWith, and eq on null values), $orderby, and $search.
     string? displayName?;
+    # The date and time when the user was hired or will start work in a future hire. Returned only on $select. Supports $filter (eq, ne, not , ge, le, in).
+    string? employeeHireDate?;
+    # The employee identifier assigned to the user by the organization. The maximum length is 16 characters. Returned only on $select. Supports $filter (eq, ne, not , ge, le, in, startsWith, and eq on null values).
+    string? employeeId?;
+    # The date and time when the user left or will leave the organization. To read this property, the calling app must be assigned the User-LifeCycleInfo.Read.All permission. To write this property, the calling app must be assigned the User.Read.All and User-LifeCycleInfo.ReadWrite.All permissions. To read this property in delegated scenarios, the admin needs at least one of the following Microsoft Entra roles: Lifecycle Workflows Administrator (least privilege), Global Reader. To write this property in delegated scenarios, the admin needs the Global Administrator role. Supports $filter (eq, ne, not , ge, le, in). For more information, see Configure the employeeLeaveDateTime property for a user.
+    string? employeeLeaveDateTime?;
+    EmployeeOrgData employeeOrgData?;
+    # Captures enterprise worker type. For example, Employee, Contractor, Consultant, or Vendor. Returned only on $select. Supports $filter (eq, ne, not , ge, le, in, startsWith).
+    string? employeeType?;
+    # For a guest invited to the tenant using the invitation API, this property represents the invited user's invitation status. For invited users, the state can be PendingAcceptance or Accepted, or null for all other users. Returned only on $select. Supports $filter (eq, ne, not , in).
+    string? externalUserState?;
+    # Shows the timestamp for the latest change to the externalUserState property. Returned only on $select. Supports $filter (eq, ne, not , in).
+    string? externalUserStateChangeDateTime?;
+    # The fax number of the user. Returned only on $select. Supports $filter (eq, ne, not , ge, le, in, startsWith, and eq on null values).
+    string? faxNumber?;
+    # The given name (first name) of the user. Maximum length is 64 characters. Returned by default. Supports $filter (eq, ne, not , ge, le, in, startsWith, and eq on null values).
     string? givenName?;
-    string? imAddress?;
-    boolean? isFavorite?;
+    # The hire date of the user. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014, is 2014-01-01T00:00:00Z. Returned only on $select.  Note: This property is specific to SharePoint in Microsoft 365. We recommend using the native employeeHireDate property to set and update hire date values using Microsoft Graph APIs.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string hireDate?;
+    # Represents the identities that can be used to sign in to this user account. Microsoft (also known as a local account), organizations, or social identity providers such as Facebook, Google, and Microsoft can provide identity and tie it to a user account. It might contain multiple items with the same signInType value. Returned only on $select.  Supports $filter (eq) with limitations.
+    ObjectIdentity[] identities?;
+    # The instant message voice-over IP (VOIP) session initiation protocol (SIP) addresses for the user. Read-only. Returned only on $select. Supports $filter (eq, not, ge, le, startsWith).
+    string[] imAddresses?;
+    # A list for the user to describe their interests. Returned only on $select.
+    string[] interests?;
+    # true if the user is a member of a restricted management administrative unit. If not set, the default value is null and the default behavior is false. Read-only.  To manage a user who is a member of a restricted management administrative unit, the administrator or calling app must be assigned a Microsoft Entra role at the scope of the restricted management administrative unit. Returned only on $select.
+    boolean? isManagementRestricted?;
+    # Don't use – reserved for future use.
+    boolean? isResourceAccount?;
+    # The user's job title. Maximum length is 128 characters. Returned by default. Supports $filter (eq, ne, not , ge, le, in, startsWith, and eq on null values).
     string? jobTitle?;
+    # The time when this Microsoft Entra user last changed their password or when their password was created, whichever date the latest action was performed. The date and time information uses ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Returned only on $select.
+    string? lastPasswordChangeDateTime?;
+    # Used by enterprise applications to determine the legal age group of the user. This property is read-only and calculated based on ageGroup and consentProvidedForMinor properties. Allowed values: null, Undefined,  MinorWithOutParentalConsent, MinorWithParentalConsent, MinorNoParentalConsentRequired, NotAdult, and Adult. For more information, see legal age group property definitions. Returned only on $select.
+    string? legalAgeGroupClassification?;
+    # State of license assignments for this user. Also indicates licenses that are directly assigned or the user inherited through group memberships. Read-only. Returned only on $select.
+    LicenseAssignmentState[] licenseAssignmentStates?;
+    # The SMTP address for the user, for example, jeff@contoso.com. Changes to this property update the user's proxyAddresses collection to include the value as an SMTP address. This property can't contain accent characters.  NOTE: We don't recommend updating this property for Azure AD B2C user profiles. Use the otherMails property instead. Returned by default. Supports $filter (eq, ne, not, ge, le, in, startsWith, endsWith, and eq on null values).
+    string? mail?;
+    MailboxSettings mailboxSettings?;
+    # The mail alias for the user. This property must be specified when a user is created. Maximum length is 64 characters. Returned only on $select. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values).
+    string? mailNickname?;
+    # The primary cellular telephone number for the user. Read-only for users synced from the on-premises directory. Maximum length is 64 characters. Returned by default. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values) and $search.
+    string? mobilePhone?;
+    # The URL for the user's site. Returned only on $select.
+    string? mySite?;
+    # The office location in the user's place of business. Returned by default. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values).
     string? officeLocation?;
-    string? personNotes?;
-    microsoft\.graph\.personType personType?;
-    microsoft\.graph\.phone[] phones?;
-    microsoft\.graph\.location[] postalAddresses?;
-    string? profession?;
-    microsoft\.graph\.scoredEmailAddress[] scoredEmailAddresses?;
-    string? surname?;
-    string? userPrincipalName?;
-    microsoft\.graph\.website[] websites?;
-    string? yomiCompany?;
-};
-
-public type microsoft\.graph\.systemFacet record {
-};
-
-public type microsoft\.graph\.managementAgentType "eas"|"mdm"|"easMdm"|"intuneClient"|"easIntuneClient"|"configurationManagerClient"|"configurationManagerClientMdm"|"configurationManagerClientMdmEas"|"unknown"|"jamf"|"googleCloudDevicePolicyController"|"microsoft365ManagedMdm"|"msSense";
-
-public type microsoft\.graph\.printTaskDefinition record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.appIdentity createdBy?;
-    string displayName?;
-    microsoft\.graph\.printTask[] tasks?;
-};
-
-public type microsoft\.graph\.onenoteOperation record {
-    *microsoft\.graph\.operation;
-    microsoft\.graph\.onenoteOperationError 'error?;
-    string? percentComplete?;
-    string? resourceId?;
-    string? resourceLocation?;
-};
-
-public type microsoft\.graph\.publicInnerError record {
-    string? code?;
-    microsoft\.graph\.publicErrorDetail[] details?;
-    string? message?;
-    string? target?;
-};
-
-public type microsoft\.graph\.quota record {
-    decimal? deleted?;
-    decimal? remaining?;
+    # Contains the on-premises Active Directory distinguished name or DN. The property is only populated for customers who are synchronizing their on-premises directory to Microsoft Entra ID via Microsoft Entra Connect. Read-only. Returned only on $select.
+    string? onPremisesDistinguishedName?;
+    # Contains the on-premises domainFQDN, also called dnsDomainName synchronized from the on-premises directory. The property is only populated for customers who are synchronizing their on-premises directory to Microsoft Entra ID via Microsoft Entra Connect. Read-only. Returned only on $select.
+    string? onPremisesDomainName?;
+    OnPremisesExtensionAttributes onPremisesExtensionAttributes?;
+    # This property is used to associate an on-premises Active Directory user account to their Microsoft Entra user object. This property must be specified when creating a new user account in the Graph if you're using a federated domain for the user's userPrincipalName (UPN) property. NOTE: The $ and _ characters can't be used when specifying this property. Returned only on $select. Supports $filter (eq, ne, not, ge, le, in).
+    string? onPremisesImmutableId?;
+    # Indicates the last time at which the object was synced with the on-premises directory; for example: 2013-02-16T03:04:54Z. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only. Returned only on $select. Supports $filter (eq, ne, not, ge, le, in).
+    string? onPremisesLastSyncDateTime?;
+    # Errors when using Microsoft synchronization product during provisioning. Returned only on $select. Supports $filter (eq, not, ge, le).
+    OnPremisesProvisioningError[] onPremisesProvisioningErrors?;
+    # Contains the on-premises samAccountName synchronized from the on-premises directory. The property is only populated for customers who are synchronizing their on-premises directory to Microsoft Entra ID via Microsoft Entra Connect. Read-only. Returned only on $select. Supports $filter (eq, ne, not, ge, le, in, startsWith).
+    string? onPremisesSamAccountName?;
+    # Contains the on-premises security identifier (SID) for the user that was synchronized from on-premises to the cloud. Read-only. Returned only on $select. Supports $filter (eq including on null values).
+    string? onPremisesSecurityIdentifier?;
+    # true if this user object is currently being synced from an on-premises Active Directory (AD); otherwise the user isn't being synced and can be managed in Microsoft Entra ID. Read-only. Returned only on $select. Supports $filter (eq, ne, not, in, and eq on null values).
+    boolean? onPremisesSyncEnabled?;
+    # Contains the on-premises userPrincipalName synchronized from the on-premises directory. The property is only populated for customers who are synchronizing their on-premises directory to Microsoft Entra ID via Microsoft Entra Connect. Read-only. Returned only on $select. Supports $filter (eq, ne, not, ge, le, in, startsWith).
+    string? onPremisesUserPrincipalName?;
+    # A list of other email addresses for the user; for example: ['bob@contoso.com', 'Robert@fabrikam.com']. Can store up to 250 values, each with a limit of 250 characters. NOTE: This property can't contain accent characters. Returned only on $select. Supports $filter (eq, not, ge, le, in, startsWith, endsWith, /$count eq 0, /$count ne 0).
+    string[] otherMails?;
+    # Specifies password policies for the user. This value is an enumeration with one possible value being DisableStrongPassword, which allows weaker passwords than the default policy to be specified. DisablePasswordExpiration can also be specified. The two might be specified together; for example: DisablePasswordExpiration, DisableStrongPassword. Returned only on $select. For more information on the default password policies, see Microsoft Entra password policies. Supports $filter (ne, not, and eq on null values).
+    string? passwordPolicies?;
+    PasswordProfile passwordProfile?;
+    # A list for the user to enumerate their past projects. Returned only on $select.
+    string[] pastProjects?;
+    # The postal code for the user's postal address. The postal code is specific to the user's country or region. In the United States of America, this attribute contains the ZIP code. Maximum length is 40 characters. Returned only on $select. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values).
+    string? postalCode?;
+    # The preferred data location for the user. For more information, see OneDrive Online Multi-Geo.
+    string? preferredDataLocation?;
+    # The preferred language for the user. The preferred language format is based on RFC 4646. The name is a combination of an ISO 639 two-letter lowercase culture code associated with the language, and an ISO 3166 two-letter uppercase subculture code associated with the country or region. Example: 'en-US', or 'es-ES'. Returned by default. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values)
+    string? preferredLanguage?;
+    # The preferred name for the user. Not Supported. This attribute returns an empty string.Returned only on $select.
+    string? preferredName?;
+    UserPrint print?;
+    # The plans that are provisioned for the user. Read-only. Not nullable. Returned only on $select. Supports $filter (eq, not, ge, le).
+    ProvisionedPlan[] provisionedPlans?;
+    # For example: ['SMTP: bob@contoso.com', 'smtp: bob@sales.contoso.com']. Changes to the mail property update this collection to include the value as an SMTP address. For more information, see mail and proxyAddresses properties. The proxy address prefixed with SMTP (capitalized) is the primary proxy address, while those addresses prefixed with smtp are the secondary proxy addresses. For Azure AD B2C accounts, this property has a limit of 10 unique addresses. Read-only in Microsoft Graph; you can update this property only through the Microsoft 365 admin center. Not nullable. Returned only on $select. Supports $filter (eq, not, ge, le, startsWith, endsWith, /$count eq 0, /$count ne 0).
+    string[] proxyAddresses?;
+    # A list for the user to enumerate their responsibilities. Returned only on $select.
+    string[] responsibilities?;
+    # A list for the user to enumerate the schools they attended. Returned only on $select.
+    string[] schools?;
+    # Security identifier (SID) of the user, used in Windows scenarios. Read-only. Returned by default. Supports $select and $filter (eq, not, ge, le, startsWith).
+    string? securityIdentifier?;
+    # Errors published by a federated service describing a nontransient, service-specific error regarding the properties or link from a user object.  Supports $filter (eq, not, for isResolved and serviceInstance).
+    ServiceProvisioningError[] serviceProvisioningErrors?;
+    # Do not use in Microsoft Graph. Manage this property through the Microsoft 365 admin center instead. Represents whether the user should be included in the Outlook global address list. See Known issue.
+    boolean? showInAddressList?;
+    SignInActivity signInActivity?;
+    # Any refresh tokens or session tokens (session cookies) issued before this time are invalid. Applications get an error when using an invalid refresh or session token to acquire a delegated access token (to access APIs such as Microsoft Graph). If this happens, the application needs to acquire a new refresh token by requesting the authorized endpoint. Read-only. Use revokeSignInSessions to reset. Returned only on $select.
+    string? signInSessionsValidFromDateTime?;
+    # A list for the user to enumerate their skills. Returned only on $select.
+    string[] skills?;
+    # The state or province in the user's address. Maximum length is 128 characters. Returned only on $select. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values).
     string? state?;
-    microsoft\.graph\.storagePlanInformation storagePlanInformation?;
-    decimal? total?;
-    decimal? used?;
+    # The street address of the user's place of business. Maximum length is 1,024 characters. Returned only on $select. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values).
+    string? streetAddress?;
+    # The user's surname (family name or last name). Maximum length is 64 characters. Returned by default. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values).
+    string? surname?;
+    # A two-letter country code (ISO standard 3166). Required for users that are assigned licenses due to legal requirements to check for availability of services in countries/regions. Examples include: US, JP, and GB. Not nullable. Returned only on $select. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values).
+    string? usageLocation?;
+    # The user principal name (UPN) of the user. The UPN is an Internet-style sign-in name for the user based on the Internet standard RFC 822. By convention, this value should map to the user's email name. The general format is alias@domain, where the domain must be present in the tenant's collection of verified domains. This property is required when a user is created. The verified domains for the tenant can be accessed from the verifiedDomains property of organization.NOTE: This property can't contain accent characters. Only the following characters are allowed A - Z, a - z, 0 - 9, ' . - _ ! # ^ ~. For the complete list of allowed characters, see username policies. Returned by default. Supports $filter (eq, ne, not, ge, le, in, startsWith, endsWith) and $orderby.
+    string? userPrincipalName?;
+    # A string value that can be used to classify user types in your directory. The possible values are Member and Guest. Returned only on $select. Supports $filter (eq, ne, not, in, and eq on null values). NOTE: For more information about the permissions for members and guests, see What are the default user permissions in Microsoft Entra ID?
+    string? userType?;
+    # The user's activities across devices. Read-only. Nullable.
+    UserActivity[] activities?;
+    # The user's terms of use acceptance statuses. Read-only. Nullable.
+    AgreementAcceptance[] agreementAcceptances?;
+    # Represents the app roles a user is granted for an application. Supports $expand.
+    AppRoleAssignment[] appRoleAssignments?;
+    Authentication authentication?;
+    Calendar calendar?;
+    # The user's calendar groups. Read-only. Nullable.
+    CalendarGroup[] calendarGroups?;
+    # The user's calendars. Read-only. Nullable.
+    Calendar[] calendars?;
+    # The calendar view for the calendar. Read-only. Nullable.
+    Event[] calendarView?;
+    Chat[] chats?;
+    CloudClipboardRoot cloudClipboard?;
+    # The user's contacts folders. Read-only. Nullable.
+    ContactFolder[] contactFolders?;
+    # The user's contacts. Read-only. Nullable.
+    Contact[] contacts?;
+    # Directory objects that the user created. Read-only. Nullable.
+    DirectoryObject[] createdObjects?;
+    UserDataSecurityAndGovernance dataSecurityAndGovernance?;
+    # The list of troubleshooting events for this user.
+    DeviceManagementTroubleshootingEvent[] deviceManagementTroubleshootingEvents?;
+    # The users and contacts that report to the user. (The users and contacts that have their manager property set to this user.) Read-only. Nullable. Supports $expand.
+    DirectoryObject[] directReports?;
+    Drive drive?;
+    # A collection of drives available for this user. Read-only.
+    Drive[] drives?;
+    EmployeeExperienceUser employeeExperience?;
+    # The user's events. Default is to show Events under the Default Calendar. Read-only. Nullable.
+    Event[] events?;
+    # The collection of open extensions defined for the user. Read-only. Supports $expand. Nullable.
+    Extension[] extensions?;
+    Site[] followedSites?;
+    InferenceClassification inferenceClassification?;
+    ItemInsights insights?;
+    Team[] joinedTeams?;
+    # A collection of this user's license details. Read-only.
+    LicenseDetails[] licenseDetails?;
+    # The user's mail folders. Read-only. Nullable.
+    MailFolder[] mailFolders?;
+    # Zero or more managed app registrations that belong to the user.
+    ManagedAppRegistration[] managedAppRegistrations?;
+    # The managed devices associated with the user.
+    ManagedDevice[] managedDevices?;
+    DirectoryObject manager?;
+    # The groups and directory roles that the user is a member of. Read-only. Nullable. Supports $expand.
+    DirectoryObject[] memberOf?;
+    # The messages in a mailbox or folder. Read-only. Nullable.
+    Message[] messages?;
+    OAuth2PermissionGrant[] oauth2PermissionGrants?;
+    Onenote onenote?;
+    # Information about a meeting, including the URL used to join a meeting, the attendees list, and the description.
+    OnlineMeeting[] onlineMeetings?;
+    OutlookUser outlook?;
+    # Devices the user owns. Read-only. Nullable. Supports $expand and $filter (/$count eq 0, /$count ne 0, /$count eq 1, /$count ne 1).
+    DirectoryObject[] ownedDevices?;
+    # Directory objects the user owns. Read-only. Nullable. Supports $expand, $select nested in $expand, and $filter (/$count eq 0, /$count ne 0, /$count eq 1, /$count ne 1).
+    DirectoryObject[] ownedObjects?;
+    # People that are relevant to the user. Read-only. Nullable.
+    Person[] people?;
+    # List all resource-specific permission grants of a user.
+    ResourceSpecificPermissionGrant[] permissionGrants?;
+    ProfilePhoto photo?;
+    # The collection of the user's profile photos in different sizes. Read-only.
+    ProfilePhoto[] photos?;
+    PlannerUser planner?;
+    Presence presence?;
+    # Devices that are registered for the user. Read-only. Nullable. Supports $expand and returns up to 100 objects.
+    DirectoryObject[] registeredDevices?;
+    ScopedRoleMembership[] scopedRoleMemberOf?;
+    UserSettings settings?;
+    UserSolutionRoot solutions?;
+    # The users and groups responsible for this guest's privileges in the tenant and keeping the guest's information and access updated. (HTTP Methods: GET, POST, DELETE.). Supports $expand.
+    DirectoryObject[] sponsors?;
+    UserTeamwork teamwork?;
+    Todo todo?;
+    # The groups, including nested groups, and directory roles that a user is a member of. Nullable.
+    DirectoryObject[] transitiveMemberOf?;
+};
+
+public type OnenoteUserRole "None"|"Owner"|"Contributor"|"Reader";
+
+public type SharePointIdentitySet1 record {
+    Identity group?;
+    SharePointIdentity siteGroup?;
+    SharePointIdentity siteUser?;
+};
+
+public type MeetingChatHistoryDefaultMode "none"|"all"|"unknownFutureValue";
+
+public type BodyType "text"|"html";
+
+public type DeviceManagementTroubleshootingEvent record {
+    *Entity;
+    *DeviceManagementTroubleshootingEvent1;
+};
+
+public type LicenseDetails record {
+    *Entity;
+    *LicenseDetails1;
+};
+
+# The ManagedAppEntity is the base entity type for all other entity types under app management workflow
+public type ManagedAppRegistration1 record {
+    # The identifier for a mobile app
+    MobileAppIdentifier appIdentifier?;
+    # App version
+    string? applicationVersion?;
+    # Date and time of creation
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string createdDateTime?;
+    # Host device name
+    string? deviceName?;
+    # App management SDK generated tag, which helps relate apps hosted on the same device. Not guaranteed to relate apps in all conditions.
+    string? deviceTag?;
+    # Host device type
+    string? deviceType?;
+    # Zero or more reasons an app registration is flagged. E.g. app running on rooted device
+    ManagedAppFlaggedReason[] flaggedReasons?;
+    # Date and time of last the app synced with management service.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string lastSyncDateTime?;
+    # App management SDK version
+    string? managementSdkVersion?;
+    # Operating System version
+    string? platformVersion?;
+    # The user Id to who this app registration belongs.
+    string? userId?;
+    # Version of the entity.
+    string? version?;
+    # Zero or more policys already applied on the registered app when it last synchronized with managment service.
+    ManagedAppPolicy[] appliedPolicies?;
+    # Zero or more policies admin intended for the app as of now.
+    ManagedAppPolicy[] intendedPolicies?;
+    # Zero or more long running operations triggered on the app registration.
+    ManagedAppOperation[] operations?;
+};
+
+public type PlannerTaskDetails record {
+    *Entity;
+    *PlannerTaskDetails1;
+};
+
+public type ScopedRoleMembership1 record {
+    # Unique identifier for the administrative unit that the directory role is scoped to
+    string administrativeUnitId?;
+    # Unique identifier for the directory role that the member is in.
+    string roleId?;
+    Identity roleMemberInfo?;
+};
+
+public type WorkbookChartLineFormat record {
+    *Entity;
+    *WorkbookChartLineFormat1;
+};
+
+public type UserDataSecurityAndGovernance record {
+    *DataSecurityAndGovernance;
+    *UserDataSecurityAndGovernance1;
 };
 
 # Represents the Queries record for the operation: search
 public type SearchQueries record {
     # Skip the first n items
-    int \$skip?;
+    @http:Query {name: "$skip"}
+    int skip?;
     # Show only the first n items
-    int \$top?;
+    @http:Query {name: "$top"}
+    int top?;
     # Filter items by property values
-    string \$filter?;
+    @http:Query {name: "$filter"}
+    string filter?;
     # Search items by search phrases
-    string \$search?;
+    @http:Query {name: "$search"}
+    string search?;
     # Order items by property values
-    string[] \$orderby?;
+    @http:Query {name: "$orderby"}
+    string[] orderby?;
     # Expand related entities
-    string[] \$expand?;
+    @http:Query {name: "$expand"}
+    string[] expand?;
     # Include count of items
-    boolean \$count?;
+    @http:Query {name: "$count"}
+    boolean count?;
     # Select properties to be returned
-    string[] \$select?;
+    @http:Query {name: "$select"}
+    string[] 'select?;
 };
 
-public type microsoft\.graph\.notebookLinks record {
-    microsoft\.graph\.externalLink oneNoteClientUrl?;
-    microsoft\.graph\.externalLink oneNoteWebUrl?;
+public type OfficeGraphInsights1 record {
+    # Calculated relationship that identifies documents shared with or by the user. This includes URLs, file attachments, and reference attachments to OneDrive for work or school and SharePoint files found in Outlook messages and meetings. This also includes URLs and reference attachments to Teams conversations. Ordered by recency of share.
+    SharedInsight[] shared?;
+    # Calculated relationship that identifies documents trending around a user. Trending documents are calculated based on activity of the user's closest network of people and include files stored in OneDrive for work or school and SharePoint. Trending insights help the user to discover potentially useful content that the user has access to, but has never viewed before.
+    Trending[] trending?;
+    # Calculated relationship that identifies the latest documents viewed or modified by a user, including OneDrive for work or school and SharePoint documents, ranked by recency of use.
+    UsedInsight[] used?;
 };
 
-public type microsoft\.graph\.printer record {
-    *microsoft\.graph\.printerBase;
-    boolean hasPhysicalDevice?;
-    boolean isShared?;
-    string? lastSeenDateTime?;
-    string registeredDateTime?;
-    microsoft\.graph\.printConnector[] connectors?;
-    microsoft\.graph\.printerShare[] shares?;
-    microsoft\.graph\.printTaskTrigger[] taskTriggers?;
-};
-
-public type microsoft\.graph\.security\.behaviorDuringRetentionPeriod "doNotRetain"|"retain"|"retainAsRecord"|"retainAsRegulatoryRecord"|"unknownFutureValue";
-
-# Represents the Headers record for the operation: deleteItemsContent
-public type DeleteItemsContentHeaders record {
-    # ETag
-    string If\-Match?;
-};
-
-public type microsoft\.graph\.printerBase record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.printerCapabilities capabilities?;
-    microsoft\.graph\.printerDefaults defaults?;
-    string displayName?;
-    boolean? isAcceptingJobs?;
-    microsoft\.graph\.printerLocation location?;
-    string? manufacturer?;
-    string? model?;
-    microsoft\.graph\.printerStatus status?;
-    microsoft\.graph\.printJob[] jobs?;
-};
-
-public type microsoft\.graph\.workbookComment record {
-    *microsoft\.graph\.entity;
-    string? content?;
-    string contentType?;
-    microsoft\.graph\.workbookCommentReply[] replies?;
-};
-
-public type microsoft\.graph\.usageRightsIncluded record {
-    *microsoft\.graph\.entity;
-    string? ownerEmail?;
-    string? userEmail?;
-    microsoft\.graph\.usageRights value?;
-};
-
-public type microsoft\.graph\.labelActionSource "manual"|"automatic"|"recommended"|"none"|"unknownFutureValue";
-
-public type microsoft\.graph\.timeCardEvent record {
-    string dateTime?;
-    boolean? isAtApprovedLocation?;
-    microsoft\.graph\.itemBody notes?;
-};
-
-public type microsoft\.graph\.deviceConfigurationSettingState record {
-    string? currentValue?;
-    decimal errorCode?;
-    string? errorDescription?;
-    string? instanceDisplayName?;
-    string? setting?;
-    string? settingName?;
-    microsoft\.graph\.settingSource[] sources?;
-    microsoft\.graph\.complianceStatus state?;
-    string? userEmail?;
-    string? userId?;
-    string? userName?;
-    string? userPrincipalName?;
-};
-
-public type microsoft\.graph\.onlineMeetingInfo record {
-    string? conferenceId?;
-    string? joinUrl?;
-    microsoft\.graph\.phone[] phones?;
-    string? quickDial?;
-    string[] tollFreeNumbers?;
-    string? tollNumber?;
-};
-
-public type microsoft\.graph\.sensitivityLabelAssignment record {
-    microsoft\.graph\.sensitivityLabelAssignmentMethod assignmentMethod?;
-    string sensitivityLabelId?;
-    string tenantId?;
-};
-
-public type microsoft\.graph\.scheduleEntity record {
-    string? endDateTime?;
-    string? startDateTime?;
-    microsoft\.graph\.scheduleEntityTheme theme?;
-};
-
-public type microsoft\.graph\.userIdentity record {
-    *microsoft\.graph\.identity;
-    string? ipAddress?;
-    string? userPrincipalName?;
-};
-
-public type microsoft\.graph\.automaticRepliesSetting record {
-    microsoft\.graph\.externalAudienceScope externalAudience?;
-    string? externalReplyMessage?;
-    string? internalReplyMessage?;
-    microsoft\.graph\.dateTimeTimeZone scheduledEndDateTime?;
-    microsoft\.graph\.dateTimeTimeZone scheduledStartDateTime?;
-    microsoft\.graph\.automaticRepliesStatus status?;
-};
-
-public type microsoft\.graph\.columnValidation record {
-    string? defaultLanguage?;
-    microsoft\.graph\.displayNameLocalization[] descriptions?;
-    string? formula?;
-};
-
-public type rootpathtoitem_microsoft_graph_copy_body record {
+public type Calendar1 record {
+    # Represent the online meeting service providers that can be used to create online meetings in this calendar. Possible values are: unknown, skypeForBusiness, skypeForConsumer, teamsForBusiness.
+    OnlineMeetingProviderType[] allowedOnlineMeetingProviders?;
+    # true if the user can write to the calendar, false otherwise. This property is true for the user who created the calendar. This property is also true for a user who shared a calendar and granted write access.
+    boolean? canEdit?;
+    # true if the user has permission to share the calendar, false otherwise. Only the user who created the calendar can share it.
+    boolean? canShare?;
+    # If true, the user can read calendar items that have been marked private, false otherwise.
+    boolean? canViewPrivateItems?;
+    # Identifies the version of the calendar object. Every time the calendar is changed, changeKey changes as well. This allows Exchange to apply changes to the correct version of the object. Read-only.
+    string? changeKey?;
+    CalendarColor color?;
+    OnlineMeetingProviderType defaultOnlineMeetingProvider?;
+    # The calendar color, expressed in a hex color code of three hexadecimal values, each ranging from 00 to FF and representing the red, green, or blue components of the color in the RGB color space. If the user has never explicitly set a color for the calendar, this property is empty. Read-only.
+    string? hexColor?;
+    # true if this is the default calendar where new events are created by default, false otherwise.
+    boolean? isDefaultCalendar?;
+    # Indicates whether this user calendar can be deleted from the user mailbox.
+    boolean? isRemovable?;
+    # Indicates whether this user calendar supports tracking of meeting responses. Only meeting invites sent from users' primary calendars support tracking of meeting responses.
+    boolean? isTallyingResponses?;
+    # The calendar name.
     string? name?;
-    microsoft\.graph\.itemReference parentReference?;
-    boolean? childrenOnly = false;
-    boolean? includeAllVersionHistory = false;
+    EmailAddress owner?;
+    # The permissions of the users with whom the calendar is shared.
+    CalendarPermission[] calendarPermissions?;
+    # The calendar view for the calendar. Navigation property. Read-only.
+    Event[] calendarView?;
+    # The events in the calendar. Navigation property. Read-only.
+    Event[] events?;
+    # The collection of multi-value extended properties defined for the calendar. Read-only. Nullable.
+    MultiValueLegacyExtendedProperty[] multiValueExtendedProperties?;
+    # The collection of single-value extended properties defined for the calendar. Read-only. Nullable.
+    SingleValueLegacyExtendedProperty[] singleValueExtendedProperties?;
 };
 
-public type microsoft\.graph\.sensitivity "normal"|"personal"|"private"|"confidential";
-
-public type microsoft\.graph\.extension record {
-    *microsoft\.graph\.entity;
+public type ResourceSpecificPermissionGrant record {
+    *DirectoryObject;
+    *ResourceSpecificPermissionGrant1;
 };
 
-public type microsoft\.graph\.assignedPlan record {
-    string? assignedDateTime?;
-    string? capabilityStatus?;
-    string? 'service?;
-    string? servicePlanId?;
+public type TeamGuestSettings record {
+    # If set to true, guests can add and update channels.
+    boolean? allowCreateUpdateChannels?;
+    # If set to true, guests can delete channels.
+    boolean? allowDeleteChannels?;
 };
 
-public type microsoft\.graph\.printConnector record {
-    *microsoft\.graph\.entity;
-    string appVersion?;
-    string displayName?;
-    string fullyQualifiedDomainName?;
-    microsoft\.graph\.printerLocation location?;
-    string operatingSystem?;
-    string registeredDateTime?;
+public type PublicError record {
+    # Represents the error code.
+    string? code?;
+    # Details of the error.
+    PublicErrorDetail[] details?;
+    PublicInnerError innerError?;
+    # A non-localized message for the developer.
+    string? message?;
+    # The target of the error.
+    string? target?;
 };
 
-public type microsoft\.graph\.cloudClipboardRoot record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.cloudClipboardItem[] items?;
+public type WorkbookChartLineFormat1 record {
+    # The HTML color code that represents the color of lines in the chart.
+    string? color?;
 };
 
-public type microsoft\.graph\.localeInfo record {
+public type AutomaticRepliesSetting record {
+    ExternalAudienceScope externalAudience?;
+    # The automatic reply to send to the specified external audience, if Status is AlwaysEnabled or Scheduled.
+    string? externalReplyMessage?;
+    # The automatic reply to send to the audience internal to the signed-in user's organization, if Status is AlwaysEnabled or Scheduled.
+    string? internalReplyMessage?;
+    DateTimeTimeZone scheduledEndDateTime?;
+    DateTimeTimeZone scheduledStartDateTime?;
+    AutomaticRepliesStatus status?;
+};
+
+public type CloudClipboardRoot1 record {
+    # Represents a collection of Cloud Clipboard items.
+    CloudClipboardItem[] items?;
+};
+
+# Device Exchange Access State Reason
+public type DeviceManagementExchangeAccessStateReason "none"|"unknown"|"exchangeGlobalRule"|"exchangeIndividualRule"|"exchangeDeviceRule"|"exchangeUpgrade"|"exchangeMailboxPolicy"|"other"|"compliant"|"notCompliant"|"notEnrolled"|"unknownLocation"|"mfaRequired"|"azureADBlockDueToAccessPolicy"|"compromisedPassword"|"deviceNotKnownWithManagedApp";
+
+public type LicenseAssignmentState record {
+    string? assignedByGroup?;
+    LicenseAssignmentStateDisabledPlansItemsString[] disabledPlans?;
+    string? 'error?;
+    string? lastUpdatedDateTime?;
+    string? skuId?;
+    string? state?;
+};
+
+public type WorkbookChartAxisFormat1 record {
+    WorkbookChartFont font?;
+    WorkbookChartLineFormat line?;
+};
+
+public type TermStoreLocalizedDescription record {
+    # The description in the localized language.
+    string? description?;
+    # The language tag for the label.
+    string? languageTag?;
+};
+
+public type PrintTaskTrigger record {
+    *Entity;
+    *PrintTaskTrigger1;
+};
+
+public type OnenoteResource1 record {
+    # The content stream
+    string? content?;
+    # The URL for downloading the content
+    string? contentUrl?;
+};
+
+public type WorkbookChartAreaFormat1 record {
+    WorkbookChartFill fill?;
+    WorkbookChartFont font?;
+};
+
+public type ItemBody record {
+    # The content of the item.
+    string? content?;
+    BodyType contentType?;
+};
+
+public type UserDataSecurityAndGovernance1 record {
+    ActivitiesContainer activities?;
+    UserProtectionScopeContainer protectionScopes?;
+};
+
+public type ContactFolder record {
+    *Entity;
+    *ContactFolder1;
+};
+
+public type PhoneAuthenticationMethod record {
+    *AuthenticationMethod;
+    *PhoneAuthenticationMethod1;
+};
+
+public type AssociatedTeamInfo record {
+    *TeamInfo;
+    *AssociatedTeamInfo1;
+};
+
+public type WindowsSettingInstance record {
+    *Entity;
+    *WindowsSettingInstance1;
+};
+
+public type MailFolder1 record {
+    # The number of immediate child mailFolders in the current mailFolder.
+    decimal? childFolderCount?;
+    # The mailFolder's display name.
     string? displayName?;
+    # Indicates whether the mailFolder is hidden. This property can be set only when creating the folder. Find more information in Hidden mail folders.
+    boolean? isHidden?;
+    # The unique identifier for the mailFolder's parent mailFolder.
+    string? parentFolderId?;
+    # The number of items in the mailFolder.
+    decimal? totalItemCount?;
+    # The number of items in the mailFolder marked as unread.
+    decimal? unreadItemCount?;
+    # The collection of child folders in the mailFolder.
+    MailFolder[] childFolders?;
+    # The collection of rules that apply to the user's Inbox folder.
+    MessageRule[] messageRules?;
+    # The collection of messages in the mailFolder.
+    Message[] messages?;
+    # The collection of multi-value extended properties defined for the mailFolder. Read-only. Nullable.
+    MultiValueLegacyExtendedProperty[] multiValueExtendedProperties?;
+    # The collection of single-value extended properties defined for the mailFolder. Read-only. Nullable.
+    SingleValueLegacyExtendedProperty[] singleValueExtendedProperties?;
+};
+
+public type TeamsAppResourceSpecificPermissionType "delegated"|"application"|"unknownFutureValue";
+
+public type EventType "singleInstance"|"occurrence"|"exception"|"seriesMaster";
+
+public type TermStoreLocalizedLabel record {
+    # Indicates whether the label is the default label.
+    boolean? isDefault?;
+    # The language tag for the label.
+    string? languageTag?;
+    # The name of the label.
+    string? name?;
+};
+
+public type SharedInsight record {
+    *Entity;
+    *SharedInsight1;
+};
+
+public type TimeOffItem record {
+    *ScheduleEntity;
+    *TimeOffItem1;
+};
+
+public type SensitivityLabel1 record {
+    LabelActionSource actionSource?;
+    string? autoTooltip?;
+    string? description?;
+    string? displayName?;
+    boolean? isDefault?;
+    boolean? isEndpointProtectionEnabled?;
+    boolean? isScopedToUser?;
     string? locale?;
+    string? name?;
+    decimal? priority?;
+    string? toolTip?;
+    UsageRightsIncluded rights?;
+    SensitivityLabel[] sublabels?;
 };
-
-public type microsoft\.graph\.printQuality "low"|"medium"|"high"|"unknownFutureValue";
-
-public type microsoft\.graph\.conversation record {
-    *microsoft\.graph\.entity;
-    boolean hasAttachments?;
-    string lastDeliveredDateTime?;
-    string preview?;
-    string topic?;
-    string[] uniqueSenders?;
-    microsoft\.graph\.conversationThread[] threads?;
-};
-
-public type microsoft\.graph\.chatMessageHistoryItem record {
-    microsoft\.graph\.chatMessageActions actions?;
-    string modifiedDateTime?;
-    microsoft\.graph\.chatMessageReaction reaction?;
-};
-
-public type microsoft\.graph\.freeBusyStatus "unknown"|"free"|"tentative"|"busy"|"oof"|"workingElsewhere";
 
 # Represents the Queries record for the operation: sharedWithMe
 public type SharedWithMeQueries record {
     # Skip the first n items
-    int \$skip?;
+    @http:Query {name: "$skip"}
+    int skip?;
     # Show only the first n items
-    int \$top?;
+    @http:Query {name: "$top"}
+    int top?;
     # Filter items by property values
-    string \$filter?;
+    @http:Query {name: "$filter"}
+    string filter?;
     # Search items by search phrases
-    string \$search?;
+    @http:Query {name: "$search"}
+    string search?;
     # Order items by property values
-    string[] \$orderby?;
+    @http:Query {name: "$orderby"}
+    string[] orderby?;
     # Expand related entities
-    string[] \$expand?;
+    @http:Query {name: "$expand"}
+    string[] expand?;
     # Include count of items
-    boolean \$count?;
+    @http:Query {name: "$count"}
+    boolean count?;
     # Select properties to be returned
-    string[] \$select?;
+    @http:Query {name: "$select"}
+    string[] 'select?;
 };
 
-public type microsoft\.graph\.attachment record {
-    *microsoft\.graph\.entity;
-    string? contentType?;
-    boolean isInline?;
-    string? lastModifiedDateTime?;
+public type WindowsHelloForBusinessAuthenticationMethod1 record {
+    # The date and time that this Windows Hello for Business key was registered.
+    string? createdDateTime?;
+    # The name of the device on which Windows Hello for Business is registered
+    string? displayName?;
+    AuthenticationMethodKeyStrength keyStrength?;
+    Device device?;
+};
+
+public type UsageRights "unknown"|"docEdit"|"edit"|"comment"|"export"|"forward"|"owner"|"print"|"reply"|"replyAll"|"view"|"extract"|"viewRightsData"|"editRightsData"|"objModel"|"accessDenied"|"userDefinedProtectionTypeNotSupportedException"|"encryptedProtectionTypeNotSupportedException"|"purviewClaimsChallengeNotSupportedException"|"exception"|"unknownFutureValue";
+
+public type ContentType1 record {
+    # List of canonical URLs for hub sites with which this content type is associated to. This will contain all hub sites where this content type is queued to be enforced or is already enforced. Enforcing a content type means that the content type is applied to the lists in the enforced sites.
+    string[] associatedHubsUrls?;
+    # The descriptive text for the item.
+    string? description?;
+    DocumentSet documentSet?;
+    DocumentSetContent documentTemplate?;
+    # The name of the group this content type belongs to. Helps organize related content types.
+    string? group?;
+    # Indicates whether the content type is hidden in the list's 'New' menu.
+    boolean? hidden?;
+    ItemReference inheritedFrom?;
+    # Specifies if a content type is a built-in content type.
+    boolean? isBuiltIn?;
+    # The name of the content type.
     string? name?;
-    decimal size?;
+    ContentTypeOrder 'order?;
+    # The unique identifier of the content type.
+    string? parentId?;
+    # If true, any changes made to the content type are pushed to inherited content types and lists that implement the content type.
+    boolean? propagateChanges?;
+    # If true, the content type can't be modified unless this value is first set to false.
+    boolean? readOnly?;
+    # If true, the content type can't be modified by users or through push-down operations. Only site collection administrators can seal or unseal content types.
+    boolean? sealed?;
+    ContentType base?;
+    # The collection of content types that are ancestors of this content type.
+    ContentType[] baseTypes?;
+    # The collection of columns that are required by this content type.
+    ColumnLink[] columnLinks?;
+    # Column order information in a content type.
+    ColumnDefinition[] columnPositions?;
+    # The collection of column definitions for this content type.
+    ColumnDefinition[] columns?;
 };
 
-public type microsoft\.graph\.timeCard record {
-    *microsoft\.graph\.changeTrackedEntity;
-    microsoft\.graph\.timeCardBreak[] breaks?;
-    microsoft\.graph\.timeCardEvent clockInEvent?;
-    microsoft\.graph\.timeCardEvent clockOutEvent?;
-    microsoft\.graph\.confirmedBy confirmedBy?;
-    microsoft\.graph\.itemBody notes?;
-    microsoft\.graph\.timeCardEntry originalEntry?;
-    microsoft\.graph\.timeCardState state?;
-    string? userId?;
+public type ScopedRoleMembership record {
+    *Entity;
+    *ScopedRoleMembership1;
 };
 
-public type microsoft\.graph\.workbookChartAxes record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.workbookChartAxis categoryAxis?;
-    microsoft\.graph\.workbookChartAxis seriesAxis?;
-    microsoft\.graph\.workbookChartAxis valueAxis?;
+public type CollectionOfDriveItem_1 record {
+    DriveItem[] value?;
+    string? \@odata\.nextLink?;
 };
 
-public type microsoft\.graph\.managedAppOperation record {
-    *microsoft\.graph\.entity;
-    string? displayName?;
-    string lastModifiedDateTime?;
-    string? state?;
-    string? version?;
+public type WeekIndex "first"|"second"|"third"|"fourth"|"last";
+
+public type TeamFunSettings record {
+    # If set to true, enables users to include custom memes.
+    boolean? allowCustomMemes?;
+    # If set to true, enables Giphy use.
+    boolean? allowGiphy?;
+    # If set to true, enables users to include stickers and memes.
+    boolean? allowStickersAndMemes?;
+    GiphyRatingType giphyContentRating?;
 };
 
-public type microsoft\.graph\.windowsDeviceMalwareState record {
-    *microsoft\.graph\.entity;
-    string? additionalInformationUrl?;
-    microsoft\.graph\.windowsMalwareCategory category?;
-    decimal? detectionCount?;
-    string? displayName?;
-    microsoft\.graph\.windowsMalwareExecutionState executionState?;
-    string? initialDetectionDateTime?;
-    string? lastStateChangeDateTime?;
-    microsoft\.graph\.windowsMalwareSeverity severity?;
-    microsoft\.graph\.windowsMalwareState state?;
-    microsoft\.graph\.windowsMalwareThreatState threatState?;
+public type ChannelSummary record {
+    # Count of guests in a channel.
+    decimal? guestsCount?;
+    # Indicates whether external members are included on the channel.
+    boolean? hasMembersFromOtherTenants?;
+    # Count of members in a channel.
+    decimal? membersCount?;
+    # Count of owners in a channel.
+    decimal? ownersCount?;
 };
 
-public type microsoft\.graph\.sharePointIdentity record {
-    *microsoft\.graph\.identity;
-    string? loginName?;
+public type PrintTaskDefinition1 record {
+    AppIdentity createdBy?;
+    # The name of the printTaskDefinition.
+    string displayName?;
+    # A list of tasks that have been created based on this definition. The list includes currently running tasks and recently completed tasks. Read-only.
+    PrintTask[] tasks?;
 };
 
-public type microsoft\.graph\.contact record {
-    *microsoft\.graph\.outlookItem;
-    string? assistantName?;
-    string? birthday?;
-    microsoft\.graph\.physicalAddress businessAddress?;
-    string? businessHomePage?;
-    string[] businessPhones?;
-    string[] children?;
-    string? companyName?;
-    string? department?;
-    string? displayName?;
-    microsoft\.graph\.emailAddress[] emailAddresses?;
-    string? fileAs?;
-    string? generation?;
-    string? givenName?;
-    microsoft\.graph\.physicalAddress homeAddress?;
-    string[] homePhones?;
-    string[] imAddresses?;
-    string? initials?;
-    string? jobTitle?;
-    string? manager?;
-    string? middleName?;
-    string? mobilePhone?;
-    string? nickName?;
-    string? officeLocation?;
-    microsoft\.graph\.physicalAddress otherAddress?;
-    string? parentFolderId?;
-    string? personalNotes?;
-    string? profession?;
-    string? spouseName?;
-    string? surname?;
-    string? title?;
-    string? yomiCompanyName?;
-    string? yomiGivenName?;
-    string? yomiSurname?;
-    microsoft\.graph\.extension[] extensions?;
-    microsoft\.graph\.multiValueLegacyExtendedProperty[] multiValueExtendedProperties?;
-    microsoft\.graph\.profilePhoto photo?;
-    microsoft\.graph\.singleValueLegacyExtendedProperty[] singleValueExtendedProperties?;
+public type WorkbookChartPointFormat record {
+    *Entity;
+    *WorkbookChartPointFormat1;
 };
 
-public type microsoft\.graph\.processContentMetadataBase record {
-    microsoft\.graph\.contentBase content?;
-    string? correlationId?;
-    string createdDateTime?;
-    string identifier?;
-    boolean isTruncated?;
-    decimal? length?;
-    string modifiedDateTime?;
-    string name?;
-    decimal? sequenceNumber?;
+public type DocumentSetContent record {
+    ContentTypeInfo contentType?;
+    # Name of the file in resource folder that should be added as a default content or a template in the document set.
+    string? fileName?;
+    # Folder name in which the file will be placed when a new document set is created in the library.
+    string? folderName?;
 };
 
-public type microsoft\.graph\.workbook record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.workbookApplication application?;
-    microsoft\.graph\.workbookComment[] comments?;
-    microsoft\.graph\.workbookFunctions functions?;
-    microsoft\.graph\.workbookNamedItem[] names?;
-    microsoft\.graph\.workbookOperation[] operations?;
-    microsoft\.graph\.workbookTable[] tables?;
-    microsoft\.graph\.workbookWorksheet[] worksheets?;
+public type Recipient record {
+    EmailAddress emailAddress?;
 };
 
-public type microsoft\.graph\.sharingDetail record {
-    microsoft\.graph\.insightIdentity sharedBy?;
-    string? sharedDateTime?;
-    microsoft\.graph\.resourceReference sharingReference?;
-    string? sharingSubject?;
-    string? sharingType?;
+public type PlannerAppliedCategories record {
 };
 
-public type microsoft\.graph\.assignedLicense record {
-    microsoft\.graph\.assignedLicenseDisabledPlansItemsString[] disabledPlans?;
+public type AttendanceRecord1 record {
+    # List of time periods between joining and leaving a meeting.
+    AttendanceInterval[] attendanceIntervals?;
+    # Email address of the user associated with this attendance record.
+    string? emailAddress?;
+    VirtualEventExternalRegistrationInformation externalRegistrationInformation?;
+    Identity identity?;
+    # Unique identifier of a virtualEventRegistration that is available to all participants registered for the virtualEventWebinar.
+    string? registrationId?;
+    # Role of the attendee. Possible values are: None, Attendee, Presenter, and Organizer.
+    string? role?;
+    # Total duration of the attendances in seconds.
+    decimal? totalAttendanceInSeconds?;
+};
+
+public type ExternalLink record {
+    # The URL of the link.
+    string? href?;
+};
+
+public type CalendarColor "auto"|"lightBlue"|"lightGreen"|"lightOrange"|"lightGray"|"lightYellow"|"lightTeal"|"lightPink"|"lightBrown"|"lightRed"|"maxColor";
+
+public type AssignedLicense record {
+    # A collection of the unique identifiers for plans that have been disabled. IDs are available in servicePlans > servicePlanId in the tenant's subscribedSkus or serviceStatus > servicePlanId in the tenant's companySubscription.
+    AssignedLicenseDisabledPlansItemsString[] disabledPlans?;
+    # The unique identifier for the SKU. Corresponds to the skuId from subscribedSkus or companySubscription.
     string? skuId?;
 };
 
-public type microsoft\.graph\.plannerTask record {
-    *microsoft\.graph\.entity;
-    decimal? activeChecklistItemCount?;
-    microsoft\.graph\.plannerAppliedCategories appliedCategories?;
-    string? assigneePriority?;
-    microsoft\.graph\.plannerAssignments assignments?;
-    string? bucketId?;
-    decimal? checklistItemCount?;
-    microsoft\.graph\.identitySet completedBy?;
-    string? completedDateTime?;
-    string? conversationThreadId?;
-    microsoft\.graph\.identitySet createdBy?;
-    string? createdDateTime?;
-    string? dueDateTime?;
-    boolean? hasDescription?;
-    string? orderHint?;
-    decimal? percentComplete?;
-    string? planId?;
-    microsoft\.graph\.plannerPreviewType previewType?;
-    decimal? priority?;
-    decimal? referenceCount?;
-    string? startDateTime?;
-    string title?;
-    microsoft\.graph\.plannerAssignedToTaskBoardTaskFormat assignedToTaskBoardFormat?;
-    microsoft\.graph\.plannerBucketTaskBoardTaskFormat bucketTaskBoardFormat?;
-    microsoft\.graph\.plannerTaskDetails details?;
-    microsoft\.graph\.plannerProgressTaskBoardTaskFormat progressTaskBoardFormat?;
+public type WorkbookChartAxisTitleFormat record {
+    *Entity;
+    *WorkbookChartAxisTitleFormat1;
 };
 
-public type microsoft\.graph\.outlookGeoCoordinates record {
-    decimal? accuracy?;
-    decimal? altitude?;
-    decimal? altitudeAccuracy?;
-    decimal? latitude?;
-    decimal? longitude?;
+# Owner type of device
+public type ManagedDeviceOwnerType "unknown"|"company"|"personal"|"unknownFutureValue";
+
+public type CalendarPermission1 record {
+    # List of allowed sharing or delegating permission levels for the calendar. Possible values are: none, freeBusyRead, limitedRead, read, write, delegateWithoutPrivateEventAccess, delegateWithPrivateEventAccess, custom.
+    CalendarRoleType[] allowedRoles?;
+    EmailAddress emailAddress?;
+    # True if the user in context (recipient or delegate) is inside the same organization as the calendar owner.
+    boolean? isInsideOrganization?;
+    # True if the user can be removed from the list of recipients or delegates for the specified calendar, false otherwise. The 'My organization' user determines the permissions other people within your organization have to the given calendar. You can't remove 'My organization' as a share recipient to a calendar.
+    boolean? isRemovable?;
+    CalendarRoleType role?;
 };
 
-public type microsoft\.graph\.workbookChartGridlinesFormat record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.workbookChartLineFormat line?;
+public type TeamsAsyncOperationType "invalid"|"cloneTeam"|"archiveTeam"|"unarchiveTeam"|"createTeam"|"unknownFutureValue"|"teamifyGroup"|"createChannel"|"archiveChannel"|"unarchiveChannel";
+
+public type ScheduleEntityTheme "white"|"blue"|"green"|"purple"|"pink"|"yellow"|"gray"|"darkBlue"|"darkGreen"|"darkPurple"|"darkPink"|"darkYellow"|"unknownFutureValue";
+
+public type File record {
+    Hashes hashes?;
+    # The MIME type for the file. This is determined by logic on the server and might not be the value provided when the file was uploaded. Read-only.
+    string? mimeType?;
+    boolean? processingMetadata?;
 };
 
-public type microsoft\.graph\.chatMessageFromIdentitySet record {
-    *microsoft\.graph\.identitySet;
+public type PrintTaskProcessingState "pending"|"processing"|"completed"|"aborted"|"unknownFutureValue";
+
+public type OnenoteEntityHierarchyModel1 record {
+    IdentitySet createdBy?;
+    # The name of the notebook.
+    string? displayName?;
+    IdentitySet lastModifiedBy?;
+    # The date and time when the notebook was last modified. The timestamp represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
+    string? lastModifiedDateTime?;
 };
-
-public type microsoft\.graph\.columnTypes "note"|"text"|"choice"|"multichoice"|"number"|"currency"|"dateTime"|"lookup"|"boolean"|"user"|"url"|"calculated"|"location"|"geolocation"|"term"|"multiterm"|"thumbnail"|"approvalStatus"|"unknownFutureValue";
-
-public type microsoft\.graph\.workbookFilterCriteria record {
-    string? color?;
-    string? criterion1?;
-    string? criterion2?;
-    string dynamicCriteria?;
-    string filterOn?;
-    microsoft\.graph\.workbookIcon icon?;
-    string operator?;
-    microsoft\.graph\.Json values?;
-};
-
-public type microsoft\.graph\.openShift record {
-    *microsoft\.graph\.changeTrackedEntity;
-    microsoft\.graph\.openShiftItem draftOpenShift?;
-    boolean? isStagedForDeletion?;
-    string? schedulingGroupId?;
-    microsoft\.graph\.openShiftItem sharedOpenShift?;
-};
-
-public type microsoft\.graph\.chatMessageMentionedIdentitySet record {
-    *microsoft\.graph\.identitySet;
-    microsoft\.graph\.teamworkConversationIdentity conversation?;
-};
-
-public type microsoft\.graph\.workbookIcon record {
-    decimal index?;
-    string set?;
-};
-
-public type microsoft\.graph\.siteArchiveStatus "recentlyArchived"|"fullyArchived"|"reactivating"|"unknownFutureValue";
-
-public type microsoft\.graph\.searchResult record {
-    string? onClickTelemetryUrl?;
-};
-
-public type microsoft\.graph\.deleted record {
-    string? state?;
-};
-
-public type microsoft\.graph\.printMultipageLayout "clockwiseFromTopLeft"|"counterclockwiseFromTopLeft"|"counterclockwiseFromTopRight"|"clockwiseFromTopRight"|"counterclockwiseFromBottomLeft"|"clockwiseFromBottomLeft"|"counterclockwiseFromBottomRight"|"clockwiseFromBottomRight"|"unknownFutureValue";
-
-public type microsoft\.graph\.workbookChartTitleFormat record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.workbookChartFill fill?;
-    microsoft\.graph\.workbookChartFont font?;
-};
-
-public type microsoft\.graph\.timeOffRequest record {
-    *microsoft\.graph\.scheduleChangeRequest;
-    string? endDateTime?;
-    string? startDateTime?;
-    string? timeOffReasonId?;
-};
-
-public type microsoft\.graph\.deviceActionResult record {
-    string? actionName?;
-    microsoft\.graph\.actionState actionState?;
-    string lastUpdatedDateTime?;
-    string startDateTime?;
-};
-
-public type microsoft\.graph\.teamGuestSettings record {
-    boolean? allowCreateUpdateChannels?;
-    boolean? allowDeleteChannels?;
-};
-
-public type microsoft\.graph\.websiteType "other"|"home"|"work"|"blog"|"profile";
-
-public type microsoft\.graph\.userScopeTeamsAppInstallation record {
-    *microsoft\.graph\.teamsAppInstallation;
-    microsoft\.graph\.chat chat?;
-};
-
-public type microsoft\.graph\.driveItemSourceApplication "teams"|"yammer"|"sharePoint"|"oneDrive"|"stream"|"powerPoint"|"office"|"loki"|"loop"|"other"|"unknownFutureValue";
 
 # Represents the Queries record for the operation: getChildrenCountInRoot
 public type GetChildrenCountInRootQueries record {
     # Filter items by property values
-    string \$filter?;
+    @http:Query {name: "$filter"}
+    string filter?;
     # Search items by search phrases
-    string \$search?;
+    @http:Query {name: "$search"}
+    string search?;
 };
 
-public type microsoft\.graph\.printerCapabilitiesRightMarginsItemsNumber decimal?;
+public type ChecklistItem1 record {
+    # The date and time when the checklistItem was finished.
+    string? checkedDateTime?;
+    # The date and time when the checklistItem was created.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string createdDateTime?;
+    # Indicates the title of the checklistItem.
+    string? displayName?;
+    # State that indicates whether the item is checked off or not.
+    boolean? isChecked?;
+};
 
-public type microsoft\.graph\.callTranscript record {
-    *microsoft\.graph\.entity;
-    string? callId?;
-    string? content?;
-    string? contentCorrelationId?;
+public type WorkbookChartSeriesFormat1 record {
+    WorkbookChartFill fill?;
+    WorkbookChartLineFormat line?;
+};
+
+public type ChatMessageFromIdentitySet record {
+    *IdentitySet;
+    *ChatMessageFromIdentitySet1;
+};
+
+public type VirtualEventExternalRegistrationInformation record {
+    # A URL or string that represents the location from which the registrant registered. Optional.
+    string? referrer?;
+    # The identifier for a virtualEventExternalRegistrationInformation object. Optional. If set, the maximum supported length is 256 characters.
+    string? registrationId?;
+};
+
+public type PhoneAuthenticationMethod1 record {
+    # The phone number to text or call for authentication. Phone numbers use the format +{country code} {number}x{extension}, with extension optional. For example, +1 5555551234 or +1 5555551234x123 are valid. Numbers are rejected when creating or updating if they don't match the required format.
+    string? phoneNumber?;
+    AuthenticationPhoneType phoneType?;
+    AuthenticationMethodSignInState smsSignInState?;
+};
+
+public type MeetingAttendanceReport record {
+    *Entity;
+    *MeetingAttendanceReport1;
+};
+
+public type Phone record {
+    string? language?;
+    # The phone number.
+    string? number?;
+    string? region?;
+    PhoneType 'type?;
+};
+
+public type FollowupFlagStatus "notFlagged"|"complete"|"flagged";
+
+public type WorkingTimeSchedule1 record {
+};
+
+public type ColumnLink record {
+    *Entity;
+    *ColumnLink1;
+};
+
+public type PolicyLocation record {
+    # The actual value representing the location. Location value is specific for concretetype of the  policyLocation - policyLocationDomain, policyLocationUrl, or policyLocationApplication (for example, 'contoso.com', 'https://partner.contoso.com/upload', '83ef198a-0396-4893-9d4f-d36efbffcaaa').
+    string value?;
+};
+
+public type PrintTask record {
+    *Entity;
+    *PrintTask1;
+};
+
+public type GroupLifecyclePolicy1 record {
+    # List of email address to send notifications for groups without owners. Multiple email address can be defined by separating email address with a semicolon.
+    string? alternateNotificationEmails?;
+    # Number of days before a group expires and needs to be renewed. Once renewed, the group expiration is extended by the number of days defined.
+    decimal? groupLifetimeInDays?;
+    # The group type for which the expiration policy applies. Possible values are All, Selected or None.
+    string? managedGroupTypes?;
+};
+
+public type DriveItemSourceApplication "teams"|"yammer"|"sharePoint"|"oneDrive"|"stream"|"powerPoint"|"office"|"loki"|"loop"|"other"|"unknownFutureValue";
+
+public type ProfilePhoto1 record {
+    # The height of the photo. Read-only.
+    decimal? height?;
+    # The width of the photo. Read-only.
+    decimal? width?;
+};
+
+public type ContentTypeOrder record {
+    # Indicates whether this is the default content type
+    boolean? default?;
+    # Specifies the position in which the content type appears in the selection UI.
+    decimal? position?;
+};
+
+public type WorkbookApplication1 record {
+    # Returns the calculation mode used in the workbook. Possible values are: Automatic, AutomaticExceptTables, Manual.
+    string calculationMode?;
+};
+
+public type ProcessContentMetadataBase record {
+    ContentBase content?;
+    # An identifier used to group multiple related content entries (for example, different parts of the same file upload, messages in a conversation).
+    string? correlationId?;
+    # Required. Timestamp indicating when the original content was created (for example, file creation time, message sent time).
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string createdDateTime?;
+    # Required. A unique identifier for this specific content entry within the context of the calling application or enforcement plane (for example, message ID, file path/URL).
+    string identifier?;
+    # Required. Indicates if the provided content has been truncated from its original form (for example, due to size limits).
+    boolean isTruncated?;
+    # The length of the original content in bytes.
+    decimal? length?;
+    # Required. Timestamp indicating when the original content was last modified. For ephemeral content like messages, this might be the same as createdDateTime.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string modifiedDateTime?;
+    # Required. A descriptive name for the content (for example, file name, web page title, 'Chat Message').
+    string name?;
+    # A sequence number indicating the order in which content was generated or should be processed, required when correlationId is used.
+    decimal? sequenceNumber?;
+};
+
+public type GroupLifecyclePolicy record {
+    *Entity;
+    *GroupLifecyclePolicy1;
+};
+
+public type SchedulingGroup record {
+    *ChangeTrackedEntity;
+    *SchedulingGroup1;
+};
+
+public type UserProtectionScopeContainer1 record {
+};
+
+public type DriveItemVersion record {
+    *BaseItemVersion;
+    *DriveItemVersion1;
+};
+
+public type Presence1 record {
+    # The supplemental information to a user's availability. Possible values are Available, Away, BeRightBack, Busy, DoNotDisturb, InACall, InAConferenceCall, Inactive, InAMeeting, Offline, OffWork, OutOfOffice, PresenceUnknown, Presenting, UrgentInterruptionsOnly.
+    string? activity?;
+    # The base presence information for a user. Possible values are Available, availableIdle,  Away, beRightBack, Busy, busyIdle, DoNotDisturb, Offline, presenceUnknown.
+    string? availability?;
+    OutOfOfficeSettings outOfOfficeSettings?;
+    # The lexicographically sortable string stamp that represents the version of a presence object.
+    string? sequenceNumber?;
+    PresenceStatusMessage statusMessage?;
+};
+
+public type AttachmentSession record {
+    *Entity;
+    *AttachmentSession1;
+};
+
+# Represents a Microsoft Entra group
+public type Group1 record {
+    # Indicates if people external to the organization can send messages to the group. The default value is false. Returned only on $select. Supported only on the Get group API (GET /groups/{ID}).
+    boolean? allowExternalSenders?;
+    # The list of sensitivity label pairs (label ID, label name) associated with a Microsoft 365 group. Returned only on $select. This property can be updated only in delegated scenarios where the caller requires both the Microsoft Graph permission and a supported administrator role.
+    AssignedLabel[] assignedLabels?;
+    # The licenses that are assigned to the group. Returned only on $select. Supports $filter (eq). Read-only.
+    AssignedLicense[] assignedLicenses?;
+    # Indicates if new members added to the group are autosubscribed to receive email notifications. You can set this property in a PATCH request for the group; don't set it in the initial POST request that creates the group. Default value is false. Returned only on $select. Supported only on the Get group API (GET /groups/{ID}).
+    boolean? autoSubscribeNewMembers?;
+    # Describes a classification for the group (such as low, medium, or high business impact). Valid values for this property are defined by creating a ClassificationList setting value, based on the template definition.Returned by default. Supports $filter (eq, ne, not, ge, le, startsWith).
+    string? classification?;
+    # Timestamp of when the group was created. The value can't be modified and is automatically populated when the group is created. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on January 1, 2014 is 2014-01-01T00:00:00Z. Returned by default. Read-only.
     string? createdDateTime?;
+    # An optional description for the group. Returned by default. Supports $filter (eq, ne, not, ge, le, startsWith) and $search.
+    string? description?;
+    # The display name for the group. This property is required when a group is created and can't be cleared during updates. Maximum length is 256 characters. Returned by default. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values), $search, and $orderby.
+    string? displayName?;
+    # Timestamp of when the group is set to expire. It's null for security groups, but for Microsoft 365 groups, it represents when the group is set to expire as defined in the groupLifecyclePolicy. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on January 1, 2014 is 2014-01-01T00:00:00Z. Returned by default. Supports $filter (eq, ne, not, ge, le, in). Read-only.
+    string? expirationDateTime?;
+    # Specifies the group type and its membership. If the collection contains Unified, the group is a Microsoft 365 group; otherwise, it's either a security group or a distribution group. For details, see groups overview.If the collection includes DynamicMembership, the group has dynamic membership; otherwise, membership is static. Returned by default. Supports $filter (eq, not).
+    string[] groupTypes?;
+    # Indicates whether there are members in this group that have license errors from its group-based license assignment. This property is never returned on a GET operation. You can use it as a $filter argument to get groups that have members with license errors (that is, filter for this property being true). See an example. Supports $filter (eq).
+    boolean? hasMembersWithLicenseErrors?;
+    # True if the group isn't displayed in certain parts of the Outlook UI: the Address Book, address lists for selecting message recipients, and the Browse Groups dialog for searching groups; otherwise, false. The default value is false. Returned only on $select. Supported only on the Get group API (GET /groups/{ID}).
+    boolean? hideFromAddressLists?;
+    # True if the group isn't displayed in Outlook clients, such as Outlook for Windows and Outlook on the web; otherwise, false. The default value is false. Returned only on $select. Supported only on the Get group API (GET /groups/{ID}).
+    boolean? hideFromOutlookClients?;
+    # When a group is associated with a team, this property determines whether the team is in read-only mode.To read this property, use the /group/{groupId}/team endpoint or the Get team API. To update this property, use the archiveTeam and unarchiveTeam APIs.
+    boolean? isArchived?;
+    # Indicates whether this group can be assigned to a Microsoft Entra role. Optional. This property can only be set while creating the group and is immutable. If set to true, the securityEnabled property must also be set to true, visibility must be Hidden, and the group can't be a dynamic group (that is, groupTypes can't contain DynamicMembership). Only callers with at least the Privileged Role Administrator role can set this property. The caller must also be assigned the RoleManagement.ReadWrite.Directory permission to set this property or update the membership of such groups. For more, see Using a group to manage Microsoft Entra role assignmentsUsing this feature requires a Microsoft Entra ID P1 license. Returned by default. Supports $filter (eq, ne, not).
+    boolean? isAssignableToRole?;
+    # Indicates whether the group is a member of a restricted management administrative unit. If not set, the default value is null and the default behavior is false. Read-only.  To manage a group member of a restricted management administrative unit, the administrator or calling app must be assigned a Microsoft Entra role at the scope of the restricted management administrative unit. Returned only on $select.
+    boolean? isManagementRestricted?;
+    # Indicates whether the signed-in user is subscribed to receive email conversations. The default value is true. Returned only on $select. Supported only on the Get group API (GET /groups/{ID}).
+    boolean? isSubscribedByMail?;
+    LicenseProcessingState licenseProcessingState?;
+    # The SMTP address for the group, for example, 'serviceadmins@contoso.com'. Returned by default. Read-only. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values).
+    string? mail?;
+    # Specifies whether the group is mail-enabled. Required. Returned by default. Supports $filter (eq, ne, not).
+    boolean? mailEnabled?;
+    # The mail alias for the group, unique for Microsoft 365 groups in the organization. Maximum length is 64 characters. This property can contain only characters in the ASCII character set 0 - 127 except the following characters: @ () / [] ' ; : <> , SPACE. Required. Returned by default. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values).
+    string? mailNickname?;
+    # The rule that determines members for this group if the group is a dynamic group (groupTypes contains DynamicMembership). For more information about the syntax of the membership rule, see Membership Rules syntax. Returned by default. Supports $filter (eq, ne, not, ge, le, startsWith).
+    string? membershipRule?;
+    # Indicates whether the dynamic membership processing is on or paused. Possible values are On or Paused. Returned by default. Supports $filter (eq, ne, not, in).
+    string? membershipRuleProcessingState?;
+    # Contains the on-premises domain FQDN, also called dnsDomainName synchronized from the on-premises directory. The property is only populated for customers synchronizing their on-premises directory to Microsoft Entra ID via Microsoft Entra Connect.Returned by default. Read-only.
+    string? onPremisesDomainName?;
+    # Indicates the last time at which the group was synced with the on-premises directory. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on January 1, 2014 is 2014-01-01T00:00:00Z. Returned by default. Read-only. Supports $filter (eq, ne, not, ge, le, in).
+    string? onPremisesLastSyncDateTime?;
+    # Contains the on-premises netBios name synchronized from the on-premises directory. The property is only populated for customers synchronizing their on-premises directory to Microsoft Entra ID via Microsoft Entra Connect.Returned by default. Read-only.
+    string? onPremisesNetBiosName?;
+    # Errors when using Microsoft synchronization product during provisioning. Returned by default. Supports $filter (eq, not).
+    OnPremisesProvisioningError[] onPremisesProvisioningErrors?;
+    # Contains the on-premises SAM account name synchronized from the on-premises directory. The property is only populated for customers synchronizing their on-premises directory to Microsoft Entra ID via Microsoft Entra Connect.Returned by default. Supports $filter (eq, ne, not, ge, le, in, startsWith). Read-only.
+    string? onPremisesSamAccountName?;
+    # Contains the on-premises security identifier (SID) for the group synchronized from on-premises to the cloud. Read-only. Returned by default. Supports $filter (eq including on null values).
+    string? onPremisesSecurityIdentifier?;
+    # true if this group is synced from an on-premises directory; false if this group was originally synced from an on-premises directory but is no longer synced; null if this object has never synced from an on-premises directory (default). Returned by default. Read-only. Supports $filter (eq, ne, not, in, and eq on null values).
+    boolean? onPremisesSyncEnabled?;
+    # The preferred data location for the Microsoft 365 group. By default, the group inherits the group creator's preferred data location. To set this property, the calling app must be granted the Directory.ReadWrite.All permission and the user be assigned at least one of the following Microsoft Entra roles: User Account Administrator Directory Writer  Exchange Administrator  SharePoint Administrator  For more information about this property, see OneDrive Online Multi-Geo. Nullable. Returned by default.
+    string? preferredDataLocation?;
+    # The preferred language for a Microsoft 365 group. Should follow ISO 639-1 Code; for example, en-US. Returned by default. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values).
+    string? preferredLanguage?;
+    # Email addresses for the group that direct to the same group mailbox. For example: ['SMTP: bob@contoso.com', 'smtp: bob@sales.contoso.com']. The any operator is required to filter expressions on multi-valued properties. Returned by default. Read-only. Not nullable. Supports $filter (eq, not, ge, le, startsWith, endsWith, /$count eq 0, /$count ne 0).
+    string[] proxyAddresses?;
+    # Timestamp of when the group was last renewed. This value can't be modified directly and is only updated via the renew service action. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on January 1, 2014 is 2014-01-01T00:00:00Z. Returned by default. Supports $filter (eq, ne, not, ge, le, in). Read-only.
+    string? renewedDateTime?;
+    # Specifies whether the group is a security group. Required. Returned by default. Supports $filter (eq, ne, not, in).
+    boolean? securityEnabled?;
+    # Security identifier of the group, used in Windows scenarios. Read-only. Returned by default.
+    string? securityIdentifier?;
+    # Errors published by a federated service describing a nontransient, service-specific error regarding the properties or link from a group object.  Supports $filter (eq, not, for isResolved and serviceInstance).
+    ServiceProvisioningError[] serviceProvisioningErrors?;
+    # Specifies a Microsoft 365 group's color theme. Possible values are Teal, Purple, Green, Blue, Pink, Orange, or Red. Returned by default.
+    string? theme?;
+    # The unique identifier that can be assigned to a group and used as an alternate key. Immutable. Read-only.
+    string? uniqueName?;
+    # Count of conversations that received new posts since the signed-in user last visited the group. Returned only on $select. Supported only on the Get group API (GET /groups/{ID}).
+    decimal? unseenCount?;
+    # Specifies the group join policy and group content visibility for groups. Possible values are: Private, Public, or HiddenMembership. HiddenMembership can be set only for Microsoft 365 groups when the groups are created. It can't be updated later. Other values of visibility can be updated after group creation. If visibility value isn't specified during group creation on Microsoft Graph, a security group is created as Private by default, and the Microsoft 365 group is Public. Groups assignable to roles are always Private. To learn more, see group visibility options. Returned by default. Nullable.
+    string? visibility?;
+    # The list of users or groups allowed to create posts or calendar events in this group. If this list is nonempty, then only users or groups listed here are allowed to post.
+    DirectoryObject[] acceptedSenders?;
+    # Represents the app roles granted to a group for an application. Supports $expand.
+    AppRoleAssignment[] appRoleAssignments?;
+    Calendar calendar?;
+    # The calendar view for the calendar. Read-only.
+    Event[] calendarView?;
+    # The group's conversations.
+    Conversation[] conversations?;
+    DirectoryObject createdOnBehalfOf?;
+    Drive drive?;
+    # The group's drives. Read-only.
+    Drive[] drives?;
+    # The group's calendar events.
+    Event[] events?;
+    # The collection of open extensions defined for the group. Read-only. Nullable.
+    Extension[] extensions?;
+    # The collection of lifecycle policies for this group. Read-only. Nullable.
+    GroupLifecyclePolicy[] groupLifecyclePolicies?;
+    # Groups that this group is a member of. HTTP Methods: GET (supported for all groups). Read-only. Nullable. Supports $expand.
+    DirectoryObject[] memberOf?;
+    # The members of this group, who can be users, devices, other groups, or service principals. Supports the List members, Add member, and Remove member operations. Nullable. Supports $expand including nested $select. For example, /groups?$filter=startsWith(displayName,'Role')&$select=id,displayName&$expand=members($select=id,userPrincipalName,displayName).
+    DirectoryObject[] members?;
+    # A list of group members with license errors from this group-based license assignment. Read-only.
+    DirectoryObject[] membersWithLicenseErrors?;
+    Onenote onenote?;
+    # The owners of the group who can be users or service principals. Limited to 100 owners. Nullable. If this property isn't specified when creating a Microsoft 365 group the calling user (admin or non-admin) is automatically assigned as the group owner. A non-admin user can't explicitly add themselves to this collection when they're creating the group. For more information, see the related known issue. For security groups, the admin user isn't automatically added to this collection. For more information, see the related known issue. Supports $filter (/$count eq 0, /$count ne 0, /$count eq 1, /$count ne 1); Supports $expand including nested $select. For example, /groups?$filter=startsWith(displayName,'Role')&$select=id,displayName&$expand=owners($select=id,userPrincipalName,displayName).
+    DirectoryObject[] owners?;
+    ResourceSpecificPermissionGrant[] permissionGrants?;
+    ProfilePhoto photo?;
+    # The profile photos owned by the group. Read-only. Nullable.
+    ProfilePhoto[] photos?;
+    PlannerGroup planner?;
+    # The list of users or groups not allowed to create posts or calendar events in this group. Nullable
+    DirectoryObject[] rejectedSenders?;
+    # Settings that can govern this group's behavior, like whether members can invite guests to the group. Nullable.
+    GroupSetting[] settings?;
+    # The list of SharePoint sites in this group. Access the default site with /sites/root.
+    Site[] sites?;
+    Team team?;
+    # The group's conversation threads. Nullable.
+    ConversationThread[] threads?;
+    # The groups that a group is a member of, either directly or through nested membership. Nullable.
+    DirectoryObject[] transitiveMemberOf?;
+    # The direct and transitive members of a group. Nullable.
+    DirectoryObject[] transitiveMembers?;
+};
+
+public type SharingInvitation record {
+    # The email address provided for the recipient of the sharing invitation. Read-only.
+    string? email?;
+    IdentitySet invitedBy?;
+    string? redeemedBy?;
+    # If true the recipient of the invitation needs to sign in in order to access the shared item. Read-only.
+    boolean? signInRequired?;
+};
+
+public type Group2 record {
+    # Date and time of the group creation. Read-only.
+    string? createdDateTime?;
+    # Description that gives details on the term usage.
+    string? description?;
+    # Name of the group.
+    string? displayName?;
+    # ID of the parent site of this group.
+    string? parentSiteId?;
+    TermStoreTermGroupScope scope?;
+    # All sets under the group in a term [store].
+    TermStoreSet[] sets?;
+};
+
+public type BaseSitePage1 record {
+    PageLayoutType pageLayout?;
+    PublicationFacet publishingState?;
+    # Title of the sitePage.
+    string? title?;
+};
+
+public type LicenseAssignmentStateDisabledPlansItemsString string?;
+
+public type TeamworkTag record {
+    *Entity;
+    *TeamworkTag1;
+};
+
+# Malware current status
+public type WindowsMalwareState "unknown"|"detected"|"cleaned"|"quarantined"|"removed"|"allowed"|"blocked"|"cleanFailed"|"quarantineFailed"|"removeFailed"|"allowFailed"|"abandoned"|"blockFailed";
+
+# Represents the Headers record for the operation: deleteItem
+public type DeleteItemHeaders record {
+    # ETag
+    @http:Header {name: "If-Match"}
+    string ifMatch?;
+};
+
+public type OnenoteEntitySchemaObjectModel record {
+    *OnenoteEntityBaseModel;
+    *OnenoteEntitySchemaObjectModel1;
+};
+
+public type UserIdentity record {
+    *Identity;
+    *UserIdentity1;
+};
+
+public type VirtualEventExternalInformation record {
+    # Identifier of the application that hosts the externalEventId. Read-only.
+    string? applicationId?;
+    # The identifier for a virtualEventExternalInformation object that associates the virtual event with an event ID in an external application. This association bundles all the information (both supported and not supported in virtualEvent) into one virtual event object. Optional. If set, the maximum supported length is 256 characters.
+    string? externalEventId?;
+};
+
+public type LookupColumn record {
+    # Indicates whether multiple values can be selected from the source.
+    boolean? allowMultipleValues?;
+    # Indicates whether values in the column should be able to exceed the standard limit of 255 characters.
+    boolean? allowUnlimitedLength?;
+    # The name of the lookup source column.
+    string? columnName?;
+    # The unique identifier of the lookup source list.
+    string? listId?;
+    # If specified, this column is a secondary lookup, pulling an additional field from the list item looked up by the primary lookup. Use the list item looked up by the primary as the source for the column named here.
+    string? primaryLookupColumnId?;
+};
+
+public type IntegratedApplicationMetadata record {
+    # The name of the integrated application.
+    string? name?;
+    # The version number of the integrated application.
+    string? version?;
+};
+
+public type AppIdentity record {
+    # Refers to the unique ID representing application in Microsoft Entra ID.
+    string? appId?;
+    # Refers to the application name displayed in the Microsoft Entra admin center.
+    string? displayName?;
+    # Refers to the unique ID for the service principal in Microsoft Entra ID.
+    string? servicePrincipalId?;
+    # Refers to the Service Principal Name is the Application name in the tenant.
+    string? servicePrincipalName?;
+};
+
+public type PlannerTaskDetails1 record {
+    PlannerChecklistItems checklist?;
+    # Description of the task.
+    string? description?;
+    PlannerPreviewType previewType?;
+    PlannerExternalReferences references?;
+};
+
+public type WellknownListName "none"|"defaultList"|"flaggedEmails"|"unknownFutureValue";
+
+public type Group record {
+    *DirectoryObject;
+    *Group1;
+};
+
+public type PlatformCredentialAuthenticationMethod1 record {
+    # The date and time that this Platform Credential Key was registered.
+    string? createdDateTime?;
+    # The name of the device on which Platform Credential is registered.
+    string? displayName?;
+    AuthenticationMethodKeyStrength keyStrength?;
+    AuthenticationMethodPlatform platform?;
+    Device device?;
+};
+
+# Represents the Queries record for the operation: recent
+public type RecentQueries record {
+    # Skip the first n items
+    @http:Query {name: "$skip"}
+    int skip?;
+    # Show only the first n items
+    @http:Query {name: "$top"}
+    int top?;
+    # Filter items by property values
+    @http:Query {name: "$filter"}
+    string filter?;
+    # Search items by search phrases
+    @http:Query {name: "$search"}
+    string search?;
+    # Order items by property values
+    @http:Query {name: "$orderby"}
+    string[] orderby?;
+    # Expand related entities
+    @http:Query {name: "$expand"}
+    string[] expand?;
+    # Include count of items
+    @http:Query {name: "$count"}
+    boolean count?;
+    # Select properties to be returned
+    @http:Query {name: "$select"}
+    string[] 'select?;
+};
+
+public type SharedWithChannelTeamInfo record {
+    *TeamInfo;
+    *SharedWithChannelTeamInfo1;
+};
+
+public type PlannerPreviewType "automatic"|"noPreview"|"checklist"|"description"|"reference";
+
+public type SensitivityLabelAssignment record {
+    SensitivityLabelAssignmentMethod assignmentMethod?;
+    # The unique identifier for the sensitivity label assigned to the file.
+    string sensitivityLabelId?;
+    # The unique identifier for the tenant that hosts the file when this label is applied.
+    string tenantId?;
+};
+
+public type ShiftActivity record {
+    # Customer defined code for the shiftActivity. Required.
+    string? code?;
+    # The name of the shiftActivity. Required.
+    string? displayName?;
+    # The end date and time for the shiftActivity. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Required.
     string? endDateTime?;
+    # Indicates whether the user should be paid for the activity during their shift. Required.
+    boolean? isPaid?;
+    # The start date and time for the shiftActivity. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Required.
+    string? startDateTime?;
+    ScheduleEntityTheme theme?;
+};
+
+public type TimeCardEntry record {
+    # The clock-in event of the timeCard.
+    TimeCardBreak[] breaks?;
+    TimeCardEvent clockInEvent?;
+    TimeCardEvent clockOutEvent?;
+};
+
+public type LicenseDetails1 record {
+    # Information about the service plans assigned with the license. Read-only. Not nullable.
+    ServicePlanInfo[] servicePlans?;
+    # Unique identifier (GUID) for the service SKU. Equal to the skuId property on the related subscribedSku object. Read-only.
+    string? skuId?;
+    # Unique SKU display name. Equal to the skuPartNumber on the related subscribedSku object; for example, AAD_Premium. Read-only.
+    string? skuPartNumber?;
+};
+
+public type TeamworkConversationIdentity1 record {
+    TeamworkConversationIdentityType conversationIdentityType?;
+};
+
+public type UserInsightsSettings record {
+    *Entity;
+    *UserInsightsSettings1;
+};
+
+public type PlannerAssignedToTaskBoardTaskFormat1 record {
+    PlannerOrderHintsByAssignee orderHintsByAssignee?;
+    # Hint value used to order the task on the AssignedTo view of the Task Board when the task isn't assigned to anyone, or if the orderHintsByAssignee dictionary doesn't provide an order hint for the user the task is assigned to. The format is defined as outlined here.
+    string? unassignedOrderHint?;
+};
+
+public type ProtectedApplicationMetadata record {
+    *IntegratedApplicationMetadata;
+    *ProtectedApplicationMetadata1;
+};
+
+public type ItemRetentionLabel record {
+    *Entity;
+    *ItemRetentionLabel1;
+};
+
+public type PlannerContainerType "group"|"unknownFutureValue"|"roster";
+
+public type InsightIdentity record {
+    # The email address of the user who shared the item.
+    string? address?;
+    # The display name of the user who shared the item.
+    string? displayName?;
+    # The ID of the user who shared the item.
+    string? id?;
+};
+
+# Represents the Queries record for the operation: getItemCount
+public type GetItemCountQueries record {
+    # Filter items by property values
+    @http:Query {name: "$filter"}
+    string filter?;
+    # Search items by search phrases
+    @http:Query {name: "$search"}
+    string search?;
+};
+
+public type PlannerPlan1 record {
+    PlannerPlanContainer container?;
+    IdentitySet createdBy?;
+    # Read-only. Date and time at which the plan is created. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
+    string? createdDateTime?;
+    # Use the container property instead. ID of the group that owns the plan. After it's set, this property can’t be updated. This property won't return a valid group ID if the container of the plan isn't a group.
+    string? owner?;
+    # Required. Title of the plan.
+    string title?;
+    # Read-only. Nullable. Collection of buckets in the plan.
+    PlannerBucket[] buckets?;
+    PlannerPlanDetails details?;
+    # Read-only. Nullable. Collection of tasks in the plan.
+    PlannerTask[] tasks?;
+};
+
+public type TeamworkConversationIdentityType "team"|"channel"|"chat"|"unknownFutureValue";
+
+public type OnenoteEntityBaseModel1 record {
+    # The endpoint where you can get details about the page. Read-only.
+    string? self?;
+};
+
+public type TeamworkTagType "standard"|"unknownFutureValue";
+
+public type WorkbookWorksheetProtection record {
+    *Entity;
+    *WorkbookWorksheetProtection1;
+};
+
+@constraint:String {pattern: re `^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$`}
+public type AssignedLicenseDisabledPlansItemsString string;
+
+public type ChatViewpoint record {
+    # Indicates whether the chat is hidden for the current user.
+    boolean? isHidden?;
+    # Represents the dateTime up until which the current user has read chatMessages in a specific chat.
+    string? lastMessageReadDateTime?;
+};
+
+public type WorkbookFilter1 record {
+    WorkbookFilterCriteria criteria?;
+};
+
+public type WindowsSettingInstance1 record {
+    # Set by the server. Represents the dateTime in UTC when the object was created on the server.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string createdDateTime?;
+    # Set by the server. The object expires at the specified dateTime in UTC, making it unavailable after that time.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string expirationDateTime?;
+    # Set by the server if not provided in the request from the Windows client device. Refers to the user's Windows device that modified the object at the specified dateTime in UTC.
+    string? lastModifiedDateTime?;
+    # Base64-encoded JSON setting value.
+    string payload?;
+};
+
+public type TeamworkHostedContent1 record {
+    # Write only. Bytes for the hosted content (such as images).
+    string? contentBytes?;
+    # Write only. Content type. such as image/png, image/jpg.
+    string? contentType?;
+};
+
+public type ItemActionStat record {
+    # The number of times the action took place. Read-only.
+    decimal? actionCount?;
+    # The number of distinct actors that performed the action. Read-only.
+    decimal? actorCount?;
+};
+
+public type WorkbookFunctions1 record {
+};
+
+public type UsageDetails record {
+    # The date and time the resource was last accessed by the user. The timestamp represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
+    string? lastAccessedDateTime?;
+    # The date and time the resource was last modified by the user. The timestamp represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
+    string? lastModifiedDateTime?;
+};
+
+public type WorkbookChartAxes1 record {
+    WorkbookChartAxis categoryAxis?;
+    WorkbookChartAxis seriesAxis?;
+    WorkbookChartAxis valueAxis?;
+};
+
+public type LocaleInfo record {
+    # A name representing the user's locale in natural language, for example, 'English (United States)'.
+    string? displayName?;
+    # A locale representation for the user, which includes the user's preferred language and country/region. For example, 'en-us'. The language component follows 2-letter codes as defined in ISO 639-1, and the country component follows 2-letter codes as defined in ISO 3166-1 alpha-2.
+    string? locale?;
+};
+
+public type StorageQuotaBreakdown record {
+    *Entity;
+    *StorageQuotaBreakdown1;
+};
+
+# Malware detection entity
+public type WindowsDeviceMalwareState1 record {
+    # Information URL to learn more about the malware
+    string? additionalInformationUrl?;
+    # Malware category id
+    WindowsMalwareCategory category?;
+    # Number of times the malware is detected
+    decimal? detectionCount?;
+    # Malware name
+    string? displayName?;
+    # Malware execution status
+    WindowsMalwareExecutionState executionState?;
+    # Initial detection datetime of the malware
+    string? initialDetectionDateTime?;
+    # The last time this particular threat was changed
+    string? lastStateChangeDateTime?;
+    # Malware severity
+    WindowsMalwareSeverity severity?;
+    # Malware current status
+    WindowsMalwareState state?;
+    # Malware threat status
+    WindowsMalwareThreatState threatState?;
+};
+
+public type ListInfo record {
+    # If true, indicates that content types are enabled for this list.
+    boolean? contentTypesEnabled?;
+    # If true, indicates that the list isn't normally visible in the SharePoint user experience.
+    boolean? hidden?;
+    # An enumerated value that represents the base list template used in creating the list. Possible values include documentLibrary, genericList, task, survey, announcements, contacts, and more.
+    string? template?;
+};
+
+public type WorkbookWorksheet record {
+    *Entity;
+    *WorkbookWorksheet1;
+};
+
+public type Photo record {
+    # Camera manufacturer. Read-only.
+    string? cameraMake?;
+    # Camera model. Read-only.
+    string? cameraModel?;
+    # The denominator for the exposure time fraction from the camera. Read-only.
+    decimal? exposureDenominator?;
+    # The numerator for the exposure time fraction from the camera. Read-only.
+    decimal? exposureNumerator?;
+    # The F-stop value from the camera. Read-only.
+    decimal? fNumber?;
+    # The focal length from the camera. Read-only.
+    decimal? focalLength?;
+    # The ISO value from the camera. Read-only.
+    decimal? iso?;
+    # The orientation value from the camera. Writable on OneDrive Personal.
+    decimal? orientation?;
+    # Represents the date and time the photo was taken. Read-only.
+    string? takenDateTime?;
+};
+
+public type CalendarGroup record {
+    *Entity;
+    *CalendarGroup1;
+};
+
+public type WorkbookChartTitle record {
+    *Entity;
+    *WorkbookChartTitle1;
+};
+
+public type ThumbnailSet1 record {
+    Thumbnail large?;
+    Thumbnail medium?;
+    Thumbnail small?;
+    Thumbnail 'source?;
+};
+
+public type AgreementAcceptance1 record {
+    # The identifier of the agreement file accepted by the user.
+    string? agreementFileId?;
+    # The identifier of the agreement.
+    string? agreementId?;
+    # The display name of the device used for accepting the agreement.
+    string? deviceDisplayName?;
+    # The unique identifier of the device used for accepting the agreement. Supports $filter (eq) and eq for null values.
+    string? deviceId?;
+    # The operating system used to accept the agreement.
+    string? deviceOSType?;
+    # The operating system version of the device used to accept the agreement.
+    string? deviceOSVersion?;
+    # The expiration date time of the acceptance. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Supports $filter (eq, ge, le) and eq for null values.
+    string? expirationDateTime?;
+    # The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z.
+    string? recordedDateTime?;
+    AgreementAcceptanceState state?;
+    # Display name of the user when the acceptance was recorded.
+    string? userDisplayName?;
+    # Email of the user when the acceptance was recorded.
+    string? userEmail?;
+    # The identifier of the user who accepted the agreement. Supports $filter (eq).
+    string? userId?;
+    # UPN of the user when the acceptance was recorded.
+    string? userPrincipalName?;
+};
+
+public type SoftwareOathAuthenticationMethod record {
+    *AuthenticationMethod;
+    *SoftwareOathAuthenticationMethod1;
+};
+
+public type Drive record {
+    *BaseItem;
+    *Drive1;
+};
+
+public type ScoredEmailAddress record {
+    # The email address.
+    string? address?;
+    string? itemId?;
+    # The relevance score of the email address. A relevance score is used as a sort key, in relation to the other returned results. A higher relevance score value corresponds to a more relevant result. Relevance is determined by the user’s communication and collaboration patterns and business relationships.
+    decimal? relevanceScore?;
+    SelectionLikelihoodInfo selectionLikelihood?;
+};
+
+public type TextColumn record {
+    # Whether to allow multiple lines of text.
+    boolean? allowMultipleLines?;
+    # Whether updates to this column should replace existing text, or append to it.
+    boolean? appendChangesToExistingText?;
+    # The size of the text box.
+    decimal? linesForEditing?;
+    # The maximum number of characters for the value.
+    decimal? maxLength?;
+    # The type of text being stored. Must be one of plain or richText
+    string? textType?;
+};
+
+public type CategoryColor "none"|"preset0"|"preset1"|"preset2"|"preset3"|"preset4"|"preset5"|"preset6"|"preset7"|"preset8"|"preset9"|"preset10"|"preset11"|"preset12"|"preset13"|"preset14"|"preset15"|"preset16"|"preset17"|"preset18"|"preset19"|"preset20"|"preset21"|"preset22"|"preset23"|"preset24";
+
+public type TeamsAppPublishingState "submitted"|"rejected"|"published"|"unknownFutureValue";
+
+public type UserScopeTeamsAppInstallation record {
+    *TeamsAppInstallation;
+    *UserScopeTeamsAppInstallation1;
+};
+
+public type TeamMessagingSettings record {
+    # If set to true, @channel mentions are allowed.
+    boolean? allowChannelMentions?;
+    # If set to true, owners can delete any message.
+    boolean? allowOwnerDeleteMessages?;
+    # If set to true, @team mentions are allowed.
+    boolean? allowTeamMentions?;
+    # If set to true, users can delete their messages.
+    boolean? allowUserDeleteMessages?;
+    # If set to true, users can edit their messages.
+    boolean? allowUserEditMessages?;
+};
+
+public type PrintOrientation "portrait"|"landscape"|"reverseLandscape"|"reversePortrait"|"unknownFutureValue";
+
+public type OutlookGeoCoordinates record {
+    # The accuracy of the latitude and longitude. As an example, the accuracy can be measured in meters, such as the latitude and longitude are accurate to within 50 meters.
+    decimal? accuracy?;
+    # The altitude of the location.
+    decimal? altitude?;
+    # The accuracy of the altitude.
+    decimal? altitudeAccuracy?;
+    # The latitude of the location.
+    decimal? latitude?;
+    # The longitude of the location.
+    decimal? longitude?;
+};
+
+public type TermStoreGroup record {
+    *Entity;
+    *Group2;
+};
+
+public type WorkbookChartLegendFormat1 record {
+    WorkbookChartFill fill?;
+    WorkbookChartFont font?;
+};
+
+public type WorkbookTableRow record {
+    *Entity;
+    *WorkbookTableRow1;
+};
+
+public type BroadcastMeetingSettings record {
+    BroadcastMeetingAudience allowedAudience?;
+    BroadcastMeetingCaptionSettings captions?;
+    # Indicates whether attendee report is enabled for this Teams live event. Default value is false.
+    boolean? isAttendeeReportEnabled?;
+    # Indicates whether Q&A is enabled for this Teams live event. Default value is false.
+    boolean? isQuestionAndAnswerEnabled?;
+    # Indicates whether recording is enabled for this Teams live event. Default value is false.
+    boolean? isRecordingEnabled?;
+    # Indicates whether video on demand is enabled for this Teams live event. Default value is false.
+    boolean? isVideoOnDemandEnabled?;
+};
+
+public type TeamsTemplate1 record {
+};
+
+public type OnenotePage record {
+    *OnenoteEntitySchemaObjectModel;
+    *OnenotePage1;
+};
+
+public type MultiValueLegacyExtendedProperty1 record {
+    # A collection of property values.
+    string[] value?;
+};
+
+public type ScheduleEntity record {
+    string? endDateTime?;
+    string? startDateTime?;
+    ScheduleEntityTheme theme?;
+};
+
+public type ChatMessagePolicyViolationUserActionTypes "none"|"override"|"reportFalsePositive";
+
+public type TimeOffRequest1 record {
+    # The date and time the time off ends in ISO 8601 format and in UTC time.
+    string? endDateTime?;
+    # The date and time the time off starts in ISO 8601 format and in UTC time.
+    string? startDateTime?;
+    # The reason for the time off.
+    string? timeOffReasonId?;
+};
+
+public type LearningCourseActivity record {
+    *Entity;
+    *LearningCourseActivity1;
+};
+
+public type PlannerBucketTaskBoardTaskFormat record {
+    *Entity;
+    *PlannerBucketTaskBoardTaskFormat1;
+};
+
+public type AccessAction record {
+};
+
+public type UserScopeTeamsAppInstallation1 record {
+    Chat chat?;
+};
+
+# Represents the Queries record for the operation: getRoot
+public type GetRootQueries record {
+    # Expand related entities
+    @http:Query {name: "$expand"}
+    string[] expand?;
+    # Select properties to be returned
+    @http:Query {name: "$select"}
+    string[] 'select?;
+};
+
+public type UserActivityType "uploadText"|"uploadFile"|"downloadText"|"downloadFile"|"unknownFutureValue";
+
+public type PasswordProfile record {
+    # true if the user must change their password on the next sign-in; otherwise false.
+    boolean? forceChangePasswordNextSignIn?;
+    # If true, at next sign-in, the user must perform a multifactor authentication (MFA) before being forced to change their password. The behavior is identical to forceChangePasswordNextSignIn except that the user is required to first perform a multifactor authentication before password change. After a password change, this property will be automatically reset to false. If not set, default is false.
+    boolean? forceChangePasswordNextSignInWithMfa?;
+    # The password for the user. This property is required when a user is created. It can be updated, but the user will be required to change the password on the next sign-in. The password must satisfy minimum requirements as specified by the user's passwordPolicies property. By default, a strong password is required.
+    string? password?;
+};
+
+public type PinnedChatMessageInfo record {
+    *Entity;
+    *PinnedChatMessageInfo1;
+};
+
+public type ScheduleChangeRequest record {
+    *ChangeTrackedEntity;
+    *ScheduleChangeRequest1;
+};
+
+public type WorkbookChartTitle1 record {
+    # Indicates whether the chart title will overlay the chart or not.
+    boolean? overlay?;
+    # The title text of the chart.
+    string? text?;
+    # Indicates whether the chart title is visible.
+    boolean visible?;
+    WorkbookChartTitleFormat format?;
+};
+
+public type PrintMargin record {
+    # The margin in microns from the bottom edge.
+    decimal? bottom?;
+    # The margin in microns from the left edge.
+    decimal? left?;
+    # The margin in microns from the right edge.
+    decimal? right?;
+    # The margin in microns from the top edge.
+    decimal? top?;
+};
+
+public type Fido2AuthenticationMethod1 record {
+    # Authenticator Attestation GUID, an identifier that indicates the type (e.g. make and model) of the authenticator.
+    string? aaGuid?;
+    # The attestation certificate(s) attached to this security key.
+    string[] attestationCertificates?;
+    AttestationLevel attestationLevel?;
+    # The timestamp when this key was registered to the user.
+    string? createdDateTime?;
+    # The display name of the key as given by the user.
+    string? displayName?;
+    # The manufacturer-assigned model of the FIDO2 security key.
+    string? model?;
+};
+
+public type Permission1 record {
+    # A format of yyyy-MM-ddTHH:mm:ssZ of DateTimeOffset indicates the expiration time of the permission. DateTime.MinValue indicates there's no expiration set for this permission. Optional.
+    string? expirationDateTime?;
+    IdentitySet grantedTo?;
+    # For type permissions, the details of the users to whom permission was granted. Read-only.
+    IdentitySet[] grantedToIdentities?;
+    # For link type permissions, the details of the users to whom permission was granted. Read-only.
+    SharePointIdentitySet[] grantedToIdentitiesV2?;
+    SharePointIdentitySet grantedToV2?;
+    # Indicates whether the password is set for this permission. This property only appears in the response. Optional. Read-only. For OneDrive Personal only..
+    boolean? hasPassword?;
+    ItemReference inheritedFrom?;
+    SharingInvitation invitation?;
+    SharingLink link?;
+    # The type of permission, for example, read. See below for the full list of roles. Read-only.
+    string[] roles?;
+    # A unique token that can be used to access this shared item via the shares API. Read-only.
+    string? shareId?;
+};
+
+public type OAuth2PermissionGrant1 record {
+    # The object id (not appId) of the client service principal for the application that's authorized to act on behalf of a signed-in user when accessing an API. Required. Supports $filter (eq only).
+    string clientId?;
+    # Indicates if authorization is granted for the client application to impersonate all users or only a specific user. AllPrincipals indicates authorization to impersonate all users. Principal indicates authorization to impersonate a specific user. Consent on behalf of all users can be granted by an administrator. Nonadmin users might be authorized to consent on behalf of themselves in some cases, for some delegated permissions. Required. Supports $filter (eq only).
+    string? consentType?;
+    # The id of the user on behalf of whom the client is authorized to access the resource, when consentType is Principal. If consentType is AllPrincipals this value is null. Required when consentType is Principal. Supports $filter (eq only).
+    string? principalId?;
+    # The id of the resource service principal to which access is authorized. This identifies the API that the client is authorized to attempt to call on behalf of a signed-in user. Supports $filter (eq only).
+    string resourceId?;
+    # A space-separated list of the claim values for delegated permissions that should be included in access tokens for the resource application (the API). For example, openid User.Read GroupMember.Read.All. Each claim value should match the value field of one of the delegated permissions defined by the API, listed in the oauth2PermissionScopes property of the resource service principal. Must not exceed 3,850 characters in length.
+    string? scope?;
+};
+
+public type DayOfWeek "sunday"|"monday"|"tuesday"|"wednesday"|"thursday"|"friday"|"saturday";
+
+public type DriveItemIdMicrosoftGraphRestoreBody record {
+    ItemReference parentReference?;
+    string? name?;
+};
+
+public type PlannerCategoryDescriptions record {
+    # The label associated with Category 1
+    string? category1?;
+    # The label associated with Category 10
+    string? category10?;
+    # The label associated with Category 11
+    string? category11?;
+    # The label associated with Category 12
+    string? category12?;
+    # The label associated with Category 13
+    string? category13?;
+    # The label associated with Category 14
+    string? category14?;
+    # The label associated with Category 15
+    string? category15?;
+    # The label associated with Category 16
+    string? category16?;
+    # The label associated with Category 17
+    string? category17?;
+    # The label associated with Category 18
+    string? category18?;
+    # The label associated with Category 19
+    string? category19?;
+    # The label associated with Category 2
+    string? category2?;
+    # The label associated with Category 20
+    string? category20?;
+    # The label associated with Category 21
+    string? category21?;
+    # The label associated with Category 22
+    string? category22?;
+    # The label associated with Category 23
+    string? category23?;
+    # The label associated with Category 24
+    string? category24?;
+    # The label associated with Category 25
+    string? category25?;
+    # The label associated with Category 3
+    string? category3?;
+    # The label associated with Category 4
+    string? category4?;
+    # The label associated with Category 5
+    string? category5?;
+    # The label associated with Category 6
+    string? category6?;
+    # The label associated with Category 7
+    string? category7?;
+    # The label associated with Category 8
+    string? category8?;
+    # The label associated with Category 9
+    string? category9?;
+};
+
+public type PendingContentUpdate record {
+    # Date and time the pending binary operation was queued in UTC time. Read-only.
+    string? queuedDateTime?;
+};
+
+public type OutlookItem record {
+    *Entity;
+    *OutlookItem1;
+};
+
+public type InferenceClassificationOverride record {
+    *Entity;
+    *InferenceClassificationOverride1;
+};
+
+public type CloudClipboardRoot record {
+    *Entity;
+    *CloudClipboardRoot1;
+};
+
+public type UserPurpose "user"|"linked"|"shared"|"room"|"equipment"|"others"|"unknownFutureValue";
+
+public type Quota record {
+    # Total space consumed by files in the recycle bin, in bytes. Read-only.
+    decimal? deleted?;
+    # Total space remaining before reaching the capacity limit, in bytes. Read-only.
+    decimal? remaining?;
+    # Enumeration value that indicates the state of the storage space. Read-only.
+    string? state?;
+    StoragePlanInformation storagePlanInformation?;
+    # Total allowed storage space, in bytes. Read-only.
+    decimal? total?;
+    # Total space used, in bytes. Read-only.
+    decimal? used?;
+};
+
+public type BaseItem1 record {
+    IdentitySet createdBy?;
+    # Date and time of item creation. Read-only.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string createdDateTime?;
+    # Provides a user-visible description of the item. Optional.
+    string? description?;
+    # ETag for the item. Read-only.
+    string? eTag?;
+    IdentitySet lastModifiedBy?;
+    # Date and time the item was last modified. Read-only.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string lastModifiedDateTime?;
+    # The name of the item. Read-write.
+    string? name?;
+    ItemReference parentReference?;
+    # URL that either displays the resource in the browser (for Office file formats), or is a direct link to the file (for other formats). Read-only.
+    string? webUrl?;
+    User createdByUser?;
+    User lastModifiedByUser?;
+};
+
+public type LocationType "default"|"conferenceRoom"|"homeAddress"|"businessAddress"|"geoCoordinates"|"streetAddress"|"hotel"|"restaurant"|"localBusiness"|"postalAddress";
+
+public type TeamInfo1 record {
+    # The name of the team.
+    string? displayName?;
+    # The ID of the Microsoft Entra tenant.
+    string? tenantId?;
+    Team team?;
+};
+
+public type PrintColorMode "blackAndWhite"|"grayscale"|"color"|"auto"|"unknownFutureValue";
+
+public type Shared record {
+    IdentitySet owner?;
+    # Indicates the scope of how the item is shared. The possible values are: anonymous, organization, or users. Read-only.
+    string? scope?;
+    IdentitySet sharedBy?;
+    # The UTC date and time when the item was shared. Read-only.
+    string? sharedDateTime?;
+};
+
+public type SharePointIdentity record {
+    *Identity;
+    *SharePointIdentity1;
+};
+
+public type Importance "low"|"normal"|"high";
+
+public type TimeCardBreak record {
+    # ID of the timeCardBreak.
+    string? breakId?;
+    TimeCardEvent end?;
+    ItemBody notes?;
+    TimeCardEvent 'start?;
+};
+
+public type CloudClipboardItem1 record {
+    # Set by the server. DateTime in UTC when the object was created on the server.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string createdDateTime?;
+    # Set by the server. DateTime in UTC when the object expires and after that the object is no longer available. The default and also maximum TTL is 12 hours after the creation, but it might change for performance optimization.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string expirationDateTime?;
+    # Set by the server if not provided in the client's request. DateTime in UTC when the object was modified by the client.
+    string? lastModifiedDateTime?;
+    # A cloudClipboardItem can have multiple cloudClipboardItemPayload objects in the payloads. A window can place more than one clipboard object on the clipboard. Each one represents the same information in a different clipboard format.
+    CloudClipboardItemPayload[] payloads?;
+};
+
+public type Subscription record {
+    *Entity;
+    *Subscription1;
+};
+
+public type OutlookCategory1 record {
+    CategoryColor color?;
+    # A unique name that identifies a category in the user's mailbox. After a category is created, the name cannot be changed. Read-only.
+    string? displayName?;
+};
+
+public type ChatMessageHostedContent record {
+    *TeamworkHostedContent;
+    *ChatMessageHostedContent1;
+};
+
+public type WorkbookChartFill1 record {
+};
+
+public type PlannerBucket record {
+    *Entity;
+    *PlannerBucket1;
+};
+
+public type LearningCourseActivity1 record {
+    # Date and time when the assignment was completed. Optional.
+    string? completedDateTime?;
+    # The percentage completion value of the course activity. Optional.
+    decimal? completionPercentage?;
+    string? externalcourseActivityId?;
+    # The user ID of the learner to whom the activity is assigned. Required.
+    string learnerUserId?;
+    # The ID of the learning content created in Viva Learning. Required.
+    string learningContentId?;
+    # The registration ID of the provider. Required.
+    string? learningProviderId?;
+    CourseStatus status?;
+};
+
+public type CallTranscript1 record {
+    # The unique identifier for the call that is related to this transcript. Read-only.
+    string? callId?;
+    # The content of the transcript. Read-only.
+    string? content?;
+    # The unique identifier that links the transcript with its corresponding recording. Read-only.
+    string? contentCorrelationId?;
+    # Date and time at which the transcript was created. The timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
+    string? createdDateTime?;
+    # Date and time at which the transcription ends. The timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
+    string? endDateTime?;
+    # The unique identifier of the online meeting related to this transcript. Read-only.
     string? meetingId?;
-    microsoft\.graph\.identitySet meetingOrganizer?;
+    IdentitySet meetingOrganizer?;
+    # The time-aligned metadata of the utterances in the transcript. Read-only.
     string? metadataContent?;
+    # The URL that can be used to access the content of the transcript. Read-only.
     string? transcriptContentUrl?;
 };
 
-public type microsoft\.graph\.onenoteResource record {
-    *microsoft\.graph\.onenoteEntityBaseModel;
-    string? content?;
-    string? contentUrl?;
+public type PlannerPlan record {
+    *Entity;
+    *PlannerPlan1;
 };
 
-public type microsoft\.graph\.userInsightsSettings record {
-    *microsoft\.graph\.entity;
-    boolean isEnabled?;
+public type ChatMessage1 record {
+    # References to attached objects like files, tabs, meetings etc.
+    ChatMessageAttachment[] attachments?;
+    ItemBody body?;
+    ChannelIdentity channelIdentity?;
+    # If the message was sent in a chat, represents the identity of the chat.
+    string? chatId?;
+    # Timestamp of when the chat message was created.
+    string? createdDateTime?;
+    # Read only. Timestamp at which the chat message was deleted, or null if not deleted.
+    string? deletedDateTime?;
+    # Read-only. Version number of the chat message.
+    string? etag?;
+    EventMessageDetail eventDetail?;
+    ChatMessageFromIdentitySet 'from?;
+    ChatMessageImportance importance?;
+    # Read only. Timestamp when edits to the chat message were made. Triggers an 'Edited' flag in the Teams UI. If no edits are made the value is null.
+    string? lastEditedDateTime?;
+    # Read only. Timestamp when the chat message is created (initial setting) or modified, including when a reaction is added or removed.
+    string? lastModifiedDateTime?;
+    # Locale of the chat message set by the client. Always set to en-us.
+    string locale?;
+    # List of entities mentioned in the chat message. Supported entities are: user, bot, team, channel, chat, and tag.
+    ChatMessageMention[] mentions?;
+    # List of activity history of a message item, including modification time and actions, such as reactionAdded, reactionRemoved, or reaction changes, on the message.
+    ChatMessageHistoryItem[] messageHistory?;
+    ChatMessageType messageType?;
+    ChatMessagePolicyViolation policyViolation?;
+    # Reactions for this chat message (for example, Like).
+    ChatMessageReaction[] reactions?;
+    # Read-only. ID of the parent chat message or root chat message of the thread. (Only applies to chat messages in channels, not chats.)
+    string? replyToId?;
+    # The subject of the chat message, in plaintext.
+    string? subject?;
+    # Summary text of the chat message that could be used for push notifications and summary views or fall back views. Only applies to channel chat messages, not chat messages in a chat.
+    string? summary?;
+    # Read-only. Link to the message in Microsoft Teams.
+    string? webUrl?;
+    # Content in a message hosted by Microsoft Teams - for example, images or code snippets.
+    ChatMessageHostedContent[] hostedContents?;
+    # Replies for a specified message. Supports $expand for channel messages.
+    ChatMessage[] replies?;
 };
 
-public type microsoft\.graph\.keyValue record {
+# Represents the Headers record for the operation: deleteItemByPath
+public type DeleteItemByPathHeaders record {
+    # ETag
+    @http:Header {name: "If-Match"}
+    string ifMatch?;
+};
+
+public type WorkbookChartAxis record {
+    *Entity;
+    *WorkbookChartAxis1;
+};
+
+public type OutlookCategory record {
+    *Entity;
+    *OutlookCategory1;
+};
+
+public type TeamSummary record {
+    # Count of guests in a team.
+    decimal? guestsCount?;
+    # Count of members in a team.
+    decimal? membersCount?;
+    # Count of owners in a team.
+    decimal? ownersCount?;
+};
+
+public type WorkbookTable1 record {
+    # Indicates whether the first column contains special formatting.
+    boolean highlightFirstColumn?;
+    # Indicates whether the last column contains special formatting.
+    boolean highlightLastColumn?;
+    # A legacy identifier used in older Excel clients. The value of the identifier remains the same even when the table is renamed. This property should be interpreted as an opaque string value and shouldn't be parsed to any other type. Read-only.
+    string? legacyId?;
+    # The name of the table.
+    string? name?;
+    # Indicates whether the columns show banded formatting in which odd columns are highlighted differently from even ones to make reading the table easier.
+    boolean showBandedColumns?;
+    # Indicates whether the rows show banded formatting in which odd rows are highlighted differently from even ones to make reading the table easier.
+    boolean showBandedRows?;
+    # Indicates whether the filter buttons are visible at the top of each column header. Setting this is only allowed if the table contains a header row.
+    boolean showFilterButton?;
+    # Indicates whether the header row is visible or not. This value can be set to show or remove the header row.
+    boolean showHeaders?;
+    # Indicates whether the total row is visible or not. This value can be set to show or remove the total row.
+    boolean showTotals?;
+    # A constant value that represents the Table style. Possible values are: TableStyleLight1 through TableStyleLight21, TableStyleMedium1 through TableStyleMedium28, TableStyleStyleDark1 through TableStyleStyleDark11. A custom user-defined style present in the workbook can also be specified.
+    string? style?;
+    # The list of all the columns in the table. Read-only.
+    WorkbookTableColumn[] columns?;
+    # The list of all the rows in the table. Read-only.
+    WorkbookTableRow[] rows?;
+    WorkbookTableSort sort?;
+    WorkbookWorksheet worksheet?;
+};
+
+public type WorkbookOperationStatus "notStarted"|"running"|"succeeded"|"failed";
+
+public type Site record {
+    *BaseItem;
+    *Site1;
+};
+
+public type WorkbookSortField record {
+    # Represents whether the sorting is done in an ascending fashion.
+    boolean 'ascending?;
+    # Represents the color that is the target of the condition if the sorting is on font or cell color.
+    string? color?;
+    # Represents additional sorting options for this field. The possible values are: Normal, TextAsNumber.
+    string dataOption?;
+    WorkbookIcon icon?;
+    # Represents the column (or row, depending on the sort orientation) that the condition is on. Represented as an offset from the first column (or row).
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal 'key?;
+    # Represents the type of sorting of this condition. The possible values are: Value, CellColor, FontColor, Icon.
+    string sortOn?;
+};
+
+public type KeyValue record {
+    # Key for the key-value pair.
     string? 'key?;
+    # Value for the key-value pair.
     string? value?;
 };
 
-public type microsoft\.graph\.patternedRecurrence record {
-    microsoft\.graph\.recurrencePattern pattern?;
-    microsoft\.graph\.recurrenceRange range?;
+public type FieldValueSet record {
+    *Entity;
+    *FieldValueSet1;
 };
 
-public type microsoft\.graph\.deviceManagementExchangeAccessState "none"|"unknown"|"allowed"|"blocked"|"quarantined";
+public type PageLayoutType "microsoftReserved"|"article"|"home"|"unknownFutureValue";
 
-# Represents the Queries record for the operation: getItemsContent
-public type GetItemsContentQueries record {
+public type FreeBusyStatus "unknown"|"free"|"tentative"|"busy"|"oof"|"workingElsewhere";
+
+public type TermStoreRelationType "pin"|"reuse"|"unknownFutureValue";
+
+public type ResourceSpecificPermissionGrant1 record {
+    # ID of the service principal of the Microsoft Entra app that has been granted access. Read-only.
+    string? clientAppId?;
+    # ID of the Microsoft Entra app that has been granted access. Read-only.
+    string? clientId?;
+    # The name of the resource-specific permission. Read-only.
+    string? permission?;
+    # The type of permission. Possible values are: Application, Delegated. Read-only.
+    string? permissionType?;
+    # ID of the Microsoft Entra app that is hosting the resource. Read-only.
+    string? resourceAppId?;
+};
+
+# Represents the Queries record for the operation: getItemByPath
+public type GetItemByPathQueries record {
+    # Expand related entities
+    @http:Query {name: "$expand"}
+    string[] expand?;
+    # Select properties to be returned
+    @http:Query {name: "$select"}
+    string[] 'select?;
+};
+
+public type PrinterCapabilitiesPagesPerSheetItemsNumber decimal?;
+
+public type OnenoteOperation record {
+    *Operation;
+    *OnenoteOperation1;
+};
+
+public type LocationUniqueIdType "unknown"|"locationStore"|"directory"|"private"|"bing";
+
+public type ListItemVersion1 record {
+    FieldValueSet fields?;
+};
+
+public type ActivityHistoryItem record {
+    *Entity;
+    *ActivityHistoryItem1;
+};
+
+public type WorkbookChartAxisTitleFormat1 record {
+    WorkbookChartFont font?;
+};
+
+public type TimeOffReason record {
+    *ChangeTrackedEntity;
+    *TimeOffReason1;
+};
+
+public type UserTeamwork record {
+    *Entity;
+    *UserTeamwork1;
+};
+
+public type TimeOffRequest record {
+    *ScheduleChangeRequest;
+    *TimeOffRequest1;
+};
+
+public type WorkbookChartSeries1 record {
+    # The name of a series in a chart.
+    string? name?;
+    WorkbookChartSeriesFormat format?;
+    # A collection of all points in the series. Read-only.
+    WorkbookChartPoint[] points?;
+};
+
+public type PublicInnerError record {
+    # The error code.
+    string? code?;
+    # A collection of error details.
+    PublicErrorDetail[] details?;
+    # The error message.
+    string? message?;
+    # The target of the error.
+    string? target?;
+};
+
+public type ColumnDefinition record {
+    *Entity;
+    *ColumnDefinition1;
+};
+
+public type WorkbookTable record {
+    *Entity;
+    *WorkbookTable1;
+};
+
+public type OnenotePage1 record {
+    # The page's HTML content.
+    string? content?;
+    # The URL for the page's HTML content.  Read-only.
+    string? contentUrl?;
+    # The unique identifier of the application that created the page. Read-only.
+    string? createdByAppId?;
+    # The date and time when the page was last modified. The timestamp represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
+    string? lastModifiedDateTime?;
+    # The indentation level of the page. Read-only.
+    decimal? level?;
+    PageLinks links?;
+    # The order of the page within its parent section. Read-only.
+    decimal? 'order?;
+    # The title of the page.
+    string? title?;
+    string[] userTags?;
+    Notebook parentNotebook?;
+    OnenoteSection parentSection?;
+};
+
+public type ThumbnailSet record {
+    *Entity;
+    *ThumbnailSet1;
+};
+
+public type Sensitivity "normal"|"personal"|"private"|"confidential";
+
+public type Authentication record {
+    *Entity;
+    *Authentication1;
+};
+
+public type WebsiteType "other"|"home"|"work"|"blog"|"profile";
+
+public type TemporaryAccessPassAuthenticationMethod1 record {
+    # The date and time when the Temporary Access Pass was created.
+    string? createdDateTime?;
+    # The state of the authentication method that indicates whether it's currently usable by the user.
+    boolean? isUsable?;
+    # Determines whether the pass is limited to a one-time use. If true, the pass can be used once; if false, the pass can be used multiple times within the Temporary Access Pass lifetime.
+    boolean? isUsableOnce?;
+    # The lifetime of the Temporary Access Pass in minutes starting at startDateTime. Must be between 10 and 43200 inclusive (equivalent to 30 days).
+    decimal? lifetimeInMinutes?;
+    # Details about the usability state (isUsable). Reasons can include: EnabledByPolicy, DisabledByPolicy, Expired, NotYetValid, OneTimeUsed.
+    string? methodUsabilityReason?;
+    # The date and time when the Temporary Access Pass becomes available to use and when isUsable is true is enforced.
+    string? startDateTime?;
+    # The Temporary Access Pass used to authenticate. Returned only on creation of a new temporaryAccessPassAuthenticationMethod object; Hidden in subsequent read operations and returned as null with GET.
+    string? temporaryAccessPass?;
+};
+
+public type WorkbookChartAxis1 record {
+    Json majorUnit?;
+    Json maximum?;
+    Json minimum?;
+    Json minorUnit?;
+    WorkbookChartAxisFormat format?;
+    WorkbookChartGridlines majorGridlines?;
+    WorkbookChartGridlines minorGridlines?;
+    WorkbookChartAxisTitle title?;
+};
+
+public type LinkedResource1 record {
+    # The app name of the source that sends the linkedResource.
+    string? applicationName?;
+    # The title of the linkedResource.
+    string? displayName?;
+    # ID of the object that is associated with this task on the third-party/partner system.
+    string? externalId?;
+    # Deep link to the linkedResource.
+    string? webUrl?;
+};
+
+public type DocumentSetVersionItem record {
+    # The unique identifier for the item.
+    string? itemId?;
+    # The title of the item.
+    string? title?;
+    # The version ID of the item.
+    string? versionId?;
+};
+
+public type Authentication1 record {
+    # The email address registered to a user for authentication.
+    EmailAuthenticationMethod[] emailMethods?;
+    # Represents the FIDO2 security keys registered to a user for authentication.
+    Fido2AuthenticationMethod[] fido2Methods?;
+    # Represents all authentication methods registered to a user.
+    AuthenticationMethod[] methods?;
+    # The details of the Microsoft Authenticator app registered to a user for authentication.
+    MicrosoftAuthenticatorAuthenticationMethod[] microsoftAuthenticatorMethods?;
+    # Represents the status of a long-running operation, such as a password reset operation.
+    LongRunningOperation[] operations?;
+    # Represents the password registered to a user for authentication. For security, the password itself is never returned in the object, but action can be taken to reset a password.
+    PasswordAuthenticationMethod[] passwordMethods?;
+    # The phone numbers registered to a user for authentication.
+    PhoneAuthenticationMethod[] phoneMethods?;
+    # Represents a platform credential instance registered to a user on Mac OS.
+    PlatformCredentialAuthenticationMethod[] platformCredentialMethods?;
+    # The software OATH time-based one-time password (TOTP) applications registered to a user for authentication.
+    SoftwareOathAuthenticationMethod[] softwareOathMethods?;
+    # Represents a Temporary Access Pass registered to a user for authentication through time-limited passcodes.
+    TemporaryAccessPassAuthenticationMethod[] temporaryAccessPassMethods?;
+    # Represents the Windows Hello for Business authentication method registered to a user for authentication.
+    WindowsHelloForBusinessAuthenticationMethod[] windowsHelloForBusinessMethods?;
+};
+
+public type LobbyBypassSettings record {
+    # Specifies whether or not to always let dial-in callers bypass the lobby. Optional.
+    boolean? isDialInBypassEnabled?;
+    LobbyBypassScope scope?;
+};
+
+public type Shift1 record {
+    ShiftItem draftShift?;
+    # The shift is marked for deletion, a process that is finalized when the schedule is shared.
+    boolean? isStagedForDeletion?;
+    # ID of the scheduling group the shift is part of. Required.
+    string? schedulingGroupId?;
+    ShiftItem sharedShift?;
+    # ID of the user assigned to the shift. Required.
+    string? userId?;
+};
+
+public type TimeOffItem1 record {
+    # ID of the timeOffReason for this timeOffItem. Required.
+    string? timeOffReasonId?;
+};
+
+public type StorageQuotaBreakdown1 record {
+    string? displayName?;
+    string? manageWebUrl?;
+    decimal? used?;
+};
+
+public type EventMessageDetail record {
+};
+
+public type SettingSource record {
+    # Not yet documented
+    string? displayName?;
+    # Not yet documented
+    string? id?;
+    SettingSourceType sourceType?;
+};
+
+public type DateTimeTimeZone record {
+    # A single point of time in a combined date and time representation ({date}T{time}; for example, 2017-08-29T04:00:00.0000000).
+    string dateTime?;
+    # Represents a time zone, for example, 'Pacific Standard Time'. See below for more possible values.
+    string? timeZone?;
+};
+
+public type DefaultColumnValue record {
+    # The formula used to compute the default value for the column.
+    string? formula?;
+    # The direct value to use as the default value for the column.
+    string? value?;
+};
+
+public type DisplayNameLocalization record {
+    # If present, the value of this field contains the displayName string that has been set for the language present in the languageTag field.
+    string? displayName?;
+    # Provides the language culture-code and friendly name of the language that the displayName field has been provided in.
+    string? languageTag?;
+};
+
+public type PlannerProgressTaskBoardTaskFormat1 record {
+    # Hint value used to order the task on the progress view of the task board. For details about the supported format, see Using order hints in Planner.
+    string? orderHint?;
+};
+
+public type WorkbookChartAxisTitle record {
+    *Entity;
+    *WorkbookChartAxisTitle1;
+};
+
+public type PrinterCapabilitiesRightMarginsItemsNumber decimal?;
+
+public type PrintFinishing "none"|"staple"|"punch"|"cover"|"bind"|"saddleStitch"|"stitchEdge"|"stapleTopLeft"|"stapleBottomLeft"|"stapleTopRight"|"stapleBottomRight"|"stitchLeftEdge"|"stitchTopEdge"|"stitchRightEdge"|"stitchBottomEdge"|"stapleDualLeft"|"stapleDualTop"|"stapleDualRight"|"stapleDualBottom"|"unknownFutureValue"|"stapleTripleLeft"|"stapleTripleTop"|"stapleTripleRight"|"stapleTripleBottom"|"bindLeft"|"bindTop"|"bindRight"|"bindBottom"|"foldAccordion"|"foldDoubleGate"|"foldGate"|"foldHalf"|"foldHalfZ"|"foldLeftGate"|"foldLetter"|"foldParallel"|"foldPoster"|"foldRightGate"|"foldZ"|"foldEngineeringZ"|"punchTopLeft"|"punchBottomLeft"|"punchTopRight"|"punchBottomRight"|"punchDualLeft"|"punchDualTop"|"punchDualRight"|"punchDualBottom"|"punchTripleLeft"|"punchTripleTop"|"punchTripleRight"|"punchTripleBottom"|"punchQuadLeft"|"punchQuadTop"|"punchQuadRight"|"punchQuadBottom"|"fold"|"trim"|"bale"|"bookletMaker"|"coat"|"laminate"|"trimAfterPages"|"trimAfterDocuments"|"trimAfterCopies"|"trimAfterJob";
+
+public type ManagedAppRegistration record {
+    *Entity;
+    *ManagedAppRegistration1;
+};
+
+public type OutOfOfficeSettings record {
+    # If true, either of the following is met:The current time falls within the out-of-office window configured in Outlook or Teams.An event marked as 'Show as Out of Office' appears on the user's calendar.Otherwise, false.
+    boolean? isOutOfOffice?;
+    # The out-of-office message configured by the user in the Outlook client (Automatic replies) or the Teams client (Schedule out of office).
+    string? message?;
+};
+
+public type Device record {
+    *DirectoryObject;
+    *Device1;
+};
+
+public type Channel record {
+    *Entity;
+    *Channel1;
+};
+
+public type TeamsTabConfiguration record {
+    # Url used for rendering tab contents in Teams. Required.
+    string? contentUrl?;
+    # Identifier for the entity hosted by the tab provider.
+    string? entityId?;
+    # Url called by Teams client when a Tab is removed using the Teams Client.
+    string? removeUrl?;
+    # Url for showing tab contents outside of Teams.
+    string? websiteUrl?;
+};
+
+public type PhysicalAddress record {
+    # The city.
+    string? city?;
+    # The country or region. It's a free-format string value, for example, 'United States'.
+    string? countryOrRegion?;
+    # The postal code.
+    string? postalCode?;
+    # The state.
+    string? state?;
+    # The street.
+    string? street?;
+};
+
+public type ChoiceColumn record {
+    # If true, allows custom values that aren't in the configured choices.
+    boolean? allowTextEntry?;
+    # The list of values available for this column.
+    string[] choices?;
+    # How the choices are to be presented in the UX. Must be one of checkBoxes, dropDownMenu, or radioButtons
+    string? displayAs?;
+};
+
+public type CalculatedColumn record {
+    # For dateTime output types, the format of the value. Possible values are: dateOnly or dateTime.
+    string? format?;
+    # The formula used to compute the value for this column.
+    string? formula?;
+    # The output type used to format values in this column. Possible values are: boolean, currency, dateTime, number, or text.
+    string? outputType?;
+};
+
+public type ColumnTypes "note"|"text"|"choice"|"multichoice"|"number"|"currency"|"dateTime"|"lookup"|"boolean"|"user"|"url"|"calculated"|"location"|"geolocation"|"term"|"multiterm"|"thumbnail"|"approvalStatus"|"unknownFutureValue";
+
+public type AuthorizationInfo record {
+    string[] certificateUserIds?;
+};
+
+public type WorkbookOperation1 record {
+    WorkbookOperationError 'error?;
+    # The resource URI for the result.
+    string? resourceLocation?;
+    WorkbookOperationStatus status?;
+};
+
+public type PhoneType "home"|"business"|"mobile"|"other"|"assistant"|"homeFax"|"businessFax"|"otherFax"|"pager"|"radio";
+
+# Represents the Queries record for the operation: getChildrenContent
+public type GetChildrenContentQueries record {
     # Format of the content
-    string \$format?;
+    @http:Query {name: "$format"}
+    string format?;
 };
 
-public type microsoft\.graph\.inferenceClassificationType "focused"|"other";
-
-public type microsoft\.graph\.deviceManagementExchangeAccessStateReason "none"|"unknown"|"exchangeGlobalRule"|"exchangeIndividualRule"|"exchangeDeviceRule"|"exchangeUpgrade"|"exchangeMailboxPolicy"|"other"|"compliant"|"notCompliant"|"notEnrolled"|"unknownLocation"|"mfaRequired"|"azureADBlockDueToAccessPolicy"|"compromisedPassword"|"deviceNotKnownWithManagedApp";
-
-public type microsoft\.graph\.servicePlanInfo record {
-    string? appliesTo?;
-    string? provisioningStatus?;
-    string? servicePlanId?;
-    string? servicePlanName?;
+public type ChatMessageInfo1 record {
+    ItemBody body?;
+    # Date time object representing the time at which message was created.
+    string? createdDateTime?;
+    EventMessageDetail eventDetail?;
+    ChatMessageFromIdentitySet 'from?;
+    # If set to true, the original message has been deleted.
+    boolean? isDeleted?;
+    ChatMessageType messageType?;
 };
 
-public type microsoft\.graph\.deviceEnrollmentType "unknown"|"userEnrollment"|"deviceEnrollmentManager"|"appleBulkWithUser"|"appleBulkWithoutUser"|"windowsAzureADJoin"|"windowsBulkUserless"|"windowsAutoEnrollment"|"windowsBulkAzureDomainJoin"|"windowsCoManagement"|"windowsAzureADJoinUsingDeviceAuth"|"appleUserEnrollment"|"appleUserEnrollmentWithServiceAccount"|"unknownFutureValue";
-
-public type microsoft\.graph\.workbookChartAreaFormat record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.workbookChartFill fill?;
-    microsoft\.graph\.workbookChartFont font?;
+public type CloudClipboardItemPayload record {
+    # The formatName version of the value of a cloud clipboard encoded in base64.
+    string content?;
+    # For a list of possible values see formatName values.
+    string formatName?;
 };
 
-public type microsoft\.graph\.itemPreviewInfo record {
+public type CallRecording1 record {
+    # The unique identifier for the call that is related to this recording. Read-only.
+    string? callId?;
+    # The content of the recording. Read-only.
+    string? content?;
+    # The unique identifier that links the transcript with its corresponding recording. Read-only.
+    string? contentCorrelationId?;
+    # Date and time at which the recording was created. The timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
+    string? createdDateTime?;
+    # Date and time at which the recording ends. The timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
+    string? endDateTime?;
+    # The unique identifier of the onlineMeeting related to this recording. Read-only.
+    string? meetingId?;
+    IdentitySet meetingOrganizer?;
+    # The URL that can be used to access the content of the recording. Read-only.
+    string? recordingContentUrl?;
+};
+
+public type TodoTask1 record {
+    ItemBody body?;
+    # The date and time when the task body was last modified. By default, it is in UTC. You can provide a custom time zone in the request header. The property value uses ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2020 would look like this: '2020-01-01T00:00:00Z'.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string bodyLastModifiedDateTime?;
+    # The categories associated with the task. Each category corresponds to the displayName property of an outlookCategory that the user has defined.
+    string[] categories?;
+    DateTimeTimeZone completedDateTime?;
+    # The date and time when the task was created. By default, it is in UTC. You can provide a custom time zone in the request header. The property value uses ISO 8601 format. For example, midnight UTC on Jan 1, 2020 would look like this: '2020-01-01T00:00:00Z'.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string createdDateTime?;
+    DateTimeTimeZone dueDateTime?;
+    # Indicates whether the task has attachments.
+    boolean? hasAttachments?;
+    Importance importance?;
+    # Set to true if an alert is set to remind the user of the task.
+    boolean isReminderOn?;
+    # The date and time when the task was last modified. By default, it is in UTC. You can provide a custom time zone in the request header. The property value uses ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2020 would look like this: '2020-01-01T00:00:00Z'.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string lastModifiedDateTime?;
+    PatternedRecurrence recurrence?;
+    DateTimeTimeZone reminderDateTime?;
+    DateTimeTimeZone startDateTime?;
+    TaskStatus status?;
+    # A brief description of the task.
+    string? title?;
+    # A collection of file attachments for the task.
+    AttachmentBase[] attachments?;
+    AttachmentSession[] attachmentSessions?;
+    # A collection of checklistItems linked to a task.
+    ChecklistItem[] checklistItems?;
+    # The collection of open extensions defined for the task. Nullable.
+    Extension[] extensions?;
+    # A collection of resources linked to the task.
+    LinkedResource[] linkedResources?;
+};
+
+public type PrintConnector record {
+    *Entity;
+    *PrintConnector1;
+};
+
+public type PrinterBase1 record {
+    PrinterCapabilities capabilities?;
+    PrinterDefaults defaults?;
+    # The name of the printer/printerShare.
+    string displayName?;
+    # Specifies whether the printer/printerShare is currently accepting new print jobs.
+    boolean? isAcceptingJobs?;
+    PrinterLocation location?;
+    # The manufacturer of the printer/printerShare.
+    string? manufacturer?;
+    # The model name of the printer/printerShare.
+    string? model?;
+    PrinterStatus status?;
+    # The list of jobs that are queued for printing by the printer/printerShare.
+    PrintJob[] jobs?;
+};
+
+public type Message record {
+    *OutlookItem;
+    *Message1;
+};
+
+public type MicrosoftAuthenticatorAuthenticationMethod record {
+    *AuthenticationMethod;
+    *MicrosoftAuthenticatorAuthenticationMethod1;
+};
+
+public type WindowsSetting1 record {
+    # The type of setting payloads contained in the instances navigation property.
+    string? payloadType?;
+    WindowsSettingType settingType?;
+    # A unique identifier for the device the setting might belong to if it is of the settingType backup.
+    string? windowsDeviceId?;
+    # A collection of setting values for a given windowsSetting.
+    WindowsSettingInstance[] instances?;
+};
+
+public type AuthenticationMethodPlatform "unknown"|"windows"|"macOS"|"iOS"|"android"|"linux"|"unknownFutureValue";
+
+public type ProfilePhoto record {
+    *Entity;
+    *ProfilePhoto1;
+};
+
+public type ContentApprovalStatusColumn record {
+};
+
+public type PrintJobStatus record {
+    # A human-readable description of the print job's current processing state. Read-only.
+    string description?;
+    # Additional details for print job state. Valid values are described in the following table. Read-only.
+    PrintJobStateDetail[] details?;
+    # True if the job was acknowledged by a printer; false otherwise. Read-only.
+    boolean isAcquiredByPrinter?;
+    PrintJobProcessingState state?;
+};
+
+public type ChatMessageReactionIdentitySet record {
+    *IdentitySet;
+    *ChatMessageReactionIdentitySet1;
+};
+
+# Represents the Queries record for the operation: getChildrenInRoot
+public type GetChildrenInRootQueries record {
+    # Expand related entities
+    @http:Query {name: "$expand"}
+    string[] expand?;
+    # Select properties to be returned
+    @http:Query {name: "$select"}
+    string[] 'select?;
+};
+
+# Represents the Queries record for the operation: listChildren
+public type ListChildrenQueries record {
+    # Skip the first n items
+    @http:Query {name: "$skip"}
+    int skip?;
+    # Show only the first n items
+    @http:Query {name: "$top"}
+    int top?;
+    # Filter items by property values
+    @http:Query {name: "$filter"}
+    string filter?;
+    # Search items by search phrases
+    @http:Query {name: "$search"}
+    string search?;
+    # Order items by property values
+    @http:Query {name: "$orderby"}
+    string[] orderby?;
+    # Expand related entities
+    @http:Query {name: "$expand"}
+    string[] expand?;
+    # Include count of items
+    @http:Query {name: "$count"}
+    boolean count?;
+    # Select properties to be returned
+    @http:Query {name: "$select"}
+    string[] 'select?;
+};
+
+public type WindowsSettingType "roaming"|"backup"|"unknownFutureValue";
+
+public type Bundle record {
+    Album album?;
+    # Number of children contained immediately within this container.
+    decimal? childCount?;
+};
+
+public type PlannerChecklistItems record {
+};
+
+public type CourseStatus "notStarted"|"inProgress"|"completed"|"unknownFutureValue";
+
+public type SecurityBehaviorDuringRetentionPeriod "doNotRetain"|"retain"|"retainAsRecord"|"retainAsRegulatoryRecord"|"unknownFutureValue";
+
+public type WorkbookNamedItem record {
+    *Entity;
+    *WorkbookNamedItem1;
+};
+
+public type CalendarPermission record {
+    *Entity;
+    *CalendarPermission1;
+};
+
+public type TeamsTab1 record {
+    TeamsTabConfiguration configuration?;
+    # Name of the tab.
+    string? displayName?;
+    # Deep link URL of the tab instance. Read-only.
+    string? webUrl?;
+    TeamsApp teamsApp?;
+};
+
+public type OperatingSystemSpecifications record {
+    # The platform of the operating system (for example, 'Windows').
+    string operatingSystemPlatform?;
+    # The version string of the operating system.
+    string operatingSystemVersion?;
+};
+
+public type ItemActivityStat record {
+    *Entity;
+    *ItemActivityStat1;
+};
+
+public type PrinterBase record {
+    *Entity;
+    *PrinterBase1;
+};
+
+public type Entity record {
+    # The unique identifier for an entity. Read-only.
+    string id?;
+};
+
+public type SiteArchivalDetails record {
+    SiteArchiveStatus archiveStatus?;
+};
+
+# Represents the Queries record for the operation: getChildrenCount
+public type GetChildrenCountQueries record {
+    # Filter items by property values
+    @http:Query {name: "$filter"}
+    string filter?;
+    # Search items by search phrases
+    @http:Query {name: "$search"}
+    string search?;
+};
+
+public type Store record {
+    # Default language of the term store.
+    string defaultLanguageTag?;
+    # List of languages for the term store.
+    string[] languageTags?;
+    # Collection of all groups available in the term store.
+    TermStoreGroup[] groups?;
+    # Collection of all sets available in the term store. This relationship can only be used to load a specific term set.
+    TermStoreSet[] sets?;
+};
+
+public type ItemActivity1 record {
+    AccessAction access?;
+    # Details about when the activity took place. Read-only.
+    string? activityDateTime?;
+    IdentitySet actor?;
+    DriveItem driveItem?;
+};
+
+public type TimeOffReasonIconType "none"|"car"|"calendar"|"running"|"plane"|"firstAid"|"doctor"|"notWorking"|"clock"|"juryDuty"|"globe"|"cup"|"phone"|"weather"|"umbrella"|"piggyBank"|"dog"|"cake"|"trafficCone"|"pin"|"sunny"|"unknownFutureValue";
+
+public type Attachment1 record {
+    # The MIME type.
+    string? contentType?;
+    # true if the attachment is an inline attachment; otherwise, false.
+    boolean isInline?;
+    # The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
+    string? lastModifiedDateTime?;
+    # The attachment's file name.
+    string? name?;
+    # The length of the attachment in bytes.
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal size?;
+};
+
+public type AuthenticationMethodKeyStrength "normal"|"weak"|"unknown";
+
+public type AudioConferencing record {
+    # The conference id of the online meeting.
+    string? conferenceId?;
+    # A URL to the externally-accessible web page that contains dial-in information.
+    string? dialinUrl?;
+    # The toll-free number that connects to the Audio Conference Provider.
+    string? tollFreeNumber?;
+    # List of toll-free numbers that are displayed in the meeting invite.
+    string[] tollFreeNumbers?;
+    # The toll number that connects to the Audio Conference Provider.
+    string? tollNumber?;
+    # List of toll numbers that are displayed in the meeting invite.
+    string[] tollNumbers?;
+};
+
+public type WorkbookChartDataLabels1 record {
+    # DataLabelPosition value that represents the position of the data label. The possible values are: None, Center, InsideEnd, InsideBase, OutsideEnd, Left, Right, Top, Bottom, BestFit, Callout.
+    string? position?;
+    # String that represents the separator used for the data labels on a chart.
+    string? separator?;
+    # Boolean value that represents whether the data label bubble size is visible.
+    boolean? showBubbleSize?;
+    # Boolean value that represents whether the data label category name is visible.
+    boolean? showCategoryName?;
+    # Boolean value that represents whether the data label legend key is visible.
+    boolean? showLegendKey?;
+    # Boolean value that represents whether the data label percentage is visible.
+    boolean? showPercentage?;
+    # Boolean value that represents whether the data label series name is visible.
+    boolean? showSeriesName?;
+    # Boolean value that represents whether the data label value is visible.
+    boolean? showValue?;
+    WorkbookChartDataLabelFormat format?;
+};
+
+public type TermStoreStore record {
+    *Entity;
+    *Store;
+};
+
+public type ListItem1 record {
+    ContentTypeInfo contentType?;
+    SharepointIds sharepointIds?;
+    ItemAnalytics analytics?;
+    # Version information for a document set version created by a user.
+    DocumentSetVersion[] documentSetVersions?;
+    DriveItem driveItem?;
+    FieldValueSet fields?;
+    # The list of previous versions of the list item.
+    ListItemVersion[] versions?;
+};
+
+# The reason for which a user has been flagged
+public type ManagedAppFlaggedReason "none"|"rootedDevice";
+
+public type SelectionLikelihoodInfo "notSpecified"|"high";
+
+public type WorkbookChartAxisTitle1 record {
+    # Represents the axis title.
+    string? text?;
+    # A Boolean that specifies the visibility of an axis title.
+    boolean visible?;
+    WorkbookChartAxisTitleFormat format?;
+};
+
+# Represents the Queries record for the operation: listItem
+public type ListItemQueries record {
+    # Skip the first n items
+    @http:Query {name: "$skip"}
+    int skip?;
+    # Show only the first n items
+    @http:Query {name: "$top"}
+    int top?;
+    # Filter items by property values
+    @http:Query {name: "$filter"}
+    string filter?;
+    # Search items by search phrases
+    @http:Query {name: "$search"}
+    string search?;
+    # Order items by property values
+    @http:Query {name: "$orderby"}
+    string[] orderby?;
+    # Expand related entities
+    @http:Query {name: "$expand"}
+    string[] expand?;
+    # Include count of items
+    @http:Query {name: "$count"}
+    boolean count?;
+    # Select properties to be returned
+    @http:Query {name: "$select"}
+    string[] 'select?;
+};
+
+# Malware category id
+public type WindowsMalwareCategory "invalid"|"adware"|"spyware"|"passwordStealer"|"trojanDownloader"|"worm"|"backdoor"|"remoteAccessTrojan"|"trojan"|"emailFlooder"|"keylogger"|"dialer"|"monitoringSoftware"|"browserModifier"|"cookie"|"browserPlugin"|"aolExploit"|"nuker"|"securityDisabler"|"jokeProgram"|"hostileActiveXControl"|"softwareBundler"|"stealthNotifier"|"settingsModifier"|"toolBar"|"remoteControlSoftware"|"trojanFtp"|"potentialUnwantedSoftware"|"icqExploit"|"trojanTelnet"|"exploit"|"filesharingProgram"|"malwareCreationTool"|"remote_Control_Software"|"tool"|"trojanDenialOfService"|"trojanDropper"|"trojanMassMailer"|"trojanMonitoringSoftware"|"trojanProxyServer"|"virus"|"known"|"unknown"|"spp"|"behavior"|"vulnerability"|"policy"|"enterpriseUnwantedSoftware"|"ransom"|"hipsRule";
+
+public type UserInsightsSettings1 record {
+    # True if the user's itemInsights and meeting hours insights are enabled; false if the user's itemInsights and meeting hours insights are disabled. The default value is true. Optional.
+    boolean isEnabled?;
+};
+
+public type PrintScaling "auto"|"shrinkToFit"|"fill"|"fit"|"none"|"unknownFutureValue";
+
+public type SectionGroup1 record {
+    # The URL for the sectionGroups navigation property, which returns all the section groups in the section group. Read-only.
+    string? sectionGroupsUrl?;
+    # The URL for the sections navigation property, which returns all the sections in the section group. Read-only.
+    string? sectionsUrl?;
+    Notebook parentNotebook?;
+    SectionGroup parentSectionGroup?;
+    # The section groups in the section. Read-only. Nullable.
+    SectionGroup[] sectionGroups?;
+    # The sections in the section group. Read-only. Nullable.
+    OnenoteSection[] sections?;
+};
+
+public type TimeCard1 record {
+    # The list of breaks associated with the timeCard.
+    TimeCardBreak[] breaks?;
+    TimeCardEvent clockInEvent?;
+    TimeCardEvent clockOutEvent?;
+    ConfirmedBy confirmedBy?;
+    ItemBody notes?;
+    TimeCardEntry originalEntry?;
+    TimeCardState state?;
+    # User ID to which the timeCard belongs.
+    string? userId?;
+};
+
+public type Todo record {
+    *Entity;
+    *Todo1;
+};
+
+public type Set record {
+    # Date and time of set creation. Read-only.
+    string? createdDateTime?;
+    # Description that gives details on the term usage.
+    string? description?;
+    # Name of the set for each languageTag.
+    TermStoreLocalizedName[] localizedNames?;
+    # Custom properties for the set.
+    KeyValue[] properties?;
+    # Children terms of set in term [store].
+    TermStoreTerm[] children?;
+    TermStoreGroup parentGroup?;
+    # Indicates which terms have been pinned or reused directly under the set.
+    TermStoreRelation[] relations?;
+    # All the terms under the set.
+    TermStoreTerm[] terms?;
+};
+
+public type PlannerUser record {
+    *Entity;
+    *PlannerUser1;
+};
+
+public type RetentionLabelSettings record {
+    SecurityBehaviorDuringRetentionPeriod behaviorDuringRetentionPeriod?;
+    # Specifies whether updates to document content are allowed. Read-only.
+    boolean? isContentUpdateAllowed?;
+    # Specifies whether the document deletion is allowed. Read-only.
+    boolean? isDeleteAllowed?;
+    # Specifies whether you're allowed to change the retention label on the document. Read-only.
+    boolean? isLabelUpdateAllowed?;
+    # Specifies whether updates to the item metadata (for example, the Title field) are blocked. Read-only.
+    boolean? isMetadataUpdateAllowed?;
+    # Specifies whether the item is locked. Read-write.
+    boolean? isRecordLocked?;
+};
+
+public type RemoteItem record {
+    IdentitySet createdBy?;
+    # Date and time of item creation. Read-only.
+    string? createdDateTime?;
+    File file?;
+    FileSystemInfo fileSystemInfo?;
+    Folder folder?;
+    # Unique identifier for the remote item in its drive. Read-only.
+    string? id?;
+    Image image?;
+    IdentitySet lastModifiedBy?;
+    # Date and time the item was last modified. Read-only.
+    string? lastModifiedDateTime?;
+    # Optional. Filename of the remote item. Read-only.
+    string? name?;
+    Package package?;
+    ItemReference parentReference?;
+    Shared shared?;
+    SharepointIds sharepointIds?;
+    # Size of the remote item. Read-only.
+    decimal? size?;
+    SpecialFolder specialFolder?;
+    Video video?;
+    # DAV compatible URL for the item.
+    string? webDavUrl?;
+    # URL that displays the resource in the browser. Read-only.
+    string? webUrl?;
+};
+
+public type Website record {
+    # The URL of the website.
+    string? address?;
+    # The display name of the web site.
+    string? displayName?;
+    WebsiteType 'type?;
+};
+
+public type WorkbookTableSort record {
+    *Entity;
+    *WorkbookTableSort1;
+};
+
+public type Device1 record {
+    # true if the account is enabled; otherwise, false. Required. Default is true.  Supports $filter (eq, ne, not, in). Only callers with at least the Cloud Device Administrator role can set this property.
+    boolean? accountEnabled?;
+    # For internal use only. Not nullable. Supports $filter (eq, not, ge, le).
+    AlternativeSecurityId[] alternativeSecurityIds?;
+    # The timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only. Supports $filter (eq, ne, not, ge, le, and eq on null values) and $orderby.
+    string? approximateLastSignInDateTime?;
+    # The timestamp when the device is no longer deemed compliant. The timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
+    string? complianceExpirationDateTime?;
+    # User-defined property set by Intune to automatically add devices to groups and simplify managing devices.
+    string? deviceCategory?;
+    # Unique identifier set by Azure Device Registration Service at the time of registration. This alternate key can be used to reference the device object. Supports $filter (eq, ne, not, startsWith).
+    string? deviceId?;
+    # For internal use only. Set to null.
+    string? deviceMetadata?;
+    # Ownership of the device. Intune sets this property. Possible values are: unknown, company, personal.
+    string? deviceOwnership?;
+    # For internal use only.
+    decimal? deviceVersion?;
+    # The display name for the device. Maximum length is 256 characters. Required. Supports $filter (eq, ne, not, ge, le, in, startsWith, and eq on null values), $search, and $orderby.
+    string? displayName?;
+    # Enrollment profile applied to the device. For example, Apple Device Enrollment Profile, Device enrollment - Corporate device identifiers, or Windows Autopilot profile name. This property is set by Intune.
+    string? enrollmentProfileName?;
+    # Enrollment type of the device. Intune sets this property. Possible values are: unknown, userEnrollment, deviceEnrollmentManager, appleBulkWithUser, appleBulkWithoutUser, windowsAzureADJoin, windowsBulkUserless, windowsAutoEnrollment, windowsBulkAzureDomainJoin, windowsCoManagement, windowsAzureADJoinUsingDeviceAuth,appleUserEnrollment, appleUserEnrollmentWithServiceAccount. NOTE: This property might return other values apart from those listed.
+    string? enrollmentType?;
+    # true if the device complies with Mobile Device Management (MDM) policies; otherwise, false. Read-only. This can only be updated by Intune for any device OS type or by an approved MDM app for Windows OS devices. Supports $filter (eq, ne, not).
+    boolean? isCompliant?;
+    # true if the device is managed by a Mobile Device Management (MDM) app; otherwise, false. This can only be updated by Intune for any device OS type or by an approved MDM app for Windows OS devices. Supports $filter (eq, ne, not).
+    boolean? isManaged?;
+    # Indicates whether the device is a member of a restricted management administrative unit. If not set, the default value is null and the default behavior is false. Read-only.  To manage a device that's a member of a restricted management administrative unit, the administrator or calling app must be assigned a Microsoft Entra role at the scope of the restricted management administrative unit. Returned only on $select.
+    boolean? isManagementRestricted?;
+    # true if the device is rooted or jail-broken. This property can only be updated by Intune.
+    boolean? isRooted?;
+    # The management channel of the device. This property is set by Intune. Possible values are: eas, mdm, easMdm, intuneClient, easIntuneClient, configurationManagerClient, configurationManagerClientMdm, configurationManagerClientMdmEas, unknown, jamf, googleCloudDevicePolicyController.
+    string? managementType?;
+    # Manufacturer of the device. Read-only.
+    string? manufacturer?;
+    # Application identifier used to register device into MDM. Read-only. Supports $filter (eq, ne, not, startsWith).
+    string? mdmAppId?;
+    # Model of the device. Read-only.
+    string? model?;
+    # The last time at which the object was synced with the on-premises directory. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z Read-only. Supports $filter (eq, ne, not, ge, le, in).
+    string? onPremisesLastSyncDateTime?;
+    # The on-premises security identifier (SID) for the user who was synchronized from on-premises to the cloud. Read-only. Returned only on $select. Supports $filter (eq).
+    string? onPremisesSecurityIdentifier?;
+    # true if this object is synced from an on-premises directory; false if this object was originally synced from an on-premises directory but is no longer synced; null if this object has never been synced from an on-premises directory (default). Read-only. Supports $filter (eq, ne, not, in, and eq on null values).
+    boolean? onPremisesSyncEnabled?;
+    # The type of operating system on the device. Required. Supports $filter (eq, ne, not, ge, le, startsWith, and eq on null values).
+    string? operatingSystem?;
+    # The version of the operating system on the device. Required. Supports $filter (eq, ne, not, ge, le, startsWith, and eq on null values).
+    string? operatingSystemVersion?;
+    # For internal use only. Not nullable. Supports $filter (eq, not, ge, le, startsWith,/$count eq 0, /$count ne 0).
+    string[] physicalIds?;
+    # The profile type of the device. Possible values: RegisteredDevice (default), SecureVM, Printer, Shared, IoT.
+    string? profileType?;
+    # Date and time of when the device was registered. The timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
+    string? registrationDateTime?;
+    # List of labels applied to the device by the system. Supports $filter (/$count eq 0, /$count ne 0).
+    string[] systemLabels?;
+    # Type of trust for the joined device. Read-only. Possible values:  Workplace (indicates bring your own personal devices), AzureAd (Cloud-only joined devices), ServerAd (on-premises domain joined devices joined to Microsoft Entra ID). For more information, see Introduction to device management in Microsoft Entra ID. Supports $filter (eq, ne, not, in).
+    string? trustType?;
+    # The collection of open extensions defined for the device. Read-only. Nullable.
+    Extension[] extensions?;
+    # Groups and administrative units that this device is a member of. Read-only. Nullable. Supports $expand.
+    DirectoryObject[] memberOf?;
+    # The user that cloud joined the device or registered their personal device. The registered owner is set at the time of registration. Read-only. Nullable. Supports $expand.
+    DirectoryObject[] registeredOwners?;
+    # Collection of registered users of the device. For cloud joined devices and registered personal devices, registered users are set to the same value as registered owners at the time of registration. Read-only. Nullable. Supports $expand.
+    DirectoryObject[] registeredUsers?;
+    # Groups and administrative units that the device is a member of. This operation is transitive. Supports $expand.
+    DirectoryObject[] transitiveMemberOf?;
+};
+
+public type WorkbookTableColumn record {
+    *Entity;
+    *WorkbookTableColumn1;
+};
+
+public type MeetingChatMode "enabled"|"disabled"|"limited"|"unknownFutureValue";
+
+# Represents the Headers record for the operation: deleteRootContent
+public type DeleteRootContentHeaders record {
+    # ETag
+    @http:Header {name: "If-Match"}
+    string ifMatch?;
+};
+
+public type NotebookLinks record {
+    ExternalLink oneNoteClientUrl?;
+    ExternalLink oneNoteWebUrl?;
+};
+
+public type LongRunningOperationStatus "notStarted"|"running"|"succeeded"|"failed"|"unknownFutureValue";
+
+# Represents the Queries record for the operation: getDrive
+public type GetDriveQueries record {
+    # Expand related entities
+    @http:Query {name: "$expand"}
+    string[] expand?;
+    # Select properties to be returned
+    @http:Query {name: "$select"}
+    string[] 'select?;
+};
+
+public type DirectoryObject1 record {
+    # Date and time when this object was deleted. Always null when the object hasn't been deleted.
+    string? deletedDateTime?;
+};
+
+public type WorkbookChartGridlines1 record {
+    # Indicates whether the axis gridlines are visible.
+    boolean visible?;
+    WorkbookChartGridlinesFormat format?;
+};
+
+public type Todo1 record {
+    # The task lists in the users mailbox.
+    TodoTaskList[] lists?;
+};
+
+public type WorkbookChartPointFormat1 record {
+    WorkbookChartFill fill?;
+};
+
+public type Chat1 record {
+    ChatType chatType?;
+    # Date and time at which the chat was created. Read-only.
+    string? createdDateTime?;
+    # Indicates whether the chat is hidden for all its members. Read-only.
+    boolean? isHiddenForAllMembers?;
+    # Date and time at which the chat was renamed or the list of members was last changed. Read-only.
+    string? lastUpdatedDateTime?;
+    TeamworkOnlineMeetingInfo onlineMeetingInfo?;
+    # The identifier of the tenant in which the chat was created. Read-only.
+    string? tenantId?;
+    # (Optional) Subject or topic for the chat. Only available for group chats.
+    string? topic?;
+    ChatViewpoint viewpoint?;
+    # The URL for the chat in Microsoft Teams. The URL should be treated as an opaque blob, and not parsed. Read-only.
+    string? webUrl?;
+    # A collection of all the apps in the chat. Nullable.
+    TeamsAppInstallation[] installedApps?;
+    ChatMessageInfo lastMessagePreview?;
+    # A collection of all the members in the chat. Nullable.
+    ConversationMember[] members?;
+    # A collection of all the messages in the chat. Nullable.
+    ChatMessage[] messages?;
+    # A collection of permissions granted to apps for the chat.
+    ResourceSpecificPermissionGrant[] permissionGrants?;
+    # A collection of all the pinned messages in the chat. Nullable.
+    PinnedChatMessageInfo[] pinnedMessages?;
+    # A collection of all the tabs in the chat. Nullable.
+    TeamsTab[] tabs?;
+};
+
+public type PersonOrGroupColumn record {
+    # Indicates whether multiple values can be selected from the source.
+    boolean? allowMultipleSelection?;
+    # Whether to allow selection of people only, or people and groups. Must be one of peopleAndGroups or peopleOnly.
+    string? chooseFromType?;
+    # How to display the information about the person or group chosen. See below.
+    string? displayAs?;
+};
+
+public type RichLongRunningOperation record {
+    *LongRunningOperation;
+    *RichLongRunningOperation1;
+};
+
+public type ItemAnalytics1 record {
+    ItemActivityStat allTime?;
+    ItemActivityStat[] itemActivityStats?;
+    ItemActivityStat lastSevenDays?;
+};
+
+public type OnenoteOperationError record {
+    # The error code.
+    string? code?;
+    # The error message.
+    string? message?;
+};
+
+public type TeamworkBot record {
+    *Entity;
+    *TeamworkBot1;
+};
+
+public type TimeCardEvent record {
+    # The time the entry is recorded.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string dateTime?;
+    # Indicates whether this action happens at an approved location.
+    boolean? isAtApprovedLocation?;
+    ItemBody notes?;
+};
+
+# Represents the Queries record for the operation: listItemsByPath
+public type ListItemsByPathQueries record {
+    # Skip the first n items
+    @http:Query {name: "$skip"}
+    int skip?;
+    # Show only the first n items
+    @http:Query {name: "$top"}
+    int top?;
+    # Filter items by property values
+    @http:Query {name: "$filter"}
+    string filter?;
+    # Search items by search phrases
+    @http:Query {name: "$search"}
+    string search?;
+    # Order items by property values
+    @http:Query {name: "$orderby"}
+    string[] orderby?;
+    # Expand related entities
+    @http:Query {name: "$expand"}
+    string[] expand?;
+    # Include count of items
+    @http:Query {name: "$count"}
+    boolean count?;
+    # Select properties to be returned
+    @http:Query {name: "$select"}
+    string[] 'select?;
+};
+
+public type PrintConnector1 record {
+    # The connector's version.
+    string appVersion?;
+    # The name of the connector.
+    string displayName?;
+    # The connector machine's hostname.
+    string fullyQualifiedDomainName?;
+    PrinterLocation location?;
+    # The connector machine's operating system version.
+    string operatingSystem?;
+    # The DateTimeOffset when the connector was registered.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string registeredDateTime?;
+};
+
+public type OperationError record {
+    # Operation error code.
+    string? code?;
+    # Operation error message.
+    string? message?;
+};
+
+public type AttendeeBase record {
+    *Recipient;
+    *AttendeeBase1;
+};
+
+public type ChatMessageActions "reactionAdded"|"reactionRemoved"|"actionUndefined"|"unknownFutureValue";
+
+public type DriveItemIdMicrosoftGraphCreateUploadSessionBody record {
+    DriveItemUploadableProperties item?;
+};
+
+public type ChatMessageReactionIdentitySet1 record {
+};
+
+public type UnifiedStorageQuota record {
+    *Entity;
+    *UnifiedStorageQuota1;
+};
+
+public type SiteArchiveStatus "recentlyArchived"|"fullyArchived"|"reactivating"|"unknownFutureValue";
+
+public type SectionLinks record {
+    ExternalLink oneNoteClientUrl?;
+    ExternalLink oneNoteWebUrl?;
+};
+
+public type UserSolutionRoot record {
+    *Entity;
+    *UserSolutionRoot1;
+};
+
+public type MediaSourceContentCategory "meeting"|"liveStream"|"presentation"|"screenRecording"|"story"|"profile"|"chat"|"note"|"comment"|"unknownFutureValue";
+
+public type PrinterStatus record {
+    # A human-readable description of the printer's current processing state. Read-only.
+    string? description?;
+    # The list of details describing why the printer is in the current state. Valid values are described in the following table. Read-only.
+    PrinterProcessingStateDetail[] details?;
+    PrinterProcessingState state?;
+};
+
+public type InferenceClassification1 record {
+    # A set of overrides for a user to always classify messages from specific senders in certain ways: focused, or other. Read-only. Nullable.
+    InferenceClassificationOverride[] overrides?;
+};
+
+public type Fido2AuthenticationMethod record {
+    *AuthenticationMethod;
+    *Fido2AuthenticationMethod1;
+};
+
+public type PresenceStatusMessage record {
+    DateTimeTimeZone expiryDateTime?;
+    ItemBody message?;
+    # Time in which the status message was published.Read-only.publishedDateTime isn't available when you request the presence of another user.
+    string? publishedDateTime?;
+};
+
+public type UserStorage1 record {
+    UnifiedStorageQuota quota?;
+};
+
+public type WorkbookIcon record {
+    # The index of the icon in the given set.
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal index?;
+    # The set that the icon is part of. The possible values are: Invalid, ThreeArrows, ThreeArrowsGray, ThreeFlags, ThreeTrafficLights1, ThreeTrafficLights2, ThreeSigns, ThreeSymbols, ThreeSymbols2, FourArrows, FourArrowsGray, FourRedToBlack, FourRating, FourTrafficLights, FiveArrows, FiveArrowsGray, FiveRating, FiveQuarters, ThreeStars, ThreeTriangles, FiveBoxes.
+    string set?;
+};
+
+public type DocumentSetVersion record {
+    *ListItemVersion;
+    *DocumentSetVersion1;
+};
+
+public type ChangeTrackedEntity record {
+    *Entity;
+    *ChangeTrackedEntity1;
+};
+
+public type DriveItemIdMicrosoftGraphAssignSensitivityLabelBody record {
+    string? sensitivityLabelId?;
+    SensitivityLabelAssignmentMethod assignmentMethod?;
+    string? justificationText?;
+};
+
+public type TeamworkTagMember record {
+    *Entity;
+    *TeamworkTagMember1;
+};
+
+public type Subscription1 record {
+    # Optional. Identifier of the application used to create the subscription. Read-only.
+    string? applicationId?;
+    # Required. Indicates the type of change in the subscribed resource that raises a change notification. The supported values are: created, updated, deleted. Multiple values can be combined using a comma-separated list. Note:  Drive root item and list change notifications support only the updated changeType. User and group change notifications support updated and deleted changeType. Use updated to receive notifications when user or group is created, updated, or soft deleted. Use deleted to receive notifications when user or group is permanently deleted.
+    string changeType?;
+    # Optional. Specifies the value of the clientState property sent by the service in each change notification. The maximum length is 128 characters. The client can check that the change notification came from the service by comparing the value of the clientState property sent with the subscription with the value of the clientState property received with each change notification.
+    string? clientState?;
+    # Optional. Identifier of the user or service principal that created the subscription. If the app used delegated permissions to create the subscription, this field contains the ID of the signed-in user the app called on behalf of. If the app used application permissions, this field contains the ID of the service principal corresponding to the app. Read-only.
+    string? creatorId?;
+    # Optional. A base64-encoded representation of a certificate with a public key used to encrypt resource data in change notifications. Optional but required when includeResourceData is true.
+    string? encryptionCertificate?;
+    # Optional. A custom app-provided identifier to help identify the certificate needed to decrypt resource data.
+    string? encryptionCertificateId?;
+    # Required. Specifies the date and time when the webhook subscription expires. The time is in UTC, and can be an amount of time from subscription creation that varies for the resource subscribed to. Any value under 45 minutes after the time of the request is automatically set to 45 minutes after the request time. For the maximum supported subscription length of time, see Subscription lifetime.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string expirationDateTime?;
+    # Optional. When set to true, change notifications include resource data (such as content of a chat message).
+    boolean? includeResourceData?;
+    # Optional. Specifies the latest version of Transport Layer Security (TLS) that the notification endpoint, specified by notificationUrl, supports. The possible values are: v10, v11, v12, v13. For subscribers whose notification endpoint supports a version lower than the currently recommended version (TLS 1.2), specifying this property by a set timeline allows them to temporarily use their deprecated version of TLS before completing their upgrade to TLS 1.2. For these subscribers, not setting this property per the timeline would result in subscription operations failing. For subscribers whose notification endpoint already supports TLS 1.2, setting this property is optional. In such cases, Microsoft Graph defaults the property to v1_2.
+    string? latestSupportedTlsVersion?;
+    # Required for Teams resources if  the expirationDateTime value is more than 1 hour from now; optional otherwise. The URL of the endpoint that receives lifecycle notifications, including subscriptionRemoved, reauthorizationRequired, and missed notifications. This URL must make use of the HTTPS protocol. For more information, see Reduce missing subscriptions and change notifications.
+    string? lifecycleNotificationUrl?;
+    # Optional. OData query options for specifying value for the targeting resource. Clients receive notifications when resource reaches the state matching the query options provided here. With this new property in the subscription creation payload along with all existing properties, Webhooks deliver notifications whenever a resource reaches the desired state mentioned in the notificationQueryOptions property. For example, when the print job is completed or when a print job resource isFetchable property value becomes true etc.  Supported only for Universal Print Service. For more information, see Subscribe to change notifications from cloud printing APIs using Microsoft Graph.
+    string? notificationQueryOptions?;
+    # Required. The URL of the endpoint that receives the change notifications. This URL must make use of the HTTPS protocol. Any query string parameter included in the notificationUrl property is included in the HTTP POST request when Microsoft Graph sends the change notifications.
+    string notificationUrl?;
+    # Optional. The app ID that the subscription service can use to generate the validation token. The value allows the client to validate the authenticity of the notification received.
+    string? notificationUrlAppId?;
+    # Required. Specifies the resource that is monitored for changes. Don't include the base URL (https://graph.microsoft.com/v1.0/). See the possible resource path values for each supported resource.
+    string 'resource?;
+};
+
+public type OnPremisesProvisioningError record {
+    # Category of the provisioning error. Note: Currently, there is only one possible value. Possible value: PropertyConflict - indicates a property value is not unique. Other objects contain the same value for the property.
+    string? category?;
+    # The date and time at which the error occurred.
+    string? occurredDateTime?;
+    # Name of the directory property causing the error. Current possible values: UserPrincipalName or ProxyAddress
+    string? propertyCausingError?;
+    # Value of the property causing the error.
+    string? value?;
+};
+
+public type Attachment record {
+    *Entity;
+    *Attachment1;
+};
+
+public type WorkbookWorksheetProtectionOptions record {
+    # Represents the worksheet protection option of allowing using auto filter feature.
+    boolean allowAutoFilter?;
+    # Represents the worksheet protection option of allowing deleting columns.
+    boolean allowDeleteColumns?;
+    # Represents the worksheet protection option of allowing deleting rows.
+    boolean allowDeleteRows?;
+    # Represents the worksheet protection option of allowing formatting cells.
+    boolean allowFormatCells?;
+    # Represents the worksheet protection option of allowing formatting columns.
+    boolean allowFormatColumns?;
+    # Represents the worksheet protection option of allowing formatting rows.
+    boolean allowFormatRows?;
+    # Represents the worksheet protection option of allowing inserting columns.
+    boolean allowInsertColumns?;
+    # Represents the worksheet protection option of allowing inserting hyperlinks.
+    boolean allowInsertHyperlinks?;
+    # Represents the worksheet protection option of allowing inserting rows.
+    boolean allowInsertRows?;
+    # Represents the worksheet protection option of allowing using pivot table feature.
+    boolean allowPivotTables?;
+    # Represents the worksheet protection option of allowing using sort feature.
+    boolean allowSort?;
+};
+
+public type BaseItemVersion record {
+    *Entity;
+    *BaseItemVersion1;
+};
+
+public type ChatMessageAttachment record {
+    # The content of the attachment. If the attachment is a rich card, set the property to the rich card object. This property and contentUrl are mutually exclusive.
+    string? content?;
+    # The media type of the content attachment. The possible values are: reference: The attachment is a link to another file. Populate the contentURL with the link to the object.forwardedMessageReference: The attachment is a reference to a forwarded message. Populate the content with the original message context.Any contentType that is supported by the Bot Framework's Attachment object.application/vnd.microsoft.card.codesnippet: A code snippet. application/vnd.microsoft.card.announcement: An announcement header.
+    string? contentType?;
+    # The URL for the content of the attachment.
+    string? contentUrl?;
+    # Read-only. The unique ID of the attachment.
+    string? id?;
+    # The name of the attachment.
+    string? name?;
+    # The ID of the Teams app that is associated with the attachment. The property is used to attribute a Teams message card to the specified app.
+    string? teamsAppId?;
+    # The URL to a thumbnail image that the channel can use if it supports using an alternative, smaller form of content or contentUrl. For example, if you set contentType to application/word and set contentUrl to the location of the Word document, you might include a thumbnail image that represents the document. The channel could display the thumbnail image instead of the document. When the user selects the image, the channel would open the document.
+    string? thumbnailUrl?;
+};
+
+public type AttestationLevel "attested"|"notAttested"|"unknownFutureValue";
+
+public type List record {
+    *BaseItem;
+    *List1;
+};
+
+public type AssociatedTeamInfo1 record {
+};
+
+public type BaseItem record {
+    *Entity;
+    *BaseItem1;
+};
+
+public type WorkbookComment1 record {
+    # The content of the comment.
+    string? content?;
+    # The content type of the comment.
+    string contentType?;
+    # The list of replies to the comment. Read-only. Nullable.
+    WorkbookCommentReply[] replies?;
+};
+
+public type DriveItemUploadableProperties record {
+    # Provides a user-visible description of the item. Read-write. Only on OneDrive Personal.
+    string? description?;
+    DriveItemSource driveItemSource?;
+    # Provides an expected file size to perform a quota check before uploading. Only on OneDrive Personal.
+    decimal? fileSize?;
+    FileSystemInfo fileSystemInfo?;
+    MediaSource mediaSource?;
+    # The name of the item (filename and extension). Read-write.
+    string? name?;
+};
+
+public type AuthenticationMethodSignInState "notSupported"|"notAllowedByPolicy"|"notEnabled"|"phoneNumberNotUnique"|"ready"|"notConfigured"|"unknownFutureValue";
+
+public type UserSettings record {
+    *Entity;
+    *UserSettings1;
+};
+
+public type BroadcastMeetingCaptionSettings record {
+    # Indicates whether captions are enabled for this Teams live event.
+    boolean? isCaptionEnabled?;
+    # The spoken language.
+    string? spokenLanguage?;
+    # The translation languages (choose up to 6).
+    string[] translationLanguages?;
+};
+
+public type WindowsProtectionState record {
+    *Entity;
+    *WindowsProtectionState1;
+};
+
+public type ResponseType "none"|"organizer"|"tentativelyAccepted"|"accepted"|"declined"|"notResponded";
+
+public type DeviceHealthAttestationState record {
+    # TWhen an Attestation Identity Key (AIK) is present on a device, it indicates that the device has an endorsement key (EK) certificate.
+    string? attestationIdentityKey?;
+    # On or Off of BitLocker Drive Encryption
+    string? bitLockerStatus?;
+    # The security version number of the Boot Application
+    string? bootAppSecurityVersion?;
+    # When bootDebugging is enabled, the device is used in development and testing
+    string? bootDebugging?;
+    # The security version number of the Boot Application
+    string? bootManagerSecurityVersion?;
+    # The version of the Boot Manager
+    string? bootManagerVersion?;
+    # The Boot Revision List that was loaded during initial boot on the attested device
+    string? bootRevisionListInfo?;
+    # When code integrity is enabled, code execution is restricted to integrity verified code
+    string? codeIntegrity?;
+    # The version of the Boot Manager
+    string? codeIntegrityCheckVersion?;
+    # The Code Integrity policy that is controlling the security of the boot environment
+    string? codeIntegrityPolicy?;
+    # The DHA report version. (Namespace version)
+    string? contentNamespaceUrl?;
+    # The HealthAttestation state schema version
+    string? contentVersion?;
+    # DEP Policy defines a set of hardware and software technologies that perform additional checks on memory
+    string? dataExcutionPolicy?;
+    # The DHA report version. (Namespace version)
+    string? deviceHealthAttestationStatus?;
+    # ELAM provides protection for the computers in your network when they start up
+    string? earlyLaunchAntiMalwareDriverProtection?;
+    # This attribute indicates if DHA is supported for the device
+    string? healthAttestationSupportedStatus?;
+    # This attribute appears if DHA-Service detects an integrity issue
+    string? healthStatusMismatchInfo?;
+    # The DateTime when device was evaluated or issued to MDM
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string issuedDateTime?;
+    # The Timestamp of the last update.
+    string? lastUpdateDateTime?;
+    # When operatingSystemKernelDebugging is enabled, the device is used in development and testing
+    string? operatingSystemKernelDebugging?;
+    # The Operating System Revision List that was loaded during initial boot on the attested device
+    string? operatingSystemRevListInfo?;
+    # The measurement that is captured in PCR[0]
+    string? pcr0?;
+    # Informational attribute that identifies the HASH algorithm that was used by TPM
+    string? pcrHashAlgorithm?;
+    # The number of times a PC device has hibernated or resumed
+    decimal resetCount?;
+    # The number of times a PC device has rebooted
+    decimal restartCount?;
+    # Safe mode is a troubleshooting option for Windows that starts your computer in a limited state
+    string? safeMode?;
+    # When Secure Boot is enabled, the core components must have the correct cryptographic signatures
+    string? secureBoot?;
+    # Fingerprint of the Custom Secure Boot Configuration Policy
+    string? secureBootConfigurationPolicyFingerPrint?;
+    # When test signing is allowed, the device does not enforce signature validation during boot
+    string? testSigning?;
+    # The security version number of the Boot Application
+    string? tpmVersion?;
+    # VSM is a container that protects high value assets from a compromised kernel
+    string? virtualSecureMode?;
+    # Operating system running with limited services that is used to prepare a computer for Windows
+    string? windowsPE?;
+};
+
+public type LicenseProcessingState record {
+    string? state?;
+};
+
+public type TermStoreTerm record {
+    *Entity;
+    *Term;
+};
+
+public type WorkbookChartAxes record {
+    *Entity;
+    *WorkbookChartAxes1;
+};
+
+# The status of a long-running operation
+public type LongRunningOperation1 record {
+    # The start time of the operation. The timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z.
+    string? createdDateTime?;
+    # The time of the last action in the operation. The timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z.
+    string? lastActionDateTime?;
+    # URI of the resource that the operation is performed on.
+    string? resourceLocation?;
+    LongRunningOperationStatus status?;
+    # Details about the status of the operation.
+    string? statusDetail?;
+};
+
+public type GeolocationColumn record {
+};
+
+public type PlannerBucketTaskBoardTaskFormat1 record {
+    # Hint used to order tasks in the bucket view of the task board. For details about the supported format, see Using order hints in Planner.
+    string? orderHint?;
+};
+
+public type OAuth2PermissionGrant record {
+    *Entity;
+    *OAuth2PermissionGrant1;
+};
+
+public type CalendarRoleType "none"|"freeBusyRead"|"limitedRead"|"read"|"write"|"delegateWithoutPrivateEventAccess"|"delegateWithPrivateEventAccess"|"custom";
+
+public type InferenceClassificationType "focused"|"other";
+
+public type Conversation1 record {
+    # Indicates whether any of the posts within this Conversation has at least one attachment. Supports $filter (eq, ne) and $search.
+    boolean hasAttachments?;
+    # The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string lastDeliveredDateTime?;
+    # A short summary from the body of the latest post in this conversation. Supports $filter (eq, ne, le, ge).
+    string preview?;
+    # The topic of the conversation. This property can be set when the conversation is created, but it cannot be updated.
+    string topic?;
+    # All the users that sent a message to this Conversation.
+    string[] uniqueSenders?;
+    # A collection of all the conversation threads in the conversation. A navigation property. Read-only. Nullable.
+    ConversationThread[] threads?;
+};
+
+public type Relation record {
+    TermStoreRelationType relationship?;
+    TermStoreTerm fromTerm?;
+    TermStoreSet set?;
+    TermStoreTerm toTerm?;
+};
+
+# Malware execution status
+public type WindowsMalwareExecutionState "unknown"|"blocked"|"allowed"|"running"|"notRunning";
+
+public type OnlineMeetingInfo record {
+    # The ID of the conference.
+    string? conferenceId?;
+    # The external link that launches the online meeting. This is a URL that clients launch into a browser and will redirect the user to join the meeting.
+    string? joinUrl?;
+    # All of the phone numbers associated with this conference.
+    Phone[] phones?;
+    # The preformatted quick dial for this call.
+    string? quickDial?;
+    # The toll free numbers that can be used to join the conference.
+    string[] tollFreeNumbers?;
+    # The toll number that can be used to join the conference.
+    string? tollNumber?;
+};
+
+public type Operation1 record {
+    # The start time of the operation.
+    string? createdDateTime?;
+    # The time of the last action of the operation.
+    string? lastActionDateTime?;
+    OperationStatus status?;
+};
+
+public type ChatMessagePolicyViolationPolicyTip record {
+    # The URL a user can visit to read about the data loss prevention policies for the organization. (ie, policies about what users shouldn't say in chats)
+    string? complianceUrl?;
+    # Explanatory text shown to the sender of the message.
+    string? generalText?;
+    # The list of improper data in the message that was detected by the data loss prevention app. Each DLP app defines its own conditions, examples include 'Credit Card Number' and 'Social Security Number'.
+    string[] matchedConditionDescriptions?;
+};
+
+public type ResourceReference record {
+    # The item's unique identifier.
+    string? id?;
+    # A string value that can be used to classify the item, such as 'driveItem'
+    string? 'type?;
+    # A URL leading to the referenced item.
+    string? webUrl?;
+};
+
+public type PlannerPlanDetails record {
+    *Entity;
+    *PlannerPlanDetails1;
+};
+
+public type CloudClipboardItem record {
+    *Entity;
+    *CloudClipboardItem1;
+};
+
+public type PinnedChatMessageInfo1 record {
+    ChatMessage message?;
+};
+
+public type MeetingLiveShareOptions "enabled"|"disabled"|"unknownFutureValue";
+
+public type Post record {
+    *OutlookItem;
+    *Post1;
+};
+
+public type RecurrencePattern record {
+    # The day of the month on which the event occurs. Required if type is absoluteMonthly or absoluteYearly.
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal dayOfMonth?;
+    # A collection of the days of the week on which the event occurs. The possible values are: sunday, monday, tuesday, wednesday, thursday, friday, saturday. If type is relativeMonthly or relativeYearly, and daysOfWeek specifies more than one day, the event falls on the first day that satisfies the pattern.  Required if type is weekly, relativeMonthly, or relativeYearly.
+    DayOfWeek[] daysOfWeek?;
+    DayOfWeek firstDayOfWeek?;
+    WeekIndex index?;
+    # The number of units between occurrences, where units can be in days, weeks, months, or years, depending on the type. Required.
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal interval?;
+    # The month in which the event occurs.  This is a number from 1 to 12.
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal month?;
+    RecurrencePatternType 'type?;
+};
+
+public type MicrosoftAuthenticatorAuthenticationMethod1 record {
+    # The date and time that this app was registered. This property is null if the device isn't registered for passwordless Phone Sign-In.
+    string? createdDateTime?;
+    # Tags containing app metadata.
+    string? deviceTag?;
+    # The name of the device on which this app is registered.
+    string? displayName?;
+    # Numerical version of this instance of the Authenticator app.
+    string? phoneAppVersion?;
+    Device device?;
+};
+
+public type WorkbookTableSort1 record {
+    # The list of the current conditions last used to sort the table. Read-only.
+    WorkbookSortField[] fields?;
+    # Indicates whether the casing impacted the last sort of the table. Read-only.
+    boolean matchCase?;
+    # The Chinese character ordering method last used to sort the table. The possible values are: PinYin, StrokeCount. Read-only.
+    string method?;
+};
+
+public type Attendee record {
+    *AttendeeBase;
+    *Attendee1;
+};
+
+public type WorkbookTableColumn1 record {
+    # The index of the column within the columns collection of the table. Zero-indexed. Read-only.
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal index?;
+    # The name of the table column.
+    string? name?;
+    Json values?;
+    WorkbookFilter filter?;
+};
+
+public type WorkbookOperationError record {
+    # The error code.
+    string? code?;
+    WorkbookOperationError innerError?;
+    # The error message.
+    string? message?;
+};
+
+public type Schedule record {
+    *Entity;
+    *Schedule1;
+};
+
+public type WorkbookChartAreaFormat record {
+    *Entity;
+    *WorkbookChartAreaFormat1;
+};
+
+public type TermStoreSet record {
+    *Entity;
+    *Set;
+};
+
+# Represents the Queries record for the operation: searchInRoot
+public type SearchInRootQueries record {
+    # Skip the first n items
+    @http:Query {name: "$skip"}
+    int skip?;
+    # Show only the first n items
+    @http:Query {name: "$top"}
+    int top?;
+    # Filter items by property values
+    @http:Query {name: "$filter"}
+    string filter?;
+    # Search items by search phrases
+    @http:Query {name: "$search"}
+    string search?;
+    # Order items by property values
+    @http:Query {name: "$orderby"}
+    string[] orderby?;
+    # Expand related entities
+    @http:Query {name: "$expand"}
+    string[] expand?;
+    # Include count of items
+    @http:Query {name: "$count"}
+    boolean count?;
+    # Select properties to be returned
+    @http:Query {name: "$select"}
+    string[] 'select?;
+};
+
+# Represents the Queries record for the operation: getRootContent
+public type GetRootContentQueries record {
+    # Format of the content
+    @http:Query {name: "$format"}
+    string format?;
+};
+
+public type WorkbookComment record {
+    *Entity;
+    *WorkbookComment1;
+};
+
+public type DriveItemCollectionResponse record {
+    DriveItem[] value?;
+    string? \@odata\.nextLink?;
+};
+
+public type PlannerUser1 record {
+    # Read-only. Nullable. Returns the plannerTasks assigned to the user.
+    PlannerPlan[] plans?;
+    # Read-only. Nullable. Returns the plannerPlans shared with the user.
+    PlannerTask[] tasks?;
+};
+
+public type Extension1 record {
+};
+
+public type PrinterCapabilitiesDpisItemsNumber decimal?;
+
+public type UserStorage record {
+    *Entity;
+    *UserStorage1;
+};
+
+public type Image record {
+    # Optional. Height of the image, in pixels. Read-only.
+    decimal? height?;
+    # Optional. Width of the image, in pixels. Read-only.
+    decimal? width?;
+};
+
+public type SharepointIds record {
+    # The unique identifier (guid) for the item's list in SharePoint.
+    string? listId?;
+    # An integer identifier for the item within the containing list.
+    string? listItemId?;
+    # The unique identifier (guid) for the item within OneDrive for Business or a SharePoint site.
+    string? listItemUniqueId?;
+    # The unique identifier (guid) for the item's site collection (SPSite).
+    string? siteId?;
+    # The SharePoint URL for the site that contains the item.
+    string? siteUrl?;
+    # The unique identifier (guid) for the tenancy.
+    string? tenantId?;
+    # The unique identifier (guid) for the item's site (SPWeb).
+    string? webId?;
+};
+
+# Devices that are managed or pre-enrolled through Intune. Limited support for $filter: Only properties whose descriptions mention support for $filter may be used, and combinations of those filtered properties must use 'and', not 'or'
+public type ManagedDevice1 record {
+    # The code that allows the Activation Lock on managed device to be bypassed. Default, is Null (Non-Default property) for this property when returned as part of managedDevice entity in LIST call. To retrieve actual values GET call needs to be made, with device id and included in select parameter. Supports: $select. $Search is not supported. Read-only. This property is read-only.
+    string? activationLockBypassCode?;
+    # Android security patch level. This property is read-only.
+    string? androidSecurityPatchLevel?;
+    # The unique identifier for the Azure Active Directory device. Read only. This property is read-only.
+    string? azureADDeviceId?;
+    # Whether the device is Azure Active Directory registered. This property is read-only.
+    boolean? azureADRegistered?;
+    # The DateTime when device compliance grace period expires. This property is read-only.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string complianceGracePeriodExpirationDateTime?;
+    # Compliance state
+    ComplianceState complianceState?;
+    # configuration Manager client enabled features
+    ConfigurationManagerClientEnabledFeatures configurationManagerClientEnabledFeatures?;
+    # List of ComplexType deviceActionResult objects. This property is read-only.
+    DeviceActionResult[] deviceActionResults?;
+    # Device category display name. Default is an empty string. Supports $filter operator 'eq' and 'or'. This property is read-only.
+    string? deviceCategoryDisplayName?;
+    # Possible ways of adding a mobile device to management
+    DeviceEnrollmentType deviceEnrollmentType?;
+    DeviceHealthAttestationState deviceHealthAttestationState?;
+    # Name of the device. This property is read-only.
+    string? deviceName?;
+    # Device registration status
+    DeviceRegistrationState deviceRegistrationState?;
+    # Whether the device is Exchange ActiveSync activated. This property is read-only.
+    boolean easActivated?;
+    # Exchange ActivationSync activation time of the device. This property is read-only.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string easActivationDateTime?;
+    # Exchange ActiveSync Id of the device. This property is read-only.
+    string? easDeviceId?;
+    # Email(s) for the user associated with the device. This property is read-only.
+    string? emailAddress?;
+    # Enrollment time of the device. Supports $filter operator 'lt' and 'gt'. This property is read-only.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string enrolledDateTime?;
+    # Name of the enrollment profile assigned to the device. Default value is empty string, indicating no enrollment profile was assgined. This property is read-only.
+    string? enrollmentProfileName?;
+    # Indicates Ethernet MAC Address of the device. Default, is Null (Non-Default property) for this property when returned as part of managedDevice entity. Individual get call with select query options is needed to retrieve actual values. Example: deviceManagement/managedDevices({managedDeviceId})?$select=ethernetMacAddress Supports: $select. $Search is not supported. Read-only. This property is read-only.
+    string? ethernetMacAddress?;
+    # Device Exchange Access State
+    DeviceManagementExchangeAccessState exchangeAccessState?;
+    # Device Exchange Access State Reason
+    DeviceManagementExchangeAccessStateReason exchangeAccessStateReason?;
+    # Last time the device contacted Exchange. This property is read-only.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string exchangeLastSuccessfulSyncDateTime?;
+    # Free Storage in Bytes. Default value is 0. Read-only. This property is read-only.
+    decimal freeStorageSpaceInBytes?;
+    # Integrated Circuit Card Identifier, it is A SIM card's unique identification number. Default is an empty string. To retrieve actual values GET call needs to be made, with device id and included in select parameter. Supports: $select. $Search is not supported. Read-only. This property is read-only.
+    string? iccid?;
+    # IMEI. This property is read-only.
+    string? imei?;
+    # Device encryption status. This property is read-only.
+    boolean isEncrypted?;
+    # Device supervised status. This property is read-only.
+    boolean isSupervised?;
+    # Whether the device is jail broken or rooted. Default is an empty string. Supports $filter operator 'eq' and 'or'. This property is read-only.
+    string? jailBroken?;
+    # The date and time that the device last completed a successful sync with Intune. Supports $filter operator 'lt' and 'gt'. This property is read-only.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string lastSyncDateTime?;
+    # Automatically generated name to identify a device. Can be overwritten to a user friendly name.
+    string? managedDeviceName?;
+    # Owner type of device
+    ManagedDeviceOwnerType managedDeviceOwnerType?;
+    ManagementAgentType managementAgent?;
+    # Reports device management certificate expiration date. This property is read-only.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string managementCertificateExpirationDate?;
+    # Manufacturer of the device. This property is read-only.
+    string? manufacturer?;
+    # MEID. This property is read-only.
+    string? meid?;
+    # Model of the device. This property is read-only.
+    string? model?;
+    # Notes on the device created by IT Admin. Default is null. To retrieve actual values GET call needs to be made, with device id and included in select parameter. Supports: $select. $Search is not supported.
+    string? notes?;
+    # Operating system of the device. Windows, iOS, etc. This property is read-only.
+    string? operatingSystem?;
+    # Operating system version of the device. This property is read-only.
+    string? osVersion?;
+    # Available health states for the Device Health API
+    ManagedDevicePartnerReportedHealthState partnerReportedThreatState?;
+    # Phone number of the device. This property is read-only.
+    string? phoneNumber?;
+    # Total Memory in Bytes. Default is 0. To retrieve actual values GET call needs to be made, with device id and included in select parameter. Supports: $select. Read-only. This property is read-only.
+    decimal physicalMemoryInBytes?;
+    # An error string that identifies issues when creating Remote Assistance session objects. This property is read-only.
+    string? remoteAssistanceSessionErrorDetails?;
+    # Url that allows a Remote Assistance session to be established with the device. Default is an empty string. To retrieve actual values GET call needs to be made, with device id and included in select parameter. This property is read-only.
+    string? remoteAssistanceSessionUrl?;
+    # Reports if the managed iOS device is user approval enrollment. This property is read-only.
+    boolean? requireUserEnrollmentApproval?;
+    # SerialNumber. This property is read-only.
+    string? serialNumber?;
+    # Subscriber Carrier. This property is read-only.
+    string? subscriberCarrier?;
+    # Total Storage in Bytes. This property is read-only.
+    decimal totalStorageSpaceInBytes?;
+    # Unique Device Identifier for iOS and macOS devices. Default is an empty string. To retrieve actual values GET call needs to be made, with device id and included in select parameter. Supports: $select. $Search is not supported. Read-only. This property is read-only.
+    string? udid?;
+    # User display name. This property is read-only.
+    string? userDisplayName?;
+    # Unique Identifier for the user associated with the device. This property is read-only.
+    string? userId?;
+    # Device user principal name. This property is read-only.
+    string? userPrincipalName?;
+    # Wi-Fi MAC. This property is read-only.
+    string? wiFiMacAddress?;
+    DeviceCategory deviceCategory?;
+    # Device compliance policy states for this device.
+    DeviceCompliancePolicyState[] deviceCompliancePolicyStates?;
+    # Device configuration states for this device.
+    DeviceConfigurationState[] deviceConfigurationStates?;
+    # List of log collection requests
+    DeviceLogCollectionResponse[] logCollectionRequests?;
+    # The primary users associated with the managed device.
+    User[] users?;
+    WindowsProtectionState windowsProtectionState?;
+};
+
+public type EmployeeExperienceUser record {
+    *Entity;
+    *EmployeeExperienceUser1;
+};
+
+public type OnPremisesExtensionAttributes record {
+    # First customizable extension attribute.
+    string? extensionAttribute1?;
+    # Tenth customizable extension attribute.
+    string? extensionAttribute10?;
+    # Eleventh customizable extension attribute.
+    string? extensionAttribute11?;
+    # Twelfth customizable extension attribute.
+    string? extensionAttribute12?;
+    # Thirteenth customizable extension attribute.
+    string? extensionAttribute13?;
+    # Fourteenth customizable extension attribute.
+    string? extensionAttribute14?;
+    # Fifteenth customizable extension attribute.
+    string? extensionAttribute15?;
+    # Second customizable extension attribute.
+    string? extensionAttribute2?;
+    # Third customizable extension attribute.
+    string? extensionAttribute3?;
+    # Fourth customizable extension attribute.
+    string? extensionAttribute4?;
+    # Fifth customizable extension attribute.
+    string? extensionAttribute5?;
+    # Sixth customizable extension attribute.
+    string? extensionAttribute6?;
+    # Seventh customizable extension attribute.
+    string? extensionAttribute7?;
+    # Eighth customizable extension attribute.
+    string? extensionAttribute8?;
+    # Ninth customizable extension attribute.
+    string? extensionAttribute9?;
+};
+
+public type BaseItemVersion1 record {
+    IdentitySet lastModifiedBy?;
+    # Date and time the version was last modified. Read-only.
+    string? lastModifiedDateTime?;
+    PublicationFacet publication?;
+};
+
+public type TeamworkTagMember1 record {
+    # The member's display name.
+    string? displayName?;
+    # The ID of the tenant that the tag member is a part of.
+    string? tenantId?;
+    # The user ID of the member.
+    string? userId?;
+};
+
+public type WorkbookChartFill record {
+    *Entity;
+    *WorkbookChartFill1;
+};
+
+public type ColumnDefinition1 record {
+    BooleanColumn 'boolean?;
+    CalculatedColumn calculated?;
+    ChoiceColumn choice?;
+    # For site columns, the name of the group this column belongs to. Helps organize related columns.
+    string? columnGroup?;
+    ContentApprovalStatusColumn contentApprovalStatus?;
+    CurrencyColumn currency?;
+    DateTimeColumn dateTime?;
+    DefaultColumnValue defaultValue?;
+    # The user-facing description of the column.
+    string? description?;
+    # The user-facing name of the column.
+    string? displayName?;
+    # If true, no two list items may have the same value for this column.
+    boolean? enforceUniqueValues?;
+    GeolocationColumn geolocation?;
+    # Specifies whether the column is displayed in the user interface.
+    boolean? hidden?;
+    HyperlinkOrPictureColumn hyperlinkOrPicture?;
+    # Specifies whether the column values can be used for sorting and searching.
+    boolean? indexed?;
+    # Indicates whether this column can be deleted.
+    boolean? isDeletable?;
+    # Indicates whether values in the column can be reordered. Read-only.
+    boolean? isReorderable?;
+    # Specifies whether the column can be changed.
+    boolean? isSealed?;
+    LookupColumn lookup?;
+    # The API-facing name of the column as it appears in the fields on a listItem. For the user-facing name, see displayName.
+    string? name?;
+    NumberColumn number?;
+    PersonOrGroupColumn personOrGroup?;
+    # If 'true', changes to this column will be propagated to lists that implement the column.
+    boolean? propagateChanges?;
+    # Specifies whether the column values can be modified.
+    boolean? readOnly?;
+    # Specifies whether the column value isn't optional.
+    boolean? required?;
+    ContentTypeInfo sourceContentType?;
+    TermColumn term?;
+    TextColumn text?;
+    ThumbnailColumn thumbnail?;
+    ColumnTypes 'type?;
+    ColumnValidation validation?;
+    ColumnDefinition sourceColumn?;
+};
+
+public type Root record {
+};
+
+public type FolderView record {
+    # The method by which the folder should be sorted.
+    string? sortBy?;
+    # If true, indicates that items should be sorted in descending order. Otherwise, items should be sorted ascending.
+    string? sortOrder?;
+    # The type of view that should be used to represent the folder.
+    string? viewType?;
+};
+
+public type WorkbookChartPoint record {
+    *Entity;
+    *WorkbookChartPoint1;
+};
+
+public type AttachmentBase1 record {
+    # The MIME type.
+    string? contentType?;
+    # The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z.
+    string? lastModifiedDateTime?;
+    # The display name of the attachment. This doesn't need to be the actual file name.
+    string? name?;
+    # The length of the attachment in bytes.
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal size?;
+};
+
+public type TimeOff1 record {
+    TimeOffItem draftTimeOff?;
+    # The timeOff is marked for deletion, a process that is finalized when the schedule is shared.
+    boolean? isStagedForDeletion?;
+    TimeOffItem sharedTimeOff?;
+    # ID of the user assigned to the timeOff. Required.
+    string? userId?;
+};
+
+public type EmailAddress record {
+    # The email address of the person or entity.
+    string? address?;
+    # The display name of the person or entity.
+    string? name?;
+};
+
+public type ShiftAvailability record {
+    PatternedRecurrence recurrence?;
+    # The time slot(s) preferred by the user.
+    TimeRange[] timeSlots?;
+    # Specifies the time zone for the indicated time.
+    string? timeZone?;
+};
+
+public type GeoCoordinates record {
+    # Optional. The altitude (height), in feet,  above sea level for the item. Read-only.
+    decimal? altitude?;
+    # Optional. The latitude, in decimal, for the item. Read-only.
+    decimal? latitude?;
+    # Optional. The longitude, in decimal, for the item. Read-only.
+    decimal? longitude?;
+};
+
+# Malware severity
+public type WindowsMalwareSeverity "unknown"|"low"|"moderate"|"high"|"severe";
+
+public type ManagedAppPolicy record {
+    *Entity;
+    *ManagedAppPolicy1;
+};
+
+public type OfficeGraphInsights record {
+    *Entity;
+    *OfficeGraphInsights1;
+};
+
+public type AttachmentBase record {
+    *Entity;
+    *AttachmentBase1;
+};
+
+public type ScheduleChangeState "pending"|"approved"|"declined"|"unknownFutureValue";
+
+public type PrintQuality "low"|"medium"|"high"|"unknownFutureValue";
+
+public type WorkbookChartDataLabels record {
+    *Entity;
+    *WorkbookChartDataLabels1;
+};
+
+public type Conversation record {
+    *Entity;
+    *Conversation1;
+};
+
+public type UserActivity record {
+    *Entity;
+    *UserActivity1;
+};
+
+public type Folder record {
+    # Number of children contained immediately within this container.
+    decimal? childCount?;
+    FolderView view?;
+};
+
+public type Workbook1 record {
+    WorkbookApplication application?;
+    # Represents a collection of comments in a workbook.
+    WorkbookComment[] comments?;
+    WorkbookFunctions functions?;
+    # Represents a collection of workbooks scoped named items (named ranges and constants). Read-only.
+    WorkbookNamedItem[] names?;
+    # The status of workbook operations. Getting an operation collection is not supported, but you can get the status of a long-running operation if the Location header is returned in the response. Read-only.
+    WorkbookOperation[] operations?;
+    # Represents a collection of tables associated with the workbook. Read-only.
+    WorkbookTable[] tables?;
+    # Represents a collection of worksheets associated with the workbook. Read-only.
+    WorkbookWorksheet[] worksheets?;
+};
+
+public type WorkingTimeSchedule record {
+    *Entity;
+    *WorkingTimeSchedule1;
+};
+
+public type OutlookUser record {
+    *Entity;
+    *OutlookUser1;
+};
+
+public type PageLinks record {
+    ExternalLink oneNoteClientUrl?;
+    ExternalLink oneNoteWebUrl?;
+};
+
+public type TeamsAsyncOperation record {
+    *Entity;
+    *TeamsAsyncOperation1;
+};
+
+public type MessageRule1 record {
+    MessageRuleActions actions?;
+    MessageRulePredicates conditions?;
+    # The display name of the rule.
+    string? displayName?;
+    MessageRulePredicates exceptions?;
+    # Indicates whether the rule is in an error condition. Read-only.
+    boolean? hasError?;
+    # Indicates whether the rule is enabled to be applied to messages.
+    boolean? isEnabled?;
+    # Indicates if the rule is read-only and cannot be modified or deleted by the rules REST API.
+    boolean? isReadOnly?;
+    # Indicates the order in which the rule is executed, among other rules.
+    decimal? sequence?;
+};
+
+# Represents the Headers record for the operation: deleteItemsContent
+public type DeleteItemsContentHeaders record {
+    # ETag
+    @http:Header {name: "If-Match"}
+    string ifMatch?;
+};
+
+public type Message1 record {
+    # The Bcc: recipients for the message.
+    Recipient[] bccRecipients?;
+    ItemBody body?;
+    # The first 255 characters of the message body. It is in text format.
+    string? bodyPreview?;
+    # The Cc: recipients for the message.
+    Recipient[] ccRecipients?;
+    # The ID of the conversation the email belongs to.
+    string? conversationId?;
+    # Indicates the position of the message within the conversation.
+    string? conversationIndex?;
+    FollowupFlag flag?;
+    Recipient 'from?;
+    # Indicates whether the message has attachments. This property doesn't include inline attachments, so if a message contains only inline attachments, this property is false. To verify the existence of inline attachments, parse the body property to look for a src attribute, such as <IMG src='cid:image001.jpg@01D26CD8.6C05F070'>.
+    boolean? hasAttachments?;
+    Importance importance?;
+    InferenceClassificationType inferenceClassification?;
+    # A collection of message headers defined by RFC5322. The set includes message headers indicating the network path taken by a message from the sender to the recipient. It can also contain custom message headers that hold app data for the message.  Returned only on applying a $select query option. Read-only.
+    InternetMessageHeader[] internetMessageHeaders?;
+    # The message ID in the format specified by RFC2822.
+    string? internetMessageId?;
+    # Indicates whether a read receipt is requested for the message.
+    boolean? isDeliveryReceiptRequested?;
+    # Indicates whether the message is a draft. A message is a draft if it hasn't been sent yet.
+    boolean? isDraft?;
+    # Indicates whether the message has been read.
+    boolean? isRead?;
+    # Indicates whether a read receipt is requested for the message.
+    boolean? isReadReceiptRequested?;
+    # The unique identifier for the message's parent mailFolder.
+    string? parentFolderId?;
+    # The date and time the message was received.  The date and time information uses ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z.
+    string? receivedDateTime?;
+    # The email addresses to use when replying.
+    Recipient[] replyTo?;
+    Recipient sender?;
+    # The date and time the message was sent.  The date and time information uses ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z.
+    string? sentDateTime?;
+    # The subject of the message.
+    string? subject?;
+    # The To: recipients for the message.
+    Recipient[] toRecipients?;
+    ItemBody uniqueBody?;
+    # The URL to open the message in Outlook on the web.You can append an ispopout argument to the end of the URL to change how the message is displayed. If ispopout is not present or if it is set to 1, then the message is shown in a popout window. If ispopout is set to 0, the browser shows the message in the Outlook on the web review pane.The message opens in the browser if you are signed in to your mailbox via Outlook on the web. You are prompted to sign in if you are not already signed in with the browser.This URL cannot be accessed from within an iFrame.
+    string? webLink?;
+    # The fileAttachment and itemAttachment attachments for the message.
+    Attachment[] attachments?;
+    # The collection of open extensions defined for the message. Nullable.
+    Extension[] extensions?;
+    # The collection of multi-value extended properties defined for the message. Nullable.
+    MultiValueLegacyExtendedProperty[] multiValueExtendedProperties?;
+    # The collection of single-value extended properties defined for the message. Nullable.
+    SingleValueLegacyExtendedProperty[] singleValueExtendedProperties?;
+};
+
+public type WorkbookChartSeries record {
+    *Entity;
+    *WorkbookChartSeries1;
+};
+
+public type LobbyBypassScope "organizer"|"organization"|"organizationAndFederated"|"everyone"|"unknownFutureValue"|"invited"|"organizationExcludingGuests";
+
+public type Site1 record {
+    # The full title for the site. Read-only.
+    string? displayName?;
+    PublicError 'error?;
+    # Identifies whether the site is personal or not. Read-only.
+    boolean? isPersonalSite?;
+    Root root?;
+    SharepointIds sharepointIds?;
+    SiteCollection siteCollection?;
+    ItemAnalytics analytics?;
+    # The collection of column definitions reusable across lists under this site.
+    ColumnDefinition[] columns?;
+    # The collection of content types defined for this site.
+    ContentType[] contentTypes?;
+    Drive drive?;
+    # The collection of drives (document libraries) under this site.
+    Drive[] drives?;
+    ColumnDefinition[] externalColumns?;
+    # Used to address any item contained in this site. This collection can't be enumerated.
+    BaseItem[] items?;
+    # The collection of lists under this site.
+    List[] lists?;
+    Onenote onenote?;
+    # The collection of long-running operations on the site.
+    RichLongRunningOperation[] operations?;
+    # The collection of pages in the baseSitePages list in this site.
+    BaseSitePage[] pages?;
+    # The permissions associated with the site. Nullable.
+    Permission[] permissions?;
+    # The collection of the sub-sites under this site.
+    Site[] sites?;
+    TermStoreStore termStore?;
+    # The collection of termStores under this site.
+    TermStoreStore[] termStores?;
+};
+
+public type ChatMessageReaction record {
+    # The timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string createdDateTime?;
+    # The name of the reaction.
+    string? displayName?;
+    # The hosted content URL for the custom reaction type.
+    string? reactionContentUrl?;
+    # The reaction type. Supported values include Unicode characters, custom, and some backward-compatible reaction types, such as like, angry, sad, laugh, heart, and surprised.
+    string reactionType?;
+    ChatMessageReactionIdentitySet user?;
+};
+
+public type SharingDetail record {
+    InsightIdentity sharedBy?;
+    # The date and time the file was last shared. The timestamp represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
+    string? sharedDateTime?;
+    ResourceReference sharingReference?;
+    # The subject with which the document was shared.
+    string? sharingSubject?;
+    # Determines the way the document was shared. Can be by a 1Link1, 1Attachment1, 1Group1, 1Site1.
+    string? sharingType?;
+};
+
+public type TaskStatus "notStarted"|"inProgress"|"completed"|"waitingOnOthers"|"deferred";
+
+public type DriveItemIdMicrosoftGraphCreateLinkBody record {
+    string? 'type?;
+    string? scope?;
+    string? expirationDateTime?;
+    string? password?;
+    string? message?;
+    DriveRecipient[] recipients?;
+    boolean? retainInheritedPermissions = false;
+    boolean? sendNotification = false;
+};
+
+public type DeviceMetadata record {
+    # Optional. The general type of the device (for example, 'Managed', 'Unmanaged').
+    string? deviceType?;
+    # The Internet Protocol (IP) address of the device.
+    string? ipAddress?;
+    OperatingSystemSpecifications operatingSystemSpecifications?;
+};
+
+public type TodoTaskList record {
+    *Entity;
+    *TodoTaskList1;
+};
+
+public type DriveItemIdMicrosoftGraphCheckinBody record {
+    string? checkInAs?;
+    string? comment?;
+};
+
+public type SectionGroup record {
+    *OnenoteEntityHierarchyModel;
+    *SectionGroup1;
+};
+
+public type Schedule1 record {
+    # Indicates whether the schedule is enabled for the team. Required.
+    boolean? enabled?;
+    # Indicates whether copied shifts include activities from the original shift.
+    boolean? isActivitiesIncludedWhenCopyingShiftsEnabled?;
+    # Indicates whether offer shift requests are enabled for the schedule.
+    boolean? offerShiftRequestsEnabled?;
+    # Indicates whether open shifts are enabled for the schedule.
+    boolean? openShiftsEnabled?;
+    OperationStatus provisionStatus?;
+    # Additional information about why schedule provisioning failed.
+    string? provisionStatusCode?;
+    DayOfWeek startDayOfWeek?;
+    # Indicates whether swap shifts requests are enabled for the schedule.
+    boolean? swapShiftsRequestsEnabled?;
+    # Indicates whether time clock is enabled for the schedule.
+    boolean? timeClockEnabled?;
+    TimeClockSettings timeClockSettings?;
+    # Indicates whether time off requests are enabled for the schedule.
+    boolean? timeOffRequestsEnabled?;
+    # Indicates the time zone of the schedule team using tz database format. Required.
+    string? timeZone?;
+    # The IDs for the workforce integrations associated with this schedule.
+    string[] workforceIntegrationIds?;
+    # The day notes in the schedule.
+    DayNote[] dayNotes?;
+    # The offer requests for shifts in the schedule.
+    OfferShiftRequest[] offerShiftRequests?;
+    # The open shift requests in the schedule.
+    OpenShiftChangeRequest[] openShiftChangeRequests?;
+    # The set of open shifts in a scheduling group in the schedule.
+    OpenShift[] openShifts?;
+    # The logical grouping of users in the schedule (usually by role).
+    SchedulingGroup[] schedulingGroups?;
+    # The shifts in the schedule.
+    Shift[] shifts?;
+    # The swap requests for shifts in the schedule.
+    SwapShiftsChangeRequest[] swapShiftsChangeRequests?;
+    # The time cards in the schedule.
+    TimeCard[] timeCards?;
+    # The set of reasons for a time off in the schedule.
+    TimeOffReason[] timeOffReasons?;
+    # The time off requests in the schedule.
+    TimeOffRequest[] timeOffRequests?;
+    # The instances of times off in the schedule.
+    TimeOff[] timesOff?;
+};
+
+public type Album record {
+    # Unique identifier of the driveItem that is the cover of the album.
+    string? coverImageItemId?;
+};
+
+public type SchedulingGroup1 record {
+    # The code for the schedulingGroup to represent an external identifier. This field must be unique within the team in Microsoft Teams and uses an alphanumeric format, with a maximum of 100 characters.
+    string? code?;
+    # The display name for the schedulingGroup. Required.
+    string? displayName?;
+    # Indicates whether the schedulingGroup can be used when creating new entities or updating existing ones. Required.
+    boolean? isActive?;
+    # The list of user IDs that are a member of the schedulingGroup. Required.
+    string[] userIds?;
+};
+
+public type Person1 record {
+    # The person's birthday.
+    string? birthday?;
+    # The name of the person's company.
+    string? companyName?;
+    # The person's department.
+    string? department?;
+    # The person's display name.
+    string? displayName?;
+    # The person's given name.
+    string? givenName?;
+    # The instant message voice over IP (VOIP) session initiation protocol (SIP) address for the user. Read-only.
+    string? imAddress?;
+    # True if the user has flagged this person as a favorite.
+    boolean? isFavorite?;
+    # The person's job title.
+    string? jobTitle?;
+    # The location of the person's office.
+    string? officeLocation?;
+    # Free-form notes that the user has taken about this person.
+    string? personNotes?;
+    PersonType personType?;
+    # The person's phone numbers.
+    Phone[] phones?;
+    # The person's addresses.
+    Location[] postalAddresses?;
+    # The person's profession.
+    string? profession?;
+    # The person's email addresses.
+    ScoredEmailAddress[] scoredEmailAddresses?;
+    # The person's surname.
+    string? surname?;
+    # The user principal name (UPN) of the person. The UPN is an Internet-style login name for the person based on the Internet standard RFC 822. By convention, this should map to the person's email name. The general format is alias@domain.
+    string? userPrincipalName?;
+    # The person's websites.
+    Website[] websites?;
+    # The phonetic Japanese name of the person's company.
+    string? yomiCompany?;
+};
+
+public type TodoTask record {
+    *Entity;
+    *TodoTask1;
+};
+
+public type WorkbookChartDataLabelFormat record {
+    *Entity;
+    *WorkbookChartDataLabelFormat1;
+};
+
+public type OnlineMeetingProviderType "unknown"|"skypeForBusiness"|"skypeForConsumer"|"teamsForBusiness";
+
+public type OnenoteResource record {
+    *OnenoteEntityBaseModel;
+    *OnenoteResource1;
+};
+
+public type Team1 record {
+    # An optional label. Typically describes the data or business sensitivity of the team. Must match one of a preconfigured set in the tenant's directory.
+    string? classification?;
+    # Timestamp at which the team was created.
+    string? createdDateTime?;
+    # An optional description for the team. Maximum length: 1,024 characters.
+    string? description?;
+    # The name of the team.
+    string? displayName?;
+    # The name of the first channel in the team. This is an optional property, only used during team creation and isn't returned in methods to get and list teams.
+    string? firstChannelName?;
+    TeamFunSettings funSettings?;
+    TeamGuestSettings guestSettings?;
+    # A unique ID for the team that was used in a few places such as the audit log/Office 365 Management Activity API.
+    string? internalId?;
+    # Whether this team is in read-only mode.
+    boolean? isArchived?;
+    TeamMemberSettings memberSettings?;
+    TeamMessagingSettings messagingSettings?;
+    TeamSpecialization specialization?;
+    TeamSummary summary?;
+    # The ID of the Microsoft Entra tenant.
+    string? tenantId?;
+    TeamVisibilityType visibility?;
+    # A hyperlink that goes to the team in the Microsoft Teams client. You get this URL when you right-click a team in the Microsoft Teams client and select Get link to team. This URL should be treated as an opaque blob, and not parsed.
+    string? webUrl?;
+    # List of channels either hosted in or shared with the team (incoming channels).
+    Channel[] allChannels?;
+    # The collection of channels and messages associated with the team.
+    Channel[] channels?;
+    Group group?;
+    # List of channels shared with the team.
+    Channel[] incomingChannels?;
+    # The apps installed in this team.
+    TeamsAppInstallation[] installedApps?;
+    # Members and owners of the team.
+    ConversationMember[] members?;
+    # The async operations that ran or are running on this team.
+    TeamsAsyncOperation[] operations?;
+    # A collection of permissions granted to apps to access the team.
+    ResourceSpecificPermissionGrant[] permissionGrants?;
+    ProfilePhoto photo?;
+    Channel primaryChannel?;
+    Schedule schedule?;
+    # The tags associated with the team.
+    TeamworkTag[] tags?;
+    TeamsTemplate template?;
+};
+
+# Compliance state
+public type ComplianceState "unknown"|"compliant"|"noncompliant"|"conflict"|"error"|"inGracePeriod"|"configManager";
+
+public type AttendanceRecord record {
+    *Entity;
+    *AttendanceRecord1;
+};
+
+public type WorkbookChartAxisFormat record {
+    *Entity;
+    *WorkbookChartAxisFormat1;
+};
+
+public type SharePointIdentity1 record {
+    # The sign in name of the SharePoint identity.
+    string? loginName?;
+};
+
+public type PrintEvent "jobStarted"|"unknownFutureValue";
+
+public type ListItemVersion record {
+    *BaseItemVersion;
+    *ListItemVersion1;
+};
+
+public type WorkbookChartFont1 record {
+    # Indicates whether the fond is bold.
+    boolean? bold?;
+    # The HTML color code representation of the text color. For example #FF0000 represents Red.
+    string? color?;
+    # Indicates whether the fond is italic.
+    boolean? italic?;
+    # The font name. For example 'Calibri'.
+    string? name?;
+    # The size of the font. For example,  11.
+    decimal? size?;
+    # The type of underlining applied to the font. The possible values are: None, Single.
+    string? underline?;
+};
+
+public type GroupSetting record {
+    *Entity;
+    *GroupSetting1;
+};
+
+public type BooleanColumn record {
+};
+
+public type ChannelMembershipType "standard"|"private"|"unknownFutureValue"|"shared";
+
+public type ChatRestrictions record {
+    # Indicates whether only text is allowed in the meeting chat. Optional.
+    boolean? allowTextOnly?;
+};
+
+public type CallRecording record {
+    *Entity;
+    *CallRecording1;
+};
+
+public type ItemPreviewInfo record {
     string? getUrl?;
     string? postParameters?;
     string? postUrl?;
 };
 
-public type microsoft\.graph\.teamsAppAuthorization record {
-    string? clientAppId?;
-    microsoft\.graph\.teamsAppPermissionSet requiredPermissionSet?;
+public type ResponseStatus record {
+    ResponseType response?;
+    # The date and time when the response was returned. It uses ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
+    string? time?;
+};
+
+public type SwapShiftsChangeRequest record {
+    *OfferShiftRequest;
+    *SwapShiftsChangeRequest1;
+};
+
+public type OnlineMeetingPresenters "everyone"|"organization"|"roleIsPresenter"|"organizer"|"unknownFutureValue";
+
+public type DeviceCompliancePolicyState record {
+    *Entity;
+    *DeviceCompliancePolicyState1;
+};
+
+public type TeamsAppInstallation1 record {
+    TeamsAppPermissionSet consentedPermissionSet?;
+    TeamsApp teamsApp?;
+    TeamsAppDefinition teamsAppDefinition?;
+};
+
+public type WorkbookWorksheet1 record {
+    # The display name of the worksheet.
+    string? name?;
+    # The zero-based position of the worksheet within the workbook.
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal position?;
+    # The visibility of the worksheet. The possible values are: Visible, Hidden, VeryHidden.
+    string visibility?;
+    # The list of charts that are part of the worksheet. Read-only.
+    WorkbookChart[] charts?;
+    # The list of names that are associated with the worksheet. Read-only.
+    WorkbookNamedItem[] names?;
+    # The list of piot tables that are part of the worksheet.
+    WorkbookPivotTable[] pivotTables?;
+    WorkbookWorksheetProtection protection?;
+    # The list of tables that are part of the worksheet. Read-only.
+    WorkbookTable[] tables?;
+};
+
+public type WindowsHelloForBusinessAuthenticationMethod record {
+    *AuthenticationMethod;
+    *WindowsHelloForBusinessAuthenticationMethod1;
+};
+
+public type ContactFolder1 record {
+    # The folder's display name.
+    string? displayName?;
+    # The ID of the folder's parent folder.
+    string? parentFolderId?;
+    # The collection of child folders in the folder. Navigation property. Read-only. Nullable.
+    ContactFolder[] childFolders?;
+    # The contacts in the folder. Navigation property. Read-only. Nullable.
+    Contact[] contacts?;
+    # The collection of multi-value extended properties defined for the contactFolder. Read-only. Nullable.
+    MultiValueLegacyExtendedProperty[] multiValueExtendedProperties?;
+    # The collection of single-value extended properties defined for the contactFolder. Read-only. Nullable.
+    SingleValueLegacyExtendedProperty[] singleValueExtendedProperties?;
+};
+
+public type ChatInfo record {
+    # The unique identifier of a message in a Microsoft Teams channel.
+    string? messageId?;
+    # The ID of the reply message.
+    string? replyChainMessageId?;
+    # The unique identifier for a thread in Microsoft Teams.
+    string? threadId?;
+};
+
+# Device Exchange Access State
+public type DeviceManagementExchangeAccessState "none"|"unknown"|"allowed"|"blocked"|"quarantined";
+
+public type GiphyRatingType "strict"|"moderate"|"unknownFutureValue";
+
+public type SingleValueLegacyExtendedProperty1 record {
+    # A property value.
+    string? value?;
+};
+
+public type SizeRange record {
+    # The maximum size (in kilobytes) that an incoming message must have in order for a condition or exception to apply.
+    decimal? maximumSize?;
+    # The minimum size (in kilobytes) that an incoming message must have in order for a condition or exception to apply.
+    decimal? minimumSize?;
+};
+
+# Represents the Queries record for the operation: getItemsContent
+public type GetItemsContentQueries record {
+    # Format of the content
+    @http:Query {name: "$format"}
+    string format?;
+};
+
+public type ItemInsights1 record {
+};
+
+public type WorkbookChartGridlines record {
+    *Entity;
+    *WorkbookChartGridlines1;
+};
+
+# The identifier for a mobile app
+public type MobileAppIdentifier record {
+};
+
+public type DocumentSetVersion1 record {
+    # Comment about the captured version.
+    string? comment?;
+    IdentitySet createdBy?;
+    # Date and time when this version was created.
+    string? createdDateTime?;
+    # Items within the document set that are captured as part of this version.
+    DocumentSetVersionItem[] items?;
+    # If true, minor versions of items are also captured; otherwise, only major versions are captured. The default value is false.
+    boolean? shouldCaptureMinorVersion?;
+};
+
+public type WorkbookNamedItem1 record {
+    # The comment associated with this name.
+    string? comment?;
+    # The name of the object. Read-only.
+    string? name?;
+    # Indicates whether the name is scoped to the workbook or to a specific worksheet. Read-only.
+    string scope?;
+    # The type of reference is associated with the name. Possible values are: String, Integer, Double, Boolean, Range. Read-only.
+    string? 'type?;
+    Json value?;
+    # Indicates whether the object is visible.
+    boolean visible?;
+    WorkbookWorksheet worksheet?;
+};
+
+public type TeamsTemplate record {
+    *Entity;
+    *TeamsTemplate1;
 };
 
 # Represents the Headers record for the operation: deleteRoot
 public type DeleteRootHeaders record {
     # ETag
-    string If\-Match?;
+    @http:Header {name: "If-Match"}
+    string ifMatch?;
 };
 
-public type microsoft\.graph\.itemActivityStat record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.itemActionStat access?;
-    microsoft\.graph\.itemActionStat create?;
-    microsoft\.graph\.itemActionStat delete?;
-    microsoft\.graph\.itemActionStat edit?;
-    string? endDateTime?;
-    microsoft\.graph\.incompleteData incompleteData?;
-    boolean? isTrending?;
-    microsoft\.graph\.itemActionStat move?;
-    string? startDateTime?;
-    microsoft\.graph\.itemActivity[] activities?;
+public type WatermarkProtectionValues record {
+    # Indicates whether to apply a watermark to any shared content.
+    boolean? isEnabledForContentSharing?;
+    # Indicates whether to apply a watermark to everyone's video feed.
+    boolean? isEnabledForVideo?;
 };
 
-public type microsoft\.graph\.site record {
-    *microsoft\.graph\.baseItem;
-    string? displayName?;
-    microsoft\.graph\.publicError 'error?;
-    boolean? isPersonalSite?;
-    microsoft\.graph\.root root?;
-    microsoft\.graph\.sharepointIds sharepointIds?;
-    microsoft\.graph\.siteCollection siteCollection?;
-    microsoft\.graph\.itemAnalytics analytics?;
-    microsoft\.graph\.columnDefinition[] columns?;
-    microsoft\.graph\.contentType[] contentTypes?;
-    microsoft\.graph\.drive drive?;
-    microsoft\.graph\.drive[] drives?;
-    microsoft\.graph\.columnDefinition[] externalColumns?;
-    microsoft\.graph\.baseItem[] items?;
-    microsoft\.graph\.list[] lists?;
-    microsoft\.graph\.onenote onenote?;
-    microsoft\.graph\.richLongRunningOperation[] operations?;
-    microsoft\.graph\.baseSitePage[] pages?;
-    microsoft\.graph\.permission[] permissions?;
-    microsoft\.graph\.site[] sites?;
-    microsoft\.graph\.termStore\.store termStore?;
-    microsoft\.graph\.termStore\.store[] termStores?;
-};
-
-public type microsoft\.graph\.groupSetting record {
-    *microsoft\.graph\.entity;
-    string? displayName?;
-    string? templateId?;
-    microsoft\.graph\.settingValue[] values?;
-};
-
-public type microsoft\.graph\.workbookChartLegend record {
-    *microsoft\.graph\.entity;
-    boolean? overlay?;
-    string? position?;
-    boolean visible?;
-    microsoft\.graph\.workbookChartLegendFormat format?;
-};
-
-public type microsoft\.graph\.mailFolder record {
-    *microsoft\.graph\.entity;
-    decimal? childFolderCount?;
-    string? displayName?;
-    boolean? isHidden?;
-    string? parentFolderId?;
-    decimal? totalItemCount?;
-    decimal? unreadItemCount?;
-    microsoft\.graph\.mailFolder[] childFolders?;
-    microsoft\.graph\.messageRule[] messageRules?;
-    microsoft\.graph\.message[] messages?;
-    microsoft\.graph\.multiValueLegacyExtendedProperty[] multiValueExtendedProperties?;
-    microsoft\.graph\.singleValueLegacyExtendedProperty[] singleValueExtendedProperties?;
+public type EmployeeOrgData record {
+    # The cost center associated with the user. Returned only on $select. Supports $filter.
+    string? costCenter?;
+    # The name of the division in which the user works. Returned only on $select. Supports $filter.
+    string? division?;
 };
 
 # Represents the Headers record for the operation: deleteChildrenContentByPath
 public type DeleteChildrenContentByPathHeaders record {
     # ETag
-    string If\-Match?;
+    @http:Header {name: "If-Match"}
+    string ifMatch?;
 };
 
-public type microsoft\.graph\.teamworkBot record {
-    *microsoft\.graph\.entity;
+public type PlannerProgressTaskBoardTaskFormat record {
+    *Entity;
+    *PlannerProgressTaskBoardTaskFormat1;
 };
 
-public type microsoft\.graph\.currencyColumn record {
-    string? locale?;
+public type AttendeeType "required"|"optional"|"resource";
+
+public type RecurrencePatternType "daily"|"weekly"|"absoluteMonthly"|"relativeMonthly"|"absoluteYearly"|"relativeYearly";
+
+public type SignInActivity record {
+    # The last non-interactive sign-in date for a specific user. You can use this field to calculate the last time a client attempted (either successfully or unsuccessfully) to sign in to the directory on behalf of a user. Because some users may use clients to access tenant resources rather than signing into your tenant directly, you can use the non-interactive sign-in date to along with lastSignInDateTime to identify inactive users. The timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Microsoft Entra ID maintains non-interactive sign-ins going back to May 2020. For more information about using the value of this property, see Manage inactive user accounts in Microsoft Entra ID.
+    string? lastNonInteractiveSignInDateTime?;
+    # Request identifier of the last non-interactive sign-in performed by this user.
+    string? lastNonInteractiveSignInRequestId?;
+    # The last interactive sign-in date and time for a specific user. This property records the last time a user attempted an interactive sign-in to the directory—whether the attempt was successful or not. Note: Since unsuccessful attempts are also logged, this value might not accurately reflect actual system usage. For tracking actual account access, please use the lastSuccessfulSignInDateTime property. The timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z.
+    string? lastSignInDateTime?;
+    # Request identifier of the last interactive sign-in performed by this user.
+    string? lastSignInRequestId?;
+    # The date and time of the user's most recent successful interactive or non-interactive sign-in. Use this property if you need to determine when the account was truly accessed. This field can be used to build reports, such as inactive users. The timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Microsoft Entra ID maintains interactive sign-ins going back to April 2020. For more information about using the value of this property, see Manage inactive user accounts in Microsoft Entra ID.
+    string? lastSuccessfulSignInDateTime?;
+    # The request ID of the last successful sign-in.
+    string? lastSuccessfulSignInRequestId?;
 };
 
-public type microsoft\.graph\.teamsAppResourceSpecificPermissionType "delegated"|"application"|"unknownFutureValue";
-
-public type microsoft\.graph\.attendanceInterval record {
-    decimal? durationInSeconds?;
-    string? joinDateTime?;
-    string? leaveDateTime?;
+public type WindowsDeviceMalwareState record {
+    *Entity;
+    *WindowsDeviceMalwareState1;
 };
 
-public type microsoft\.graph\.printerCapabilitiesPagesPerSheetItemsNumber decimal?;
-
-public type microsoft\.graph\.chat record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.chatType chatType?;
-    string? createdDateTime?;
-    boolean? isHiddenForAllMembers?;
-    string? lastUpdatedDateTime?;
-    microsoft\.graph\.teamworkOnlineMeetingInfo onlineMeetingInfo?;
-    string? tenantId?;
-    string? topic?;
-    microsoft\.graph\.chatViewpoint viewpoint?;
-    string? webUrl?;
-    microsoft\.graph\.teamsAppInstallation[] installedApps?;
-    microsoft\.graph\.chatMessageInfo lastMessagePreview?;
-    microsoft\.graph\.conversationMember[] members?;
-    microsoft\.graph\.chatMessage[] messages?;
-    microsoft\.graph\.resourceSpecificPermissionGrant[] permissionGrants?;
-    microsoft\.graph\.pinnedChatMessageInfo[] pinnedMessages?;
-    microsoft\.graph\.teamsTab[] tabs?;
+public type OpenShiftItem record {
+    *ShiftItem;
+    *OpenShiftItem1;
 };
 
-public type microsoft\.graph\.driveItem record {
-    *microsoft\.graph\.baseItem;
-    microsoft\.graph\.audio audio?;
-    microsoft\.graph\.bundle bundle?;
+public type DelegateMeetingMessageDeliveryOptions "sendToDelegateAndInformationToPrincipal"|"sendToDelegateAndPrincipal"|"sendToDelegateOnly";
+
+public type PlannerPlanContainer record {
+    # The identifier of the resource that contains the plan. Optional.
+    string? containerId?;
+    PlannerContainerType 'type?;
+    # The full canonical URL of the container. Optional.
+    string? url?;
+};
+
+public type ChatMessageHistoryItem record {
+    ChatMessageActions actions?;
+    # The date and time when the message was modified.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string modifiedDateTime?;
+    ChatMessageReaction reaction?;
+};
+
+public type Thumbnail record {
+    # The content stream for the thumbnail.
     string? content?;
-    string? cTag?;
-    microsoft\.graph\.deleted deleted?;
-    microsoft\.graph\.file file?;
-    microsoft\.graph\.fileSystemInfo fileSystemInfo?;
-    microsoft\.graph\.folder folder?;
-    microsoft\.graph\.image image?;
-    microsoft\.graph\.geoCoordinates location?;
-    microsoft\.graph\.malware malware?;
-    microsoft\.graph\.package package?;
-    microsoft\.graph\.pendingOperations pendingOperations?;
-    microsoft\.graph\.photo photo?;
-    microsoft\.graph\.publicationFacet publication?;
-    microsoft\.graph\.remoteItem remoteItem?;
-    microsoft\.graph\.root root?;
-    microsoft\.graph\.searchResult searchResult?;
-    microsoft\.graph\.shared shared?;
-    microsoft\.graph\.sharepointIds sharepointIds?;
-    decimal? size?;
-    microsoft\.graph\.specialFolder specialFolder?;
-    microsoft\.graph\.video video?;
-    string? webDavUrl?;
-    microsoft\.graph\.itemAnalytics analytics?;
-    microsoft\.graph\.driveItem[] children?;
-    microsoft\.graph\.listItem listItem?;
-    microsoft\.graph\.permission[] permissions?;
-    microsoft\.graph\.itemRetentionLabel retentionLabel?;
-    microsoft\.graph\.subscription[] subscriptions?;
-    microsoft\.graph\.thumbnailSet[] thumbnails?;
-    microsoft\.graph\.driveItemVersion[] versions?;
-    microsoft\.graph\.workbook workbook?;
+    # The height of the thumbnail, in pixels.
+    decimal? height?;
+    # The unique identifier of the item that provided the thumbnail. This is only available when a folder thumbnail is requested.
+    string? sourceItemId?;
+    # The URL used to fetch the thumbnail content.
+    string? url?;
+    # The width of the thumbnail, in pixels.
+    decimal? width?;
 };
 
-public type microsoft\.graph\.chatMessageMention record {
-    decimal? id?;
-    microsoft\.graph\.chatMessageMentionedIdentitySet mentioned?;
-    string? mentionText?;
+public type BaseSitePage record {
+    *BaseItem;
+    *BaseSitePage1;
 };
 
-public type microsoft\.graph\.outOfOfficeSettings record {
-    boolean? isOutOfOffice?;
-    string? message?;
+public type OnlineMeetingBase1 record {
+    # Indicates whether attendees can turn on their camera.
+    boolean? allowAttendeeToEnableCamera?;
+    # Indicates whether attendees can turn on their microphone.
+    boolean? allowAttendeeToEnableMic?;
+    # Indicates whether breakout rooms are enabled for the meeting.
+    boolean? allowBreakoutRooms?;
+    AllowedLobbyAdmitterRoles allowedLobbyAdmitters?;
+    OnlineMeetingPresenters allowedPresenters?;
+    MeetingLiveShareOptions allowLiveShare?;
+    MeetingChatMode allowMeetingChat?;
+    # Specifies if participants are allowed to rename themselves in an instance of the meeting.
+    boolean? allowParticipantsToChangeName?;
+    # Indicates whether PowerPoint live is enabled for the meeting.
+    boolean? allowPowerPointSharing?;
+    # Indicates whether recording is enabled for the meeting.
+    boolean? allowRecording?;
+    # Indicates if Teams reactions are enabled for the meeting.
+    boolean? allowTeamworkReactions?;
+    # Indicates whether transcription is enabled for the meeting.
+    boolean? allowTranscription?;
+    # Indicates whether whiteboard is enabled for the meeting.
+    boolean? allowWhiteboard?;
+    AudioConferencing audioConferencing?;
+    ChatInfo chatInfo?;
+    ChatRestrictions chatRestrictions?;
+    boolean? isEndToEndEncryptionEnabled?;
+    # Indicates whether to announce when callers join or leave.
+    boolean? isEntryExitAnnounced?;
+    ItemBody joinInformation?;
+    JoinMeetingIdSettings joinMeetingIdSettings?;
+    # The join URL of the online meeting. Read-only.
+    string? joinWebUrl?;
+    LobbyBypassSettings lobbyBypassSettings?;
+    # Indicates whether to record the meeting automatically.
+    boolean? recordAutomatically?;
+    MeetingChatHistoryDefaultMode shareMeetingChatHistoryDefault?;
+    # The subject of the online meeting.
+    string? subject?;
+    # The video teleconferencing ID. Read-only.
+    string? videoTeleconferenceId?;
+    WatermarkProtectionValues watermarkProtection?;
+    # The attendance reports of an online meeting. Read-only.
+    MeetingAttendanceReport[] attendanceReports?;
 };
 
-public type microsoft\.graph\.userSolutionRoot record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.workingTimeSchedule workingTimeSchedule?;
+public type SingleValueLegacyExtendedProperty record {
+    *Entity;
+    *SingleValueLegacyExtendedProperty1;
 };
 
-public type microsoft\.graph\.onPremisesProvisioningError record {
-    string? category?;
-    string? occurredDateTime?;
-    string? propertyCausingError?;
-    string? value?;
+# Device action result
+public type DeviceActionResult record {
+    # Action name
+    string? actionName?;
+    # State of the action on the device
+    ActionState actionState?;
+    # Time the action state was last updated
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string lastUpdatedDateTime?;
+    # Time the action was initiated
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string startDateTime?;
 };
 
-public type microsoft\.graph\.displayNameLocalization record {
-    string? displayName?;
-    string? languageTag?;
-};
-
-public type microsoft\.graph\.attachmentBase record {
-    *microsoft\.graph\.entity;
-    string? contentType?;
-    string? lastModifiedDateTime?;
+public type TimeZoneBase record {
+    # The name of a time zone. It can be a standard time zone name such as 'Hawaii-Aleutian Standard Time', or 'Customized Time Zone' for a custom time zone.
     string? name?;
-    decimal size?;
 };
 
-public type microsoft\.graph\.pageLayoutType "microsoftReserved"|"article"|"home"|"unknownFutureValue";
-
-public type microsoft\.graph\.temporaryAccessPassAuthenticationMethod record {
-    *microsoft\.graph\.authenticationMethod;
-    string? createdDateTime?;
-    boolean? isUsable?;
-    boolean? isUsableOnce?;
-    decimal? lifetimeInMinutes?;
-    string? methodUsabilityReason?;
-    string? startDateTime?;
-    string? temporaryAccessPass?;
+public type Permission record {
+    *Entity;
+    *Permission1;
 };
 
-public type microsoft\.graph\.termStore\.set record {
-    *microsoft\.graph\.entity;
-    string? createdDateTime?;
-    string? description?;
-    microsoft\.graph\.termStore\.localizedName[] localizedNames?;
-    microsoft\.graph\.keyValue[] properties?;
-    microsoft\.graph\.termStore\.term[] children?;
-    microsoft\.graph\.termStore\.group parentGroup?;
-    microsoft\.graph\.termStore\.relation[] relations?;
-    microsoft\.graph\.termStore\.term[] terms?;
-};
-
-public type microsoft\.graph\.identitySet record {
-    microsoft\.graph\.identity application?;
-    microsoft\.graph\.identity device?;
-    microsoft\.graph\.identity user?;
-};
-
-public type microsoft\.graph\.messageRulePredicates record {
-    string[] bodyContains?;
-    string[] bodyOrSubjectContains?;
-    string[] categories?;
-    microsoft\.graph\.recipient[] fromAddresses?;
-    boolean? hasAttachments?;
-    string[] headerContains?;
-    microsoft\.graph\.importance importance?;
-    boolean? isApprovalRequest?;
-    boolean? isAutomaticForward?;
-    boolean? isAutomaticReply?;
-    boolean? isEncrypted?;
-    boolean? isMeetingRequest?;
-    boolean? isMeetingResponse?;
-    boolean? isNonDeliveryReport?;
-    boolean? isPermissionControlled?;
-    boolean? isReadReceipt?;
-    boolean? isSigned?;
-    boolean? isVoicemail?;
-    microsoft\.graph\.messageActionFlag messageActionFlag?;
-    boolean? notSentToMe?;
-    string[] recipientContains?;
-    string[] senderContains?;
-    microsoft\.graph\.sensitivity sensitivity?;
-    boolean? sentCcMe?;
-    boolean? sentOnlyToMe?;
-    microsoft\.graph\.recipient[] sentToAddresses?;
-    boolean? sentToMe?;
-    boolean? sentToOrCcMe?;
-    string[] subjectContains?;
-    microsoft\.graph\.sizeRange withinSizeRange?;
-};
-
-public type microsoft\.graph\.attendanceRecord record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.attendanceInterval[] attendanceIntervals?;
-    string? emailAddress?;
-    microsoft\.graph\.virtualEventExternalRegistrationInformation externalRegistrationInformation?;
-    microsoft\.graph\.identity identity?;
-    string? registrationId?;
-    string? role?;
-    decimal? totalAttendanceInSeconds?;
-};
-
-public type microsoft\.graph\.windowsMalwareExecutionState "unknown"|"blocked"|"allowed"|"running"|"notRunning";
-
-public type microsoft\.graph\.wellknownListName "none"|"defaultList"|"flaggedEmails"|"unknownFutureValue";
-
-# Represents the Headers record for the operation: deleteItem
-public type DeleteItemHeaders record {
-    # ETag
-    string If\-Match?;
-};
-
-public type microsoft\.graph\.sharePointIdentitySet record {
-    *microsoft\.graph\.identitySet;
-    microsoft\.graph\.identity group?;
-    microsoft\.graph\.sharePointIdentity siteGroup?;
-    microsoft\.graph\.sharePointIdentity siteUser?;
-};
-
-public type root_microsoft_graph_preview_body record {
-    string? page?;
-    decimal? zoom?;
-};
-
-public type microsoft\.graph\.employeeOrgData record {
-    string? costCenter?;
-    string? division?;
-};
-
-public type microsoft\.graph\.printerLocation record {
-    decimal? altitudeInMeters?;
-    string? building?;
-    string? city?;
-    string? countryOrRegion?;
-    string? floor?;
-    string? floorDescription?;
-    decimal? latitude?;
-    decimal? longitude?;
-    string[] organization?;
-    string? postalCode?;
-    string? roomDescription?;
-    string? roomName?;
-    string? site?;
-    string? stateOrProvince?;
-    string? streetAddress?;
-    string[] subdivision?;
-    string[] subunit?;
+public type ChatMessageHostedContent1 record {
 };
 
 # Provides a set of configurations for controlling the behaviours when communicating with a remote HTTP endpoint.
@@ -2758,2285 +6224,1856 @@ public type ConnectionConfig record {|
     boolean laxDataBinding = true;
 |};
 
-public type microsoft\.graph\.termStore\.group record {
-    *microsoft\.graph\.entity;
-    string? createdDateTime?;
-    string? description?;
-    string? displayName?;
-    string? parentSiteId?;
-    microsoft\.graph\.termStore\.termGroupScope scope?;
-    microsoft\.graph\.termStore\.set[] sets?;
+public type ExtractSensitivityLabelsResult record {
+    # List of sensitivity labels assigned to a file.
+    SensitivityLabelAssignment[] labels?;
 };
 
-public type microsoft\.graph\.plannerAssignedToTaskBoardTaskFormat record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.plannerOrderHintsByAssignee orderHintsByAssignee?;
-    string? unassignedOrderHint?;
+public type SystemFacet record {
 };
 
-public type microsoft\.graph\.deviceRegistrationState "notRegistered"|"registered"|"revoked"|"keyConflict"|"approvalPending"|"certificateReset"|"notRegisteredPendingEnrollment"|"unknown";
-
-public type microsoft\.graph\.calendarColor "auto"|"lightBlue"|"lightGreen"|"lightOrange"|"lightGray"|"lightYellow"|"lightTeal"|"lightPink"|"lightBrown"|"lightRed"|"maxColor";
-
-public type microsoft\.graph\.windowsProtectionState record {
-    *microsoft\.graph\.entity;
-    string? antiMalwareVersion?;
-    microsoft\.graph\.windowsDeviceHealthState deviceState?;
-    string? engineVersion?;
-    boolean? fullScanOverdue?;
-    boolean? fullScanRequired?;
-    boolean? isVirtualMachine?;
-    string? lastFullScanDateTime?;
-    string? lastFullScanSignatureVersion?;
-    string? lastQuickScanDateTime?;
-    string? lastQuickScanSignatureVersion?;
-    string? lastReportedDateTime?;
-    boolean? malwareProtectionEnabled?;
-    boolean? networkInspectionSystemEnabled?;
-    microsoft\.graph\.windowsDefenderProductStatus productStatus?;
-    boolean? quickScanOverdue?;
-    boolean? realTimeProtectionEnabled?;
-    boolean? rebootRequired?;
-    boolean? signatureUpdateOverdue?;
-    string? signatureVersion?;
-    boolean? tamperProtectionEnabled?;
-    microsoft\.graph\.windowsDeviceMalwareState[] detectedMalwareState?;
+public type WorkbookFilterCriteria record {
+    # The color applied to the cell.
+    string? color?;
+    # A custom criterion.
+    string? criterion1?;
+    # A custom criterion.
+    string? criterion2?;
+    # A dynamic formula specified in a custom filter.
+    string dynamicCriteria?;
+    # Indicates whether a filter is applied to a column.
+    string filterOn?;
+    WorkbookIcon icon?;
+    # An operator in a cell; for example, =, >, <, <=, or <>.
+    string operator?;
+    Json values?;
 };
 
-public type microsoft\.graph\.serviceStorageQuotaBreakdown record {
-    *microsoft\.graph\.storageQuotaBreakdown;
+public type Hashes record {
+    # The CRC32 value of the file (if available). Read-only.
+    string? crc32Hash?;
+    # A proprietary hash of the file that can be used to determine if the contents of the file change (if available). Read-only.
+    string? quickXorHash?;
+    # SHA1 hash for the contents of the file (if available). Read-only.
+    string? sha1Hash?;
+    # This property isn't supported. Don't use.
+    string? sha256Hash?;
 };
 
-public type microsoft\.graph\.teamsAppInstallation record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.teamsAppPermissionSet consentedPermissionSet?;
-    microsoft\.graph\.teamsApp teamsApp?;
-    microsoft\.graph\.teamsAppDefinition teamsAppDefinition?;
-};
-
-public type microsoft\.graph\.authenticationMethodSignInState "notSupported"|"notAllowedByPolicy"|"notEnabled"|"phoneNumberNotUnique"|"ready"|"notConfigured"|"unknownFutureValue";
-
-public type microsoft\.graph\.teamMemberSettings record {
-    boolean? allowAddRemoveApps?;
-    boolean? allowCreatePrivateChannels?;
-    boolean? allowCreateUpdateChannels?;
-    boolean? allowCreateUpdateRemoveConnectors?;
-    boolean? allowCreateUpdateRemoveTabs?;
-    boolean? allowDeleteChannels?;
-};
-
-public type microsoft\.graph\.image record {
-    decimal? height?;
-    decimal? width?;
-};
-
-public type microsoft\.graph\.workbookTableColumn record {
-    *microsoft\.graph\.entity;
-    decimal index?;
-    string? name?;
-    microsoft\.graph\.Json values?;
-    microsoft\.graph\.workbookFilter filter?;
-};
-
-public type microsoft\.graph\.teamSummary record {
-    decimal? guestsCount?;
-    decimal? membersCount?;
-    decimal? ownersCount?;
-};
-
-public type microsoft\.graph\.teamsApp record {
-    *microsoft\.graph\.entity;
-    string? displayName?;
-    microsoft\.graph\.teamsAppDistributionMethod distributionMethod?;
-    string? externalId?;
-    microsoft\.graph\.teamsAppDefinition[] appDefinitions?;
-};
-
-public type microsoft\.graph\.managedAppRegistration record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.mobileAppIdentifier appIdentifier?;
-    string? applicationVersion?;
-    string createdDateTime?;
-    string? deviceName?;
-    string? deviceTag?;
-    string? deviceType?;
-    microsoft\.graph\.managedAppFlaggedReason[] flaggedReasons?;
-    string lastSyncDateTime?;
-    string? managementSdkVersion?;
-    string? platformVersion?;
-    string? userId?;
-    string? version?;
-    microsoft\.graph\.managedAppPolicy[] appliedPolicies?;
-    microsoft\.graph\.managedAppPolicy[] intendedPolicies?;
-    microsoft\.graph\.managedAppOperation[] operations?;
-};
-
-public type microsoft\.graph\.teamVisibilityType "private"|"public"|"hiddenMembership"|"unknownFutureValue";
-
-public type microsoft\.graph\.attachmentSession record {
-    *microsoft\.graph\.entity;
-    string? content?;
-    string? expirationDateTime?;
-    string[] nextExpectedRanges?;
-};
-
-public type microsoft\.graph\.changeTrackedEntity record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.identitySet createdBy?;
-    string? createdDateTime?;
-    microsoft\.graph\.identitySet lastModifiedBy?;
-    string? lastModifiedDateTime?;
-};
-
-public type microsoft\.graph\.scheduleChangeRequest record {
-    *microsoft\.graph\.changeTrackedEntity;
-    microsoft\.graph\.scheduleChangeRequestActor assignedTo?;
-    string? managerActionDateTime?;
-    string? managerActionMessage?;
-    string? managerUserId?;
-    string? senderDateTime?;
-    string? senderMessage?;
-    string? senderUserId?;
-    microsoft\.graph\.scheduleChangeState state?;
-};
-
-public type microsoft\.graph\.windowsMalwareThreatState "active"|"actionFailed"|"manualStepsRequired"|"fullScanRequired"|"rebootRequired"|"remediatedWithNonCriticalFailures"|"quarantined"|"removed"|"cleaned"|"allowed"|"noStatusCleared";
-
-public type microsoft\.graph\.workbookApplication record {
-    *microsoft\.graph\.entity;
-    string calculationMode?;
-};
-
-public type microsoft\.graph\.insightIdentity record {
-    string? address?;
-    string? displayName?;
+public type ContentTypeInfo record {
+    # The ID of the content type.
     string? id?;
+    # The name of the content type.
+    string? name?;
 };
 
-public type microsoft\.graph\.conversationThread record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.recipient[] ccRecipients?;
-    boolean hasAttachments?;
-    boolean isLocked?;
-    string lastDeliveredDateTime?;
-    string preview?;
-    string topic?;
-    microsoft\.graph\.recipient[] toRecipients?;
-    string[] uniqueSenders?;
-    microsoft\.graph\.post[] posts?;
-};
-
-public type microsoft\.graph\.deviceCompliancePolicyState record {
-    *microsoft\.graph\.entity;
+public type Contact1 record {
+    # The name of the contact's assistant.
+    string? assistantName?;
+    # The contact's birthday. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
+    string? birthday?;
+    PhysicalAddress businessAddress?;
+    # The business home page of the contact.
+    string? businessHomePage?;
+    # The contact's business phone numbers.
+    string[] businessPhones?;
+    # The names of the contact's children.
+    string[] children?;
+    # The name of the contact's company.
+    string? companyName?;
+    # The contact's department.
+    string? department?;
+    # The contact's display name. You can specify the display name in a create or update operation. Note that later updates to other properties may cause an automatically generated value to overwrite the displayName value you have specified. To preserve a pre-existing value, always include it as displayName in an update operation.
     string? displayName?;
-    microsoft\.graph\.policyPlatformType platformType?;
-    decimal settingCount?;
-    microsoft\.graph\.deviceCompliancePolicySettingState[] settingStates?;
-    microsoft\.graph\.complianceStatus state?;
-    decimal version?;
+    # The contact's email addresses.
+    EmailAddress[] emailAddresses?;
+    # The name the contact is filed under.
+    string? fileAs?;
+    # The contact's suffix.
+    string? generation?;
+    # The contact's given name.
+    string? givenName?;
+    PhysicalAddress homeAddress?;
+    # The contact's home phone numbers.
+    string[] homePhones?;
+    # The contact's instant messaging (IM) addresses.
+    string[] imAddresses?;
+    # The contact's initials.
+    string? initials?;
+    # The contact’s job title.
+    string? jobTitle?;
+    # The name of the contact's manager.
+    string? manager?;
+    # The contact's middle name.
+    string? middleName?;
+    # The contact's mobile phone number.
+    string? mobilePhone?;
+    # The contact's nickname.
+    string? nickName?;
+    # The location of the contact's office.
+    string? officeLocation?;
+    PhysicalAddress otherAddress?;
+    # The ID of the contact's parent folder.
+    string? parentFolderId?;
+    # The user's notes about the contact.
+    string? personalNotes?;
+    # The contact's profession.
+    string? profession?;
+    # The name of the contact's spouse/partner.
+    string? spouseName?;
+    # The contact's surname.
+    string? surname?;
+    # The contact's title.
+    string? title?;
+    # The phonetic Japanese company name of the contact.
+    string? yomiCompanyName?;
+    # The phonetic Japanese given name (first name) of the contact.
+    string? yomiGivenName?;
+    # The phonetic Japanese surname (last name)  of the contact.
+    string? yomiSurname?;
+    # The collection of open extensions defined for the contact. Read-only. Nullable.
+    Extension[] extensions?;
+    # The collection of multi-value extended properties defined for the contact. Read-only. Nullable.
+    MultiValueLegacyExtendedProperty[] multiValueExtendedProperties?;
+    ProfilePhoto photo?;
+    # The collection of single-value extended properties defined for the contact. Read-only. Nullable.
+    SingleValueLegacyExtendedProperty[] singleValueExtendedProperties?;
 };
 
-public type microsoft\.graph\.personOrGroupColumn record {
-    boolean? allowMultipleSelection?;
-    string? chooseFromType?;
-    string? displayAs?;
+public type ShiftItem record {
+    *ScheduleEntity;
+    *ShiftItem1;
 };
 
-public type microsoft\.graph\.termStore\.relationType "pin"|"reuse"|"unknownFutureValue";
-
-public type microsoft\.graph\.phone record {
-    string? language?;
-    string? number?;
-    string? region?;
-    microsoft\.graph\.phoneType 'type?;
+public type ChatMessageMentionedIdentitySet record {
+    *IdentitySet;
+    *ChatMessageMentionedIdentitySet1;
 };
 
 # Represents the Headers record for the operation: deleteDrive
 public type DeleteDriveHeaders record {
     # ETag
-    string If\-Match?;
+    @http:Header {name: "If-Match"}
+    string ifMatch?;
 };
 
-public type microsoft\.graph\.recurrenceRangeType "endDate"|"noEnd"|"numbered";
-
-public type microsoft\.graph\.customSecurityAttributeValue record {
+public type UserProtectionScopeContainer record {
+    *Entity;
+    *UserProtectionScopeContainer1;
 };
 
-public type microsoft\.graph\.printColorMode "blackAndWhite"|"grayscale"|"color"|"auto"|"unknownFutureValue";
-
-public type microsoft\.graph\.usageDetails record {
-    string? lastAccessedDateTime?;
-    string? lastModifiedDateTime?;
+public type WorkbookFilter record {
+    *Entity;
+    *WorkbookFilter1;
 };
 
-public type microsoft\.graph\.chatMessagePolicyViolationDlpActionTypes "none"|"notifySender"|"blockAccess"|"blockAccessExternal";
-
-# Represents the Queries record for the operation: recent
-public type RecentQueries record {
-    # Skip the first n items
-    int \$skip?;
-    # Show only the first n items
-    int \$top?;
-    # Filter items by property values
-    string \$filter?;
-    # Search items by search phrases
-    string \$search?;
-    # Order items by property values
-    string[] \$orderby?;
-    # Expand related entities
-    string[] \$expand?;
-    # Include count of items
-    boolean \$count?;
-    # Select properties to be returned
-    string[] \$select?;
-};
-
-public type microsoft\.graph\.shiftItem record {
-    *microsoft\.graph\.scheduleEntity;
-    microsoft\.graph\.shiftActivity[] activities?;
-    string? displayName?;
-    string? notes?;
-};
-
-public type microsoft\.graph\.teamsAppResourceSpecificPermission record {
-    microsoft\.graph\.teamsAppResourceSpecificPermissionType permissionType?;
-    string? permissionValue?;
-};
-
-public type microsoft\.graph\.teamFunSettings record {
-    boolean? allowCustomMemes?;
-    boolean? allowGiphy?;
-    boolean? allowStickersAndMemes?;
-    microsoft\.graph\.giphyRatingType giphyContentRating?;
-};
-
-public type microsoft\.graph\.channelMembershipType "standard"|"private"|"unknownFutureValue"|"shared";
-
-public type driveItemid_microsoft_graph_preview_body record {
-    string? page?;
-    decimal? zoom?;
-};
-
-public type microsoft\.graph\.workbookPivotTable record {
-    *microsoft\.graph\.entity;
-    string? name?;
-    microsoft\.graph\.workbookWorksheet worksheet?;
-};
-
-public type microsoft\.graph\.internetMessageHeader record {
-    string? name?;
-    string? value?;
-};
-
-public type microsoft\.graph\.notebook record {
-    *microsoft\.graph\.onenoteEntityHierarchyModel;
-    boolean? isDefault?;
-    boolean? isShared?;
-    microsoft\.graph\.notebookLinks links?;
-    string? sectionGroupsUrl?;
-    string? sectionsUrl?;
-    microsoft\.graph\.onenoteUserRole userRole?;
-    microsoft\.graph\.sectionGroup[] sectionGroups?;
-    microsoft\.graph\.onenoteSection[] sections?;
-};
-
-public type microsoft\.graph\.unifiedStorageQuota record {
-    *microsoft\.graph\.entity;
+public type UnifiedStorageQuota1 record {
     decimal? deleted?;
     string? manageWebUrl?;
     decimal? remaining?;
     string? state?;
     decimal? total?;
     decimal? used?;
-    microsoft\.graph\.serviceStorageQuotaBreakdown[] services?;
+    ServiceStorageQuotaBreakdown[] services?;
 };
 
-public type microsoft\.graph\.lobbyBypassSettings record {
-    boolean? isDialInBypassEnabled?;
-    microsoft\.graph\.lobbyBypassScope scope?;
+# Malware threat status
+public type WindowsMalwareThreatState "active"|"actionFailed"|"manualStepsRequired"|"fullScanRequired"|"rebootRequired"|"remediatedWithNonCriticalFailures"|"quarantined"|"removed"|"cleaned"|"allowed"|"noStatusCleared";
+
+public type WorkbookChart record {
+    *Entity;
+    *WorkbookChart1;
 };
 
-public type microsoft\.graph\.cloudClipboardItemPayload record {
-    string content?;
-    string formatName?;
+public type UsedInsight1 record {
+    UsageDetails lastUsed?;
+    ResourceReference resourceReference?;
+    ResourceVisualization resourceVisualization?;
+    Entity 'resource?;
 };
 
-public type microsoft\.graph\.timeRange record {
-    string? endTime?;
-    string? startTime?;
+public type ChecklistItem record {
+    *Entity;
+    *ChecklistItem1;
 };
 
-public type microsoft\.graph\.printerStatus record {
-    string? description?;
-    microsoft\.graph\.printerProcessingStateDetail[] details?;
-    microsoft\.graph\.printerProcessingState state?;
+public type AssignedPlan record {
+    # The date and time at which the plan was assigned. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z.
+    string? assignedDateTime?;
+    # Condition of the capability assignment. The possible values are Enabled, Warning, Suspended, Deleted, LockedOut. See a detailed description of each value.
+    string? capabilityStatus?;
+    # The name of the service; for example, exchange.
+    string? 'service?;
+    # A GUID that identifies the service plan. For a complete list of GUIDs and their equivalent friendly service names, see Product names and service plan identifiers for licensing.
+    string? servicePlanId?;
 };
 
-public type microsoft\.graph\.baseItem record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.identitySet createdBy?;
-    string createdDateTime?;
-    string? description?;
-    string? eTag?;
-    microsoft\.graph\.identitySet lastModifiedBy?;
-    string lastModifiedDateTime?;
-    string? name?;
-    microsoft\.graph\.itemReference parentReference?;
-    string? webUrl?;
-    microsoft\.graph\.user createdByUser?;
-    microsoft\.graph\.user lastModifiedByUser?;
+public type Team record {
+    *Entity;
+    *Team1;
 };
 
-public type microsoft\.graph\.linkedResource record {
-    *microsoft\.graph\.entity;
-    string? applicationName?;
-    string? displayName?;
-    string? externalId?;
-    string? webUrl?;
+public type ManagedDevice record {
+    *Entity;
+    *ManagedDevice1;
 };
 
-# Represents the Queries record for the operation: getItemCount
-public type GetItemCountQueries record {
-    # Filter items by property values
-    string \$filter?;
-    # Search items by search phrases
-    string \$search?;
+public type IncompleteData record {
+    # The service does not have source data before the specified time.
+    string? missingDataBeforeDateTime?;
+    # Some data was not recorded due to excessive activity.
+    boolean? wasThrottled?;
 };
 
-public type microsoft\.graph\.package record {
-    string? 'type?;
-};
-
-public type microsoft\.graph\.user record {
-    *microsoft\.graph\.directoryObject;
-    string? aboutMe?;
-    boolean? accountEnabled?;
-    string? ageGroup?;
-    microsoft\.graph\.assignedLicense[] assignedLicenses?;
-    microsoft\.graph\.assignedPlan[] assignedPlans?;
-    microsoft\.graph\.authorizationInfo authorizationInfo?;
-    string birthday?;
-    string[] businessPhones?;
-    string? city?;
-    string? companyName?;
-    string? consentProvidedForMinor?;
-    string? country?;
-    string? createdDateTime?;
-    string? creationType?;
-    microsoft\.graph\.customSecurityAttributeValue customSecurityAttributes?;
-    string? department?;
-    decimal deviceEnrollmentLimit?;
-    string? displayName?;
-    string? employeeHireDate?;
-    string? employeeId?;
-    string? employeeLeaveDateTime?;
-    microsoft\.graph\.employeeOrgData employeeOrgData?;
-    string? employeeType?;
-    string? externalUserState?;
-    string? externalUserStateChangeDateTime?;
-    string? faxNumber?;
-    string? givenName?;
-    string hireDate?;
-    microsoft\.graph\.objectIdentity[] identities?;
-    string[] imAddresses?;
-    string[] interests?;
-    boolean? isManagementRestricted?;
-    boolean? isResourceAccount?;
-    string? jobTitle?;
-    string? lastPasswordChangeDateTime?;
-    string? legalAgeGroupClassification?;
-    microsoft\.graph\.licenseAssignmentState[] licenseAssignmentStates?;
-    string? mail?;
-    microsoft\.graph\.mailboxSettings mailboxSettings?;
-    string? mailNickname?;
-    string? mobilePhone?;
-    string? mySite?;
-    string? officeLocation?;
-    string? onPremisesDistinguishedName?;
-    string? onPremisesDomainName?;
-    microsoft\.graph\.onPremisesExtensionAttributes onPremisesExtensionAttributes?;
-    string? onPremisesImmutableId?;
-    string? onPremisesLastSyncDateTime?;
-    microsoft\.graph\.onPremisesProvisioningError[] onPremisesProvisioningErrors?;
-    string? onPremisesSamAccountName?;
-    string? onPremisesSecurityIdentifier?;
-    boolean? onPremisesSyncEnabled?;
-    string? onPremisesUserPrincipalName?;
-    string[] otherMails?;
-    string? passwordPolicies?;
-    microsoft\.graph\.passwordProfile passwordProfile?;
-    string[] pastProjects?;
-    string? postalCode?;
-    string? preferredDataLocation?;
-    string? preferredLanguage?;
-    string? preferredName?;
-    microsoft\.graph\.userPrint print?;
-    microsoft\.graph\.provisionedPlan[] provisionedPlans?;
-    string[] proxyAddresses?;
-    string[] responsibilities?;
-    string[] schools?;
-    string? securityIdentifier?;
-    microsoft\.graph\.serviceProvisioningError[] serviceProvisioningErrors?;
-    boolean? showInAddressList?;
-    microsoft\.graph\.signInActivity signInActivity?;
-    string? signInSessionsValidFromDateTime?;
-    string[] skills?;
-    string? state?;
-    string? streetAddress?;
-    string? surname?;
-    string? usageLocation?;
+public type UserIdentity1 record {
+    # Indicates the client IP address associated with the user performing the activity (audit log only).
+    string? ipAddress?;
+    # The userPrincipalName attribute of the user.
     string? userPrincipalName?;
-    string? userType?;
-    microsoft\.graph\.userActivity[] activities?;
-    microsoft\.graph\.agreementAcceptance[] agreementAcceptances?;
-    microsoft\.graph\.appRoleAssignment[] appRoleAssignments?;
-    microsoft\.graph\.authentication authentication?;
-    microsoft\.graph\.calendar calendar?;
-    microsoft\.graph\.calendarGroup[] calendarGroups?;
-    microsoft\.graph\.calendar[] calendars?;
-    microsoft\.graph\.event[] calendarView?;
-    microsoft\.graph\.chat[] chats?;
-    microsoft\.graph\.cloudClipboardRoot cloudClipboard?;
-    microsoft\.graph\.contactFolder[] contactFolders?;
-    microsoft\.graph\.contact[] contacts?;
-    microsoft\.graph\.directoryObject[] createdObjects?;
-    microsoft\.graph\.userDataSecurityAndGovernance dataSecurityAndGovernance?;
-    microsoft\.graph\.deviceManagementTroubleshootingEvent[] deviceManagementTroubleshootingEvents?;
-    microsoft\.graph\.directoryObject[] directReports?;
-    microsoft\.graph\.drive drive?;
-    microsoft\.graph\.drive[] drives?;
-    microsoft\.graph\.employeeExperienceUser employeeExperience?;
-    microsoft\.graph\.event[] events?;
-    microsoft\.graph\.extension[] extensions?;
-    microsoft\.graph\.site[] followedSites?;
-    microsoft\.graph\.inferenceClassification inferenceClassification?;
-    microsoft\.graph\.itemInsights insights?;
-    microsoft\.graph\.team[] joinedTeams?;
-    microsoft\.graph\.licenseDetails[] licenseDetails?;
-    microsoft\.graph\.mailFolder[] mailFolders?;
-    microsoft\.graph\.managedAppRegistration[] managedAppRegistrations?;
-    microsoft\.graph\.managedDevice[] managedDevices?;
-    microsoft\.graph\.directoryObject manager?;
-    microsoft\.graph\.directoryObject[] memberOf?;
-    microsoft\.graph\.message[] messages?;
-    microsoft\.graph\.oAuth2PermissionGrant[] oauth2PermissionGrants?;
-    microsoft\.graph\.onenote onenote?;
-    microsoft\.graph\.onlineMeeting[] onlineMeetings?;
-    microsoft\.graph\.outlookUser outlook?;
-    microsoft\.graph\.directoryObject[] ownedDevices?;
-    microsoft\.graph\.directoryObject[] ownedObjects?;
-    microsoft\.graph\.person[] people?;
-    microsoft\.graph\.resourceSpecificPermissionGrant[] permissionGrants?;
-    microsoft\.graph\.profilePhoto photo?;
-    microsoft\.graph\.profilePhoto[] photos?;
-    microsoft\.graph\.plannerUser planner?;
-    microsoft\.graph\.presence presence?;
-    microsoft\.graph\.directoryObject[] registeredDevices?;
-    microsoft\.graph\.scopedRoleMembership[] scopedRoleMemberOf?;
-    microsoft\.graph\.userSettings settings?;
-    microsoft\.graph\.userSolutionRoot solutions?;
-    microsoft\.graph\.directoryObject[] sponsors?;
-    microsoft\.graph\.userTeamwork teamwork?;
-    microsoft\.graph\.todo todo?;
-    microsoft\.graph\.directoryObject[] transitiveMemberOf?;
 };
 
-public type microsoft\.graph\.richLongRunningOperation record {
-    *microsoft\.graph\.longRunningOperation;
-    microsoft\.graph\.publicError 'error?;
-    decimal? percentageComplete?;
-    string? resourceId?;
-    string? 'type?;
+public type AgreementAcceptance record {
+    *Entity;
+    *AgreementAcceptance1;
 };
 
-public type microsoft\.graph\.sharedWithChannelTeamInfo record {
-    *microsoft\.graph\.teamInfo;
-    boolean? isHostTeam?;
-    microsoft\.graph\.conversationMember[] allowedMembers?;
+public type DayNote1 record {
+    # The date of the day note.
+    string? dayNoteDate?;
+    ItemBody draftDayNote?;
+    ItemBody sharedDayNote?;
 };
 
-public type microsoft\.graph\.workbookChartFont record {
-    *microsoft\.graph\.entity;
-    boolean? bold?;
-    string? color?;
-    boolean? italic?;
-    string? name?;
-    decimal? size?;
-    string? underline?;
+public type ChatMessageImportance "normal"|"high"|"urgent"|"unknownFutureValue";
+
+public type TimeOffReason1 record {
+    # The code of the timeOffReason to represent an external identifier. This field must be unique within the team in Microsoft Teams and uses an alphanumeric format, with a maximum of 100 characters.
+    string? code?;
+    # The name of the timeOffReason. Required.
+    string? displayName?;
+    TimeOffReasonIconType iconType?;
+    # Indicates whether the timeOffReason can be used when creating new entities or updating existing ones. Required.
+    boolean? isActive?;
+};
+
+public type Calendar record {
+    *Entity;
+    *Calendar1;
+};
+
+public type PrinterLocation record {
+    # The altitude, in meters, that the printer is located at.
+    decimal? altitudeInMeters?;
+    # The building that the printer is located in.
+    string? building?;
+    # The city that the printer is located in.
+    string? city?;
+    # The country or region that the printer is located in.
+    string? countryOrRegion?;
+    # The floor that the printer is located on. Only numerical values are supported right now.
+    string? floor?;
+    # The description of the floor that the printer is located on.
+    string? floorDescription?;
+    # The latitude that the printer is located at.
+    decimal? latitude?;
+    # The longitude that the printer is located at.
+    decimal? longitude?;
+    # The organizational hierarchy that the printer belongs to. The elements should be in hierarchical order.
+    string[] organization?;
+    # The postal code that the printer is located in.
+    string? postalCode?;
+    # The description of the room that the printer is located in.
+    string? roomDescription?;
+    # The room that the printer is located in. Only numerical values are supported right now.
+    string? roomName?;
+    # The site that the printer is located in.
+    string? site?;
+    # The state or province that the printer is located in.
+    string? stateOrProvince?;
+    # The street address where the printer is located.
+    string? streetAddress?;
+    # The subdivision that the printer is located in. The elements should be in hierarchical order.
+    string[] subdivision?;
+    string[] subunit?;
+};
+
+public type SearchResult record {
+    # A callback URL that can be used to record telemetry information. The application should issue a GET on this URL if the user interacts with this item to improve the quality of results.
+    string? onClickTelemetryUrl?;
+};
+
+public type TeamsTab record {
+    *Entity;
+    *TeamsTab1;
 };
 
 # Represents the Headers record for the operation: deleteChildrenContent
 public type DeleteChildrenContentHeaders record {
     # ETag
-    string If\-Match?;
+    @http:Header {name: "If-Match"}
+    string ifMatch?;
 };
 
-public type microsoft\.graph\.visualInfo record {
-    microsoft\.graph\.imageInfo attribution?;
-    string? backgroundColor?;
-    microsoft\.graph\.Json content?;
-    string? description?;
-    string displayText?;
+public type WorkingHours record {
+    # The days of the week on which the user works.
+    DayOfWeek[] daysOfWeek?;
+    # The time of the day that the user stops working.
+    string? endTime?;
+    # The time of the day that the user starts working.
+    string? startTime?;
+    TimeZoneBase timeZone?;
 };
 
-public type microsoft\.graph\.passwordAuthenticationMethod record {
-    *microsoft\.graph\.authenticationMethod;
-    string? createdDateTime?;
-    string? password?;
+public type DriveItem record {
+    *BaseItem;
+    *DriveItem1;
 };
 
-public type microsoft\.graph\.workbookChartPointFormat record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.workbookChartFill fill?;
+public type ItemAnalytics record {
+    *Entity;
+    *ItemAnalytics1;
 };
 
-public type microsoft\.graph\.deviceConfigurationState record {
-    *microsoft\.graph\.entity;
-    string? displayName?;
-    microsoft\.graph\.policyPlatformType platformType?;
-    decimal settingCount?;
-    microsoft\.graph\.deviceConfigurationSettingState[] settingStates?;
-    microsoft\.graph\.complianceStatus state?;
-    decimal version?;
+public type Event record {
+    *OutlookItem;
+    *Event1;
 };
 
-public type microsoft\.graph\.authenticationPhoneType "mobile"|"alternateMobile"|"office"|"unknownFutureValue";
-
-public type microsoft\.graph\.geoCoordinates record {
-    decimal? altitude?;
-    decimal? latitude?;
-    decimal? longitude?;
+public type EmailAuthenticationMethod record {
+    *AuthenticationMethod;
+    *EmailAuthenticationMethod1;
 };
 
-public type microsoft\.graph\.recipient record {
-    microsoft\.graph\.emailAddress emailAddress?;
+public type WorkbookPivotTable record {
+    *Entity;
+    *WorkbookPivotTable1;
 };
 
-public type microsoft\.graph\.schedule record {
-    *microsoft\.graph\.entity;
-    boolean? enabled?;
-    boolean? isActivitiesIncludedWhenCopyingShiftsEnabled?;
-    boolean? offerShiftRequestsEnabled?;
-    boolean? openShiftsEnabled?;
-    microsoft\.graph\.operationStatus provisionStatus?;
-    string? provisionStatusCode?;
-    microsoft\.graph\.dayOfWeek startDayOfWeek?;
-    boolean? swapShiftsRequestsEnabled?;
-    boolean? timeClockEnabled?;
-    microsoft\.graph\.timeClockSettings timeClockSettings?;
-    boolean? timeOffRequestsEnabled?;
-    string? timeZone?;
-    string[] workforceIntegrationIds?;
-    microsoft\.graph\.dayNote[] dayNotes?;
-    microsoft\.graph\.offerShiftRequest[] offerShiftRequests?;
-    microsoft\.graph\.openShiftChangeRequest[] openShiftChangeRequests?;
-    microsoft\.graph\.openShift[] openShifts?;
-    microsoft\.graph\.schedulingGroup[] schedulingGroups?;
-    microsoft\.graph\.shift[] shifts?;
-    microsoft\.graph\.swapShiftsChangeRequest[] swapShiftsChangeRequests?;
-    microsoft\.graph\.timeCard[] timeCards?;
-    microsoft\.graph\.timeOffReason[] timeOffReasons?;
-    microsoft\.graph\.timeOffRequest[] timeOffRequests?;
-    microsoft\.graph\.timeOff[] timesOff?;
+public type PrinterProcessingStateDetail "paused"|"mediaJam"|"mediaNeeded"|"mediaLow"|"mediaEmpty"|"coverOpen"|"interlockOpen"|"outputTrayMissing"|"outputAreaFull"|"markerSupplyLow"|"markerSupplyEmpty"|"inputTrayMissing"|"outputAreaAlmostFull"|"markerWasteAlmostFull"|"markerWasteFull"|"fuserOverTemp"|"fuserUnderTemp"|"other"|"none"|"movingToPaused"|"shutdown"|"connectingToDevice"|"timedOut"|"stopping"|"stoppedPartially"|"tonerLow"|"tonerEmpty"|"spoolAreaFull"|"doorOpen"|"opticalPhotoConductorNearEndOfLife"|"opticalPhotoConductorLifeOver"|"developerLow"|"developerEmpty"|"interpreterResourceUnavailable"|"unknownFutureValue"|"alertRemovalOfBinaryChangeEntry"|"banderAdded"|"banderAlmostEmpty"|"banderAlmostFull"|"banderAtLimit"|"banderClosed"|"banderConfigurationChange"|"banderCoverClosed"|"banderCoverOpen"|"banderEmpty"|"banderFull"|"banderInterlockClosed"|"banderInterlockOpen"|"banderJam"|"banderLifeAlmostOver"|"banderLifeOver"|"banderMemoryExhausted"|"banderMissing"|"banderMotorFailure"|"banderNearLimit"|"banderOffline"|"banderOpened"|"banderOverTemperature"|"banderPowerSaver"|"banderRecoverableFailure"|"banderRecoverableStorage"|"banderRemoved"|"banderResourceAdded"|"banderResourceRemoved"|"banderThermistorFailure"|"banderTimingFailure"|"banderTurnedOff"|"banderTurnedOn"|"banderUnderTemperature"|"banderUnrecoverableFailure"|"banderUnrecoverableStorageError"|"banderWarmingUp"|"binderAdded"|"binderAlmostEmpty"|"binderAlmostFull"|"binderAtLimit"|"binderClosed"|"binderConfigurationChange"|"binderCoverClosed"|"binderCoverOpen"|"binderEmpty"|"binderFull"|"binderInterlockClosed"|"binderInterlockOpen"|"binderJam"|"binderLifeAlmostOver"|"binderLifeOver"|"binderMemoryExhausted"|"binderMissing"|"binderMotorFailure"|"binderNearLimit"|"binderOffline"|"binderOpened"|"binderOverTemperature"|"binderPowerSaver"|"binderRecoverableFailure"|"binderRecoverableStorage"|"binderRemoved"|"binderResourceAdded"|"binderResourceRemoved"|"binderThermistorFailure"|"binderTimingFailure"|"binderTurnedOff"|"binderTurnedOn"|"binderUnderTemperature"|"binderUnrecoverableFailure"|"binderUnrecoverableStorageError"|"binderWarmingUp"|"cameraFailure"|"chamberCooling"|"chamberFailure"|"chamberHeating"|"chamberTemperatureHigh"|"chamberTemperatureLow"|"cleanerLifeAlmostOver"|"cleanerLifeOver"|"configurationChange"|"deactivated"|"deleted"|"dieCutterAdded"|"dieCutterAlmostEmpty"|"dieCutterAlmostFull"|"dieCutterAtLimit"|"dieCutterClosed"|"dieCutterConfigurationChange"|"dieCutterCoverClosed"|"dieCutterCoverOpen"|"dieCutterEmpty"|"dieCutterFull"|"dieCutterInterlockClosed"|"dieCutterInterlockOpen"|"dieCutterJam"|"dieCutterLifeAlmostOver"|"dieCutterLifeOver"|"dieCutterMemoryExhausted"|"dieCutterMissing"|"dieCutterMotorFailure"|"dieCutterNearLimit"|"dieCutterOffline"|"dieCutterOpened"|"dieCutterOverTemperature"|"dieCutterPowerSaver"|"dieCutterRecoverableFailure"|"dieCutterRecoverableStorage"|"dieCutterRemoved"|"dieCutterResourceAdded"|"dieCutterResourceRemoved"|"dieCutterThermistorFailure"|"dieCutterTimingFailure"|"dieCutterTurnedOff"|"dieCutterTurnedOn"|"dieCutterUnderTemperature"|"dieCutterUnrecoverableFailure"|"dieCutterUnrecoverableStorageError"|"dieCutterWarmingUp"|"extruderCooling"|"extruderFailure"|"extruderHeating"|"extruderJam"|"extruderTemperatureHigh"|"extruderTemperatureLow"|"fanFailure"|"faxModemLifeAlmostOver"|"faxModemLifeOver"|"faxModemMissing"|"faxModemTurnedOff"|"faxModemTurnedOn"|"folderAdded"|"folderAlmostEmpty"|"folderAlmostFull"|"folderAtLimit"|"folderClosed"|"folderConfigurationChange"|"folderCoverClosed"|"folderCoverOpen"|"folderEmpty"|"folderFull"|"folderInterlockClosed"|"folderInterlockOpen"|"folderJam"|"folderLifeAlmostOver"|"folderLifeOver"|"folderMemoryExhausted"|"folderMissing"|"folderMotorFailure"|"folderNearLimit"|"folderOffline"|"folderOpened"|"folderOverTemperature"|"folderPowerSaver"|"folderRecoverableFailure"|"folderRecoverableStorage"|"folderRemoved"|"folderResourceAdded"|"folderResourceRemoved"|"folderThermistorFailure"|"folderTimingFailure"|"folderTurnedOff"|"folderTurnedOn"|"folderUnderTemperature"|"folderUnrecoverableFailure"|"folderUnrecoverableStorageError"|"folderWarmingUp"|"hibernate"|"holdNewJobs"|"identifyPrinterRequested"|"imprinterAdded"|"imprinterAlmostEmpty"|"imprinterAlmostFull"|"imprinterAtLimit"|"imprinterClosed"|"imprinterConfigurationChange"|"imprinterCoverClosed"|"imprinterCoverOpen"|"imprinterEmpty"|"imprinterFull"|"imprinterInterlockClosed"|"imprinterInterlockOpen"|"imprinterJam"|"imprinterLifeAlmostOver"|"imprinterLifeOver"|"imprinterMemoryExhausted"|"imprinterMissing"|"imprinterMotorFailure"|"imprinterNearLimit"|"imprinterOffline"|"imprinterOpened"|"imprinterOverTemperature"|"imprinterPowerSaver"|"imprinterRecoverableFailure"|"imprinterRecoverableStorage"|"imprinterRemoved"|"imprinterResourceAdded"|"imprinterResourceRemoved"|"imprinterThermistorFailure"|"imprinterTimingFailure"|"imprinterTurnedOff"|"imprinterTurnedOn"|"imprinterUnderTemperature"|"imprinterUnrecoverableFailure"|"imprinterUnrecoverableStorageError"|"imprinterWarmingUp"|"inputCannotFeedSizeSelected"|"inputManualInputRequest"|"inputMediaColorChange"|"inputMediaFormPartsChange"|"inputMediaSizeChange"|"inputMediaTrayFailure"|"inputMediaTrayFeedError"|"inputMediaTrayJam"|"inputMediaTypeChange"|"inputMediaWeightChange"|"inputPickRollerFailure"|"inputPickRollerLifeOver"|"inputPickRollerLifeWarn"|"inputPickRollerMissing"|"inputTrayElevationFailure"|"inputTrayPositionFailure"|"inserterAdded"|"inserterAlmostEmpty"|"inserterAlmostFull"|"inserterAtLimit"|"inserterClosed"|"inserterConfigurationChange"|"inserterCoverClosed"|"inserterCoverOpen"|"inserterEmpty"|"inserterFull"|"inserterInterlockClosed"|"inserterInterlockOpen"|"inserterJam"|"inserterLifeAlmostOver"|"inserterLifeOver"|"inserterMemoryExhausted"|"inserterMissing"|"inserterMotorFailure"|"inserterNearLimit"|"inserterOffline"|"inserterOpened"|"inserterOverTemperature"|"inserterPowerSaver"|"inserterRecoverableFailure"|"inserterRecoverableStorage"|"inserterRemoved"|"inserterResourceAdded"|"inserterResourceRemoved"|"inserterThermistorFailure"|"inserterTimingFailure"|"inserterTurnedOff"|"inserterTurnedOn"|"inserterUnderTemperature"|"inserterUnrecoverableFailure"|"inserterUnrecoverableStorageError"|"inserterWarmingUp"|"interlockClosed"|"interpreterCartridgeAdded"|"interpreterCartridgeDeleted"|"interpreterComplexPageEncountered"|"interpreterMemoryDecrease"|"interpreterMemoryIncrease"|"interpreterResourceAdded"|"interpreterResourceDeleted"|"lampAtEol"|"lampFailure"|"lampNearEol"|"laserAtEol"|"laserFailure"|"laserNearEol"|"makeEnvelopeAdded"|"makeEnvelopeAlmostEmpty"|"makeEnvelopeAlmostFull"|"makeEnvelopeAtLimit"|"makeEnvelopeClosed"|"makeEnvelopeConfigurationChange"|"makeEnvelopeCoverClosed"|"makeEnvelopeCoverOpen"|"makeEnvelopeEmpty"|"makeEnvelopeFull"|"makeEnvelopeInterlockClosed"|"makeEnvelopeInterlockOpen"|"makeEnvelopeJam"|"makeEnvelopeLifeAlmostOver"|"makeEnvelopeLifeOver"|"makeEnvelopeMemoryExhausted"|"makeEnvelopeMissing"|"makeEnvelopeMotorFailure"|"makeEnvelopeNearLimit"|"makeEnvelopeOffline"|"makeEnvelopeOpened"|"makeEnvelopeOverTemperature"|"makeEnvelopePowerSaver"|"makeEnvelopeRecoverableFailure"|"makeEnvelopeRecoverableStorage"|"makeEnvelopeRemoved"|"makeEnvelopeResourceAdded"|"makeEnvelopeResourceRemoved"|"makeEnvelopeThermistorFailure"|"makeEnvelopeTimingFailure"|"makeEnvelopeTurnedOff"|"makeEnvelopeTurnedOn"|"makeEnvelopeUnderTemperature"|"makeEnvelopeUnrecoverableFailure"|"makeEnvelopeUnrecoverableStorageError"|"makeEnvelopeWarmingUp"|"markerAdjustingPrintQuality"|"markerCleanerMissing"|"markerDeveloperAlmostEmpty"|"markerDeveloperEmpty"|"markerDeveloperMissing"|"markerFuserMissing"|"markerFuserThermistorFailure"|"markerFuserTimingFailure"|"markerInkAlmostEmpty"|"markerInkEmpty"|"markerInkMissing"|"markerOpcMissing"|"markerPrintRibbonAlmostEmpty"|"markerPrintRibbonEmpty"|"markerPrintRibbonMissing"|"markerSupplyAlmostEmpty"|"markerSupplyMissing"|"markerTonerCartridgeMissing"|"markerTonerMissing"|"markerWasteInkReceptacleAlmostFull"|"markerWasteInkReceptacleFull"|"markerWasteInkReceptacleMissing"|"markerWasteMissing"|"markerWasteTonerReceptacleAlmostFull"|"markerWasteTonerReceptacleFull"|"markerWasteTonerReceptacleMissing"|"materialEmpty"|"materialLow"|"materialNeeded"|"mediaDrying"|"mediaPathCannotDuplexMediaSelected"|"mediaPathFailure"|"mediaPathInputEmpty"|"mediaPathInputFeedError"|"mediaPathInputJam"|"mediaPathInputRequest"|"mediaPathJam"|"mediaPathMediaTrayAlmostFull"|"mediaPathMediaTrayFull"|"mediaPathMediaTrayMissing"|"mediaPathOutputFeedError"|"mediaPathOutputFull"|"mediaPathOutputJam"|"mediaPathPickRollerFailure"|"mediaPathPickRollerLifeOver"|"mediaPathPickRollerLifeWarn"|"mediaPathPickRollerMissing"|"motorFailure"|"outputMailboxSelectFailure"|"outputMediaTrayFailure"|"outputMediaTrayFeedError"|"outputMediaTrayJam"|"perforaterAdded"|"perforaterAlmostEmpty"|"perforaterAlmostFull"|"perforaterAtLimit"|"perforaterClosed"|"perforaterConfigurationChange"|"perforaterCoverClosed"|"perforaterCoverOpen"|"perforaterEmpty"|"perforaterFull"|"perforaterInterlockClosed"|"perforaterInterlockOpen"|"perforaterJam"|"perforaterLifeAlmostOver"|"perforaterLifeOver"|"perforaterMemoryExhausted"|"perforaterMissing"|"perforaterMotorFailure"|"perforaterNearLimit"|"perforaterOffline"|"perforaterOpened"|"perforaterOverTemperature"|"perforaterPowerSaver"|"perforaterRecoverableFailure"|"perforaterRecoverableStorage"|"perforaterRemoved"|"perforaterResourceAdded"|"perforaterResourceRemoved"|"perforaterThermistorFailure"|"perforaterTimingFailure"|"perforaterTurnedOff"|"perforaterTurnedOn"|"perforaterUnderTemperature"|"perforaterUnrecoverableFailure"|"perforaterUnrecoverableStorageError"|"perforaterWarmingUp"|"platformCooling"|"platformFailure"|"platformHeating"|"platformTemperatureHigh"|"platformTemperatureLow"|"powerDown"|"powerUp"|"printerManualReset"|"printerNmsReset"|"printerReadyToPrint"|"puncherAdded"|"puncherAlmostEmpty"|"puncherAlmostFull"|"puncherAtLimit"|"puncherClosed"|"puncherConfigurationChange"|"puncherCoverClosed"|"puncherCoverOpen"|"puncherEmpty"|"puncherFull"|"puncherInterlockClosed"|"puncherInterlockOpen"|"puncherJam"|"puncherLifeAlmostOver"|"puncherLifeOver"|"puncherMemoryExhausted"|"puncherMissing"|"puncherMotorFailure"|"puncherNearLimit"|"puncherOffline"|"puncherOpened"|"puncherOverTemperature"|"puncherPowerSaver"|"puncherRecoverableFailure"|"puncherRecoverableStorage"|"puncherRemoved"|"puncherResourceAdded"|"puncherResourceRemoved"|"puncherThermistorFailure"|"puncherTimingFailure"|"puncherTurnedOff"|"puncherTurnedOn"|"puncherUnderTemperature"|"puncherUnrecoverableFailure"|"puncherUnrecoverableStorageError"|"puncherWarmingUp"|"resuming"|"scanMediaPathFailure"|"scanMediaPathInputEmpty"|"scanMediaPathInputFeedError"|"scanMediaPathInputJam"|"scanMediaPathInputRequest"|"scanMediaPathJam"|"scanMediaPathOutputFeedError"|"scanMediaPathOutputFull"|"scanMediaPathOutputJam"|"scanMediaPathPickRollerFailure"|"scanMediaPathPickRollerLifeOver"|"scanMediaPathPickRollerLifeWarn"|"scanMediaPathPickRollerMissing"|"scanMediaPathTrayAlmostFull"|"scanMediaPathTrayFull"|"scanMediaPathTrayMissing"|"scannerLightFailure"|"scannerLightLifeAlmostOver"|"scannerLightLifeOver"|"scannerLightMissing"|"scannerSensorFailure"|"scannerSensorLifeAlmostOver"|"scannerSensorLifeOver"|"scannerSensorMissing"|"separationCutterAdded"|"separationCutterAlmostEmpty"|"separationCutterAlmostFull"|"separationCutterAtLimit"|"separationCutterClosed"|"separationCutterConfigurationChange"|"separationCutterCoverClosed"|"separationCutterCoverOpen"|"separationCutterEmpty"|"separationCutterFull"|"separationCutterInterlockClosed"|"separationCutterInterlockOpen"|"separationCutterJam"|"separationCutterLifeAlmostOver"|"separationCutterLifeOver"|"separationCutterMemoryExhausted"|"separationCutterMissing"|"separationCutterMotorFailure"|"separationCutterNearLimit"|"separationCutterOffline"|"separationCutterOpened"|"separationCutterOverTemperature"|"separationCutterPowerSaver"|"separationCutterRecoverableFailure"|"separationCutterRecoverableStorage"|"separationCutterRemoved"|"separationCutterResourceAdded"|"separationCutterResourceRemoved"|"separationCutterThermistorFailure"|"separationCutterTimingFailure"|"separationCutterTurnedOff"|"separationCutterTurnedOn"|"separationCutterUnderTemperature"|"separationCutterUnrecoverableFailure"|"separationCutterUnrecoverableStorageError"|"separationCutterWarmingUp"|"sheetRotatorAdded"|"sheetRotatorAlmostEmpty"|"sheetRotatorAlmostFull"|"sheetRotatorAtLimit"|"sheetRotatorClosed"|"sheetRotatorConfigurationChange"|"sheetRotatorCoverClosed"|"sheetRotatorCoverOpen"|"sheetRotatorEmpty"|"sheetRotatorFull"|"sheetRotatorInterlockClosed"|"sheetRotatorInterlockOpen"|"sheetRotatorJam"|"sheetRotatorLifeAlmostOver"|"sheetRotatorLifeOver"|"sheetRotatorMemoryExhausted"|"sheetRotatorMissing"|"sheetRotatorMotorFailure"|"sheetRotatorNearLimit"|"sheetRotatorOffline"|"sheetRotatorOpened"|"sheetRotatorOverTemperature"|"sheetRotatorPowerSaver"|"sheetRotatorRecoverableFailure"|"sheetRotatorRecoverableStorage"|"sheetRotatorRemoved"|"sheetRotatorResourceAdded"|"sheetRotatorResourceRemoved"|"sheetRotatorThermistorFailure"|"sheetRotatorTimingFailure"|"sheetRotatorTurnedOff"|"sheetRotatorTurnedOn"|"sheetRotatorUnderTemperature"|"sheetRotatorUnrecoverableFailure"|"sheetRotatorUnrecoverableStorageError"|"sheetRotatorWarmingUp"|"slitterAdded"|"slitterAlmostEmpty"|"slitterAlmostFull"|"slitterAtLimit"|"slitterClosed"|"slitterConfigurationChange"|"slitterCoverClosed"|"slitterCoverOpen"|"slitterEmpty"|"slitterFull"|"slitterInterlockClosed"|"slitterInterlockOpen"|"slitterJam"|"slitterLifeAlmostOver"|"slitterLifeOver"|"slitterMemoryExhausted"|"slitterMissing"|"slitterMotorFailure"|"slitterNearLimit"|"slitterOffline"|"slitterOpened"|"slitterOverTemperature"|"slitterPowerSaver"|"slitterRecoverableFailure"|"slitterRecoverableStorage"|"slitterRemoved"|"slitterResourceAdded"|"slitterResourceRemoved"|"slitterThermistorFailure"|"slitterTimingFailure"|"slitterTurnedOff"|"slitterTurnedOn"|"slitterUnderTemperature"|"slitterUnrecoverableFailure"|"slitterUnrecoverableStorageError"|"slitterWarmingUp"|"stackerAdded"|"stackerAlmostEmpty"|"stackerAlmostFull"|"stackerAtLimit"|"stackerClosed"|"stackerConfigurationChange"|"stackerCoverClosed"|"stackerCoverOpen"|"stackerEmpty"|"stackerFull"|"stackerInterlockClosed"|"stackerInterlockOpen"|"stackerJam"|"stackerLifeAlmostOver"|"stackerLifeOver"|"stackerMemoryExhausted"|"stackerMissing"|"stackerMotorFailure"|"stackerNearLimit"|"stackerOffline"|"stackerOpened"|"stackerOverTemperature"|"stackerPowerSaver"|"stackerRecoverableFailure"|"stackerRecoverableStorage"|"stackerRemoved"|"stackerResourceAdded"|"stackerResourceRemoved"|"stackerThermistorFailure"|"stackerTimingFailure"|"stackerTurnedOff"|"stackerTurnedOn"|"stackerUnderTemperature"|"stackerUnrecoverableFailure"|"stackerUnrecoverableStorageError"|"stackerWarmingUp"|"standby"|"staplerAdded"|"staplerAlmostEmpty"|"staplerAlmostFull"|"staplerAtLimit"|"staplerClosed"|"staplerConfigurationChange"|"staplerCoverClosed"|"staplerCoverOpen"|"staplerEmpty"|"staplerFull"|"staplerInterlockClosed"|"staplerInterlockOpen"|"staplerJam"|"staplerLifeAlmostOver"|"staplerLifeOver"|"staplerMemoryExhausted"|"staplerMissing"|"staplerMotorFailure"|"staplerNearLimit"|"staplerOffline"|"staplerOpened"|"staplerOverTemperature"|"staplerPowerSaver"|"staplerRecoverableFailure"|"staplerRecoverableStorage"|"staplerRemoved"|"staplerResourceAdded"|"staplerResourceRemoved"|"staplerThermistorFailure"|"staplerTimingFailure"|"staplerTurnedOff"|"staplerTurnedOn"|"staplerUnderTemperature"|"staplerUnrecoverableFailure"|"staplerUnrecoverableStorageError"|"staplerWarmingUp"|"stitcherAdded"|"stitcherAlmostEmpty"|"stitcherAlmostFull"|"stitcherAtLimit"|"stitcherClosed"|"stitcherConfigurationChange"|"stitcherCoverClosed"|"stitcherCoverOpen"|"stitcherEmpty"|"stitcherFull"|"stitcherInterlockClosed"|"stitcherInterlockOpen"|"stitcherJam"|"stitcherLifeAlmostOver"|"stitcherLifeOver"|"stitcherMemoryExhausted"|"stitcherMissing"|"stitcherMotorFailure"|"stitcherNearLimit"|"stitcherOffline"|"stitcherOpened"|"stitcherOverTemperature"|"stitcherPowerSaver"|"stitcherRecoverableFailure"|"stitcherRecoverableStorage"|"stitcherRemoved"|"stitcherResourceAdded"|"stitcherResourceRemoved"|"stitcherThermistorFailure"|"stitcherTimingFailure"|"stitcherTurnedOff"|"stitcherTurnedOn"|"stitcherUnderTemperature"|"stitcherUnrecoverableFailure"|"stitcherUnrecoverableStorageError"|"stitcherWarmingUp"|"subunitAdded"|"subunitAlmostEmpty"|"subunitAlmostFull"|"subunitAtLimit"|"subunitClosed"|"subunitCoolingDown"|"subunitEmpty"|"subunitFull"|"subunitLifeAlmostOver"|"subunitLifeOver"|"subunitMemoryExhausted"|"subunitMissing"|"subunitMotorFailure"|"subunitNearLimit"|"subunitOffline"|"subunitOpened"|"subunitOverTemperature"|"subunitPowerSaver"|"subunitRecoverableFailure"|"subunitRecoverableStorage"|"subunitRemoved"|"subunitResourceAdded"|"subunitResourceRemoved"|"subunitThermistorFailure"|"subunitTimingFailure"|"subunitTurnedOff"|"subunitTurnedOn"|"subunitUnderTemperature"|"subunitUnrecoverableFailure"|"subunitUnrecoverableStorage"|"subunitWarmingUp"|"suspend"|"testing"|"trimmerAdded"|"trimmerAlmostEmpty"|"trimmerAlmostFull"|"trimmerAtLimit"|"trimmerClosed"|"trimmerConfigurationChange"|"trimmerCoverClosed"|"trimmerCoverOpen"|"trimmerEmpty"|"trimmerFull"|"trimmerInterlockClosed"|"trimmerInterlockOpen"|"trimmerJam"|"trimmerLifeAlmostOver"|"trimmerLifeOver"|"trimmerMemoryExhausted"|"trimmerMissing"|"trimmerMotorFailure"|"trimmerNearLimit"|"trimmerOffline"|"trimmerOpened"|"trimmerOverTemperature"|"trimmerPowerSaver"|"trimmerRecoverableFailure"|"trimmerRecoverableStorage"|"trimmerRemoved"|"trimmerResourceAdded"|"trimmerResourceRemoved"|"trimmerThermistorFailure"|"trimmerTimingFailure"|"trimmerTurnedOff"|"trimmerTurnedOn"|"trimmerUnderTemperature"|"trimmerUnrecoverableFailure"|"trimmerUnrecoverableStorageError"|"trimmerWarmingUp"|"unknown"|"wrapperAdded"|"wrapperAlmostEmpty"|"wrapperAlmostFull"|"wrapperAtLimit"|"wrapperClosed"|"wrapperConfigurationChange"|"wrapperCoverClosed"|"wrapperCoverOpen"|"wrapperEmpty"|"wrapperFull"|"wrapperInterlockClosed"|"wrapperInterlockOpen"|"wrapperJam"|"wrapperLifeAlmostOver"|"wrapperLifeOver"|"wrapperMemoryExhausted"|"wrapperMissing"|"wrapperMotorFailure"|"wrapperNearLimit"|"wrapperOffline"|"wrapperOpened"|"wrapperOverTemperature"|"wrapperPowerSaver"|"wrapperRecoverableFailure"|"wrapperRecoverableStorage"|"wrapperRemoved"|"wrapperResourceAdded"|"wrapperResourceRemoved"|"wrapperThermistorFailure"|"wrapperTimingFailure"|"wrapperTurnedOff"|"wrapperTurnedOn"|"wrapperUnderTemperature"|"wrapperUnrecoverableFailure"|"wrapperUnrecoverableStorageError"|"wrapperWarmingUp";
+
+public type AttendeeBase1 record {
+    AttendeeType 'type?;
 };
 
-public type microsoft\.graph\.columnDefinition record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.booleanColumn 'boolean?;
-    microsoft\.graph\.calculatedColumn calculated?;
-    microsoft\.graph\.choiceColumn choice?;
-    string? columnGroup?;
-    microsoft\.graph\.contentApprovalStatusColumn contentApprovalStatus?;
-    microsoft\.graph\.currencyColumn currency?;
-    microsoft\.graph\.dateTimeColumn dateTime?;
-    microsoft\.graph\.defaultColumnValue defaultValue?;
-    string? description?;
-    string? displayName?;
-    boolean? enforceUniqueValues?;
-    microsoft\.graph\.geolocationColumn geolocation?;
-    boolean? hidden?;
-    microsoft\.graph\.hyperlinkOrPictureColumn hyperlinkOrPicture?;
-    boolean? indexed?;
-    boolean? isDeletable?;
-    boolean? isReorderable?;
-    boolean? isSealed?;
-    microsoft\.graph\.lookupColumn lookup?;
+public type SpecialFolder record {
+    # The unique identifier for this item in the /drive/special collection
     string? name?;
-    microsoft\.graph\.numberColumn number?;
-    microsoft\.graph\.personOrGroupColumn personOrGroup?;
-    boolean? propagateChanges?;
-    boolean? readOnly?;
-    boolean? required?;
-    microsoft\.graph\.contentTypeInfo sourceContentType?;
-    microsoft\.graph\.termColumn term?;
-    microsoft\.graph\.textColumn text?;
-    microsoft\.graph\.thumbnailColumn thumbnail?;
-    microsoft\.graph\.columnTypes 'type?;
-    microsoft\.graph\.columnValidation validation?;
-    microsoft\.graph\.columnDefinition sourceColumn?;
 };
 
-public type microsoft\.graph\.teamMessagingSettings record {
-    boolean? allowChannelMentions?;
-    boolean? allowOwnerDeleteMessages?;
-    boolean? allowTeamMentions?;
-    boolean? allowUserDeleteMessages?;
-    boolean? allowUserEditMessages?;
+public type PlannerTask record {
+    *Entity;
+    *PlannerTask1;
 };
 
-public type Collection\ of\ driveItem record {
-    microsoft\.graph\.driveItem[] value?;
+public type Drive1 record {
+    # Describes the type of drive represented by this resource. OneDrive personal drives return personal. OneDrive for Business returns business. SharePoint document libraries return documentLibrary. Read-only.
+    string? driveType?;
+    IdentitySet owner?;
+    Quota quota?;
+    SharepointIds sharePointIds?;
+    SystemFacet system?;
+    # Collection of bundles (albums and multi-select-shared sets of items). Only in personal OneDrive.
+    DriveItem[] bundles?;
+    # The list of items the user is following. Only in OneDrive for Business.
+    DriveItem[] following?;
+    # All items contained in the drive. Read-only. Nullable.
+    DriveItem[] items?;
+    List list?;
+    DriveItem root?;
+    # Collection of common folders available in OneDrive. Read-only. Nullable.
+    DriveItem[] special?;
+};
+
+public type OpenShiftChangeRequest record {
+    *ScheduleChangeRequest;
+    *OpenShiftChangeRequest1;
+};
+
+public type OnlineMeetingBase record {
+    *Entity;
+    *OnlineMeetingBase1;
+};
+
+public type DriveCollectionResponse record {
+    Drive[] value?;
     string? \@odata\.nextLink?;
-};
-
-public type microsoft\.graph\.sharingInvitation record {
-    string? email?;
-    microsoft\.graph\.identitySet invitedBy?;
-    string? redeemedBy?;
-    boolean? signInRequired?;
-};
-
-public type driveItemid_microsoft_graph_invite_body record {
-    boolean? requireSignIn = false;
-    string[] roles?;
-    boolean? sendInvitation = false;
-    string? message?;
-    microsoft\.graph\.driveRecipient[] recipients?;
-    boolean? retainInheritedPermissions = false;
-    string? expirationDateTime?;
-    string? password?;
-};
-
-public type microsoft\.graph\.officeGraphInsights record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.sharedInsight[] shared?;
-    microsoft\.graph\.trending[] trending?;
-    microsoft\.graph\.usedInsight[] used?;
-};
-
-public type microsoft\.graph\.timeCardBreak record {
-    string? breakId?;
-    microsoft\.graph\.timeCardEvent end?;
-    microsoft\.graph\.itemBody notes?;
-    microsoft\.graph\.timeCardEvent 'start?;
-};
-
-public type microsoft\.graph\.workbookFunctions record {
-    *microsoft\.graph\.entity;
-};
-
-public type microsoft\.graph\.timeOffItem record {
-    *microsoft\.graph\.scheduleEntity;
-    string? timeOffReasonId?;
-};
-
-public type microsoft\.graph\.platformCredentialAuthenticationMethod record {
-    *microsoft\.graph\.authenticationMethod;
-    string? createdDateTime?;
-    string? displayName?;
-    microsoft\.graph\.authenticationMethodKeyStrength keyStrength?;
-    microsoft\.graph\.authenticationMethodPlatform platform?;
-    microsoft\.graph\.device device?;
 };
 
 # Represents the Queries record for the operation: getChildrenContentInRoot
 public type GetChildrenContentInRootQueries record {
     # Format of the content
-    string \$format?;
+    @http:Query {name: "$format"}
+    string format?;
 };
 
 # Represents the Queries record for the operation: getChildren
 public type GetChildrenQueries record {
     # Expand related entities
-    string[] \$expand?;
+    @http:Query {name: "$expand"}
+    string[] expand?;
     # Select properties to be returned
-    string[] \$select?;
+    @http:Query {name: "$select"}
+    string[] 'select?;
 };
 
-public type microsoft\.graph\.sensitivityLabel record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.labelActionSource actionSource?;
-    string? autoTooltip?;
-    string? description?;
-    string? displayName?;
+public type FollowupFlag record {
+    DateTimeTimeZone completedDateTime?;
+    DateTimeTimeZone dueDateTime?;
+    FollowupFlagStatus flagStatus?;
+    DateTimeTimeZone startDateTime?;
+};
+
+public type TimeSlot record {
+    DateTimeTimeZone end?;
+    DateTimeTimeZone 'start?;
+};
+
+public type OnenoteSection1 record {
+    # Indicates whether this is the user's default section. Read-only.
     boolean? isDefault?;
-    boolean? isEndpointProtectionEnabled?;
-    boolean? isScopedToUser?;
-    string? locale?;
-    string? name?;
-    decimal? priority?;
-    string? toolTip?;
-    microsoft\.graph\.usageRightsIncluded rights?;
-    microsoft\.graph\.sensitivityLabel[] sublabels?;
+    SectionLinks links?;
+    # The pages endpoint where you can get details for all the pages in the section. Read-only.
+    string? pagesUrl?;
+    # The collection of pages in the section.  Read-only. Nullable.
+    OnenotePage[] pages?;
+    Notebook parentNotebook?;
+    SectionGroup parentSectionGroup?;
 };
 
-public type microsoft\.graph\.workbookChartAxisTitleFormat record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.workbookChartFont font?;
+public type Channel1 record {
+    # Read only. Timestamp at which the channel was created.
+    string? createdDateTime?;
+    # Optional textual description for the channel.
+    string? description?;
+    # Channel name as it will appear to the user in Microsoft Teams. The maximum length is 50 characters.
+    string displayName?;
+    # The email address for sending messages to the channel. Read-only.
+    string? email?;
+    # Indicates whether the channel is archived. Read-only.
+    boolean? isArchived?;
+    # Indicates whether the channel should be marked as recommended for all members of the team to show in their channel list. Note: All recommended channels automatically show in the channels list for education and frontline worker users. The property can only be set programmatically via the Create team method. The default value is false.
+    boolean? isFavoriteByDefault?;
+    ChannelMembershipType membershipType?;
+    ChannelSummary summary?;
+    # The ID of the Microsoft Entra tenant.
+    string? tenantId?;
+    # A hyperlink that will go to the channel in Microsoft Teams. This is the URL that you get when you right-click a channel in Microsoft Teams and select Get link to channel. This URL should be treated as an opaque blob, and not parsed. Read-only.
+    string? webUrl?;
+    # A collection of membership records associated with the channel, including both direct and indirect members of shared channels.
+    ConversationMember[] allMembers?;
+    DriveItem filesFolder?;
+    # A collection of membership records associated with the channel.
+    ConversationMember[] members?;
+    # A collection of all the messages in the channel. A navigation property. Nullable.
+    ChatMessage[] messages?;
+    # A collection of teams with which a channel is shared.
+    SharedWithChannelTeamInfo[] sharedWithTeams?;
+    # A collection of all the tabs in the channel. A navigation property.
+    TeamsTab[] tabs?;
 };
 
-public type microsoft\.graph\.employeeExperienceUser record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.learningCourseActivity[] learningCourseActivities?;
+public type ChatMessageMentionedIdentitySet1 record {
+    TeamworkConversationIdentity conversation?;
 };
 
-public type microsoft\.graph\.printJob record {
-    *microsoft\.graph\.entity;
-    string? acknowledgedDateTime?;
-    microsoft\.graph\.printJobConfiguration configuration?;
-    microsoft\.graph\.userIdentity createdBy?;
-    string createdDateTime?;
-    decimal? errorCode?;
-    boolean isFetchable?;
-    string? redirectedFrom?;
-    string? redirectedTo?;
-    microsoft\.graph\.printJobStatus status?;
-    microsoft\.graph\.printDocument[] documents?;
-    microsoft\.graph\.printTask[] tasks?;
-};
-
-public type microsoft\.graph\.selectionLikelihoodInfo "notSpecified"|"high";
-
-public type microsoft\.graph\.sensitivityLabelAssignmentMethod "standard"|"privileged"|"auto"|"unknownFutureValue";
-
-public type microsoft\.graph\.authorizationInfo record {
-    string[] certificateUserIds?;
-};
-
-public type microsoft\.graph\.folder record {
-    decimal? childCount?;
-    microsoft\.graph\.folderView view?;
-};
-
-public type microsoft\.graph\.authenticationMethodKeyStrength "normal"|"weak"|"unknown";
-
-public type microsoft\.graph\.shiftPreferences record {
-    *microsoft\.graph\.changeTrackedEntity;
-    microsoft\.graph\.shiftAvailability[] availability?;
-};
-
-public type microsoft\.graph\.printerCapabilities record {
-    microsoft\.graph\.printerCapabilitiesBottomMarginsItemsNumber[] bottomMargins?;
-    boolean? collation?;
-    microsoft\.graph\.printColorMode[] colorModes?;
-    string[] contentTypes?;
-    microsoft\.graph\.integerRange copiesPerJob?;
-    microsoft\.graph\.printerCapabilitiesDpisItemsNumber[] dpis?;
-    microsoft\.graph\.printDuplexMode[] duplexModes?;
-    microsoft\.graph\.printerFeedOrientation[] feedOrientations?;
-    microsoft\.graph\.printFinishing[] finishings?;
-    string[] inputBins?;
-    boolean? isColorPrintingSupported?;
-    boolean? isPageRangeSupported?;
-    microsoft\.graph\.printerCapabilitiesLeftMarginsItemsNumber[] leftMargins?;
-    string[] mediaColors?;
-    string[] mediaSizes?;
-    string[] mediaTypes?;
-    microsoft\.graph\.printMultipageLayout[] multipageLayouts?;
-    microsoft\.graph\.printOrientation[] orientations?;
-    string[] outputBins?;
-    microsoft\.graph\.printerCapabilitiesPagesPerSheetItemsNumber[] pagesPerSheet?;
-    microsoft\.graph\.printQuality[] qualities?;
-    microsoft\.graph\.printerCapabilitiesRightMarginsItemsNumber[] rightMargins?;
-    microsoft\.graph\.printScaling[] scalings?;
-    boolean? supportsFitPdfToPage?;
-    microsoft\.graph\.printerCapabilitiesTopMarginsItemsNumber[] topMargins?;
-};
-
-public type microsoft\.graph\.teamsTabConfiguration record {
-    string? contentUrl?;
-    string? entityId?;
-    string? removeUrl?;
-    string? websiteUrl?;
-};
-
-public type microsoft\.graph\.passwordProfile record {
-    boolean? forceChangePasswordNextSignIn?;
-    boolean? forceChangePasswordNextSignInWithMfa?;
-    string? password?;
-};
-
-public type microsoft\.graph\.thumbnail record {
-    string? content?;
-    decimal? height?;
-    string? sourceItemId?;
-    string? url?;
-    decimal? width?;
-};
-
-public type microsoft\.graph\.windowsDeviceHealthState "clean"|"fullScanPending"|"rebootPending"|"manualStepsPending"|"offlineScanPending"|"critical";
-
-public type microsoft\.graph\.website record {
-    string? address?;
-    string? displayName?;
-    microsoft\.graph\.websiteType 'type?;
-};
-
-public type microsoft\.graph\.onenoteUserRole "None"|"Owner"|"Contributor"|"Reader";
-
-public type microsoft\.graph\.timeZoneBase record {
-    string? name?;
-};
-
-public type microsoft\.graph\.singleValueLegacyExtendedProperty record {
-    *microsoft\.graph\.entity;
-    string? value?;
-};
-
-public type microsoft\.graph\.meetingParticipantInfo record {
-    microsoft\.graph\.identitySet identity?;
-    microsoft\.graph\.onlineMeetingRole role?;
-    string? upn?;
-};
-
-public type microsoft\.graph\.chatMessagePolicyViolationUserActionTypes "none"|"override"|"reportFalsePositive";
-
-public type root_microsoft_graph_createLink_body record {
-    string? 'type?;
-    string? scope?;
-    string? expirationDateTime?;
-    string? password?;
-    string? message?;
-    microsoft\.graph\.driveRecipient[] recipients?;
-    boolean? retainInheritedPermissions = false;
-    boolean? sendNotification = false;
-};
-
-public type microsoft\.graph\.managedAppFlaggedReason "none"|"rootedDevice";
-
-public type microsoft\.graph\.dayNote record {
-    *microsoft\.graph\.changeTrackedEntity;
-    string? dayNoteDate?;
-    microsoft\.graph\.itemBody draftDayNote?;
-    microsoft\.graph\.itemBody sharedDayNote?;
-};
-
-public type microsoft\.graph\.list record {
-    *microsoft\.graph\.baseItem;
-    string? displayName?;
-    microsoft\.graph\.listInfo list?;
-    microsoft\.graph\.sharepointIds sharepointIds?;
-    microsoft\.graph\.systemFacet system?;
-    microsoft\.graph\.columnDefinition[] columns?;
-    microsoft\.graph\.contentType[] contentTypes?;
-    microsoft\.graph\.drive drive?;
-    microsoft\.graph\.listItem[] items?;
-    microsoft\.graph\.richLongRunningOperation[] operations?;
-    microsoft\.graph\.subscription[] subscriptions?;
-};
-
-public type microsoft\.graph\.plannerContainerType "group"|"unknownFutureValue"|"roster";
-
-public type microsoft\.graph\.printTask record {
-    *microsoft\.graph\.entity;
-    string parentUrl?;
-    microsoft\.graph\.printTaskStatus status?;
-    microsoft\.graph\.printTaskDefinition definition?;
-    microsoft\.graph\.printTaskTrigger trigger?;
-};
-
-public type microsoft\.graph\.complianceStatus "unknown"|"notApplicable"|"compliant"|"remediated"|"nonCompliant"|"error"|"conflict"|"notAssigned";
-
-public type microsoft\.graph\.printerCapabilitiesDpisItemsNumber decimal?;
-
-public type microsoft\.graph\.calendarRoleType "none"|"freeBusyRead"|"limitedRead"|"read"|"write"|"delegateWithoutPrivateEventAccess"|"delegateWithPrivateEventAccess"|"custom";
-
-public type microsoft\.graph\.teamsAsyncOperationStatus "invalid"|"notStarted"|"inProgress"|"succeeded"|"failed"|"unknownFutureValue";
-
-public type microsoft\.graph\.delegateMeetingMessageDeliveryOptions "sendToDelegateAndInformationToPrincipal"|"sendToDelegateAndPrincipal"|"sendToDelegateOnly";
-
-public type microsoft\.graph\.baseSitePage record {
-    *microsoft\.graph\.baseItem;
-    microsoft\.graph\.pageLayoutType pageLayout?;
-    microsoft\.graph\.publicationFacet publishingState?;
-    string? title?;
-};
-
-public type microsoft\.graph\.meetingParticipants record {
-    microsoft\.graph\.meetingParticipantInfo[] attendees?;
-    microsoft\.graph\.meetingParticipantInfo organizer?;
-};
-
-public type microsoft\.graph\.imageInfo record {
-    boolean? addImageQuery?;
-    string? alternateText?;
-    string? alternativeText?;
-    string? iconUrl?;
-};
-
-# Represents the Queries record for the operation: getRoot
-public type GetRootQueries record {
-    # Expand related entities
-    string[] \$expand?;
-    # Select properties to be returned
-    string[] \$select?;
-};
-
-public type microsoft\.graph\.teamSpecialization "none"|"educationStandard"|"educationClass"|"educationProfessionalLearningCommunity"|"educationStaff"|"healthcareStandard"|"healthcareCareCoordination"|"unknownFutureValue";
-
-public type microsoft\.graph\.usedInsight record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.usageDetails lastUsed?;
-    microsoft\.graph\.resourceReference resourceReference?;
-    microsoft\.graph\.resourceVisualization resourceVisualization?;
-    microsoft\.graph\.entity 'resource?;
-};
-
-public type microsoft\.graph\.channelIdentity record {
-    string? channelId?;
-    string? teamId?;
-};
-
-public type microsoft\.graph\.onenoteEntityHierarchyModel record {
-    *microsoft\.graph\.onenoteEntitySchemaObjectModel;
-    microsoft\.graph\.identitySet createdBy?;
-    string? displayName?;
-    microsoft\.graph\.identitySet lastModifiedBy?;
+public type FileSystemInfo record {
+    # The UTC date and time the file was created on a client.
+    string? createdDateTime?;
+    # The UTC date and time the file was last accessed. Available for the recent file list only.
+    string? lastAccessedDateTime?;
+    # The UTC date and time the file was last modified on a client.
     string? lastModifiedDateTime?;
 };
 
-public type microsoft\.graph\.contentApprovalStatusColumn record {
+public type WorkbookChartSeriesFormat record {
+    *Entity;
+    *WorkbookChartSeriesFormat1;
 };
 
-public type microsoft\.graph\.storagePlanInformation record {
-    boolean? upgradeAvailable?;
+public type OutlookUser1 record {
+    # A list of categories defined for the user.
+    OutlookCategory[] masterCategories?;
+};
+
+public type PlannerGroup record {
+    *Entity;
+    *PlannerGroup1;
+};
+
+public type PlannerTask1 record {
+    # Number of checklist items with value set to false, representing incomplete items.
+    decimal? activeChecklistItemCount?;
+    PlannerAppliedCategories appliedCategories?;
+    # Hint used to order items of this type in a list view. The format is defined as outlined here.
+    string? assigneePriority?;
+    PlannerAssignments assignments?;
+    # Bucket ID to which the task belongs. The bucket needs to be in the plan that the task is in. It's 28 characters long and case-sensitive. Format validation is done on the service.
+    string? bucketId?;
+    # Number of checklist items that are present on the task.
+    decimal? checklistItemCount?;
+    IdentitySet completedBy?;
+    # Read-only. Date and time at which the 'percentComplete' of the task is set to '100'. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
+    string? completedDateTime?;
+    # Thread ID of the conversation on the task. This is the ID of the conversation thread object created in the group.
+    string? conversationThreadId?;
+    IdentitySet createdBy?;
+    # Read-only. Date and time at which the task is created. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
+    string? createdDateTime?;
+    # Date and time at which the task is due. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
+    string? dueDateTime?;
+    # Read-only. Value is true if the details object of the task has a nonempty description and false otherwise.
+    boolean? hasDescription?;
+    # Hint used to order items of this type in a list view. The format is defined as outlined here.
+    string? orderHint?;
+    # Percentage of task completion. When set to 100, the task is considered completed.
+    decimal? percentComplete?;
+    # Plan ID to which the task belongs.
+    string? planId?;
+    PlannerPreviewType previewType?;
+    # Priority of the task. The valid range of values is between 0 and 10, with the increasing value being lower priority (0 has the highest priority and 10 has the lowest priority).  Currently, Planner interprets values 0 and 1 as 'urgent', 2, 3 and 4 as 'important', 5, 6, and 7 as 'medium', and 8, 9, and 10 as 'low'.  Additionally, Planner sets the value 1 for 'urgent', 3 for 'important', 5 for 'medium', and 9 for 'low'.
+    decimal? priority?;
+    # Number of external references that exist on the task.
+    decimal? referenceCount?;
+    # Date and time at which the task starts. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
+    string? startDateTime?;
+    # Title of the task.
+    string title?;
+    PlannerAssignedToTaskBoardTaskFormat assignedToTaskBoardFormat?;
+    PlannerBucketTaskBoardTaskFormat bucketTaskBoardFormat?;
+    PlannerTaskDetails details?;
+    PlannerProgressTaskBoardTaskFormat progressTaskBoardFormat?;
+};
+
+public type OnenoteEntitySchemaObjectModel1 record {
+    # The date and time when the page was created. The timestamp represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
+    string? createdDateTime?;
+};
+
+public type ChannelIdentity record {
+    # The identity of the channel in which the message was posted.
+    string? channelId?;
+    # The identity of the team in which the message was posted.
+    string? teamId?;
+};
+
+public type DataSecurityAndGovernance record {
+    *Entity;
+    *DataSecurityAndGovernance1;
+};
+
+public type EmployeeExperienceUser1 record {
+    LearningCourseActivity[] learningCourseActivities?;
+};
+
+public type ConversationThread record {
+    *Entity;
+    *ConversationThread1;
+};
+
+public type TimeRange record {
+    # End time for the time range.
+    string? endTime?;
+    # Start time for the time range.
+    string? startTime?;
+};
+
+public type MultiValueLegacyExtendedProperty record {
+    *Entity;
+    *MultiValueLegacyExtendedProperty1;
+};
+
+public type AlternativeSecurityId record {
+    # For internal use only.
+    string? identityProvider?;
+    # For internal use only.
+    string? 'key?;
+    # For internal use only.
+    decimal? 'type?;
+};
+
+public type PrintJobStateDetail "uploadPending"|"transforming"|"completedSuccessfully"|"completedWithWarnings"|"completedWithErrors"|"releaseWait"|"interpreting"|"unknownFutureValue";
+
+public type AppRoleAssignment1 record {
+    # The identifier (id) for the app role that's assigned to the principal. This app role must be exposed in the appRoles property on the resource application's service principal (resourceId). If the resource application hasn't declared any app roles, a default app role ID of 00000000-0000-0000-0000-000000000000 can be specified to signal that the principal is assigned to the resource app without any specific app roles. Required on create.
+    @constraint:String {pattern: re `^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$`}
+    string appRoleId?;
+    # The time when the app role assignment was created. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
+    string? createdDateTime?;
+    # The display name of the user, group, or service principal that was granted the app role assignment. Maximum length is 256 characters. Read-only. Supports $filter (eq and startswith).
+    string? principalDisplayName?;
+    # The unique identifier (id) for the user, security group, or service principal being granted the app role. Security groups with dynamic memberships are supported. Required on create.
+    string? principalId?;
+    # The type of the assigned principal. This can either be User, Group, or ServicePrincipal. Read-only.
+    string? principalType?;
+    # The display name of the resource app's service principal to which the assignment is made. Maximum length is 256 characters.
+    string? resourceDisplayName?;
+    # The unique identifier (id) for the resource service principal for which the assignment is made. Required on create. Supports $filter (eq only).
+    string? resourceId?;
+};
+
+public type WorkbookChartLegend1 record {
+    # Indicates whether the chart legend should overlap with the main body of the chart.
+    boolean? overlay?;
+    # Represents the position of the legend on the chart. The possible values are: Top, Bottom, Left, Right, Corner, Custom.
+    string? position?;
+    # Indicates whether the chart legend is visible.
+    boolean visible?;
+    WorkbookChartLegendFormat format?;
+};
+
+public type PrintTask1 record {
+    # The URL for the print entity that triggered this task. For example, https://graph.microsoft.com/v1.0/print/printers/{printerId}/jobs/{jobId}. Read-only.
+    string parentUrl?;
+    PrintTaskStatus status?;
+    PrintTaskDefinition definition?;
+    PrintTaskTrigger trigger?;
+};
+
+public type SensitivityLabelAssignmentMethod "standard"|"privileged"|"auto"|"unknownFutureValue";
+
+public type ChatMessagePolicyViolationVerdictDetailsTypes "none"|"allowFalsePositiveOverride"|"allowOverrideWithoutJustification"|"allowOverrideWithJustification";
+
+public type WorkbookChartGridlinesFormat1 record {
+    WorkbookChartLineFormat line?;
+};
+
+public type TemporaryAccessPassAuthenticationMethod record {
+    *AuthenticationMethod;
+    *TemporaryAccessPassAuthenticationMethod1;
+};
+
+public type CollectionOfPermission record {
+    Permission[] value?;
+    string? \@odata\.nextLink?;
+};
+
+public type TeamworkUserIdentityType "aadUser"|"onPremiseAadUser"|"anonymousGuest"|"federatedUser"|"personalMicrosoftAccountUser"|"skypeUser"|"phoneUser"|"unknownFutureValue"|"emailUser";
+
+public type OpenShift record {
+    *ChangeTrackedEntity;
+    *OpenShift1;
+};
+
+public type TeamworkHostedContent record {
+    *Entity;
+    *TeamworkHostedContent1;
+};
+
+public type Presence record {
+    *Entity;
+    *Presence1;
+};
+
+public type MessageRulePredicates record {
+    # Represents the strings that should appear in the body of an incoming message in order for the condition or exception to apply.
+    string[] bodyContains?;
+    # Represents the strings that should appear in the body or subject of an incoming message in order for the condition or exception to apply.
+    string[] bodyOrSubjectContains?;
+    # Represents the categories that an incoming message should be labeled with in order for the condition or exception to apply.
+    string[] categories?;
+    # Represents the specific sender email addresses of an incoming message in order for the condition or exception to apply.
+    Recipient[] fromAddresses?;
+    # Indicates whether an incoming message must have attachments in order for the condition or exception to apply.
+    boolean? hasAttachments?;
+    # Represents the strings that appear in the headers of an incoming message in order for the condition or exception to apply.
+    string[] headerContains?;
+    Importance importance?;
+    # Indicates whether an incoming message must be an approval request in order for the condition or exception to apply.
+    boolean? isApprovalRequest?;
+    # Indicates whether an incoming message must be automatically forwarded in order for the condition or exception to apply.
+    boolean? isAutomaticForward?;
+    # Indicates whether an incoming message must be an auto reply in order for the condition or exception to apply.
+    boolean? isAutomaticReply?;
+    # Indicates whether an incoming message must be encrypted in order for the condition or exception to apply.
+    boolean? isEncrypted?;
+    # Indicates whether an incoming message must be a meeting request in order for the condition or exception to apply.
+    boolean? isMeetingRequest?;
+    # Indicates whether an incoming message must be a meeting response in order for the condition or exception to apply.
+    boolean? isMeetingResponse?;
+    # Indicates whether an incoming message must be a non-delivery report in order for the condition or exception to apply.
+    boolean? isNonDeliveryReport?;
+    # Indicates whether an incoming message must be permission controlled (RMS-protected) in order for the condition or exception to apply.
+    boolean? isPermissionControlled?;
+    # Indicates whether an incoming message must be a read receipt in order for the condition or exception to apply.
+    boolean? isReadReceipt?;
+    # Indicates whether an incoming message must be S/MIME-signed in order for the condition or exception to apply.
+    boolean? isSigned?;
+    # Indicates whether an incoming message must be a voice mail in order for the condition or exception to apply.
+    boolean? isVoicemail?;
+    MessageActionFlag messageActionFlag?;
+    # Indicates whether the owner of the mailbox must not be a recipient of an incoming message in order for the condition or exception to apply.
+    boolean? notSentToMe?;
+    # Represents the strings that appear in either the toRecipients or ccRecipients properties of an incoming message in order for the condition or exception to apply.
+    string[] recipientContains?;
+    # Represents the strings that appear in the from property of an incoming message in order for the condition or exception to apply.
+    string[] senderContains?;
+    Sensitivity sensitivity?;
+    # Indicates whether the owner of the mailbox must be in the ccRecipients property of an incoming message in order for the condition or exception to apply.
+    boolean? sentCcMe?;
+    # Indicates whether the owner of the mailbox must be the only recipient in an incoming message in order for the condition or exception to apply.
+    boolean? sentOnlyToMe?;
+    # Represents the email addresses that an incoming message must have been sent to in order for the condition or exception to apply.
+    Recipient[] sentToAddresses?;
+    # Indicates whether the owner of the mailbox must be in the toRecipients property of an incoming message in order for the condition or exception to apply.
+    boolean? sentToMe?;
+    # Indicates whether the owner of the mailbox must be in either a toRecipients or ccRecipients property of an incoming message in order for the condition or exception to apply.
+    boolean? sentToOrCcMe?;
+    # Represents the strings that appear in the subject of an incoming message in order for the condition or exception to apply.
+    string[] subjectContains?;
+    SizeRange withinSizeRange?;
 };
 
 # Represents the Headers record for the operation: deleteChildrenContentInRoot
 public type DeleteChildrenContentInRootHeaders record {
     # ETag
-    string If\-Match?;
+    @http:Header {name: "If-Match"}
+    string ifMatch?;
 };
 
-public type microsoft\.graph\.contentTypeInfo record {
-    string? id?;
-    string? name?;
-};
-
-public type microsoft\.graph\.sizeRange record {
-    decimal? maximumSize?;
-    decimal? minimumSize?;
-};
-
-public type microsoft\.graph\.followupFlagStatus "notFlagged"|"complete"|"flagged";
+public type TeamsAsyncOperationStatus "invalid"|"notStarted"|"inProgress"|"succeeded"|"failed"|"unknownFutureValue";
 
 # Represents the Queries record for the operation: listChildrenInRoot
 public type ListChildrenInRootQueries record {
     # Skip the first n items
-    int \$skip?;
+    @http:Query {name: "$skip"}
+    int skip?;
     # Show only the first n items
-    int \$top?;
+    @http:Query {name: "$top"}
+    int top?;
     # Filter items by property values
-    string \$filter?;
+    @http:Query {name: "$filter"}
+    string filter?;
     # Search items by search phrases
-    string \$search?;
+    @http:Query {name: "$search"}
+    string search?;
     # Order items by property values
-    string[] \$orderby?;
+    @http:Query {name: "$orderby"}
+    string[] orderby?;
     # Expand related entities
-    string[] \$expand?;
+    @http:Query {name: "$expand"}
+    string[] expand?;
     # Include count of items
-    boolean \$count?;
+    @http:Query {name: "$count"}
+    boolean count?;
     # Select properties to be returned
-    string[] \$select?;
+    @http:Query {name: "$select"}
+    string[] 'select?;
 };
 
-public type microsoft\.graph\.photo record {
-    string? cameraMake?;
-    string? cameraModel?;
-    decimal? exposureDenominator?;
-    decimal? exposureNumerator?;
-    decimal? fNumber?;
-    decimal? focalLength?;
-    decimal? iso?;
-    decimal? orientation?;
-    string? takenDateTime?;
+public type SwapShiftsChangeRequest1 record {
+    # The recipient's Shift ID
+    string? recipientShiftId?;
 };
 
-public type microsoft\.graph\.siteArchivalDetails record {
-    microsoft\.graph\.siteArchiveStatus archiveStatus?;
+public type ContentBase record {
 };
-
-public type microsoft\.graph\.broadcastMeetingAudience "roleIsAttendee"|"organization"|"everyone"|"unknownFutureValue";
 
 # Represents the Queries record for the operation: getItem
 public type GetItemQueries record {
     # Expand related entities
-    string[] \$expand?;
+    @http:Query {name: "$expand"}
+    string[] expand?;
     # Select properties to be returned
-    string[] \$select?;
+    @http:Query {name: "$select"}
+    string[] 'select?;
 };
 
-public type microsoft\.graph\.chatMessageHostedContent record {
-    *microsoft\.graph\.teamworkHostedContent;
+public type ContentActivity1 record {
+    ProcessContentRequest contentMetadata?;
+    # The scope identified from computed protection scopes.
+    string? scopeIdentifier?;
+    # ID of the user.
+    string? userId?;
 };
 
-public type root_microsoft_graph_checkin_body record {
-    string? checkInAs?;
-    string? comment?;
-};
-
-public type microsoft\.graph\.objectIdentity record {
-    string? issuer?;
-    string? issuerAssignedId?;
-    string? signInType?;
-};
-
-public type microsoft\.graph\.plannerPlanContainer record {
-    string? containerId?;
-    microsoft\.graph\.plannerContainerType 'type?;
-    string? url?;
-};
-
-public type microsoft\.graph\.todo record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.todoTaskList[] lists?;
-};
-
-public type microsoft\.graph\.workbookWorksheet record {
-    *microsoft\.graph\.entity;
+public type InternetMessageHeader record {
+    # Represents the key in a key-value pair.
     string? name?;
-    decimal position?;
-    string visibility?;
-    microsoft\.graph\.workbookChart[] charts?;
-    microsoft\.graph\.workbookNamedItem[] names?;
-    microsoft\.graph\.workbookPivotTable[] pivotTables?;
-    microsoft\.graph\.workbookWorksheetProtection protection?;
-    microsoft\.graph\.workbookTable[] tables?;
-};
-
-public type microsoft\.graph\.inferenceClassification record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.inferenceClassificationOverride[] overrides?;
-};
-
-public type microsoft\.graph\.workbookChartSeriesFormat record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.workbookChartFill fill?;
-    microsoft\.graph\.workbookChartLineFormat line?;
-};
-
-public type microsoft\.graph\.lookupColumn record {
-    boolean? allowMultipleValues?;
-    boolean? allowUnlimitedLength?;
-    string? columnName?;
-    string? listId?;
-    string? primaryLookupColumnId?;
-};
-
-public type microsoft\.graph\.printJobStateDetail "uploadPending"|"transforming"|"completedSuccessfully"|"completedWithWarnings"|"completedWithErrors"|"releaseWait"|"interpreting"|"unknownFutureValue";
-
-public type microsoft\.graph\.settingValue record {
-    string? name?;
+    # The value in a key-value pair.
     string? value?;
 };
 
-public type driveItemid_microsoft_graph_checkin_body record {
-    string? checkInAs?;
-    string? comment?;
+public type Extension record {
+    *Entity;
+    *Extension1;
 };
 
-public type microsoft\.graph\.workbookOperationError record {
-    string? code?;
-    microsoft\.graph\.workbookOperationError innerError?;
-    string? message?;
+public type SharingLink record {
+    Identity application?;
+    # If true then the user can only use this link to view the item on the web, and cannot use it to download the contents of the item. Only for OneDrive for Business and SharePoint.
+    boolean? preventsDownload?;
+    # The scope of the link represented by this permission. Value anonymous indicates the link is usable by anyone, organization indicates the link is only usable for users signed into the same tenant.
+    string? scope?;
+    # The type of the link created.
+    string? 'type?;
+    # For embed links, this property contains the HTML code for an <iframe> element that will embed the item in a webpage.
+    string? webHtml?;
+    # A URL that opens the item in the browser on the OneDrive website.
+    string? webUrl?;
 };
 
-public type microsoft\.graph\.windowsSettingType "roaming"|"backup"|"unknownFutureValue";
-
-public type microsoft\.graph\.teamworkTag record {
-    *microsoft\.graph\.entity;
-    string? description?;
-    string? displayName?;
-    decimal? memberCount?;
-    microsoft\.graph\.teamworkTagType tagType?;
-    string? teamId?;
-    microsoft\.graph\.teamworkTagMember[] members?;
-};
-
-public type microsoft\.graph\.profilePhoto record {
-    *microsoft\.graph\.entity;
-    decimal? height?;
-    decimal? width?;
-};
-
-public type microsoft\.graph\.pendingContentUpdate record {
-    string? queuedDateTime?;
-};
-
-public type microsoft\.graph\.teamsAsyncOperationType "invalid"|"cloneTeam"|"archiveTeam"|"unarchiveTeam"|"createTeam"|"unknownFutureValue"|"teamifyGroup"|"createChannel"|"archiveChannel"|"unarchiveChannel";
-
-public type microsoft\.graph\.appIdentity record {
-    string? appId?;
-    string? displayName?;
-    string? servicePrincipalId?;
-    string? servicePrincipalName?;
-};
-
-public type microsoft\.graph\.userPrint record {
-    microsoft\.graph\.printerShare[] recentPrinterShares?;
-};
-
-public type microsoft\.graph\.workbookChartSeries record {
-    *microsoft\.graph\.entity;
-    string? name?;
-    microsoft\.graph\.workbookChartSeriesFormat format?;
-    microsoft\.graph\.workbookChartPoint[] points?;
-};
-
-public type microsoft\.graph\.identity record {
-    string? displayName?;
-    string? id?;
-};
-
-public type microsoft\.graph\.root record {
-};
-
-public type microsoft\.graph\.licenseAssignmentStateDisabledPlansItemsString string?;
-
-public type microsoft\.graph\.chatMessagePolicyViolationVerdictDetailsTypes "none"|"allowFalsePositiveOverride"|"allowOverrideWithoutJustification"|"allowOverrideWithJustification";
-
-public type microsoft\.graph\.sharedInsight record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.sharingDetail lastShared?;
-    microsoft\.graph\.resourceReference resourceReference?;
-    microsoft\.graph\.resourceVisualization resourceVisualization?;
-    microsoft\.graph\.sharingDetail[] sharingHistory?;
-    microsoft\.graph\.entity lastSharedMethod?;
-    microsoft\.graph\.entity 'resource?;
-};
-
-public type microsoft\.graph\.pendingOperations record {
-    microsoft\.graph\.pendingContentUpdate pendingContentUpdate?;
-};
-
-public type microsoft\.graph\.teamworkHostedContent record {
-    *microsoft\.graph\.entity;
-    string? contentBytes?;
-    string? contentType?;
-};
-
-public type microsoft\.graph\.pinnedChatMessageInfo record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.chatMessage message?;
-};
-
-public type microsoft\.graph\.scoredEmailAddress record {
-    string? address?;
-    string? itemId?;
-    decimal? relevanceScore?;
-    microsoft\.graph\.selectionLikelihoodInfo selectionLikelihood?;
-};
-
-public type microsoft\.graph\.workbookChartTitle record {
-    *microsoft\.graph\.entity;
-    boolean? overlay?;
-    string? text?;
-    boolean visible?;
-    microsoft\.graph\.workbookChartTitleFormat format?;
-};
-
-public type microsoft\.graph\.configurationManagerClientEnabledFeatures record {
-    boolean compliancePolicy?;
-    boolean deviceConfiguration?;
-    boolean inventory?;
-    boolean modernApps?;
-    boolean resourceAccess?;
-    boolean windowsUpdateForBusiness?;
-};
-
-public type microsoft\.graph\.itemInsights record {
-    *microsoft\.graph\.officeGraphInsights;
-};
-
-public type microsoft\.graph\.workbookChartAxisFormat record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.workbookChartFont font?;
-    microsoft\.graph\.workbookChartLineFormat line?;
-};
-
-public type microsoft\.graph\.courseStatus "notStarted"|"inProgress"|"completed"|"unknownFutureValue";
-
-public type microsoft\.graph\.folderView record {
-    string? sortBy?;
-    string? sortOrder?;
-    string? viewType?;
-};
-
-public type microsoft\.graph\.broadcastMeetingCaptionSettings record {
-    boolean? isCaptionEnabled?;
-    string? spokenLanguage?;
-    string[] translationLanguages?;
-};
-
-# Represents the Headers record for the operation: deleteItemByPath
-public type DeleteItemByPathHeaders record {
-    # ETag
-    string If\-Match?;
-};
-
-public type microsoft\.graph\.teamworkConversationIdentityType "team"|"channel"|"chat"|"unknownFutureValue";
-
-public type microsoft\.graph\.sectionLinks record {
-    microsoft\.graph\.externalLink oneNoteClientUrl?;
-    microsoft\.graph\.externalLink oneNoteWebUrl?;
-};
-
-public type microsoft\.graph\.resourceVisualization record {
-    string? containerDisplayName?;
-    string? containerType?;
-    string? containerWebUrl?;
-    string? mediaType?;
-    string? previewImageUrl?;
-    string? previewText?;
-    string? title?;
+# The status of a long-running operation
+public type RichLongRunningOperation1 record {
+    PublicError 'error?;
+    # A value between 0 and 100 that indicates the progress of the operation.
+    decimal? percentageComplete?;
+    # The unique identifier for the result.
+    string? resourceId?;
+    # The type of the operation.
     string? 'type?;
 };
 
-public type microsoft\.graph\.operationError record {
-    string? code?;
-    string? message?;
+public type PrintTaskTrigger1 record {
+    PrintEvent event?;
+    PrintTaskDefinition definition?;
 };
 
-public type microsoft\.graph\.booleanColumn record {
+# Windows Log Collection request entity
+public type DeviceLogCollectionResponse1 record {
+    # The User Principal Name (UPN) of the user that enrolled the device.
+    string? enrolledByUser?;
+    # The DateTime of the expiration of the logs.
+    string? expirationDateTimeUTC?;
+    # The UPN for who initiated the request.
+    string? initiatedByUserPrincipalName?;
+    # Indicates Intune device unique identifier.
+    @constraint:String {pattern: re `^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$`}
+    string managedDeviceId?;
+    # The DateTime the request was received.
+    string? receivedDateTimeUTC?;
+    # The DateTime of the request.
+    string? requestedDateTimeUTC?;
+    # The size of the logs in KB. Valid values -1.79769313486232E+308 to 1.79769313486232E+308
+    decimal? sizeInKB?;
+    # AppLogUploadStatus
+    AppLogUploadState status?;
 };
 
-public type microsoft\.graph\.printerCapabilitiesLeftMarginsItemsNumber decimal?;
+# State of the action on the device
+public type ActionState "none"|"pending"|"canceled"|"active"|"done"|"failed"|"notSupported";
 
-public type microsoft\.graph\.workbookChartFill record {
-    *microsoft\.graph\.entity;
+public type Location record {
+    PhysicalAddress address?;
+    OutlookGeoCoordinates coordinates?;
+    # The name associated with the location.
+    string? displayName?;
+    # Optional email address of the location.
+    string? locationEmailAddress?;
+    LocationType locationType?;
+    # Optional URI representing the location.
+    string? locationUri?;
+    # For internal use only.
+    string? uniqueId?;
+    LocationUniqueIdType uniqueIdType?;
 };
 
-public type microsoft\.graph\.managedDeviceOwnerType "unknown"|"company"|"personal"|"unknownFutureValue";
-
-public type microsoft\.graph\.assignedLicenseDisabledPlansItemsString string;
-
-public type microsoft\.graph\.bundle record {
-    microsoft\.graph\.album album?;
-    decimal? childCount?;
+public type OnenoteSection record {
+    *OnenoteEntityHierarchyModel;
+    *OnenoteSection1;
 };
 
-public type microsoft\.graph\.licenseProcessingState record {
+public type ProcessContentRequest record {
+    ActivityMetadata activityMetadata?;
+    # A collection of content entries to be processed. Each entry contains the content itself and its metadata. Use conversation metadata for content like prompts and responses and file metadata for files. Required.
+    ProcessContentMetadataBase[] contentEntries?;
+    DeviceMetadata deviceMetadata?;
+    IntegratedApplicationMetadata integratedAppMetadata?;
+    ProtectedApplicationMetadata protectedAppMetadata?;
+};
+
+public type CallTranscript record {
+    *Entity;
+    *CallTranscript1;
+};
+
+public type ContentType record {
+    *Entity;
+    *ContentType1;
+};
+
+public type UserSolutionRoot1 record {
+    WorkingTimeSchedule workingTimeSchedule?;
+};
+
+public type CustomSecurityAttributeValue record {
+};
+
+public type JoinMeetingIdSettings record {
+    # Indicates whether a passcode is required to join a meeting when using joinMeetingId. Optional.
+    boolean? isPasscodeRequired?;
+    # The meeting ID to be used to join a meeting. Optional. Read-only.
+    string? joinMeetingId?;
+    # The passcode to join a meeting.  Optional. Read-only.
+    string? passcode?;
+};
+
+public type PersonType record {
+    # The type of data source, such as Person.
+    string? 'class?;
+    # The secondary type of data source, such as OrganizationUser.
+    string? subclass?;
+};
+
+public type TermColumn record {
+    # Specifies whether the column allows more than one value.
+    boolean? allowMultipleValues?;
+    # Specifies whether to display the entire term path or only the term label.
+    boolean? showFullyQualifiedName?;
+    TermStoreTerm parentTerm?;
+    TermStoreSet termSet?;
+};
+
+public type AttendanceInterval record {
+    # Duration of the meeting interval in seconds; that is, the difference between joinDateTime and leaveDateTime.
+    decimal? durationInSeconds?;
+    # The time the attendee joined in UTC.
+    string? joinDateTime?;
+    # The time the attendee left in UTC.
+    string? leaveDateTime?;
+};
+
+public type FieldValueSet1 record {
+};
+
+public type WorkbookOperation record {
+    *Entity;
+    *WorkbookOperation1;
+};
+
+# Support for this Entity is being deprecated starting May 2026 & will no longer be supported
+public type DeviceConfigurationState1 record {
+    # The name of the policy for this policyBase
+    string? displayName?;
+    # Supported platform types for policies
+    PolicyPlatformType platformType?;
+    # Count of how many setting a policy holds
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal settingCount?;
+    DeviceConfigurationSettingState[] settingStates?;
+    ComplianceStatus state?;
+    # The version of the policy
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal version?;
+};
+
+public type ConversationMember record {
+    *Entity;
+    *ConversationMember1;
+};
+
+public type SharedWithChannelTeamInfo1 record {
+    # Indicates whether the team is the host of the channel.
+    boolean? isHostTeam?;
+    # A collection of team members who have access to the shared channel.
+    ConversationMember[] allowedMembers?;
+};
+
+public type Identity record {
+    # The display name of the identity.For drive items, the display name might not always be available or up to date. For example, if a user changes their display name the API might show the new value in a future response, but the items associated with the user don't show up as changed when using delta.
+    string? displayName?;
+    # Unique identifier for the identity or actor. For example, in the access reviews decisions API, this property might record the id of the principal, that is, the group, user, or application that's subject to review.
+    string? id?;
+};
+
+public type PrinterCapabilities record {
+    # A list of supported bottom margins(in microns) for the printer.
+    PrinterCapabilitiesBottomMarginsItemsNumber[] bottomMargins?;
+    # True if the printer supports collating when printing muliple copies of a multi-page document; false otherwise.
+    boolean? collation?;
+    # The color modes supported by the printer. Valid values are described in the following table.
+    PrintColorMode[] colorModes?;
+    # A list of supported content (MIME) types that the printer supports. It is not guaranteed that the Universal Print service supports printing all of these MIME types.
+    string[] contentTypes?;
+    IntegerRange copiesPerJob?;
+    # The list of print resolutions in DPI that are supported by the printer.
+    PrinterCapabilitiesDpisItemsNumber[] dpis?;
+    # The list of duplex modes that are supported by the printer. Valid values are described in the following table.
+    PrintDuplexMode[] duplexModes?;
+    # The list of feed orientations that are supported by the printer.
+    PrinterFeedOrientation[] feedOrientations?;
+    # Finishing processes the printer supports for a printed document.
+    PrintFinishing[] finishings?;
+    # Supported input bins for the printer.
+    string[] inputBins?;
+    # True if color printing is supported by the printer; false otherwise. Read-only.
+    boolean? isColorPrintingSupported?;
+    # True if the printer supports printing by page ranges; false otherwise.
+    boolean? isPageRangeSupported?;
+    # A list of supported left margins(in microns) for the printer.
+    PrinterCapabilitiesLeftMarginsItemsNumber[] leftMargins?;
+    # The media (i.e., paper) colors supported by the printer.
+    string[] mediaColors?;
+    # The media sizes supported by the printer. Supports standard size names for ISO and ANSI media sizes. Valid values are in the following table.
+    string[] mediaSizes?;
+    # The media types supported by the printer.
+    string[] mediaTypes?;
+    # The presentation directions supported by the printer. Supported values are described in the following table.
+    PrintMultipageLayout[] multipageLayouts?;
+    # The print orientations supported by the printer. Valid values are described in the following table.
+    PrintOrientation[] orientations?;
+    # The printer's supported output bins (trays).
+    string[] outputBins?;
+    # Supported number of Input Pages to impose upon a single Impression.
+    PrinterCapabilitiesPagesPerSheetItemsNumber[] pagesPerSheet?;
+    # The print qualities supported by the printer.
+    PrintQuality[] qualities?;
+    # A list of supported right margins(in microns) for the printer.
+    PrinterCapabilitiesRightMarginsItemsNumber[] rightMargins?;
+    # Supported print scalings.
+    PrintScaling[] scalings?;
+    # True if the printer supports scaling PDF pages to match the print media size; false otherwise.
+    boolean? supportsFitPdfToPage?;
+    # A list of supported top margins(in microns) for the printer.
+    PrinterCapabilitiesTopMarginsItemsNumber[] topMargins?;
+};
+
+# Represents an operation applied against an app registration
+public type ManagedAppOperation1 record {
+    # The operation name.
+    string? displayName?;
+    # The last time the app operation was modified.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string lastModifiedDateTime?;
+    # The current state of the operation
     string? state?;
+    # Version of the entity.
+    string? version?;
 };
 
-public type microsoft\.graph\.swapShiftsChangeRequest record {
-    *microsoft\.graph\.offerShiftRequest;
-    string? recipientShiftId?;
+public type DriveItemIdMicrosoftGraphInviteBody record {
+    boolean? requireSignIn = false;
+    string[] roles?;
+    boolean? sendInvitation = false;
+    string? message?;
+    DriveRecipient[] recipients?;
+    boolean? retainInheritedPermissions = false;
+    string? expirationDateTime?;
+    string? password?;
 };
 
-public type microsoft\.graph\.userDataSecurityAndGovernance record {
-    *microsoft\.graph\.dataSecurityAndGovernance;
-    microsoft\.graph\.activitiesContainer activities?;
-    microsoft\.graph\.userProtectionScopeContainer protectionScopes?;
+public type OpenShiftItem1 record {
+    # Count of the number of slots for the given open shift.
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal openSlotCount?;
+};
+
+public type ProvisionedPlan record {
+    # Condition of the capability assignment. The possible values are Enabled, Warning, Suspended, Deleted, LockedOut. See a detailed description of each value.
+    string? capabilityStatus?;
+    # The possible values are:Success - Service is fully provisioned.Disabled - Service is disabled.Error - The service plan isn't provisioned and is in an error state.PendingInput - The service isn't provisioned and is awaiting service confirmation.PendingActivation - The service is provisioned but requires explicit activation by an administrator (for example, Intune_O365 service plan)PendingProvisioning - Microsoft has added a new service to the product SKU and it isn't activated in the tenant.
+    string? provisioningStatus?;
+    # The name of the service; for example, 'AccessControlS2S'.
+    string? 'service?;
+};
+
+public type CurrencyColumn record {
+    # Specifies the locale from which to infer the currency symbol.
+    string? locale?;
+};
+
+public type ShiftPreferences record {
+    *ChangeTrackedEntity;
+    *ShiftPreferences1;
+};
+
+public type WorkbookChartLegend record {
+    *Entity;
+    *WorkbookChartLegend1;
+};
+
+# Supported platform types for policies
+public type PolicyPlatformType "android"|"androidForWork"|"iOS"|"macOS"|"windowsPhone81"|"windows81AndLater"|"windows10AndLater"|"all";
+
+# Device Compilance Policy Setting State for a given device
+public type DeviceCompliancePolicySettingState record {
+    # Current value of setting on device
+    string? currentValue?;
+    # Error code for the setting
+    decimal errorCode?;
+    # Error description
+    string? errorDescription?;
+    # Name of setting instance that is being reported.
+    string? instanceDisplayName?;
+    # The setting that is being reported
+    string? setting?;
+    # Localized/user friendly setting name that is being reported
+    string? settingName?;
+    # Contributing policies
+    SettingSource[] sources?;
+    ComplianceStatus state?;
+    # UserEmail
+    string? userEmail?;
+    # UserId
+    string? userId?;
+    # UserName
+    string? userName?;
+    # UserPrincipalName.
+    string? userPrincipalName?;
+};
+
+# configuration Manager client enabled features
+public type ConfigurationManagerClientEnabledFeatures record {
+    # Whether compliance policy is managed by Intune
+    boolean compliancePolicy?;
+    # Whether device configuration is managed by Intune
+    boolean deviceConfiguration?;
+    # Whether inventory is managed by Intune
+    boolean inventory?;
+    # Whether modern application is managed by Intune
+    boolean modernApps?;
+    # Whether resource access is managed by Intune
+    boolean resourceAccess?;
+    # Whether Windows Update for Business is managed by Intune
+    boolean windowsUpdateForBusiness?;
+};
+
+public type Package record {
+    # A string indicating the type of package. While oneNote is the only currently defined value, you should expect other package types to be returned and handle them accordingly.
+    string? 'type?;
+};
+
+public type ActivitiesContainer1 record {
+    # Collection of activity logs related to content processing.
+    ContentActivity[] contentActivities?;
+};
+
+public type UsedInsight record {
+    *Entity;
+    *UsedInsight1;
 };
 
 # Represents the Queries record for the operation: listDrive
 public type ListDriveQueries record {
     # Skip the first n items
-    int \$skip?;
+    @http:Query {name: "$skip"}
+    int skip?;
     # Show only the first n items
-    int \$top?;
+    @http:Query {name: "$top"}
+    int top?;
     # Filter items by property values
-    string \$filter?;
+    @http:Query {name: "$filter"}
+    string filter?;
     # Search items by search phrases
-    string \$search?;
+    @http:Query {name: "$search"}
+    string search?;
     # Order items by property values
-    string[] \$orderby?;
+    @http:Query {name: "$orderby"}
+    string[] orderby?;
     # Expand related entities
-    string[] \$expand?;
+    @http:Query {name: "$expand"}
+    string[] expand?;
     # Select properties to be returned
-    string[] \$select?;
+    @http:Query {name: "$select"}
+    string[] 'select?;
 };
 
-public type microsoft\.graph\.driveItemSource record {
-    microsoft\.graph\.driveItemSourceApplication application?;
+public type ChatMessageType "message"|"chatEvent"|"typing"|"unknownFutureValue"|"systemEventMessage";
+
+public type WindowsSetting record {
+    *Entity;
+    *WindowsSetting1;
+};
+
+public type UserSettings1 record {
+    # Reflects the organization level setting controlling delegate access to the trending API. When set to true, the organization doesn't have access to Office Delve. The relevancy of the content displayed in Microsoft 365, for example in Suggested sites in SharePoint Home and the Discover view in OneDrive for work or school is affected for the whole organization. This setting is read-only and can only be changed by administrators in the SharePoint admin center.
+    boolean contributionToContentDiscoveryAsOrganizationDisabled?;
+    # When set to true, the delegate access to the user's trending API is disabled. When set to true, documents in the user's Office Delve are disabled. When set to true, the relevancy of the content displayed in Microsoft 365, for example in Suggested sites in SharePoint Home and the Discover view in OneDrive for work or school is affected. Users can control this setting in Office Delve.
+    boolean contributionToContentDiscoveryDisabled?;
+    UserInsightsSettings itemInsights?;
+    ShiftPreferences shiftPreferences?;
+    UserStorage storage?;
+    WindowsSetting[] windows?;
+};
+
+public type DriveItemIdMicrosoftGraphPreviewBody record {
+    string? page?;
+    decimal? zoom?;
+};
+
+public type ResourceVisualization record {
+    # A string describing where the item is stored. For example, the name of a SharePoint site or the user name identifying the owner of the OneDrive storing the item.
+    string? containerDisplayName?;
+    # Can be used for filtering by the type of container in which the file is stored. Such as Site or OneDriveBusiness.
+    string? containerType?;
+    # A path leading to the folder in which the item is stored.
+    string? containerWebUrl?;
+    # The item's media type. Can be used for filtering for a specific type of file based on supported IANA Media Mime Types. Not all Media Mime Types are supported.
+    string? mediaType?;
+    # A URL leading to the preview image for the item.
+    string? previewImageUrl?;
+    # A preview text for the item.
+    string? previewText?;
+    # The item's title text.
+    string? title?;
+    # The item's media type. Can be used for filtering for a specific file based on a specific type. See the section Type property values for supported types.
+    string? 'type?;
+};
+
+public type List1 record {
+    # The displayable title of the list.
+    string? displayName?;
+    ListInfo list?;
+    SharepointIds sharepointIds?;
+    SystemFacet system?;
+    # The collection of field definitions for this list.
+    ColumnDefinition[] columns?;
+    # The collection of content types present in this list.
+    ContentType[] contentTypes?;
+    Drive drive?;
+    # All items contained in the list.
+    ListItem[] items?;
+    # The collection of long-running operations on the list.
+    RichLongRunningOperation[] operations?;
+    # The set of subscriptions on the list.
+    Subscription[] subscriptions?;
+};
+
+public type ChatType "oneOnOne"|"group"|"meeting"|"unknownFutureValue";
+
+public type MessageActionFlag "any"|"call"|"doNotForward"|"followUp"|"fyi"|"forward"|"noResponseNecessary"|"read"|"reply"|"replyToAll"|"review";
+
+public type CollectionOfDriveItem record {
+    DriveItem[] value?;
+    string? \@odata\.nextLink?;
+};
+
+public type UserPrint record {
+    PrinterShare[] recentPrinterShares?;
+};
+
+public type Chat record {
+    *Entity;
+    *Chat1;
+};
+
+public type MailboxSettings record {
+    # Folder ID of an archive folder for the user.
+    string? archiveFolder?;
+    AutomaticRepliesSetting automaticRepliesSetting?;
+    # The date format for the user's mailbox.
+    string? dateFormat?;
+    DelegateMeetingMessageDeliveryOptions delegateMeetingMessageDeliveryOptions?;
+    LocaleInfo language?;
+    # The time format for the user's mailbox.
+    string? timeFormat?;
+    # The default time zone for the user's mailbox.
+    string? timeZone?;
+    UserPurpose userPurpose?;
+    WorkingHours workingHours?;
+};
+
+public type Malware record {
+    # Contains the virus details for the malware facet.
+    string? description?;
+};
+
+public type WorkbookFunctions record {
+    *Entity;
+    *WorkbookFunctions1;
+};
+
+public type TeamsAppDistributionMethod "store"|"organization"|"sideloaded"|"unknownFutureValue";
+
+public type OnlineMeeting1 record {
+    # The content stream of the attendee report of a Microsoft Teams live event. Read-only.
+    string? attendeeReport?;
+    BroadcastMeetingSettings broadcastSettings?;
+    # The meeting creation time in UTC. Read-only.
+    string? creationDateTime?;
+    # The meeting end time in UTC. Required when you create an online meeting.
+    string? endDateTime?;
+    # The external ID that is a custom identifier. Optional.
     string? externalId?;
+    # Indicates whether this meeting is a Teams live event.
+    boolean? isBroadcast?;
+    # The ID of the meeting template.
+    string? meetingTemplateId?;
+    MeetingParticipants participants?;
+    # The meeting start time in UTC.
+    string? startDateTime?;
+    # The recordings of an online meeting. Read-only.
+    CallRecording[] recordings?;
+    # The transcripts of an online meeting. Read-only.
+    CallTranscript[] transcripts?;
 };
 
-public type microsoft\.graph\.workbookChartLineFormat record {
-    *microsoft\.graph\.entity;
-    string? color?;
+public type IntegerRange record {
+    # The inclusive upper bound of the integer range.
+    decimal? end?;
+    # The inclusive lower bound of the integer range.
+    decimal? 'start?;
 };
 
-public type microsoft\.graph\.timeOffReason record {
-    *microsoft\.graph\.changeTrackedEntity;
-    string? code?;
-    string? displayName?;
-    microsoft\.graph\.timeOffReasonIconType iconType?;
-    boolean? isActive?;
+public type IdentitySet record {
+    Identity application?;
+    Identity device?;
+    Identity user?;
 };
 
-public type microsoft\.graph\.printTaskTrigger record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.printEvent event?;
-    microsoft\.graph\.printTaskDefinition definition?;
+public type MailFolder record {
+    *Entity;
+    *MailFolder1;
 };
 
-public type microsoft\.graph\.columnLink record {
-    *microsoft\.graph\.entity;
-    string? name?;
+public type SharedInsight1 record {
+    SharingDetail lastShared?;
+    ResourceReference resourceReference?;
+    ResourceVisualization resourceVisualization?;
+    SharingDetail[] sharingHistory?;
+    Entity lastSharedMethod?;
+    Entity 'resource?;
 };
 
-public type microsoft\.graph\.virtualEventExternalRegistrationInformation record {
-    string? referrer?;
-    string? registrationId?;
+public type PrintDocument record {
+    *Entity;
+    *PrintDocument1;
 };
 
-# Represents the Queries record for the operation: getItemByPath
-public type GetItemByPathQueries record {
-    # Expand related entities
-    string[] \$expand?;
-    # Select properties to be returned
-    string[] \$select?;
+public type ColumnValidation record {
+    # Default BCP 47 language tag for the description.
+    string? defaultLanguage?;
+    # Localized messages that explain what is needed for this column's value to be considered valid. User will be prompted with this message if validation fails.
+    DisplayNameLocalization[] descriptions?;
+    # The formula to validate column value. For examples, see Examples of common formulas in lists.
+    string? formula?;
 };
 
-public type microsoft\.graph\.storageQuotaBreakdown record {
-    *microsoft\.graph\.entity;
-    string? displayName?;
-    string? manageWebUrl?;
-    decimal? used?;
+# Computer endpoint protection state
+public type WindowsDeviceHealthState "clean"|"fullScanPending"|"rebootPending"|"manualStepsPending"|"offlineScanPending"|"critical";
+
+# Device Configuration Setting State for a given device
+public type DeviceConfigurationSettingState record {
+    # Current value of setting on device
+    string? currentValue?;
+    # Error code for the setting
+    decimal errorCode?;
+    # Error description
+    string? errorDescription?;
+    # Name of setting instance that is being reported.
+    string? instanceDisplayName?;
+    # The setting that is being reported
+    string? setting?;
+    # Localized/user friendly setting name that is being reported
+    string? settingName?;
+    # Contributing policies
+    SettingSource[] sources?;
+    ComplianceStatus state?;
+    # UserEmail
+    string? userEmail?;
+    # UserId
+    string? userId?;
+    # UserName
+    string? userName?;
+    # UserPrincipalName.
+    string? userPrincipalName?;
 };
 
-public type microsoft\.graph\.fieldValueSet record {
-    *microsoft\.graph\.entity;
+public type TeamsAppPermissionSet record {
+    # A collection of resource-specific permissions.
+    TeamsAppResourceSpecificPermission[] resourceSpecificPermissions?;
 };
 
-public type microsoft\.graph\.post record {
-    *microsoft\.graph\.outlookItem;
-    microsoft\.graph\.itemBody body?;
-    string? conversationId?;
-    string? conversationThreadId?;
-    microsoft\.graph\.recipient 'from?;
-    boolean hasAttachments?;
-    microsoft\.graph\.recipient[] newParticipants?;
-    string receivedDateTime?;
-    microsoft\.graph\.recipient sender?;
-    microsoft\.graph\.attachment[] attachments?;
-    microsoft\.graph\.extension[] extensions?;
-    microsoft\.graph\.post inReplyTo?;
-    microsoft\.graph\.multiValueLegacyExtendedProperty[] multiValueExtendedProperties?;
-    microsoft\.graph\.singleValueLegacyExtendedProperty[] singleValueExtendedProperties?;
-};
-
-public type microsoft\.graph\.workbookChart record {
-    *microsoft\.graph\.entity;
-    decimal? height?;
-    decimal? left?;
-    string? name?;
-    decimal? top?;
-    decimal? width?;
-    microsoft\.graph\.workbookChartAxes axes?;
-    microsoft\.graph\.workbookChartDataLabels dataLabels?;
-    microsoft\.graph\.workbookChartAreaFormat format?;
-    microsoft\.graph\.workbookChartLegend legend?;
-    microsoft\.graph\.workbookChartSeries[] series?;
-    microsoft\.graph\.workbookChartTitle title?;
-    microsoft\.graph\.workbookWorksheet worksheet?;
-};
-
-public type microsoft\.graph\.workbookOperation record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.workbookOperationError 'error?;
-    string? resourceLocation?;
-    microsoft\.graph\.workbookOperationStatus status?;
-};
-
-public type microsoft\.graph\.recurrencePattern record {
-    decimal dayOfMonth?;
-    microsoft\.graph\.dayOfWeek[] daysOfWeek?;
-    microsoft\.graph\.dayOfWeek firstDayOfWeek?;
-    microsoft\.graph\.weekIndex index?;
-    decimal interval?;
-    decimal month?;
-    microsoft\.graph\.recurrencePatternType 'type?;
-};
-
-public type microsoft\.graph\.retentionLabelSettings record {
-    microsoft\.graph\.security\.behaviorDuringRetentionPeriod behaviorDuringRetentionPeriod?;
-    boolean? isContentUpdateAllowed?;
-    boolean? isDeleteAllowed?;
-    boolean? isLabelUpdateAllowed?;
-    boolean? isMetadataUpdateAllowed?;
-    boolean? isRecordLocked?;
-};
-
-public type microsoft\.graph\.followupFlag record {
-    microsoft\.graph\.dateTimeTimeZone completedDateTime?;
-    microsoft\.graph\.dateTimeTimeZone dueDateTime?;
-    microsoft\.graph\.followupFlagStatus flagStatus?;
-    microsoft\.graph\.dateTimeTimeZone startDateTime?;
-};
-
-public type microsoft\.graph\.Json record {
-};
-
-public type microsoft\.graph\.associatedTeamInfo record {
-    *microsoft\.graph\.teamInfo;
-};
-
-public type microsoft\.graph\.presence record {
-    *microsoft\.graph\.entity;
-    string? activity?;
-    string? availability?;
-    microsoft\.graph\.outOfOfficeSettings outOfOfficeSettings?;
-    string? sequenceNumber?;
-    microsoft\.graph\.presenceStatusMessage statusMessage?;
-};
-
-public type microsoft\.graph\.chatInfo record {
-    string? messageId?;
-    string? replyChainMessageId?;
-    string? threadId?;
-};
-
-public type microsoft\.graph\.assignedLabel record {
-    string? displayName?;
-    string? labelId?;
-};
-
-public type microsoft\.graph\.timeCardEntry record {
-    microsoft\.graph\.timeCardBreak[] breaks?;
-    microsoft\.graph\.timeCardEvent clockInEvent?;
-    microsoft\.graph\.timeCardEvent clockOutEvent?;
-};
-
-public type microsoft\.graph\.groupLifecyclePolicy record {
-    *microsoft\.graph\.entity;
-    string? alternateNotificationEmails?;
-    decimal? groupLifetimeInDays?;
-    string? managedGroupTypes?;
-};
-
-public type microsoft\.graph\.outlookItem record {
-    *microsoft\.graph\.entity;
+public type OutlookItem1 record {
+    # The categories associated with the item
     string[] categories?;
+    # Identifies the version of the item. Every time the item is changed, changeKey changes as well. This allows Exchange to apply changes to the correct version of the object. Read-only.
     string? changeKey?;
+    # The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
     string? createdDateTime?;
+    # The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
     string? lastModifiedDateTime?;
 };
 
-public type microsoft\.graph\.printerCapabilitiesTopMarginsItemsNumber decimal?;
-
-public type microsoft\.graph\.onlineMeetingBase record {
-    *microsoft\.graph\.entity;
-    boolean? allowAttendeeToEnableCamera?;
-    boolean? allowAttendeeToEnableMic?;
-    boolean? allowBreakoutRooms?;
-    microsoft\.graph\.allowedLobbyAdmitterRoles allowedLobbyAdmitters?;
-    microsoft\.graph\.onlineMeetingPresenters allowedPresenters?;
-    microsoft\.graph\.meetingLiveShareOptions allowLiveShare?;
-    microsoft\.graph\.meetingChatMode allowMeetingChat?;
-    boolean? allowParticipantsToChangeName?;
-    boolean? allowPowerPointSharing?;
-    boolean? allowRecording?;
-    boolean? allowTeamworkReactions?;
-    boolean? allowTranscription?;
-    boolean? allowWhiteboard?;
-    microsoft\.graph\.audioConferencing audioConferencing?;
-    microsoft\.graph\.chatInfo chatInfo?;
-    microsoft\.graph\.chatRestrictions chatRestrictions?;
-    boolean? isEndToEndEncryptionEnabled?;
-    boolean? isEntryExitAnnounced?;
-    microsoft\.graph\.itemBody joinInformation?;
-    microsoft\.graph\.joinMeetingIdSettings joinMeetingIdSettings?;
-    string? joinWebUrl?;
-    microsoft\.graph\.lobbyBypassSettings lobbyBypassSettings?;
-    boolean? recordAutomatically?;
-    microsoft\.graph\.meetingChatHistoryDefaultMode shareMeetingChatHistoryDefault?;
-    string? subject?;
-    string? videoTeleconferenceId?;
-    microsoft\.graph\.watermarkProtectionValues watermarkProtection?;
-    microsoft\.graph\.meetingAttendanceReport[] attendanceReports?;
+public type UsageRightsIncluded1 record {
+    # The email of owner label rights.
+    string? ownerEmail?;
+    # The email of user with label user rights.
+    string? userEmail?;
+    UsageRights value?;
 };
 
-public type microsoft\.graph\.emailAuthenticationMethod record {
-    *microsoft\.graph\.authenticationMethod;
+public type PendingOperations record {
+    PendingContentUpdate pendingContentUpdate?;
+};
+
+public type Trending1 record {
+    # The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
+    string? lastModifiedDateTime?;
+    ResourceReference resourceReference?;
+    ResourceVisualization resourceVisualization?;
+    # Value indicating how much the document is currently trending. The larger the number, the more the document is currently trending around the user (the more relevant it is). Returned documents are sorted by this value.
+    decimal? weight?;
+    Entity 'resource?;
+};
+
+public type DirectoryObject record {
+    *Entity;
+    *DirectoryObject1;
+};
+
+public type ConversationThread1 record {
+    # The Cc: recipients for the thread. Returned only on $select.
+    Recipient[] ccRecipients?;
+    # Indicates whether any of the posts within this thread has at least one attachment. Returned by default.
+    boolean hasAttachments?;
+    # Indicates if the thread is locked. Returned by default.
+    boolean isLocked?;
+    # The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z.Returned by default.
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string lastDeliveredDateTime?;
+    # A short summary from the body of the latest post in this conversation. Returned by default.
+    string preview?;
+    # The topic of the conversation. This property can be set when the conversation is created, but it cannot be updated. Returned by default.
+    string topic?;
+    # The To: recipients for the thread. Returned only on $select.
+    Recipient[] toRecipients?;
+    # All the users that sent a message to this thread. Returned by default.
+    string[] uniqueSenders?;
+    Post[] posts?;
+};
+
+public type PrintDuplexMode "flipOnLongEdge"|"flipOnShortEdge"|"oneSided"|"unknownFutureValue";
+
+public type PrintTaskDefinition record {
+    *Entity;
+    *PrintTaskDefinition1;
+};
+
+public type TeamVisibilityType "private"|"public"|"hiddenMembership"|"unknownFutureValue";
+
+public type AgreementAcceptanceState "accepted"|"declined"|"unknownFutureValue";
+
+public type ThumbnailColumn record {
+};
+
+public type PasswordAuthenticationMethod1 record {
+    # The date and time when this password was last updated. This property is currently not populated. Read-only. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z.
+    string? createdDateTime?;
+    # For security, the password is always returned as null from a LIST or GET operation.
+    string? password?;
+};
+
+public type TeamworkTag1 record {
+    # The description of the tag as it appears to the user in Microsoft Teams. A teamworkTag can't have more than 200 teamworkTagMembers.
+    string? description?;
+    # The name of the tag as it appears to the user in Microsoft Teams.
+    string? displayName?;
+    # The number of users assigned to the tag.
+    decimal? memberCount?;
+    TeamworkTagType tagType?;
+    # ID of the team in which the tag is defined.
+    string? teamId?;
+    # Users assigned to the tag.
+    TeamworkTagMember[] members?;
+};
+
+public type Printer record {
+    *PrinterBase;
+    *Printer1;
+};
+
+public type ItemInsights record {
+    *OfficeGraphInsights;
+    *ItemInsights1;
+};
+
+public type OnenoteOperation1 record {
+    OnenoteOperationError 'error?;
+    # The operation percent complete if the operation is still in running status.
+    string? percentComplete?;
+    # The resource id.
+    string? resourceId?;
+    # The resource URI for the object. For example, the resource URI for a copied page or section.
+    string? resourceLocation?;
+};
+
+public type EmailAuthenticationMethod1 record {
+    # The email address registered to this user.
     string? emailAddress?;
 };
 
-public type microsoft\.graph\.printJobConfiguration record {
-    boolean? collate?;
-    microsoft\.graph\.printColorMode colorMode?;
-    decimal? copies?;
-    decimal? dpi?;
-    microsoft\.graph\.printDuplexMode duplexMode?;
-    microsoft\.graph\.printerFeedOrientation feedOrientation?;
-    microsoft\.graph\.printFinishing[] finishings?;
-    boolean? fitPdfToPage?;
-    string? inputBin?;
-    microsoft\.graph\.printMargin margin?;
-    string? mediaSize?;
-    string? mediaType?;
-    microsoft\.graph\.printMultipageLayout multipageLayout?;
-    microsoft\.graph\.printOrientation orientation?;
-    string? outputBin?;
-    microsoft\.graph\.integerRange[] pageRanges?;
-    decimal? pagesPerSheet?;
-    microsoft\.graph\.printQuality quality?;
-    microsoft\.graph\.printScaling scaling?;
+public type WorkbookCommentReply1 record {
+    # The content of the reply.
+    string? content?;
+    # The content type for the reply.
+    string contentType?;
 };
 
-public type microsoft\.graph\.itemRetentionLabel record {
-    *microsoft\.graph\.entity;
-    boolean? isLabelAppliedExplicitly?;
-    microsoft\.graph\.identitySet labelAppliedBy?;
-    string? labelAppliedDateTime?;
-    string? name?;
-    microsoft\.graph\.retentionLabelSettings retentionSettings?;
+public type OpenShiftChangeRequest1 record {
+    # ID for the open shift.
+    string? openShiftId?;
 };
 
-public type microsoft\.graph\.plannerPreviewType "automatic"|"noPreview"|"checklist"|"description"|"reference";
+public type TimeCardState "clockedIn"|"onBreak"|"clockedOut"|"unknownFutureValue";
 
-public type microsoft\.graph\.outlookCategory record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.categoryColor color?;
-    string? displayName?;
+public type VisualInfo record {
+    ImageInfo attribution?;
+    # Optional. Background color used to render the activity in the UI - brand color for the application source of the activity. Must be a valid hex color
+    string? backgroundColor?;
+    Json content?;
+    # Optional. Longer text description of the user's unique activity (example: document name, first sentence, and/or metadata)
+    string? description?;
+    # Required. Short text description of the user's unique activity (for example, document name in cases where an activity refers to document creation)
+    string displayText?;
 };
 
-public type microsoft\.graph\.location record {
-    microsoft\.graph\.physicalAddress address?;
-    microsoft\.graph\.outlookGeoCoordinates coordinates?;
-    string? displayName?;
-    string? locationEmailAddress?;
-    microsoft\.graph\.locationType locationType?;
-    string? locationUri?;
-    string? uniqueId?;
-    microsoft\.graph\.locationUniqueIdType uniqueIdType?;
+public type ChatMessageMention record {
+    # Index of an entity being mentioned in the specified chatMessage. Matches the {index} value in the corresponding <at id='{index}'> tag in the message body.
+    decimal? id?;
+    ChatMessageMentionedIdentitySet mentioned?;
+    # String used to represent the mention. For example, a user's display name, a team name.
+    string? mentionText?;
 };
 
-public type microsoft\.graph\.resourceSpecificPermissionGrant record {
-    *microsoft\.graph\.directoryObject;
-    string? clientAppId?;
-    string? clientId?;
-    string? permission?;
-    string? permissionType?;
-    string? resourceAppId?;
-};
-
-public type microsoft\.graph\.geolocationColumn record {
-};
-
-public type microsoft\.graph\.windowsDefenderProductStatus "noStatus"|"serviceNotRunning"|"serviceStartedWithoutMalwareProtection"|"pendingFullScanDueToThreatAction"|"pendingRebootDueToThreatAction"|"pendingManualStepsDueToThreatAction"|"avSignaturesOutOfDate"|"asSignaturesOutOfDate"|"noQuickScanHappenedForSpecifiedPeriod"|"noFullScanHappenedForSpecifiedPeriod"|"systemInitiatedScanInProgress"|"systemInitiatedCleanInProgress"|"samplesPendingSubmission"|"productRunningInEvaluationMode"|"productRunningInNonGenuineMode"|"productExpired"|"offlineScanRequired"|"serviceShutdownAsPartOfSystemShutdown"|"threatRemediationFailedCritically"|"threatRemediationFailedNonCritically"|"noStatusFlagsSet"|"platformOutOfDate"|"platformUpdateInProgress"|"platformAboutToBeOutdated"|"signatureOrPlatformEndOfLifeIsPastOrIsImpending"|"windowsSModeSignaturesInUseOnNonWin10SInstall";
-
-public type microsoft\.graph\.contactFolder record {
-    *microsoft\.graph\.entity;
-    string? displayName?;
-    string? parentFolderId?;
-    microsoft\.graph\.contactFolder[] childFolders?;
-    microsoft\.graph\.contact[] contacts?;
-    microsoft\.graph\.multiValueLegacyExtendedProperty[] multiValueExtendedProperties?;
-    microsoft\.graph\.singleValueLegacyExtendedProperty[] singleValueExtendedProperties?;
-};
-
-public type microsoft\.graph\.lobbyBypassScope "organizer"|"organization"|"organizationAndFederated"|"everyone"|"unknownFutureValue"|"invited"|"organizationExcludingGuests";
-
-public type microsoft\.graph\.listItem record {
-    *microsoft\.graph\.baseItem;
-    microsoft\.graph\.contentTypeInfo contentType?;
-    microsoft\.graph\.sharepointIds sharepointIds?;
-    microsoft\.graph\.itemAnalytics analytics?;
-    microsoft\.graph\.documentSetVersion[] documentSetVersions?;
-    microsoft\.graph\.driveItem driveItem?;
-    microsoft\.graph\.fieldValueSet fields?;
-    microsoft\.graph\.listItemVersion[] versions?;
-};
-
-public type microsoft\.graph\.specialFolder record {
-    string? name?;
-};
-
-public type microsoft\.graph\.broadcastMeetingSettings record {
-    microsoft\.graph\.broadcastMeetingAudience allowedAudience?;
-    microsoft\.graph\.broadcastMeetingCaptionSettings captions?;
-    boolean? isAttendeeReportEnabled?;
-    boolean? isQuestionAndAnswerEnabled?;
-    boolean? isRecordingEnabled?;
-    boolean? isVideoOnDemandEnabled?;
-};
-
-public type microsoft\.graph\.authenticationMethod record {
-    *microsoft\.graph\.entity;
-};
-
-public type microsoft\.graph\.workbookWorksheetProtection record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.workbookWorksheetProtectionOptions options?;
-    boolean protected?;
-};
-
-public type microsoft\.graph\.printTaskProcessingState "pending"|"processing"|"completed"|"aborted"|"unknownFutureValue";
-
-public type microsoft\.graph\.alternativeSecurityId record {
-    string? identityProvider?;
-    string? 'key?;
-    decimal? 'type?;
-};
-
-public type microsoft\.graph\.windowsSettingInstance record {
-    *microsoft\.graph\.entity;
-    string createdDateTime?;
-    string expirationDateTime?;
-    string? lastModifiedDateTime?;
-    string payload?;
-};
-
-public type microsoft\.graph\.onPremisesExtensionAttributes record {
-    string? extensionAttribute1?;
-    string? extensionAttribute10?;
-    string? extensionAttribute11?;
-    string? extensionAttribute12?;
-    string? extensionAttribute13?;
-    string? extensionAttribute14?;
-    string? extensionAttribute15?;
-    string? extensionAttribute2?;
-    string? extensionAttribute3?;
-    string? extensionAttribute4?;
-    string? extensionAttribute5?;
-    string? extensionAttribute6?;
-    string? extensionAttribute7?;
-    string? extensionAttribute8?;
-    string? extensionAttribute9?;
-};
-
-public type microsoft\.graph\.shift record {
-    *microsoft\.graph\.changeTrackedEntity;
-    microsoft\.graph\.shiftItem draftShift?;
-    boolean? isStagedForDeletion?;
-    string? schedulingGroupId?;
-    microsoft\.graph\.shiftItem sharedShift?;
-    string? userId?;
-};
-
-public type microsoft\.graph\.appLogUploadState "pending"|"completed"|"failed"|"unknownFutureValue";
-
-public type microsoft\.graph\.provisionedPlan record {
-    string? capabilityStatus?;
-    string? provisioningStatus?;
-    string? 'service?;
-};
-
-public type microsoft\.graph\.conversationMember record {
-    *microsoft\.graph\.entity;
-    string? displayName?;
-    string[] roles?;
-    string? visibleHistoryStartDateTime?;
-};
-
-public type microsoft\.graph\.windowsMalwareCategory "invalid"|"adware"|"spyware"|"passwordStealer"|"trojanDownloader"|"worm"|"backdoor"|"remoteAccessTrojan"|"trojan"|"emailFlooder"|"keylogger"|"dialer"|"monitoringSoftware"|"browserModifier"|"cookie"|"browserPlugin"|"aolExploit"|"nuker"|"securityDisabler"|"jokeProgram"|"hostileActiveXControl"|"softwareBundler"|"stealthNotifier"|"settingsModifier"|"toolBar"|"remoteControlSoftware"|"trojanFtp"|"potentialUnwantedSoftware"|"icqExploit"|"trojanTelnet"|"exploit"|"filesharingProgram"|"malwareCreationTool"|"remote_Control_Software"|"tool"|"trojanDenialOfService"|"trojanDropper"|"trojanMassMailer"|"trojanMonitoringSoftware"|"trojanProxyServer"|"virus"|"known"|"unknown"|"spp"|"behavior"|"vulnerability"|"policy"|"enterpriseUnwantedSoftware"|"ransom"|"hipsRule";
-
-public type microsoft\.graph\.longRunningOperation record {
-    *microsoft\.graph\.entity;
-    string? createdDateTime?;
-    string? lastActionDateTime?;
-    string? resourceLocation?;
-    microsoft\.graph\.longRunningOperationStatus status?;
-    string? statusDetail?;
-};
-
-public type microsoft\.graph\.teamworkConversationIdentity record {
-    *microsoft\.graph\.identity;
-    microsoft\.graph\.teamworkConversationIdentityType conversationIdentityType?;
-};
-
-public type microsoft\.graph\.chatMessageInfo record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.itemBody body?;
-    string? createdDateTime?;
-    microsoft\.graph\.eventMessageDetail eventDetail?;
-    microsoft\.graph\.chatMessageFromIdentitySet 'from?;
-    boolean? isDeleted?;
-    microsoft\.graph\.chatMessageType messageType?;
-};
-
-public type microsoft\.graph\.dayOfWeek "sunday"|"monday"|"tuesday"|"wednesday"|"thursday"|"friday"|"saturday";
-
-public type microsoft\.graph\.incompleteData record {
-    string? missingDataBeforeDateTime?;
-    boolean? wasThrottled?;
-};
-
-public type microsoft\.graph\.termStore\.termGroupScope "global"|"system"|"siteCollection"|"unknownFutureValue";
-
-public type microsoft\.graph\.chatMessageReaction record {
-    string createdDateTime?;
-    string? displayName?;
-    string? reactionContentUrl?;
-    string reactionType?;
-    microsoft\.graph\.chatMessageReactionIdentitySet user?;
-};
-
-public type microsoft\.graph\.printTaskStatus record {
-    string description?;
-    microsoft\.graph\.printTaskProcessingState state?;
-};
-
-public type microsoft\.graph\.attendee record {
-    *microsoft\.graph\.attendeeBase;
-    microsoft\.graph\.timeSlot proposedNewTime?;
-    microsoft\.graph\.responseStatus status?;
-};
-
-public type microsoft\.graph\.usageRights "unknown"|"docEdit"|"edit"|"comment"|"export"|"forward"|"owner"|"print"|"reply"|"replyAll"|"view"|"extract"|"viewRightsData"|"editRightsData"|"objModel"|"accessDenied"|"userDefinedProtectionTypeNotSupportedException"|"encryptedProtectionTypeNotSupportedException"|"purviewClaimsChallengeNotSupportedException"|"exception"|"unknownFutureValue";
-
-public type microsoft\.graph\.file record {
-    microsoft\.graph\.hashes hashes?;
-    string? mimeType?;
-    boolean? processingMetadata?;
+public type ImageInfo record {
+    # Optional; parameter used to indicate the server is able to render image dynamically in response to parameterization. For example – a high contrast image
+    boolean? addImageQuery?;
+    # Optional; alt-text accessible content for the image
+    string? alternateText?;
+    string? alternativeText?;
+    # Optional; URI that points to an icon which represents the application used to generate the activity
+    string? iconUrl?;
 };
 
 # Represents the Queries record for the operation: getChildrenContentByPath
 public type GetChildrenContentByPathQueries record {
     # Format of the content
-    string \$format?;
+    @http:Query {name: "$format"}
+    string format?;
 };
 
-public type microsoft\.graph\.hashes record {
-    string? crc32Hash?;
-    string? quickXorHash?;
-    string? sha1Hash?;
-    string? sha256Hash?;
+public type TimeCard record {
+    *ChangeTrackedEntity;
+    *TimeCard1;
 };
 
-public type microsoft\.graph\.video record {
-    decimal? audioBitsPerSample?;
-    decimal? audioChannels?;
-    string? audioFormat?;
-    decimal? audioSamplesPerSecond?;
-    decimal? bitrate?;
-    decimal? duration?;
-    string? fourCC?;
-    decimal? frameRate?;
-    decimal? height?;
-    decimal? width?;
+public type PlannerAssignments record {
 };
 
-public type microsoft\.graph\.integerRange record {
-    decimal? end?;
-    decimal? 'start?;
+public type PrintJob record {
+    *Entity;
+    *PrintJob1;
 };
 
-public type microsoft\.graph\.licenseDetails record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.servicePlanInfo[] servicePlans?;
-    string? skuId?;
-    string? skuPartNumber?;
+public type TimeOff record {
+    *ChangeTrackedEntity;
+    *TimeOff1;
 };
 
-public type microsoft\.graph\.teamworkTagType "standard"|"unknownFutureValue";
-
-public type microsoft\.graph\.plannerTaskDetails record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.plannerChecklistItems checklist?;
-    string? description?;
-    microsoft\.graph\.plannerPreviewType previewType?;
-    microsoft\.graph\.plannerExternalReferences references?;
+public type WorkbookChartTitleFormat1 record {
+    WorkbookChartFill fill?;
+    WorkbookChartFont font?;
 };
 
-public type microsoft\.graph\.activitiesContainer record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.contentActivity[] contentActivities?;
+# Product Status of Windows Defender
+public type WindowsDefenderProductStatus "noStatus"|"serviceNotRunning"|"serviceStartedWithoutMalwareProtection"|"pendingFullScanDueToThreatAction"|"pendingRebootDueToThreatAction"|"pendingManualStepsDueToThreatAction"|"avSignaturesOutOfDate"|"asSignaturesOutOfDate"|"noQuickScanHappenedForSpecifiedPeriod"|"noFullScanHappenedForSpecifiedPeriod"|"systemInitiatedScanInProgress"|"systemInitiatedCleanInProgress"|"samplesPendingSubmission"|"productRunningInEvaluationMode"|"productRunningInNonGenuineMode"|"productExpired"|"offlineScanRequired"|"serviceShutdownAsPartOfSystemShutdown"|"threatRemediationFailedCritically"|"threatRemediationFailedNonCritically"|"noStatusFlagsSet"|"platformOutOfDate"|"platformUpdateInProgress"|"platformAboutToBeOutdated"|"signatureOrPlatformEndOfLifeIsPastOrIsImpending"|"windowsSModeSignaturesInUseOnNonWin10SInstall";
+
+public type SoftwareOathAuthenticationMethod1 record {
+    # The secret key of the method. Always returns null.
+    string? secretKey?;
 };
 
-public type microsoft\.graph\.publicationFacet record {
-    microsoft\.graph\.identitySet checkedOutBy?;
-    string? level?;
-    string? versionId?;
+# Device registration status
+public type DeviceRegistrationState "notRegistered"|"registered"|"revoked"|"keyConflict"|"approvalPending"|"certificateReset"|"notRegisteredPendingEnrollment"|"unknown";
+
+public type UsageRightsIncluded record {
+    *Entity;
+    *UsageRightsIncluded1;
 };
 
-public type microsoft\.graph\.teamInfo record {
-    *microsoft\.graph\.entity;
-    string? displayName?;
-    string? tenantId?;
-    microsoft\.graph\.team team?;
+public type AppRoleAssignment record {
+    *DirectoryObject;
+    *AppRoleAssignment1;
 };
 
-public type microsoft\.graph\.printerProcessingStateDetail "paused"|"mediaJam"|"mediaNeeded"|"mediaLow"|"mediaEmpty"|"coverOpen"|"interlockOpen"|"outputTrayMissing"|"outputAreaFull"|"markerSupplyLow"|"markerSupplyEmpty"|"inputTrayMissing"|"outputAreaAlmostFull"|"markerWasteAlmostFull"|"markerWasteFull"|"fuserOverTemp"|"fuserUnderTemp"|"other"|"none"|"movingToPaused"|"shutdown"|"connectingToDevice"|"timedOut"|"stopping"|"stoppedPartially"|"tonerLow"|"tonerEmpty"|"spoolAreaFull"|"doorOpen"|"opticalPhotoConductorNearEndOfLife"|"opticalPhotoConductorLifeOver"|"developerLow"|"developerEmpty"|"interpreterResourceUnavailable"|"unknownFutureValue"|"alertRemovalOfBinaryChangeEntry"|"banderAdded"|"banderAlmostEmpty"|"banderAlmostFull"|"banderAtLimit"|"banderClosed"|"banderConfigurationChange"|"banderCoverClosed"|"banderCoverOpen"|"banderEmpty"|"banderFull"|"banderInterlockClosed"|"banderInterlockOpen"|"banderJam"|"banderLifeAlmostOver"|"banderLifeOver"|"banderMemoryExhausted"|"banderMissing"|"banderMotorFailure"|"banderNearLimit"|"banderOffline"|"banderOpened"|"banderOverTemperature"|"banderPowerSaver"|"banderRecoverableFailure"|"banderRecoverableStorage"|"banderRemoved"|"banderResourceAdded"|"banderResourceRemoved"|"banderThermistorFailure"|"banderTimingFailure"|"banderTurnedOff"|"banderTurnedOn"|"banderUnderTemperature"|"banderUnrecoverableFailure"|"banderUnrecoverableStorageError"|"banderWarmingUp"|"binderAdded"|"binderAlmostEmpty"|"binderAlmostFull"|"binderAtLimit"|"binderClosed"|"binderConfigurationChange"|"binderCoverClosed"|"binderCoverOpen"|"binderEmpty"|"binderFull"|"binderInterlockClosed"|"binderInterlockOpen"|"binderJam"|"binderLifeAlmostOver"|"binderLifeOver"|"binderMemoryExhausted"|"binderMissing"|"binderMotorFailure"|"binderNearLimit"|"binderOffline"|"binderOpened"|"binderOverTemperature"|"binderPowerSaver"|"binderRecoverableFailure"|"binderRecoverableStorage"|"binderRemoved"|"binderResourceAdded"|"binderResourceRemoved"|"binderThermistorFailure"|"binderTimingFailure"|"binderTurnedOff"|"binderTurnedOn"|"binderUnderTemperature"|"binderUnrecoverableFailure"|"binderUnrecoverableStorageError"|"binderWarmingUp"|"cameraFailure"|"chamberCooling"|"chamberFailure"|"chamberHeating"|"chamberTemperatureHigh"|"chamberTemperatureLow"|"cleanerLifeAlmostOver"|"cleanerLifeOver"|"configurationChange"|"deactivated"|"deleted"|"dieCutterAdded"|"dieCutterAlmostEmpty"|"dieCutterAlmostFull"|"dieCutterAtLimit"|"dieCutterClosed"|"dieCutterConfigurationChange"|"dieCutterCoverClosed"|"dieCutterCoverOpen"|"dieCutterEmpty"|"dieCutterFull"|"dieCutterInterlockClosed"|"dieCutterInterlockOpen"|"dieCutterJam"|"dieCutterLifeAlmostOver"|"dieCutterLifeOver"|"dieCutterMemoryExhausted"|"dieCutterMissing"|"dieCutterMotorFailure"|"dieCutterNearLimit"|"dieCutterOffline"|"dieCutterOpened"|"dieCutterOverTemperature"|"dieCutterPowerSaver"|"dieCutterRecoverableFailure"|"dieCutterRecoverableStorage"|"dieCutterRemoved"|"dieCutterResourceAdded"|"dieCutterResourceRemoved"|"dieCutterThermistorFailure"|"dieCutterTimingFailure"|"dieCutterTurnedOff"|"dieCutterTurnedOn"|"dieCutterUnderTemperature"|"dieCutterUnrecoverableFailure"|"dieCutterUnrecoverableStorageError"|"dieCutterWarmingUp"|"extruderCooling"|"extruderFailure"|"extruderHeating"|"extruderJam"|"extruderTemperatureHigh"|"extruderTemperatureLow"|"fanFailure"|"faxModemLifeAlmostOver"|"faxModemLifeOver"|"faxModemMissing"|"faxModemTurnedOff"|"faxModemTurnedOn"|"folderAdded"|"folderAlmostEmpty"|"folderAlmostFull"|"folderAtLimit"|"folderClosed"|"folderConfigurationChange"|"folderCoverClosed"|"folderCoverOpen"|"folderEmpty"|"folderFull"|"folderInterlockClosed"|"folderInterlockOpen"|"folderJam"|"folderLifeAlmostOver"|"folderLifeOver"|"folderMemoryExhausted"|"folderMissing"|"folderMotorFailure"|"folderNearLimit"|"folderOffline"|"folderOpened"|"folderOverTemperature"|"folderPowerSaver"|"folderRecoverableFailure"|"folderRecoverableStorage"|"folderRemoved"|"folderResourceAdded"|"folderResourceRemoved"|"folderThermistorFailure"|"folderTimingFailure"|"folderTurnedOff"|"folderTurnedOn"|"folderUnderTemperature"|"folderUnrecoverableFailure"|"folderUnrecoverableStorageError"|"folderWarmingUp"|"hibernate"|"holdNewJobs"|"identifyPrinterRequested"|"imprinterAdded"|"imprinterAlmostEmpty"|"imprinterAlmostFull"|"imprinterAtLimit"|"imprinterClosed"|"imprinterConfigurationChange"|"imprinterCoverClosed"|"imprinterCoverOpen"|"imprinterEmpty"|"imprinterFull"|"imprinterInterlockClosed"|"imprinterInterlockOpen"|"imprinterJam"|"imprinterLifeAlmostOver"|"imprinterLifeOver"|"imprinterMemoryExhausted"|"imprinterMissing"|"imprinterMotorFailure"|"imprinterNearLimit"|"imprinterOffline"|"imprinterOpened"|"imprinterOverTemperature"|"imprinterPowerSaver"|"imprinterRecoverableFailure"|"imprinterRecoverableStorage"|"imprinterRemoved"|"imprinterResourceAdded"|"imprinterResourceRemoved"|"imprinterThermistorFailure"|"imprinterTimingFailure"|"imprinterTurnedOff"|"imprinterTurnedOn"|"imprinterUnderTemperature"|"imprinterUnrecoverableFailure"|"imprinterUnrecoverableStorageError"|"imprinterWarmingUp"|"inputCannotFeedSizeSelected"|"inputManualInputRequest"|"inputMediaColorChange"|"inputMediaFormPartsChange"|"inputMediaSizeChange"|"inputMediaTrayFailure"|"inputMediaTrayFeedError"|"inputMediaTrayJam"|"inputMediaTypeChange"|"inputMediaWeightChange"|"inputPickRollerFailure"|"inputPickRollerLifeOver"|"inputPickRollerLifeWarn"|"inputPickRollerMissing"|"inputTrayElevationFailure"|"inputTrayPositionFailure"|"inserterAdded"|"inserterAlmostEmpty"|"inserterAlmostFull"|"inserterAtLimit"|"inserterClosed"|"inserterConfigurationChange"|"inserterCoverClosed"|"inserterCoverOpen"|"inserterEmpty"|"inserterFull"|"inserterInterlockClosed"|"inserterInterlockOpen"|"inserterJam"|"inserterLifeAlmostOver"|"inserterLifeOver"|"inserterMemoryExhausted"|"inserterMissing"|"inserterMotorFailure"|"inserterNearLimit"|"inserterOffline"|"inserterOpened"|"inserterOverTemperature"|"inserterPowerSaver"|"inserterRecoverableFailure"|"inserterRecoverableStorage"|"inserterRemoved"|"inserterResourceAdded"|"inserterResourceRemoved"|"inserterThermistorFailure"|"inserterTimingFailure"|"inserterTurnedOff"|"inserterTurnedOn"|"inserterUnderTemperature"|"inserterUnrecoverableFailure"|"inserterUnrecoverableStorageError"|"inserterWarmingUp"|"interlockClosed"|"interpreterCartridgeAdded"|"interpreterCartridgeDeleted"|"interpreterComplexPageEncountered"|"interpreterMemoryDecrease"|"interpreterMemoryIncrease"|"interpreterResourceAdded"|"interpreterResourceDeleted"|"lampAtEol"|"lampFailure"|"lampNearEol"|"laserAtEol"|"laserFailure"|"laserNearEol"|"makeEnvelopeAdded"|"makeEnvelopeAlmostEmpty"|"makeEnvelopeAlmostFull"|"makeEnvelopeAtLimit"|"makeEnvelopeClosed"|"makeEnvelopeConfigurationChange"|"makeEnvelopeCoverClosed"|"makeEnvelopeCoverOpen"|"makeEnvelopeEmpty"|"makeEnvelopeFull"|"makeEnvelopeInterlockClosed"|"makeEnvelopeInterlockOpen"|"makeEnvelopeJam"|"makeEnvelopeLifeAlmostOver"|"makeEnvelopeLifeOver"|"makeEnvelopeMemoryExhausted"|"makeEnvelopeMissing"|"makeEnvelopeMotorFailure"|"makeEnvelopeNearLimit"|"makeEnvelopeOffline"|"makeEnvelopeOpened"|"makeEnvelopeOverTemperature"|"makeEnvelopePowerSaver"|"makeEnvelopeRecoverableFailure"|"makeEnvelopeRecoverableStorage"|"makeEnvelopeRemoved"|"makeEnvelopeResourceAdded"|"makeEnvelopeResourceRemoved"|"makeEnvelopeThermistorFailure"|"makeEnvelopeTimingFailure"|"makeEnvelopeTurnedOff"|"makeEnvelopeTurnedOn"|"makeEnvelopeUnderTemperature"|"makeEnvelopeUnrecoverableFailure"|"makeEnvelopeUnrecoverableStorageError"|"makeEnvelopeWarmingUp"|"markerAdjustingPrintQuality"|"markerCleanerMissing"|"markerDeveloperAlmostEmpty"|"markerDeveloperEmpty"|"markerDeveloperMissing"|"markerFuserMissing"|"markerFuserThermistorFailure"|"markerFuserTimingFailure"|"markerInkAlmostEmpty"|"markerInkEmpty"|"markerInkMissing"|"markerOpcMissing"|"markerPrintRibbonAlmostEmpty"|"markerPrintRibbonEmpty"|"markerPrintRibbonMissing"|"markerSupplyAlmostEmpty"|"markerSupplyMissing"|"markerTonerCartridgeMissing"|"markerTonerMissing"|"markerWasteInkReceptacleAlmostFull"|"markerWasteInkReceptacleFull"|"markerWasteInkReceptacleMissing"|"markerWasteMissing"|"markerWasteTonerReceptacleAlmostFull"|"markerWasteTonerReceptacleFull"|"markerWasteTonerReceptacleMissing"|"materialEmpty"|"materialLow"|"materialNeeded"|"mediaDrying"|"mediaPathCannotDuplexMediaSelected"|"mediaPathFailure"|"mediaPathInputEmpty"|"mediaPathInputFeedError"|"mediaPathInputJam"|"mediaPathInputRequest"|"mediaPathJam"|"mediaPathMediaTrayAlmostFull"|"mediaPathMediaTrayFull"|"mediaPathMediaTrayMissing"|"mediaPathOutputFeedError"|"mediaPathOutputFull"|"mediaPathOutputJam"|"mediaPathPickRollerFailure"|"mediaPathPickRollerLifeOver"|"mediaPathPickRollerLifeWarn"|"mediaPathPickRollerMissing"|"motorFailure"|"outputMailboxSelectFailure"|"outputMediaTrayFailure"|"outputMediaTrayFeedError"|"outputMediaTrayJam"|"perforaterAdded"|"perforaterAlmostEmpty"|"perforaterAlmostFull"|"perforaterAtLimit"|"perforaterClosed"|"perforaterConfigurationChange"|"perforaterCoverClosed"|"perforaterCoverOpen"|"perforaterEmpty"|"perforaterFull"|"perforaterInterlockClosed"|"perforaterInterlockOpen"|"perforaterJam"|"perforaterLifeAlmostOver"|"perforaterLifeOver"|"perforaterMemoryExhausted"|"perforaterMissing"|"perforaterMotorFailure"|"perforaterNearLimit"|"perforaterOffline"|"perforaterOpened"|"perforaterOverTemperature"|"perforaterPowerSaver"|"perforaterRecoverableFailure"|"perforaterRecoverableStorage"|"perforaterRemoved"|"perforaterResourceAdded"|"perforaterResourceRemoved"|"perforaterThermistorFailure"|"perforaterTimingFailure"|"perforaterTurnedOff"|"perforaterTurnedOn"|"perforaterUnderTemperature"|"perforaterUnrecoverableFailure"|"perforaterUnrecoverableStorageError"|"perforaterWarmingUp"|"platformCooling"|"platformFailure"|"platformHeating"|"platformTemperatureHigh"|"platformTemperatureLow"|"powerDown"|"powerUp"|"printerManualReset"|"printerNmsReset"|"printerReadyToPrint"|"puncherAdded"|"puncherAlmostEmpty"|"puncherAlmostFull"|"puncherAtLimit"|"puncherClosed"|"puncherConfigurationChange"|"puncherCoverClosed"|"puncherCoverOpen"|"puncherEmpty"|"puncherFull"|"puncherInterlockClosed"|"puncherInterlockOpen"|"puncherJam"|"puncherLifeAlmostOver"|"puncherLifeOver"|"puncherMemoryExhausted"|"puncherMissing"|"puncherMotorFailure"|"puncherNearLimit"|"puncherOffline"|"puncherOpened"|"puncherOverTemperature"|"puncherPowerSaver"|"puncherRecoverableFailure"|"puncherRecoverableStorage"|"puncherRemoved"|"puncherResourceAdded"|"puncherResourceRemoved"|"puncherThermistorFailure"|"puncherTimingFailure"|"puncherTurnedOff"|"puncherTurnedOn"|"puncherUnderTemperature"|"puncherUnrecoverableFailure"|"puncherUnrecoverableStorageError"|"puncherWarmingUp"|"resuming"|"scanMediaPathFailure"|"scanMediaPathInputEmpty"|"scanMediaPathInputFeedError"|"scanMediaPathInputJam"|"scanMediaPathInputRequest"|"scanMediaPathJam"|"scanMediaPathOutputFeedError"|"scanMediaPathOutputFull"|"scanMediaPathOutputJam"|"scanMediaPathPickRollerFailure"|"scanMediaPathPickRollerLifeOver"|"scanMediaPathPickRollerLifeWarn"|"scanMediaPathPickRollerMissing"|"scanMediaPathTrayAlmostFull"|"scanMediaPathTrayFull"|"scanMediaPathTrayMissing"|"scannerLightFailure"|"scannerLightLifeAlmostOver"|"scannerLightLifeOver"|"scannerLightMissing"|"scannerSensorFailure"|"scannerSensorLifeAlmostOver"|"scannerSensorLifeOver"|"scannerSensorMissing"|"separationCutterAdded"|"separationCutterAlmostEmpty"|"separationCutterAlmostFull"|"separationCutterAtLimit"|"separationCutterClosed"|"separationCutterConfigurationChange"|"separationCutterCoverClosed"|"separationCutterCoverOpen"|"separationCutterEmpty"|"separationCutterFull"|"separationCutterInterlockClosed"|"separationCutterInterlockOpen"|"separationCutterJam"|"separationCutterLifeAlmostOver"|"separationCutterLifeOver"|"separationCutterMemoryExhausted"|"separationCutterMissing"|"separationCutterMotorFailure"|"separationCutterNearLimit"|"separationCutterOffline"|"separationCutterOpened"|"separationCutterOverTemperature"|"separationCutterPowerSaver"|"separationCutterRecoverableFailure"|"separationCutterRecoverableStorage"|"separationCutterRemoved"|"separationCutterResourceAdded"|"separationCutterResourceRemoved"|"separationCutterThermistorFailure"|"separationCutterTimingFailure"|"separationCutterTurnedOff"|"separationCutterTurnedOn"|"separationCutterUnderTemperature"|"separationCutterUnrecoverableFailure"|"separationCutterUnrecoverableStorageError"|"separationCutterWarmingUp"|"sheetRotatorAdded"|"sheetRotatorAlmostEmpty"|"sheetRotatorAlmostFull"|"sheetRotatorAtLimit"|"sheetRotatorClosed"|"sheetRotatorConfigurationChange"|"sheetRotatorCoverClosed"|"sheetRotatorCoverOpen"|"sheetRotatorEmpty"|"sheetRotatorFull"|"sheetRotatorInterlockClosed"|"sheetRotatorInterlockOpen"|"sheetRotatorJam"|"sheetRotatorLifeAlmostOver"|"sheetRotatorLifeOver"|"sheetRotatorMemoryExhausted"|"sheetRotatorMissing"|"sheetRotatorMotorFailure"|"sheetRotatorNearLimit"|"sheetRotatorOffline"|"sheetRotatorOpened"|"sheetRotatorOverTemperature"|"sheetRotatorPowerSaver"|"sheetRotatorRecoverableFailure"|"sheetRotatorRecoverableStorage"|"sheetRotatorRemoved"|"sheetRotatorResourceAdded"|"sheetRotatorResourceRemoved"|"sheetRotatorThermistorFailure"|"sheetRotatorTimingFailure"|"sheetRotatorTurnedOff"|"sheetRotatorTurnedOn"|"sheetRotatorUnderTemperature"|"sheetRotatorUnrecoverableFailure"|"sheetRotatorUnrecoverableStorageError"|"sheetRotatorWarmingUp"|"slitterAdded"|"slitterAlmostEmpty"|"slitterAlmostFull"|"slitterAtLimit"|"slitterClosed"|"slitterConfigurationChange"|"slitterCoverClosed"|"slitterCoverOpen"|"slitterEmpty"|"slitterFull"|"slitterInterlockClosed"|"slitterInterlockOpen"|"slitterJam"|"slitterLifeAlmostOver"|"slitterLifeOver"|"slitterMemoryExhausted"|"slitterMissing"|"slitterMotorFailure"|"slitterNearLimit"|"slitterOffline"|"slitterOpened"|"slitterOverTemperature"|"slitterPowerSaver"|"slitterRecoverableFailure"|"slitterRecoverableStorage"|"slitterRemoved"|"slitterResourceAdded"|"slitterResourceRemoved"|"slitterThermistorFailure"|"slitterTimingFailure"|"slitterTurnedOff"|"slitterTurnedOn"|"slitterUnderTemperature"|"slitterUnrecoverableFailure"|"slitterUnrecoverableStorageError"|"slitterWarmingUp"|"stackerAdded"|"stackerAlmostEmpty"|"stackerAlmostFull"|"stackerAtLimit"|"stackerClosed"|"stackerConfigurationChange"|"stackerCoverClosed"|"stackerCoverOpen"|"stackerEmpty"|"stackerFull"|"stackerInterlockClosed"|"stackerInterlockOpen"|"stackerJam"|"stackerLifeAlmostOver"|"stackerLifeOver"|"stackerMemoryExhausted"|"stackerMissing"|"stackerMotorFailure"|"stackerNearLimit"|"stackerOffline"|"stackerOpened"|"stackerOverTemperature"|"stackerPowerSaver"|"stackerRecoverableFailure"|"stackerRecoverableStorage"|"stackerRemoved"|"stackerResourceAdded"|"stackerResourceRemoved"|"stackerThermistorFailure"|"stackerTimingFailure"|"stackerTurnedOff"|"stackerTurnedOn"|"stackerUnderTemperature"|"stackerUnrecoverableFailure"|"stackerUnrecoverableStorageError"|"stackerWarmingUp"|"standby"|"staplerAdded"|"staplerAlmostEmpty"|"staplerAlmostFull"|"staplerAtLimit"|"staplerClosed"|"staplerConfigurationChange"|"staplerCoverClosed"|"staplerCoverOpen"|"staplerEmpty"|"staplerFull"|"staplerInterlockClosed"|"staplerInterlockOpen"|"staplerJam"|"staplerLifeAlmostOver"|"staplerLifeOver"|"staplerMemoryExhausted"|"staplerMissing"|"staplerMotorFailure"|"staplerNearLimit"|"staplerOffline"|"staplerOpened"|"staplerOverTemperature"|"staplerPowerSaver"|"staplerRecoverableFailure"|"staplerRecoverableStorage"|"staplerRemoved"|"staplerResourceAdded"|"staplerResourceRemoved"|"staplerThermistorFailure"|"staplerTimingFailure"|"staplerTurnedOff"|"staplerTurnedOn"|"staplerUnderTemperature"|"staplerUnrecoverableFailure"|"staplerUnrecoverableStorageError"|"staplerWarmingUp"|"stitcherAdded"|"stitcherAlmostEmpty"|"stitcherAlmostFull"|"stitcherAtLimit"|"stitcherClosed"|"stitcherConfigurationChange"|"stitcherCoverClosed"|"stitcherCoverOpen"|"stitcherEmpty"|"stitcherFull"|"stitcherInterlockClosed"|"stitcherInterlockOpen"|"stitcherJam"|"stitcherLifeAlmostOver"|"stitcherLifeOver"|"stitcherMemoryExhausted"|"stitcherMissing"|"stitcherMotorFailure"|"stitcherNearLimit"|"stitcherOffline"|"stitcherOpened"|"stitcherOverTemperature"|"stitcherPowerSaver"|"stitcherRecoverableFailure"|"stitcherRecoverableStorage"|"stitcherRemoved"|"stitcherResourceAdded"|"stitcherResourceRemoved"|"stitcherThermistorFailure"|"stitcherTimingFailure"|"stitcherTurnedOff"|"stitcherTurnedOn"|"stitcherUnderTemperature"|"stitcherUnrecoverableFailure"|"stitcherUnrecoverableStorageError"|"stitcherWarmingUp"|"subunitAdded"|"subunitAlmostEmpty"|"subunitAlmostFull"|"subunitAtLimit"|"subunitClosed"|"subunitCoolingDown"|"subunitEmpty"|"subunitFull"|"subunitLifeAlmostOver"|"subunitLifeOver"|"subunitMemoryExhausted"|"subunitMissing"|"subunitMotorFailure"|"subunitNearLimit"|"subunitOffline"|"subunitOpened"|"subunitOverTemperature"|"subunitPowerSaver"|"subunitRecoverableFailure"|"subunitRecoverableStorage"|"subunitRemoved"|"subunitResourceAdded"|"subunitResourceRemoved"|"subunitThermistorFailure"|"subunitTimingFailure"|"subunitTurnedOff"|"subunitTurnedOn"|"subunitUnderTemperature"|"subunitUnrecoverableFailure"|"subunitUnrecoverableStorage"|"subunitWarmingUp"|"suspend"|"testing"|"trimmerAdded"|"trimmerAlmostEmpty"|"trimmerAlmostFull"|"trimmerAtLimit"|"trimmerClosed"|"trimmerConfigurationChange"|"trimmerCoverClosed"|"trimmerCoverOpen"|"trimmerEmpty"|"trimmerFull"|"trimmerInterlockClosed"|"trimmerInterlockOpen"|"trimmerJam"|"trimmerLifeAlmostOver"|"trimmerLifeOver"|"trimmerMemoryExhausted"|"trimmerMissing"|"trimmerMotorFailure"|"trimmerNearLimit"|"trimmerOffline"|"trimmerOpened"|"trimmerOverTemperature"|"trimmerPowerSaver"|"trimmerRecoverableFailure"|"trimmerRecoverableStorage"|"trimmerRemoved"|"trimmerResourceAdded"|"trimmerResourceRemoved"|"trimmerThermistorFailure"|"trimmerTimingFailure"|"trimmerTurnedOff"|"trimmerTurnedOn"|"trimmerUnderTemperature"|"trimmerUnrecoverableFailure"|"trimmerUnrecoverableStorageError"|"trimmerWarmingUp"|"unknown"|"wrapperAdded"|"wrapperAlmostEmpty"|"wrapperAlmostFull"|"wrapperAtLimit"|"wrapperClosed"|"wrapperConfigurationChange"|"wrapperCoverClosed"|"wrapperCoverOpen"|"wrapperEmpty"|"wrapperFull"|"wrapperInterlockClosed"|"wrapperInterlockOpen"|"wrapperJam"|"wrapperLifeAlmostOver"|"wrapperLifeOver"|"wrapperMemoryExhausted"|"wrapperMissing"|"wrapperMotorFailure"|"wrapperNearLimit"|"wrapperOffline"|"wrapperOpened"|"wrapperOverTemperature"|"wrapperPowerSaver"|"wrapperRecoverableFailure"|"wrapperRecoverableStorage"|"wrapperRemoved"|"wrapperResourceAdded"|"wrapperResourceRemoved"|"wrapperThermistorFailure"|"wrapperTimingFailure"|"wrapperTurnedOff"|"wrapperTurnedOn"|"wrapperUnderTemperature"|"wrapperUnrecoverableFailure"|"wrapperUnrecoverableStorageError"|"wrapperWarmingUp";
-
-public type microsoft\.graph\.teamsAppDistributionMethod "store"|"organization"|"sideloaded"|"unknownFutureValue";
-
-public type microsoft\.graph\.todoTask record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.itemBody body?;
-    string bodyLastModifiedDateTime?;
-    string[] categories?;
-    microsoft\.graph\.dateTimeTimeZone completedDateTime?;
-    string createdDateTime?;
-    microsoft\.graph\.dateTimeTimeZone dueDateTime?;
-    boolean? hasAttachments?;
-    microsoft\.graph\.importance importance?;
-    boolean isReminderOn?;
-    string lastModifiedDateTime?;
-    microsoft\.graph\.patternedRecurrence recurrence?;
-    microsoft\.graph\.dateTimeTimeZone reminderDateTime?;
-    microsoft\.graph\.dateTimeTimeZone startDateTime?;
-    microsoft\.graph\.taskStatus status?;
-    string? title?;
-    microsoft\.graph\.attachmentBase[] attachments?;
-    microsoft\.graph\.attachmentSession[] attachmentSessions?;
-    microsoft\.graph\.checklistItem[] checklistItems?;
-    microsoft\.graph\.extension[] extensions?;
-    microsoft\.graph\.linkedResource[] linkedResources?;
+public type ObjectIdentity record {
+    # Specifies the issuer of the identity, for example facebook.com. 512 character limit. For local accounts (where signInType isn't federated), this property is the local default domain name for the tenant, for example contoso.com.  For guests from other Microsoft Entra organizations, this is the domain of the federated organization, for example contoso.com. For more information about filtering behavior for this property, see Filtering on the identities property of a user.
+    string? issuer?;
+    # Specifies the unique identifier assigned to the user by the issuer. 64 character limit. The combination of issuer and issuerAssignedId must be unique within the organization. Represents the sign-in name for the user, when signInType is set to emailAddress or userName (also known as local accounts).When signInType is set to: emailAddress (or a custom string that starts with emailAddress like emailAddress1), issuerAssignedId must be a valid email addressuserName, issuerAssignedId must begin with an alphabetical character or number, and can only contain alphanumeric characters and the following symbols: - or _  For more information about filtering behavior for this property, see Filtering on the identities property of a user.
+    string? issuerAssignedId?;
+    # Specifies the user sign-in types in your directory, such as emailAddress, userName, federated, or userPrincipalName. federated represents a unique identifier for a user from an issuer that can be in any format chosen by the issuer. Setting or updating a userPrincipalName identity updates the value of the userPrincipalName property on the user object. The validations performed on the userPrincipalName property on the user object, for example, verified domains and acceptable characters, are performed when setting or updating a userPrincipalName identity. Extra validation is enforced on issuerAssignedId when the sign-in type is set to emailAddress or userName. This property can also be set to any custom string.  For more information about filtering behavior for this property, see Filtering on the identities property of a user.
+    string? signInType?;
 };
 
-public type microsoft\.graph\.drive record {
-    *microsoft\.graph\.baseItem;
-    string? driveType?;
-    microsoft\.graph\.identitySet owner?;
-    microsoft\.graph\.quota quota?;
-    microsoft\.graph\.sharepointIds sharePointIds?;
-    microsoft\.graph\.systemFacet system?;
-    microsoft\.graph\.driveItem[] bundles?;
-    microsoft\.graph\.driveItem[] following?;
-    microsoft\.graph\.driveItem[] items?;
-    microsoft\.graph\.list list?;
-    microsoft\.graph\.driveItem root?;
-    microsoft\.graph\.driveItem[] special?;
+public type OnlineMeeting record {
+    *OnlineMeetingBase;
+    *OnlineMeeting1;
 };
 
-public type microsoft\.graph\.onenotePage record {
-    *microsoft\.graph\.onenoteEntitySchemaObjectModel;
-    string? content?;
+public type UserActivity1 record {
+    # Required. URL used to launch the activity in the best native experience represented by the appId. Might launch a web-based app if no native app exists.
+    string activationUrl?;
+    # Required. URL for the domain representing the cross-platform identity mapping for the app. Mapping is stored either as a JSON file hosted on the domain or configurable via Windows Dev Center. The JSON file is named cross-platform-app-identifiers and is hosted at root of your HTTPS domain, either at the top level domain or include a sub domain. For example: https://contoso.com or https://myapp.contoso.com but NOT https://myapp.contoso.com/somepath. You must have a unique file and domain (or sub domain) per cross-platform app identity. For example, a separate file and domain is needed for Word vs. PowerPoint.
+    string activitySourceHost?;
+    # Required. The unique activity ID in the context of the app - supplied by caller and immutable thereafter.
+    string appActivityId?;
+    # Optional. Short text description of the app used to generate the activity for use in cases when the app is not installed on the user’s local device.
+    string? appDisplayName?;
+    Json contentInfo?;
+    # Optional. Used in the event the content can be rendered outside of a native or web-based app experience (for example, a pointer to an item in an RSS feed).
     string? contentUrl?;
-    string? createdByAppId?;
+    # Set by the server. DateTime in UTC when the object was created on the server.
+    string? createdDateTime?;
+    # Set by the server. DateTime in UTC when the object expired on the server.
+    string? expirationDateTime?;
+    # Optional. URL used to launch the activity in a web-based app, if available.
+    string? fallbackUrl?;
+    # Set by the server. DateTime in UTC when the object was modified on the server.
     string? lastModifiedDateTime?;
-    decimal? level?;
-    microsoft\.graph\.pageLinks links?;
-    decimal? 'order?;
-    string? title?;
-    string[] userTags?;
-    microsoft\.graph\.notebook parentNotebook?;
-    microsoft\.graph\.onenoteSection parentSection?;
+    Status status?;
+    # Optional. The timezone in which the user's device used to generate the activity was located at activity creation time; values supplied as Olson IDs in order to support cross-platform representation.
+    string? userTimezone?;
+    VisualInfo visualElements?;
+    # Optional. NavigationProperty/Containment; navigation property to the activity's historyItems.
+    ActivityHistoryItem[] historyItems?;
 };
 
-public type microsoft\.graph\.scheduleChangeState "pending"|"approved"|"declined"|"unknownFutureValue";
+public type ManagementAgentType "eas"|"mdm"|"easMdm"|"intuneClient"|"easIntuneClient"|"configurationManagerClient"|"configurationManagerClientMdm"|"configurationManagerClientMdmEas"|"unknown"|"jamf"|"googleCloudDevicePolicyController"|"microsoft365ManagedMdm"|"msSense";
 
-public type microsoft\.graph\.presenceStatusMessage record {
-    microsoft\.graph\.dateTimeTimeZone expiryDateTime?;
-    microsoft\.graph\.itemBody message?;
-    string? publishedDateTime?;
-};
-
-public type microsoft\.graph\.termStore\.localizedLabel record {
-    boolean? isDefault?;
-    string? languageTag?;
+public type ItemRetentionLabel1 record {
+    # Specifies whether the label is applied explicitly on the item. True indicates that the label is applied explicitly; otherwise, the label is inherited from its parent. Read-only.
+    boolean? isLabelAppliedExplicitly?;
+    IdentitySet labelAppliedBy?;
+    # The date and time when the label was applied on the item. The timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z. Read-only.
+    string? labelAppliedDateTime?;
+    # The retention label on the document. Read-write.
     string? name?;
+    RetentionLabelSettings retentionSettings?;
 };
 
-public type microsoft\.graph\.chatMessageImportance "normal"|"high"|"urgent"|"unknownFutureValue";
-
-public type microsoft\.graph\.windowsHelloForBusinessAuthenticationMethod record {
-    *microsoft\.graph\.authenticationMethod;
-    string? createdDateTime?;
-    string? displayName?;
-    microsoft\.graph\.authenticationMethodKeyStrength keyStrength?;
-    microsoft\.graph\.device device?;
-};
-
-public type microsoft\.graph\.plannerExternalReferences record {
-};
-
-public type microsoft\.graph\.meetingChatHistoryDefaultMode "none"|"all"|"unknownFutureValue";
-
-public type microsoft\.graph\.itemActivity record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.accessAction access?;
-    string? activityDateTime?;
-    microsoft\.graph\.identitySet actor?;
-    microsoft\.graph\.driveItem driveItem?;
-};
-
-public type microsoft\.graph\.workbookNamedItem record {
-    *microsoft\.graph\.entity;
-    string? comment?;
-    string? name?;
-    string scope?;
-    string? 'type?;
-    microsoft\.graph\.Json value?;
-    boolean visible?;
-    microsoft\.graph\.workbookWorksheet worksheet?;
-};
-
-public type microsoft\.graph\.plannerBucket record {
-    *microsoft\.graph\.entity;
-    string name?;
-    string? orderHint?;
-    string? planId?;
-    microsoft\.graph\.plannerTask[] tasks?;
-};
-
-public type microsoft\.graph\.onenoteSection record {
-    *microsoft\.graph\.onenoteEntityHierarchyModel;
-    boolean? isDefault?;
-    microsoft\.graph\.sectionLinks links?;
-    string? pagesUrl?;
-    microsoft\.graph\.onenotePage[] pages?;
-    microsoft\.graph\.notebook parentNotebook?;
-    microsoft\.graph\.sectionGroup parentSectionGroup?;
-};
-
-public type microsoft\.graph\.teamsAsyncOperation record {
-    *microsoft\.graph\.entity;
-    decimal attemptsCount?;
-    string createdDateTime?;
-    microsoft\.graph\.operationError 'error?;
-    string lastActionDateTime?;
-    microsoft\.graph\.teamsAsyncOperationType operationType?;
-    microsoft\.graph\.teamsAsyncOperationStatus status?;
-    string? targetResourceId?;
-    string? targetResourceLocation?;
-};
-
-public type microsoft\.graph\.oAuth2PermissionGrant record {
-    *microsoft\.graph\.entity;
-    string clientId?;
-    string? consentType?;
-    string? principalId?;
-    string resourceId?;
-    string? scope?;
-};
-
-# Represents the Queries record for the operation: getChildrenContent
-public type GetChildrenContentQueries record {
-    # Format of the content
-    string \$format?;
-};
-
-public type microsoft\.graph\.cloudClipboardItem record {
-    *microsoft\.graph\.entity;
-    string createdDateTime?;
-    string expirationDateTime?;
-    string? lastModifiedDateTime?;
-    microsoft\.graph\.cloudClipboardItemPayload[] payloads?;
-};
-
-public type microsoft\.graph\.thumbnailColumn record {
-};
-
-public type microsoft\.graph\.printEvent "jobStarted"|"unknownFutureValue";
-
-public type microsoft\.graph\.extractSensitivityLabelsResult record {
-    microsoft\.graph\.sensitivityLabelAssignment[] labels?;
-};
-
-public type microsoft\.graph\.scheduleEntityTheme "white"|"blue"|"green"|"purple"|"pink"|"yellow"|"gray"|"darkBlue"|"darkGreen"|"darkPurple"|"darkPink"|"darkYellow"|"unknownFutureValue";
-
-public type microsoft\.graph\.driveItemUploadableProperties record {
-    string? description?;
-    microsoft\.graph\.driveItemSource driveItemSource?;
-    decimal? fileSize?;
-    microsoft\.graph\.fileSystemInfo fileSystemInfo?;
-    microsoft\.graph\.mediaSource mediaSource?;
-    string? name?;
-};
-
-public type microsoft\.graph\.itemReference record {
-    string? driveId?;
-    string? driveType?;
-    string? id?;
-    string? name?;
-    string? path?;
-    string? shareId?;
-    microsoft\.graph\.sharepointIds sharepointIds?;
-    string? siteId?;
-};
-
-public type microsoft\.graph\.deviceMetadata record {
-    string? deviceType?;
-    string? ipAddress?;
-    microsoft\.graph\.operatingSystemSpecifications operatingSystemSpecifications?;
-};
-
-public type microsoft\.graph\.workbookOperationStatus "notStarted"|"running"|"succeeded"|"failed";
-
-public type driveItemid_microsoft_graph_assignSensitivityLabel_body record {
-    string? sensitivityLabelId?;
-    microsoft\.graph\.sensitivityLabelAssignmentMethod assignmentMethod?;
-    string? justificationText?;
-};
-
-public type microsoft\.graph\.fileSystemInfo record {
-    string? createdDateTime?;
-    string? lastAccessedDateTime?;
-    string? lastModifiedDateTime?;
-};
-
-public type microsoft\.graph\.printDuplexMode "flipOnLongEdge"|"flipOnShortEdge"|"oneSided"|"unknownFutureValue";
-
-public type microsoft\.graph\.workbookChartGridlines record {
-    *microsoft\.graph\.entity;
-    boolean visible?;
-    microsoft\.graph\.workbookChartGridlinesFormat format?;
-};
-
-public type microsoft\.graph\.directoryObject record {
-    *microsoft\.graph\.entity;
-    string? deletedDateTime?;
-};
-
-public type microsoft\.graph\.categoryColor "none"|"preset0"|"preset1"|"preset2"|"preset3"|"preset4"|"preset5"|"preset6"|"preset7"|"preset8"|"preset9"|"preset10"|"preset11"|"preset12"|"preset13"|"preset14"|"preset15"|"preset16"|"preset17"|"preset18"|"preset19"|"preset20"|"preset21"|"preset22"|"preset23"|"preset24";
-
-public type microsoft\.graph\.choiceColumn record {
-    boolean? allowTextEntry?;
-    string[] choices?;
-    string? displayAs?;
-};
-
-# Represents the Queries record for the operation: getChildrenInRoot
-public type GetChildrenInRootQueries record {
-    # Expand related entities
-    string[] \$expand?;
-    # Select properties to be returned
-    string[] \$select?;
-};
-
-public type microsoft\.graph\.scheduleChangeRequestActor "sender"|"recipient"|"manager"|"system"|"unknownFutureValue";
-
-public type microsoft\.graph\.plannerUser record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.plannerPlan[] plans?;
-    microsoft\.graph\.plannerTask[] tasks?;
-};
-
-public type microsoft\.graph\.outlookUser record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.outlookCategory[] masterCategories?;
-};
-
-public type root_microsoft_graph_createUploadSession_body record {
-    microsoft\.graph\.driveItemUploadableProperties item?;
-};
-
-public type microsoft\.graph\.joinMeetingIdSettings record {
-    boolean? isPasscodeRequired?;
-    string? joinMeetingId?;
-    string? passcode?;
-};
-
-public type microsoft\.graph\.appRoleAssignment record {
-    *microsoft\.graph\.directoryObject;
-    string appRoleId?;
-    string? createdDateTime?;
-    string? principalDisplayName?;
-    string? principalId?;
-    string? principalType?;
-    string? resourceDisplayName?;
-    string? resourceId?;
-};
-
-public type microsoft\.graph\.meetingLiveShareOptions "enabled"|"disabled"|"unknownFutureValue";
-
-# Represents the Queries record for the operation: listChildren
-public type ListChildrenQueries record {
-    # Skip the first n items
-    int \$skip?;
-    # Show only the first n items
-    int \$top?;
-    # Filter items by property values
-    string \$filter?;
-    # Search items by search phrases
-    string \$search?;
-    # Order items by property values
-    string[] \$orderby?;
-    # Expand related entities
-    string[] \$expand?;
-    # Include count of items
-    boolean \$count?;
-    # Select properties to be returned
-    string[] \$select?;
-};
-
-public type microsoft\.graph\.offerShiftRequest record {
-    *microsoft\.graph\.scheduleChangeRequest;
-    string? recipientActionDateTime?;
-    string? recipientActionMessage?;
-    string? recipientUserId?;
-    string? senderShiftId?;
-};
-
-public type microsoft\.graph\.plannerCategoryDescriptions record {
-    string? category1?;
-    string? category10?;
-    string? category11?;
-    string? category12?;
-    string? category13?;
-    string? category14?;
-    string? category15?;
-    string? category16?;
-    string? category17?;
-    string? category18?;
-    string? category19?;
-    string? category2?;
-    string? category20?;
-    string? category21?;
-    string? category22?;
-    string? category23?;
-    string? category24?;
-    string? category25?;
-    string? category3?;
-    string? category4?;
-    string? category5?;
-    string? category6?;
-    string? category7?;
-    string? category8?;
-    string? category9?;
-};
-
-public type microsoft\.graph\.operationStatus "NotStarted"|"Running"|"Completed"|"Failed";
-
-public type microsoft\.graph\.dateTimeColumn record {
-    string? displayAs?;
-    string? format?;
-};
-
-public type microsoft\.graph\.hyperlinkOrPictureColumn record {
-    boolean? isPicture?;
-};
-
-public type root_microsoft_graph_copy_body record {
-    string? name?;
-    microsoft\.graph\.itemReference parentReference?;
-    boolean? childrenOnly = false;
-    boolean? includeAllVersionHistory = false;
-};
-
-public type microsoft\.graph\.workbookSortField record {
-    boolean 'ascending?;
-    string? color?;
-    string dataOption?;
-    microsoft\.graph\.workbookIcon icon?;
-    decimal 'key?;
-    string sortOn?;
-};
-
-public type microsoft\.graph\.contentTypeOrder record {
-    boolean? default?;
-    decimal? position?;
-};
-
-public type microsoft\.graph\.mailboxSettings record {
-    string? archiveFolder?;
-    microsoft\.graph\.automaticRepliesSetting automaticRepliesSetting?;
-    string? dateFormat?;
-    microsoft\.graph\.delegateMeetingMessageDeliveryOptions delegateMeetingMessageDeliveryOptions?;
-    microsoft\.graph\.localeInfo language?;
-    string? timeFormat?;
-    string? timeZone?;
-    microsoft\.graph\.userPurpose userPurpose?;
-    microsoft\.graph\.workingHours workingHours?;
-};
-
-public type microsoft\.graph\.workbookTableSort record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.workbookSortField[] fields?;
-    boolean matchCase?;
-    string method?;
-};
-
-public type microsoft\.graph\.printScaling "auto"|"shrinkToFit"|"fill"|"fit"|"none"|"unknownFutureValue";
-
-public type microsoft\.graph\.plannerPlanDetails record {
-    *microsoft\.graph\.entity;
-    microsoft\.graph\.plannerCategoryDescriptions categoryDescriptions?;
-    microsoft\.graph\.plannerUserIds sharedWith?;
-};
-
-public type microsoft\.graph\.bodyType "text"|"html";
-
-public type microsoft\.graph\.physicalAddress record {
-    string? city?;
-    string? countryOrRegion?;
-    string? postalCode?;
-    string? state?;
-    string? street?;
-};
-
-public type microsoft\.graph\.deviceHealthAttestationState record {
-    string? attestationIdentityKey?;
-    string? bitLockerStatus?;
-    string? bootAppSecurityVersion?;
-    string? bootDebugging?;
-    string? bootManagerSecurityVersion?;
-    string? bootManagerVersion?;
-    string? bootRevisionListInfo?;
-    string? codeIntegrity?;
-    string? codeIntegrityCheckVersion?;
-    string? codeIntegrityPolicy?;
-    string? contentNamespaceUrl?;
-    string? contentVersion?;
-    string? dataExcutionPolicy?;
-    string? deviceHealthAttestationStatus?;
-    string? earlyLaunchAntiMalwareDriverProtection?;
-    string? healthAttestationSupportedStatus?;
-    string? healthStatusMismatchInfo?;
-    string issuedDateTime?;
-    string? lastUpdateDateTime?;
-    string? operatingSystemKernelDebugging?;
-    string? operatingSystemRevListInfo?;
-    string? pcr0?;
-    string? pcrHashAlgorithm?;
-    decimal resetCount?;
-    decimal restartCount?;
-    string? safeMode?;
-    string? secureBoot?;
-    string? secureBootConfigurationPolicyFingerPrint?;
-    string? testSigning?;
-    string? tpmVersion?;
-    string? virtualSecureMode?;
-    string? windowsPE?;
-};
-
-public type microsoft\.graph\.itemBody record {
-    string? content?;
-    microsoft\.graph\.bodyType contentType?;
-};
-
-public type microsoft\.graph\.documentSetVersion record {
-    *microsoft\.graph\.listItemVersion;
-    string? comment?;
-    microsoft\.graph\.identitySet createdBy?;
-    string? createdDateTime?;
-    microsoft\.graph\.documentSetVersionItem[] items?;
-    boolean? shouldCaptureMinorVersion?;
-};
-
-public type microsoft\.graph\.activityMetadata record {
-    microsoft\.graph\.userActivityType activity?;
-};
-
-public type microsoft\.graph\.remoteItem record {
-    microsoft\.graph\.identitySet createdBy?;
-    string? createdDateTime?;
-    microsoft\.graph\.file file?;
-    microsoft\.graph\.fileSystemInfo fileSystemInfo?;
-    microsoft\.graph\.folder folder?;
-    string? id?;
-    microsoft\.graph\.image image?;
-    microsoft\.graph\.identitySet lastModifiedBy?;
-    string? lastModifiedDateTime?;
-    string? name?;
-    microsoft\.graph\.package package?;
-    microsoft\.graph\.itemReference parentReference?;
-    microsoft\.graph\.shared shared?;
-    microsoft\.graph\.sharepointIds sharepointIds?;
-    decimal? size?;
-    microsoft\.graph\.specialFolder specialFolder?;
-    microsoft\.graph\.video video?;
-    string? webDavUrl?;
-    string? webUrl?;
-};
-
-public type microsoft\.graph\.plannerAppliedCategories record {
-};
-
-public type microsoft\.graph\.schedulingGroup record {
-    *microsoft\.graph\.changeTrackedEntity;
+public type PublicErrorDetail record {
+    # The error code.
     string? code?;
-    string? displayName?;
-    boolean? isActive?;
-    string[] userIds?;
+    # The error message.
+    string? message?;
+    # The target of the error.
+    string? target?;
 };
 
-public type Collection\ of\ permission record {
-    microsoft\.graph\.permission[] value?;
-    string? \@odata\.nextLink?;
+public type Trending record {
+    *Entity;
+    *Trending1;
+};
+
+public type Onenote record {
+    *Entity;
+    *Onenote1;
+};
+
+public type WorkbookCommentReply record {
+    *Entity;
+    *WorkbookCommentReply1;
+};
+
+# AppLogUploadStatus
+public type AppLogUploadState "pending"|"completed"|"failed"|"unknownFutureValue";
+
+public type User record {
+    *DirectoryObject;
+    *User1;
+};
+
+public type TeamsAppDefinition record {
+    *Entity;
+    *TeamsAppDefinition1;
+};
+
+public type RecurrenceRange record {
+    # The date to stop applying the recurrence pattern. Depending on the recurrence pattern of the event, the last occurrence of the meeting may not be this date. Required if type is endDate.
+    string? endDate?;
+    # The number of times to repeat the event. Required and must be positive if type is numbered.
+    @constraint:Number {minValue: -2147483648, maxValue: 2147483647}
+    decimal numberOfOccurrences?;
+    # Time zone for the startDate and endDate properties. Optional. If not specified, the time zone of the event is used.
+    string? recurrenceTimeZone?;
+    # The date to start applying the recurrence pattern. The first occurrence of the meeting may be this date or later, depending on the recurrence pattern of the event. Must be the same value as the start property of the recurring event. Required.
+    string? startDate?;
+    RecurrenceRangeType 'type?;
+};
+
+public type WorkbookChartFont record {
+    *Entity;
+    *WorkbookChartFont1;
+};
+
+public type Operation record {
+    *Entity;
+    *Operation1;
+};
+
+public type UploadSession record {
+    # The date and time in UTC that the upload session expires. The complete file must be uploaded before this expiration time is reached. Each fragment uploaded during the session extends the expiration time.
+    string? expirationDateTime?;
+    # A collection of byte ranges that the server is missing for the file. These ranges are zero indexed and of the format 'start-end' (for example '0-26' to indicate the first 27 bytes of the file). When uploading files as Outlook attachments, instead of a collection of ranges, this property always indicates a single value '{start}', the location in the file where the next upload should begin.
+    string[] nextExpectedRanges?;
+    # The URL endpoint that accepts PUT requests for byte ranges of the file.
+    string? uploadUrl?;
+};
+
+public type PrinterCapabilitiesLeftMarginsItemsNumber decimal?;
+
+public type OnenoteEntityHierarchyModel record {
+    *OnenoteEntitySchemaObjectModel;
+    *OnenoteEntityHierarchyModel1;
+};
+
+public type PlannerBucket1 record {
+    # Name of the bucket.
+    string name?;
+    # Hint used to order items of this type in a list view. For details about the supported format, see Using order hints in Planner.
+    string? orderHint?;
+    # Plan ID to which the bucket belongs.
+    string? planId?;
+    # Read-only. Nullable. The collection of tasks in the bucket.
+    PlannerTask[] tasks?;
+};
+
+public type LinkedResource record {
+    *Entity;
+    *LinkedResource1;
+};
+
+public type PrintTaskStatus record {
+    # A human-readable description of the current processing state of the printTask.
+    string description?;
+    PrintTaskProcessingState state?;
+};
+
+public type ChangeTrackedEntity1 record {
+    IdentitySet createdBy?;
+    # The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
+    string? createdDateTime?;
+    IdentitySet lastModifiedBy?;
+    # The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
+    string? lastModifiedDateTime?;
+};
+
+public type InferenceClassification record {
+    *Entity;
+    *InferenceClassification1;
+};
+
+# Available health states for the Device Health API
+public type ManagedDevicePartnerReportedHealthState "unknown"|"activated"|"deactivated"|"secured"|"lowSeverity"|"mediumSeverity"|"highSeverity"|"unresponsive"|"compromised"|"misconfigured";
+
+public type Notebook record {
+    *OnenoteEntityHierarchyModel;
+    *Notebook1;
+};
+
+public type TeamSpecialization "none"|"educationStandard"|"educationClass"|"educationProfessionalLearningCommunity"|"educationStaff"|"healthcareStandard"|"healthcareCareCoordination"|"unknownFutureValue";
+
+public type PatternedRecurrence record {
+    RecurrencePattern pattern?;
+    RecurrenceRange range?;
+};
+
+public type Post1 record {
+    ItemBody body?;
+    # Unique ID of the conversation. Read-only.
+    string? conversationId?;
+    # Unique ID of the conversation thread. Read-only.
+    string? conversationThreadId?;
+    Recipient 'from?;
+    # Indicates whether the post has at least one attachment. This is a default property.
+    boolean hasAttachments?;
+    # Conversation participants that were added to the thread as part of this post.
+    Recipient[] newParticipants?;
+    # Specifies when the post was received. The DateTimeOffset type represents date and time information using ISO 8601 format and is always in UTC time. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z
+    @constraint:String {pattern: re `^[0-9]{4,}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]([.][0-9]{1,12})?(Z|[+-][0-9][0-9]:[0-9][0-9])$`}
+    string receivedDateTime?;
+    Recipient sender?;
+    # Read-only. Nullable. Supports $expand.
+    Attachment[] attachments?;
+    # The collection of open extensions defined for the post. Read-only. Nullable. Supports $expand.
+    Extension[] extensions?;
+    Post inReplyTo?;
+    # The collection of multi-value extended properties defined for the post. Read-only. Nullable.
+    MultiValueLegacyExtendedProperty[] multiValueExtendedProperties?;
+    # The collection of single-value extended properties defined for the post. Read-only. Nullable.
+    SingleValueLegacyExtendedProperty[] singleValueExtendedProperties?;
+};
+
+public type ServiceStorageQuotaBreakdown record {
+    *StorageQuotaBreakdown;
+    *ServiceStorageQuotaBreakdown1;
+};
+
+public type SharePointIdentitySet record {
+    *IdentitySet;
+    *SharePointIdentitySet1;
+};
+
+public type ScheduleChangeRequest1 record {
+    ScheduleChangeRequestActor assignedTo?;
+    # The date and time when the manager approved or declined the scheduleChangeRequest. The timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z.
+    string? managerActionDateTime?;
+    # The message sent by the manager regarding the scheduleChangeRequest. Optional.
+    string? managerActionMessage?;
+    # The user ID of the manager who approved or declined the scheduleChangeRequest.
+    string? managerUserId?;
+    # The date and time when the sender sent the scheduleChangeRequest. The timestamp type represents date and time information using ISO 8601 format and is always in UTC. For example, midnight UTC on Jan 1, 2014 is 2014-01-01T00:00:00Z.
+    string? senderDateTime?;
+    # The message sent by the sender of the scheduleChangeRequest. Optional.
+    string? senderMessage?;
+    # The user ID of the sender of the scheduleChangeRequest.
+    string? senderUserId?;
+    ScheduleChangeState state?;
+};
+
+public type ItemActivity record {
+    *Entity;
+    *ItemActivity1;
+};
+
+public type Contact record {
+    *OutlookItem;
+    *Contact1;
+};
+
+public type ManagedAppOperation record {
+    *Entity;
+    *ManagedAppOperation1;
+};
+
+public type DeviceLogCollectionResponse record {
+    *Entity;
+    *DeviceLogCollectionResponse1;
+};
+
+public type MediaSource record {
+    MediaSourceContentCategory contentCategory?;
+};
+
+public type AttachmentSession1 record {
+    # The content streams that are uploaded.
+    string? content?;
+    # The date and time in UTC when the upload session will expire. The complete file must be uploaded before this expiration time is reached.
+    string? expirationDateTime?;
+    # Indicates a single value {start} that represents the location in the file where the next upload should begin.
+    string[] nextExpectedRanges?;
+};
+
+public type WorkbookChartTitleFormat record {
+    *Entity;
+    *WorkbookChartTitleFormat1;
+};
+
+public type ScheduleChangeRequestActor "sender"|"recipient"|"manager"|"system"|"unknownFutureValue";
+
+public type PrintJobProcessingState "unknown"|"pending"|"processing"|"paused"|"stopped"|"completed"|"canceled"|"aborted"|"unknownFutureValue";
+
+public type Onenote1 record {
+    # The collection of OneNote notebooks that are owned by the user or group. Read-only. Nullable.
+    Notebook[] notebooks?;
+    # The status of OneNote operations. Getting an operations collection isn't supported, but you can get the status of long-running operations if the Operation-Location header is returned in the response. Read-only. Nullable.
+    OnenoteOperation[] operations?;
+    # The pages in all OneNote notebooks that are owned by the user or group.  Read-only. Nullable.
+    OnenotePage[] pages?;
+    # The image and other file resources in OneNote pages. Getting a resources collection isn't supported, but you can get the binary content of a specific resource. Read-only. Nullable.
+    OnenoteResource[] resources?;
+    # The section groups in all OneNote notebooks that are owned by the user or group.  Read-only. Nullable.
+    SectionGroup[] sectionGroups?;
+    # The sections in all OneNote notebooks that are owned by the user or group.  Read-only. Nullable.
+    OnenoteSection[] sections?;
 };
