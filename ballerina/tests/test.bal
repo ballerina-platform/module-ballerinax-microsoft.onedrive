@@ -46,10 +46,10 @@ string idOfFileInCollector = "";
 
 @test:BeforeSuite
 function testCreateFoldersAndFiles() returns error? {
-    microsoft\.graph\.driveCollectionResponse driveItems = check oneDriveClient->listDrive();
-    microsoft\.graph\.drive[] items = driveItems.value ?: [];
+    DriveCollectionResponse driveItems = check oneDriveClient->listDrive();
+    Drive[] items = driveItems.value ?: [];
 
-    driveId = from microsoft\.graph\.drive item in items
+    driveId = from Drive item in items
         where item["name"] == "OneDrive"
         limit 1
         select item.id ?: "";
@@ -58,7 +58,7 @@ function testCreateFoldersAndFiles() returns error? {
 
     runtime:sleep(2);
     log:printInfo("Creating Collector Folder");
-    microsoft\.graph\.driveItem collectorFolder = check oneDriveClient->createChildrenInRoot(driveId,
+    DriveItem collectorFolder = check oneDriveClient->createChildrenInRoot(driveId,
         {
         name: "Collector",
         folder: {}
@@ -72,15 +72,15 @@ function testCreateFoldersAndFiles() returns error? {
 @test:Config {
 }
 function testGetItemsSharedWithMe() returns error? {
-    Collection\ of\ driveItem driveItems = check oneDriveClient->sharedWithMe(driveId);
-    microsoft\.graph\.driveItem[] _ = driveItems.value ?: [];
+    CollectionOfDriveItem driveItems = check oneDriveClient->sharedWithMe(driveId);
+    DriveItem[] _ = driveItems.value ?: [];
 }
 
 @test:Config {
 }
 function testCreateFolder() returns error? {
     runtime:sleep(2);
-    microsoft\.graph\.driveItem newFolder = check oneDriveClient->createChildrenInRoot(driveId,
+    DriveItem newFolder = check oneDriveClient->createChildrenInRoot(driveId,
         {
         name: "Designs",
         folder: {
@@ -102,7 +102,7 @@ function testCreateFolderByPath() returns error? {
     runtime:sleep(2);
 
     runtime:sleep(2);
-    microsoft\.graph\.driveItem newFolder = check oneDriveClient->createItemByPath(driveId, "/Child_Designs",
+    DriveItem newFolder = check oneDriveClient->createItemByPath(driveId, "/Child_Designs",
         {
         name: "Child_Designs",
         folder: {
@@ -118,7 +118,7 @@ function testCreateFolderByPath() returns error? {
 function testGetItem() returns error? {
     runtime:sleep(2);
 
-    microsoft\.graph\.driveItem driveItem = check oneDriveClient->getItem(driveId, newFolderId);
+    DriveItem driveItem = check oneDriveClient->getItem(driveId, newFolderId);
     test:assertNotEquals(driveItem.id ?: "", "", msg = "driveItem id cannot be empty");
 }
 
@@ -128,7 +128,7 @@ function testGetItem() returns error? {
 function testGetItemByPath() returns error? {
     runtime:sleep(2);
 
-    microsoft\.graph\.driveItemCollectionResponse driveItemCollectionResponse =
+    DriveItemCollectionResponse driveItemCollectionResponse =
         check oneDriveClient->listItemsByPath(driveId, "/Child_Designs");
     test:assertNotEquals(driveItemCollectionResponse.value, (), msg = "driveItemCollectionResponse cannot be empty");
 }
@@ -139,7 +139,7 @@ function testGetItemByPath() returns error? {
 function testUpdateDriveItem() returns error? {
     runtime:sleep(2);
 
-    microsoft\.graph\.driveItem driveItem = check oneDriveClient->updateItem(driveId, newFolderId,
+    DriveItem driveItem = check oneDriveClient->updateItem(driveId, newFolderId,
     {
         name: "Canva_Folder",
         folder: {
@@ -158,7 +158,7 @@ function testUpdateDriveItem() returns error? {
 function testUpdateDriveItemByPath() returns error? {
     runtime:sleep(2);
 
-    microsoft\.graph\.driveItem driveItem = check oneDriveClient->updateItemByPath(driveId, newFolderPath,
+    DriveItem driveItem = check oneDriveClient->updateItemByPath(driveId, newFolderPath,
     {
         name: "Child_Canva",
         folder: {}
@@ -172,7 +172,7 @@ function testUpdateDriveItemByPath() returns error? {
 }
 function testMoveDriveItem() returns error? {
     runtime:sleep(2);
-    microsoft\.graph\.driveItem driveItem = check oneDriveClient->updateItem(driveId, newFolderId,
+    DriveItem driveItem = check oneDriveClient->updateItem(driveId, newFolderId,
     {
         name: "Moved_to_Collector_Id",
         parentReference: {
@@ -182,7 +182,7 @@ function testMoveDriveItem() returns error? {
     test:assertNotEquals(driveItem.id, (), msg = "driveItem id cannot be empty");
 
     runtime:sleep(2);
-    microsoft\.graph\.driveItem driveItem2 = check oneDriveClient->updateItemByPath(driveId, newFolderPath,
+    DriveItem driveItem2 = check oneDriveClient->updateItemByPath(driveId, newFolderPath,
     {
         name: "Moved_to_Collector_Path",
         parentReference: {
@@ -199,7 +199,7 @@ function testMoveDriveItem() returns error? {
 function testCopyDriveItemInPath() returns error? {
     runtime:sleep(2);
     // Validate why no contemt is returned in this request
-    microsoft\.graph\.driveItem|error driveItem = oneDriveClient->copyByPath(driveId, collectorFolderPath, {
+    DriveItem|error driveItem = oneDriveClient->copyByPath(driveId, collectorFolderPath, {
         name: "Collector_Copy_Path"
     });
     collectorCopyFolderPath = "/Collector_Copy_Path";
@@ -219,7 +219,7 @@ function testUploadFileToFolder() returns error? {
     runtime:sleep(2);
 
     byte[] testFileContent = checkpanic io:fileReadBytes("tests/files/github.png");
-    microsoft\.graph\.driveItem driveItem = check oneDriveClient->setChildrenContent(driveId, collectorFolderId,
+    DriveItem driveItem = check oneDriveClient->setChildrenContent(driveId, collectorFolderId,
     "newUpload.png", testFileContent);
     test:assertNotEquals(driveItem.id, (), msg = "driveItem id cannot be empty");
     idOfFileInCollector = driveItem.id ?: "";
@@ -232,7 +232,7 @@ function testUploadFileToFolderByPath() returns error? {
     runtime:sleep(2);
 
     byte[] testFileContent = checkpanic io:fileReadBytes("tests/files/github.png");
-    microsoft\.graph\.driveItem driveItem = check oneDriveClient->setChildrenContentByPath(driveId,
+    DriveItem driveItem = check oneDriveClient->setChildrenContentByPath(driveId,
     collectorFolderPath + "/newUploadByPath.png", testFileContent);
     test:assertNotEquals(driveItem.id, (), msg = "driveItem id cannot be empty");
 }
