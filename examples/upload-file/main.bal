@@ -33,9 +33,9 @@ public function main() returns error? {
         }
     );
 
-    onedrive:microsoft\.graph\.driveCollectionResponse driveItems = check oneDrive->listDrive();
-    onedrive:microsoft\.graph\.drive[] items = driveItems.value ?: [];
-    string driveId = from onedrive:microsoft\.graph\.drive item in items
+    onedrive:DriveCollectionResponse driveItems = check oneDrive->listDrive();
+    onedrive:Drive[] items = driveItems.value ?: [];
+    string driveId = from onedrive:Drive item in items
         where item["name"] == "OneDrive"
         limit 1
         select item.id ?: "";
@@ -49,7 +49,7 @@ public function main() returns error? {
 
     io:println("Uploading File");
     byte[] fileContent = checkpanic io:fileReadBytes("files/github.png");
-    onedrive:microsoft\.graph\.driveItem driveItem = check oneDrive->setChildrenContentByPath(
+    onedrive:DriveItem driveItem = check oneDrive->setChildrenContentByPath(
         driveId, "/Upload/github.png", fileContent);
     io:println(string `File Uploaded. File ID: ${driveItem.id ?: ""}`);
 
