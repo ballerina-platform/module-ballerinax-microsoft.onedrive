@@ -21,6 +21,7 @@ These changes are done in order to improve the overall usability, and as workaro
     additionalProperties: true
     ```
     Due to [OpenAPI generation incorrectly resolves additional properties, object when included in oneOf type](https://github.com/ballerina-platform/ballerina-library/issues/8205)
+5. Add support to path based URLs
 
 ## OpenAPI cli command
 
