@@ -218,7 +218,7 @@ function testDeleteDriveItemByPath() returns error? {
 function testUploadFileToFolder() returns error? {
     runtime:sleep(2);
 
-    byte[] testFileContent = checkpanic io:fileReadBytes("tests/files/github.png");
+    byte[] testFileContent = check io:fileReadBytes("tests/files/github.png");
     DriveItem driveItem = check oneDriveClient->setChildrenContent(driveId, collectorFolderId,
     "newUpload.png", testFileContent);
     test:assertNotEquals(driveItem.id, (), msg = "driveItem id cannot be empty");
@@ -231,7 +231,7 @@ function testUploadFileToFolder() returns error? {
 function testUploadFileToFolderByPath() returns error? {
     runtime:sleep(2);
 
-    byte[] testFileContent = checkpanic io:fileReadBytes("tests/files/github.png");
+    byte[] testFileContent = check io:fileReadBytes("tests/files/github.png");
     DriveItem driveItem = check oneDriveClient->setChildrenContentByPath(driveId,
     collectorFolderPath + "/newUploadByPath.png", testFileContent);
     test:assertNotEquals(driveItem.id, (), msg = "driveItem id cannot be empty");

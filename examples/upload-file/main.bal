@@ -48,7 +48,7 @@ public function main() returns error? {
     });
 
     io:println("Uploading File");
-    byte[] fileContent = checkpanic io:fileReadBytes("files/github.png");
+    byte[] fileContent = check io:fileReadBytes("files/github.png");
     onedrive:DriveItem driveItem = check oneDrive->setChildrenContentByPath(
         driveId, "/Upload/github.png", fileContent);
     io:println(string `File Uploaded. File ID: ${driveItem.id ?: ""}`);
