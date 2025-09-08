@@ -22,6 +22,10 @@ These changes are done in order to improve the overall usability, and as workaro
     ```
     Due to [OpenAPI generation incorrectly resolves additional properties, object when included in oneOf type](https://github.com/ballerina-platform/ballerina-library/issues/8205)
 5. Add support to path based URLs
+6. Strip `microsoft.graph` prefix in schemas to be more usefriendly
+7. Run `bal openapi align` command
+8. Fix unescape select keyword. [Issue](https://github.com/ballerina-platform/ballerina-library/issues/8059)
+9. Update spec for unaligned words with spaces `Collection of driveItem` -> `CollectionOfDriveItem`, and `Collection of permission` -> `CollectionOfPermission`. [Issue](https://github.com/ballerina-platform/ballerina-library/issues/8217)
 
 ## OpenAPI cli command
 
