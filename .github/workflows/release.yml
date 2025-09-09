@@ -14,3 +14,5 @@ jobs:
     with:
       package-name: microsoft.onedrive
       package-org: ballerinax
+      additional-release-flags: -x test
+      # Do not have wso2 tenant access atm
