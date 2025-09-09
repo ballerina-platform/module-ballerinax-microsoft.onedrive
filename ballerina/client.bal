@@ -29,6 +29,11 @@ public isolated client class Client {
     # + return - An error if connector initialization failed 
     public isolated function init(ConnectionConfig config, string serviceUrl = "https://graph.microsoft.com/v1.0/") returns error? {
         http:ClientConfiguration httpClientConfig = {auth: config.auth, httpVersion: config.httpVersion, http1Settings: config.http1Settings, http2Settings: config.http2Settings, timeout: config.timeout, forwarded: config.forwarded, followRedirects: config.followRedirects, poolConfig: config.poolConfig, cache: config.cache, compression: config.compression, circuitBreaker: config.circuitBreaker, retryConfig: config.retryConfig, cookieConfig: config.cookieConfig, responseLimits: config.responseLimits, secureSocket: config.secureSocket, proxy: config.proxy, socketConfig: config.socketConfig, validation: config.validation, laxDataBinding: config.laxDataBinding};
+        httpClientConfig.followRedirects = {
+            enabled: true,
+            allowAuthHeaders: false,
+            maxCount: config.followRedirects?.maxCount ?: 5
+        };
         self.clientEp = check new (serviceUrl, httpClientConfig);
     }
 
