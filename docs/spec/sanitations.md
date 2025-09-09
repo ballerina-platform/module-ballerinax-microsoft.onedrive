@@ -26,6 +26,15 @@ These changes are done in order to improve the overall usability, and as workaro
 7. Run `bal openapi align` command
 8. Fix unescape select keyword. [Issue](https://github.com/ballerina-platform/ballerina-library/issues/8059)
 9. Update spec for unaligned words with spaces `Collection of driveItem` -> `CollectionOfDriveItem`, and `Collection of permission` -> `CollectionOfPermission`. [Issue](https://github.com/ballerina-platform/ballerina-library/issues/8217)
+10. Always enable Follow Redirects, Generated client updated L32,
+    ```ballerina
+            httpClientConfig.followRedirects = {
+            enabled: true,
+            allowAuthHeaders: false,
+            maxCount: config.followRedirects?.maxCount ?: 5
+        };
+    ```
+
 
 ## OpenAPI cli command
 
