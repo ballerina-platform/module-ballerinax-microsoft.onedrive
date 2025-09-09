@@ -17,3 +17,5 @@ jobs:
     secrets: inherit
     with:
       repo-name: module-ballerinax-microsoft.onedrive
+      additional-test-flags: -x test
+      # Do not have wso2 tenant access atm
