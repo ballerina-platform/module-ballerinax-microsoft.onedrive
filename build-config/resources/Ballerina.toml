@@ -5,7 +5,7 @@ name = "microsoft.onedrive"
 version = "@toml.version@"
 license = ["Apache-2.0"]
 authors = ["Ballerina"]
-keywords = ["Content & Files/File Management & Storage", "Cost/Freemium", "Vendor/Microsoft"]
+keywords = ["Content & Files/File Management & Storage", "Cost/Freemium", "Vendor/Microsoft", "Area/File Management", "Type/Connector"]
 icon = "icon.png"
 repository = "https://github.com/ballerina-platform/module-ballerinax-microsoft.onedrive"
 
