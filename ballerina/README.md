@@ -1,8 +1,15 @@
 ## Overview
 
-[Microsoft OneDrive](https://central.ballerina.io/ballerinax/microsoft.onedrive/latest) is a cloud-based file storage service provided by Microsoft, allowing users and organizations to store, share, and manage files securely online.
+[Microsoft OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage) is a cloud-based file storage service provided by Microsoft, allowing users and organizations to store, share, and manage files securely online.
 
-The `ballerinax/microsoft.onedrive` package offers APIs to connect and interact with OneDrive API endpoints, specifically based on [Microsoft Graph v1.0](https://learn.microsoft.com/en-us/graph/overview). This package enables developers to perform operations such as uploading, downloading, and sharing files and folders on OneDrive using the Ballerina language.
+The Microsoft OneDrive connector offers APIs to connect and interact with OneDrive API endpoints, specifically based on [Microsoft Graph v1.0](https://learn.microsoft.com/en-us/graph/overview). This connector enables developers to perform operations such as uploading, downloading, and sharing files and folders on OneDrive.
+
+### Key Features
+
+- Secure cloud-based file storage and management
+- Support for Microsoft Graph API v1.0 endpoints
+- Perform file and folder operations programmatically
+- Secure file sharing and organizational data management
 
 ## Setup guide
 
