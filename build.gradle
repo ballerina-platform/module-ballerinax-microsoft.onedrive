@@ -57,8 +57,14 @@ allprojects {
 
 def moduleVersion = project.version.replace("-SNAPSHOT", "")
 
-task build {
-    dependsOn(':microsoft.onedrive-ballerina:build')
+if (tasks.names.contains('build')) {
+    tasks.named('build') {
+        dependsOn(':microsoft.onedrive-ballerina:build')
+    }
+} else {
+    tasks.register('build') {
+        dependsOn(':microsoft.onedrive-ballerina:build')
+    }
 }
 
 release {

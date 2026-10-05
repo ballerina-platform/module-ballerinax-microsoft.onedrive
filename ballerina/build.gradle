@@ -48,9 +48,15 @@ ballerina {
     packageOrganization = packageOrg
     module = packageName
     testCoverageParam = "--code-coverage --coverage-format=xml"
-    isConnector = true
+    connector = true
     platform = "any"
 }
+
+abstract class ExecHelper {
+    @Inject
+    abstract ExecOperations getExecOperations()
+}
+def execHelper = project.objects.newInstance(ExecHelper)
 
 task updateTomlFiles {
     doLast {
@@ -62,7 +68,7 @@ task updateTomlFiles {
 
 task commitTomlFiles {
     doLast {
-        project.exec {
+        execHelper.execOperations.exec {
             ignoreExitValue true
             if (Os.isFamily(Os.FAMILY_WINDOWS)) {
                 commandLine 'cmd', '/c', "git commit -m \"[Automated] Update the toml files\" Ballerina.toml Dependencies.toml"
