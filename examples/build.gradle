@@ -22,13 +22,19 @@ apply plugin: 'java'
 
 def graalvmFlag = ""
 
+abstract class ExecHelper {
+    @Inject
+    abstract ExecOperations getExecOperations()
+}
+def execHelper = project.objects.newInstance(ExecHelper)
+
 task testExamples {
     if (project.hasProperty("balGraalVMTest")) {
         graalvmFlag = "--graalvm"
     }
     doLast {
         try {
-            exec {
+            execHelper.execOperations.exec {
                 workingDir project.projectDir
                 println("Working dir: ${workingDir}")
                 if (Os.isFamily(Os.FAMILY_WINDOWS)) {
@@ -54,7 +60,7 @@ task buildExamples {
     }
     doLast {
         try {
-            exec {
+            execHelper.execOperations.exec {
                 workingDir project.projectDir
                 println("Working dir: ${workingDir}")
                 if (Os.isFamily(Os.FAMILY_WINDOWS)) {
